@@ -1,0 +1,33 @@
+//
+//  LockyMac-Prefix.pch
+//  Locky
+//
+//  Created by Nicolas Dominati on 06/03/15.
+//  Copyright (c) 2015 Lunabee Pte Ltd. All rights reserved.
+//
+
+#ifndef Locky_LockyMac_Prefix_pch
+#define Locky_LockyMac_Prefix_pch
+
+#import "Constants.h"
+#import "NSUserDefaults+Utils.h"
+#import "NSData+Utils.h"
+#import "NSDictionary+Utils.h"
+#import "NSString+Utils.h"
+#import "NSMutableArray+Utils.h"
+#import "OSX.h"
+#import "NSView+Utils.h"
+#import "ParseMacManager.h"
+#import "NSImage+Utils.h"
+#import "NSView+Constraints.h"
+#import "NSNotificationCenter+Utils.h"
+#import "NSURL+Utils.h"
+#import "NSString+NSHash.h"
+#import "NSData+NSHash.h"
+#import "NSDate+Utils.h"
+
+#ifdef PROD
+#define NSLog(__FORMAT__, ...) //NSLog(__FORMAT__, ...)
+#endif
+
+#endif

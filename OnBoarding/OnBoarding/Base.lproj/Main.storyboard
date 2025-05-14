@@ -1,0 +1,742 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14D131" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="703-4V-yAM">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
+    </dependencies>
+    <scenes>
+        <!--On Boarding Controller-->
+        <scene sceneID="clB-vc-fyl">
+            <objects>
+                <viewController id="703-4V-yAM" customClass="OnBoardingController" customModule="OnBoarding" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="I7W-xW-C47"/>
+                        <viewControllerLayoutGuide type="bottom" id="IfR-02-kHw"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="502-Ir-ELC" customClass="LBGradientView" customModule="OnBoarding" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.26274511220000002" green="0.56078433989999998" blue="0.81568634510000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="color" keyPath="startColor">
+                                <color key="value" red="0.70210683350000003" green="0.41413527729999999" blue="0.88373762369999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="endColor">
+                                <color key="value" red="0.371388942" green="0.195740521" blue="0.48552918430000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="startX">
+                                <real key="value" value="0.0"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="startY">
+                                <real key="value" value="1"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="endX">
+                                <real key="value" value="1"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="endY">
+                                <real key="value" value="0.0"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Q3h-pU-vEd" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-101" y="-243"/>
+        </scene>
+        <!--On Boarding Detail Controller-->
+        <scene sceneID="snT-py-3hH">
+            <objects>
+                <viewController storyboardIdentifier="OB1" id="S4R-Ja-viH" customClass="OnBoardingDetailController" customModule="OnBoarding" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="fXf-Jd-eTc"/>
+                        <viewControllerLayoutGuide type="bottom" id="EPS-s9-h4K"/>
+                    </layoutGuides>
+                    <view key="view" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="ZwX-cT-FIQ">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Battery friendly" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="cF2-Le-7mQ">
+                                <rect key="frame" x="20" y="40" width="560" height="60"/>
+                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="50"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dN4-gN-ccU">
+                                <rect key="frame" x="198" y="380" width="204" height="24"/>
+                                <string key="text">Bluetooth Low Energy
+</string>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Locky is leveraging the brand new Bluetooth version to save your iPhone's battery. Even when running in background." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mlo-LJ-tD8">
+                                <rect key="frame" x="20" y="412" width="560" height="41"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Battery-Empty" translatesAutoresizingMaskIntoConstraints="NO" id="BIh-DH-Xl1">
+                                <rect key="frame" x="140" y="120" width="320" height="240"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="320" id="Lbs-8Y-F0M"/>
+                                </constraints>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Battery-1" translatesAutoresizingMaskIntoConstraints="NO" id="6OZ-J1-awV" customClass="LBAnimatableImageView" customModule="OnBoarding" customModuleProvider="target">
+                                <rect key="frame" x="140" y="120" width="320" height="240"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="a0Alpha">
+                                        <real key="value" value="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="a1Alpha">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="aDuration">
+                                        <real key="value" value="0.080000000000000002"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="shouldAnimateOnViewDidLoad" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="delay">
+                                        <real key="value" value="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <outlet property="nextAnimatedImageView" destination="Bt0-DP-LF5" id="sdp-5S-Car"/>
+                                </connections>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Battery-2" translatesAutoresizingMaskIntoConstraints="NO" id="Bt0-DP-LF5" customClass="LBAnimatableImageView" customModule="OnBoarding" customModuleProvider="target">
+                                <rect key="frame" x="140" y="120" width="320" height="240"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="a0Alpha">
+                                        <real key="value" value="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="a1Alpha">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="aDuration">
+                                        <real key="value" value="0.080000000000000002"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="delay">
+                                        <real key="value" value="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <outlet property="nextAnimatedImageView" destination="FcH-9t-Jow" id="cY4-nF-Mon"/>
+                                </connections>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Battery-3" translatesAutoresizingMaskIntoConstraints="NO" id="FcH-9t-Jow" customClass="LBAnimatableImageView" customModule="OnBoarding" customModuleProvider="target">
+                                <rect key="frame" x="140" y="120" width="320" height="240"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="a0Alpha">
+                                        <real key="value" value="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="a1Alpha">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="aDuration">
+                                        <real key="value" value="0.080000000000000002"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="delay">
+                                        <real key="value" value="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <outlet property="nextAnimatedImageView" destination="ipN-f8-h3F" id="4iF-vc-kRa"/>
+                                </connections>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Battery-4" translatesAutoresizingMaskIntoConstraints="NO" id="ipN-f8-h3F" customClass="LBAnimatableImageView" customModule="OnBoarding" customModuleProvider="target">
+                                <rect key="frame" x="140" y="120" width="320" height="240"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="a0Alpha">
+                                        <real key="value" value="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="a1Alpha">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="aDuration">
+                                        <real key="value" value="0.080000000000000002"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="delay">
+                                        <real key="value" value="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <outlet property="nextAnimatedImageView" destination="gr0-qo-JgE" id="RbT-Yd-VwG"/>
+                                </connections>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Battery-5" translatesAutoresizingMaskIntoConstraints="NO" id="gr0-qo-JgE" customClass="LBAnimatableImageView" customModule="OnBoarding" customModuleProvider="target">
+                                <rect key="frame" x="140" y="120" width="320" height="240"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="a0Alpha">
+                                        <real key="value" value="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="a1Alpha">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="aDuration">
+                                        <real key="value" value="0.080000000000000002"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="delay">
+                                        <real key="value" value="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <outlet property="nextAnimatedImageView" destination="jtk-74-gOK" id="iOu-7V-U0w"/>
+                                </connections>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Battery-6" translatesAutoresizingMaskIntoConstraints="NO" id="jtk-74-gOK" customClass="LBAnimatableImageView" customModule="OnBoarding" customModuleProvider="target">
+                                <rect key="frame" x="140" y="120" width="320" height="240"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="a0Alpha">
+                                        <real key="value" value="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="a1Alpha">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="aDuration">
+                                        <real key="value" value="0.080000000000000002"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="delay">
+                                        <real key="value" value="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.70210683350000003" green="0.41413527729999999" blue="0.88373762369999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="BIh-DH-Xl1" firstAttribute="trailing" secondItem="ipN-f8-h3F" secondAttribute="trailing" id="4D9-NZ-uij"/>
+                            <constraint firstItem="BIh-DH-Xl1" firstAttribute="top" secondItem="Bt0-DP-LF5" secondAttribute="top" id="5KZ-mI-TAU"/>
+                            <constraint firstAttribute="centerX" secondItem="mlo-LJ-tD8" secondAttribute="centerX" id="8is-Q5-exh"/>
+                            <constraint firstItem="6OZ-J1-awV" firstAttribute="trailing" secondItem="BIh-DH-Xl1" secondAttribute="trailing" id="BdE-WP-ONT"/>
+                            <constraint firstItem="BIh-DH-Xl1" firstAttribute="trailing" secondItem="Bt0-DP-LF5" secondAttribute="trailing" id="Czp-OL-qKR"/>
+                            <constraint firstItem="gr0-qo-JgE" firstAttribute="leading" secondItem="BIh-DH-Xl1" secondAttribute="leading" id="DIY-Ir-LSM"/>
+                            <constraint firstItem="jtk-74-gOK" firstAttribute="top" secondItem="BIh-DH-Xl1" secondAttribute="top" id="JfM-od-qpy"/>
+                            <constraint firstItem="gr0-qo-JgE" firstAttribute="trailing" secondItem="BIh-DH-Xl1" secondAttribute="trailing" id="Ogx-0Q-scZ"/>
+                            <constraint firstItem="BIh-DH-Xl1" firstAttribute="bottom" secondItem="Bt0-DP-LF5" secondAttribute="bottom" id="PLq-6q-hVh"/>
+                            <constraint firstItem="FcH-9t-Jow" firstAttribute="leading" secondItem="BIh-DH-Xl1" secondAttribute="leading" id="PRH-TD-te4"/>
+                            <constraint firstItem="cF2-Le-7mQ" firstAttribute="leading" secondItem="ZwX-cT-FIQ" secondAttribute="leading" constant="20" symbolic="YES" id="PnF-O8-Bso"/>
+                            <constraint firstItem="jtk-74-gOK" firstAttribute="bottom" secondItem="BIh-DH-Xl1" secondAttribute="bottom" id="QHs-EG-NkE"/>
+                            <constraint firstItem="BIh-DH-Xl1" firstAttribute="top" secondItem="cF2-Le-7mQ" secondAttribute="bottom" constant="20" id="Qqs-jX-cC5"/>
+                            <constraint firstItem="BIh-DH-Xl1" firstAttribute="leading" secondItem="Bt0-DP-LF5" secondAttribute="leading" id="SVL-of-DD6"/>
+                            <constraint firstItem="dN4-gN-ccU" firstAttribute="top" secondItem="BIh-DH-Xl1" secondAttribute="bottom" constant="20" id="TYp-jO-nXO"/>
+                            <constraint firstItem="6OZ-J1-awV" firstAttribute="leading" secondItem="BIh-DH-Xl1" secondAttribute="leading" id="WTW-pP-1mh"/>
+                            <constraint firstItem="6OZ-J1-awV" firstAttribute="top" secondItem="BIh-DH-Xl1" secondAttribute="top" id="Wgj-gA-YcQ"/>
+                            <constraint firstItem="jtk-74-gOK" firstAttribute="leading" secondItem="BIh-DH-Xl1" secondAttribute="leading" id="YgB-mw-kXV"/>
+                            <constraint firstItem="gr0-qo-JgE" firstAttribute="top" secondItem="BIh-DH-Xl1" secondAttribute="top" id="ayy-0v-B8H"/>
+                            <constraint firstAttribute="trailing" secondItem="cF2-Le-7mQ" secondAttribute="trailing" constant="20" symbolic="YES" id="cCk-mG-gz5"/>
+                            <constraint firstAttribute="centerX" secondItem="dN4-gN-ccU" secondAttribute="centerX" id="dFT-68-sem"/>
+                            <constraint firstItem="BIh-DH-Xl1" firstAttribute="leading" secondItem="ipN-f8-h3F" secondAttribute="leading" id="dyq-UF-cx2"/>
+                            <constraint firstItem="FcH-9t-Jow" firstAttribute="top" secondItem="BIh-DH-Xl1" secondAttribute="top" id="ecZ-Oz-AZ5"/>
+                            <constraint firstItem="FcH-9t-Jow" firstAttribute="bottom" secondItem="BIh-DH-Xl1" secondAttribute="bottom" id="fIj-Wi-zAI"/>
+                            <constraint firstItem="mlo-LJ-tD8" firstAttribute="leading" secondItem="ZwX-cT-FIQ" secondAttribute="leading" constant="20" id="gnI-Wl-3vQ"/>
+                            <constraint firstItem="6OZ-J1-awV" firstAttribute="bottom" secondItem="BIh-DH-Xl1" secondAttribute="bottom" id="lTd-F7-I0c"/>
+                            <constraint firstItem="dN4-gN-ccU" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ZwX-cT-FIQ" secondAttribute="leading" constant="20" id="o0a-Uj-Gqm"/>
+                            <constraint firstItem="BIh-DH-Xl1" firstAttribute="bottom" secondItem="ipN-f8-h3F" secondAttribute="bottom" id="oGm-ow-dGT"/>
+                            <constraint firstItem="jtk-74-gOK" firstAttribute="trailing" secondItem="BIh-DH-Xl1" secondAttribute="trailing" id="po5-oS-QFl"/>
+                            <constraint firstItem="mlo-LJ-tD8" firstAttribute="top" secondItem="dN4-gN-ccU" secondAttribute="bottom" constant="8" id="qp2-Dp-WmU"/>
+                            <constraint firstItem="gr0-qo-JgE" firstAttribute="bottom" secondItem="BIh-DH-Xl1" secondAttribute="bottom" id="qxe-Ap-541"/>
+                            <constraint firstItem="BIh-DH-Xl1" firstAttribute="centerX" secondItem="dN4-gN-ccU" secondAttribute="centerX" id="rsU-6n-Ur6"/>
+                            <constraint firstItem="FcH-9t-Jow" firstAttribute="trailing" secondItem="BIh-DH-Xl1" secondAttribute="trailing" id="uHN-tE-cZF"/>
+                            <constraint firstItem="BIh-DH-Xl1" firstAttribute="top" secondItem="ipN-f8-h3F" secondAttribute="top" id="vRX-P2-T0d"/>
+                            <constraint firstItem="cF2-Le-7mQ" firstAttribute="top" secondItem="ZwX-cT-FIQ" secondAttribute="top" constant="40" id="zem-Jm-uYh"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="animatableImageView" destination="6OZ-J1-awV" id="yTi-IT-Zct"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GmD-Rr-ZGN" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="685" y="-235"/>
+        </scene>
+        <!--On Boarding Detail Controller-->
+        <scene sceneID="rhR-VO-9m4">
+            <objects>
+                <viewController storyboardIdentifier="OB2" id="luL-5a-kUs" customClass="OnBoardingDetailController" customModule="OnBoarding" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Ez0-Ou-MuC"/>
+                        <viewControllerLayoutGuide type="bottom" id="AYq-MI-AEk"/>
+                    </layoutGuides>
+                    <view key="view" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="VYU-83-ZsR">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Signal" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="N8t-IW-riR">
+                                <rect key="frame" x="20" y="40" width="560" height="60"/>
+                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="50"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Keep that in mind" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uR8-OO-3YH">
+                                <rect key="frame" x="219" y="380" width="163" height="24"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your body and clothes reduce the signal strength, and therefore impacts the calculated distance between your Mac and iPhone." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JVR-X2-fAw">
+                                <rect key="frame" x="21" y="412" width="558" height="41"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Signal-1" translatesAutoresizingMaskIntoConstraints="NO" id="cBr-PB-a5b" customClass="LBAnimatableImageView" customModule="OnBoarding" customModuleProvider="target">
+                                <rect key="frame" x="140" y="120" width="320" height="240"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="240" id="9gy-PB-hJi"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="a0Alpha">
+                                        <real key="value" value="0.5"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="a1Alpha">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="aDuration">
+                                        <real key="value" value="0.125"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="shouldAnimateOnViewDidLoad" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <outlet property="nextAnimatedImageView" destination="VtQ-LU-ooQ" id="xdv-lm-3wP"/>
+                                </connections>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Signal-2" translatesAutoresizingMaskIntoConstraints="NO" id="VtQ-LU-ooQ" customClass="LBAnimatableImageView" customModule="OnBoarding" customModuleProvider="target">
+                                <rect key="frame" x="140" y="120" width="320" height="240"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="a0Alpha">
+                                        <real key="value" value="0.5"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="a1Alpha">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="aDuration">
+                                        <real key="value" value="0.125"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <outlet property="nextAnimatedImageView" destination="pGa-Im-2da" id="cZo-5x-ohQ"/>
+                                </connections>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Signal-3" translatesAutoresizingMaskIntoConstraints="NO" id="pGa-Im-2da" customClass="LBAnimatableImageView" customModule="OnBoarding" customModuleProvider="target">
+                                <rect key="frame" x="140" y="120" width="320" height="240"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="a0Alpha">
+                                        <real key="value" value="0.5"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="a1Alpha">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="aDuration">
+                                        <real key="value" value="0.125"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <outlet property="nextAnimatedImageView" destination="aRY-vQ-ekY" id="KIG-Qr-G4V"/>
+                                </connections>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Signal-4" translatesAutoresizingMaskIntoConstraints="NO" id="aRY-vQ-ekY" customClass="LBAnimatableImageView" customModule="OnBoarding" customModuleProvider="target">
+                                <rect key="frame" x="140" y="120" width="320" height="240"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="a0Alpha">
+                                        <real key="value" value="0.5"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="a1Alpha">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="aDuration">
+                                        <real key="value" value="0.125"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.70210683350000003" green="0.41413527729999999" blue="0.88373762369999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="pGa-Im-2da" firstAttribute="bottom" secondItem="cBr-PB-a5b" secondAttribute="bottom" id="1ci-Vt-hWb"/>
+                            <constraint firstItem="VtQ-LU-ooQ" firstAttribute="top" secondItem="cBr-PB-a5b" secondAttribute="top" id="3hh-qM-weZ"/>
+                            <constraint firstItem="VtQ-LU-ooQ" firstAttribute="leading" secondItem="cBr-PB-a5b" secondAttribute="leading" id="88I-tf-kNb"/>
+                            <constraint firstAttribute="centerX" secondItem="JVR-X2-fAw" secondAttribute="centerX" id="CoF-ga-0Tm"/>
+                            <constraint firstItem="JVR-X2-fAw" firstAttribute="top" secondItem="uR8-OO-3YH" secondAttribute="bottom" constant="8" id="EXp-3n-qK0"/>
+                            <constraint firstItem="cBr-PB-a5b" firstAttribute="centerX" secondItem="uR8-OO-3YH" secondAttribute="centerX" id="GLG-4M-dSB"/>
+                            <constraint firstItem="N8t-IW-riR" firstAttribute="leading" secondItem="VYU-83-ZsR" secondAttribute="leading" constant="20" symbolic="YES" id="Ken-gV-i4b"/>
+                            <constraint firstItem="VtQ-LU-ooQ" firstAttribute="trailing" secondItem="cBr-PB-a5b" secondAttribute="trailing" id="Lse-pl-2nm"/>
+                            <constraint firstItem="pGa-Im-2da" firstAttribute="top" secondItem="cBr-PB-a5b" secondAttribute="top" id="Qgq-3K-uFN"/>
+                            <constraint firstItem="JVR-X2-fAw" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="VYU-83-ZsR" secondAttribute="leading" constant="20" id="VET-ay-3E0"/>
+                            <constraint firstItem="pGa-Im-2da" firstAttribute="leading" secondItem="cBr-PB-a5b" secondAttribute="leading" id="Y8y-Hs-YXS"/>
+                            <constraint firstAttribute="centerX" secondItem="uR8-OO-3YH" secondAttribute="centerX" id="ZJE-Rk-dYy"/>
+                            <constraint firstAttribute="centerY" secondItem="uR8-OO-3YH" secondAttribute="centerY" id="bFY-10-PvE"/>
+                            <constraint firstItem="cBr-PB-a5b" firstAttribute="top" secondItem="N8t-IW-riR" secondAttribute="bottom" constant="20" id="cGw-Mw-VfL"/>
+                            <constraint firstItem="cBr-PB-a5b" firstAttribute="top" secondItem="aRY-vQ-ekY" secondAttribute="top" id="izC-Ol-f4D"/>
+                            <constraint firstItem="N8t-IW-riR" firstAttribute="top" secondItem="VYU-83-ZsR" secondAttribute="top" constant="40" id="mWp-62-Lvu"/>
+                            <constraint firstItem="uR8-OO-3YH" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="VYU-83-ZsR" secondAttribute="leading" constant="20" id="rWs-hb-za2"/>
+                            <constraint firstItem="uR8-OO-3YH" firstAttribute="top" secondItem="cBr-PB-a5b" secondAttribute="bottom" constant="20" id="ssi-aU-BHx"/>
+                            <constraint firstItem="cBr-PB-a5b" firstAttribute="bottom" secondItem="aRY-vQ-ekY" secondAttribute="bottom" id="uOz-Dd-SKd"/>
+                            <constraint firstItem="pGa-Im-2da" firstAttribute="trailing" secondItem="cBr-PB-a5b" secondAttribute="trailing" id="unE-6U-UZq"/>
+                            <constraint firstAttribute="trailing" secondItem="N8t-IW-riR" secondAttribute="trailing" constant="20" symbolic="YES" id="uxu-JH-jrD"/>
+                            <constraint firstItem="cBr-PB-a5b" firstAttribute="trailing" secondItem="aRY-vQ-ekY" secondAttribute="trailing" id="v8h-rS-ukI"/>
+                            <constraint firstItem="cBr-PB-a5b" firstAttribute="leading" secondItem="aRY-vQ-ekY" secondAttribute="leading" id="vsF-hw-GY4"/>
+                            <constraint firstItem="VtQ-LU-ooQ" firstAttribute="bottom" secondItem="cBr-PB-a5b" secondAttribute="bottom" id="wGh-x1-Rt4"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="bFY-10-PvE"/>
+                            </mask>
+                        </variation>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="D2I-V1-nL2" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1421" y="-235"/>
+        </scene>
+        <!--3-->
+        <scene sceneID="ffE-lD-u57">
+            <objects>
+                <viewController storyboardIdentifier="OB3" id="ise-ir-EtK" userLabel="3" customClass="OnBoardingDetailController" customModule="OnBoarding" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="c1a-Qo-aav"/>
+                        <viewControllerLayoutGuide type="bottom" id="rBx-9P-IWh"/>
+                    </layoutGuides>
+                    <view key="view" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="C4j-wV-qLV">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Intruders" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="OCQ-vm-OCh">
+                                <rect key="frame" x="20" y="40" width="560" height="60"/>
+                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="50"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="When you’re away" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mnQ-s7-ITo">
+                                <rect key="frame" x="216" y="380" width="169" height="24"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="with your iPhone, Locky can send you a photo of the intruder when activity is detected on your Mac." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jd6-xQ-6G4">
+                                <rect key="frame" x="41" y="412" width="519" height="41"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Intruders detection" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VWc-Zg-bnW">
+                                <rect key="frame" x="199" y="493" width="145" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Thief" translatesAutoresizingMaskIntoConstraints="NO" id="wdZ-0c-YrX" customClass="LBAnimatableImageView" customModule="OnBoarding" customModuleProvider="target">
+                                <rect key="frame" x="140" y="120" width="320" height="240"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="240" id="tta-tf-jt8"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="shouldAnimateOnViewDidLoad" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Thief-Eyes" translatesAutoresizingMaskIntoConstraints="NO" id="Lec-7I-9HX" customClass="LBAnimatableImageView" customModule="OnBoarding" customModuleProvider="target">
+                                <rect key="frame" x="140" y="120" width="320" height="240"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="shouldAnimateOnViewDidLoad" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="a0Scale">
+                                        <real key="value" value="0.94999999999999996"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </imageView>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="k4f-Oq-BJf">
+                                <rect key="frame" x="352" y="488" width="51" height="31"/>
+                            </switch>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TRx-rE-2UU">
+                                <rect key="frame" x="0.0" y="493" width="199" height="21"/>
+                                <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qaT-Bg-r4A">
+                                <rect key="frame" x="401" y="493" width="199" height="21"/>
+                                <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.70210683350000003" green="0.41413527729999999" blue="0.88373762369999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="VWc-Zg-bnW" firstAttribute="height" secondItem="TRx-rE-2UU" secondAttribute="height" id="1yX-Na-667"/>
+                            <constraint firstItem="Lec-7I-9HX" firstAttribute="leading" secondItem="wdZ-0c-YrX" secondAttribute="leading" id="3Xk-pH-BNm"/>
+                            <constraint firstItem="VWc-Zg-bnW" firstAttribute="centerY" secondItem="TRx-rE-2UU" secondAttribute="centerY" id="9oA-fX-rQh"/>
+                            <constraint firstItem="k4f-Oq-BJf" firstAttribute="leading" secondItem="VWc-Zg-bnW" secondAttribute="trailing" constant="8" id="CV4-WA-jKY"/>
+                            <constraint firstAttribute="centerX" secondItem="mnQ-s7-ITo" secondAttribute="centerX" id="DSY-lk-ewA"/>
+                            <constraint firstAttribute="centerX" secondItem="jd6-xQ-6G4" secondAttribute="centerX" id="FB4-Y2-dwg"/>
+                            <constraint firstItem="qaT-Bg-r4A" firstAttribute="leading" secondItem="k4f-Oq-BJf" secondAttribute="trailing" id="Fb8-zu-WkQ"/>
+                            <constraint firstItem="Lec-7I-9HX" firstAttribute="bottom" secondItem="wdZ-0c-YrX" secondAttribute="bottom" id="H9f-kf-59R"/>
+                            <constraint firstAttribute="trailing" secondItem="qaT-Bg-r4A" secondAttribute="trailing" id="Jrv-5k-Dk5"/>
+                            <constraint firstItem="mnQ-s7-ITo" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="C4j-wV-qLV" secondAttribute="leading" constant="20" id="LnQ-cT-a8m"/>
+                            <constraint firstItem="jd6-xQ-6G4" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="C4j-wV-qLV" secondAttribute="leading" constant="20" id="MlP-F7-t47"/>
+                            <constraint firstItem="VWc-Zg-bnW" firstAttribute="centerY" secondItem="k4f-Oq-BJf" secondAttribute="centerY" id="PDW-Ij-YKA"/>
+                            <constraint firstItem="wdZ-0c-YrX" firstAttribute="centerX" secondItem="mnQ-s7-ITo" secondAttribute="centerX" id="Po6-D4-jZg"/>
+                            <constraint firstItem="qaT-Bg-r4A" firstAttribute="width" secondItem="TRx-rE-2UU" secondAttribute="width" id="RbT-Bw-PVo"/>
+                            <constraint firstItem="jd6-xQ-6G4" firstAttribute="top" secondItem="mnQ-s7-ITo" secondAttribute="bottom" constant="8" id="SKp-K6-XAZ"/>
+                            <constraint firstAttribute="trailing" secondItem="OCQ-vm-OCh" secondAttribute="trailing" constant="20" symbolic="YES" id="Tb6-xf-p4f"/>
+                            <constraint firstItem="VWc-Zg-bnW" firstAttribute="leading" secondItem="TRx-rE-2UU" secondAttribute="trailing" id="UYv-xa-6LR"/>
+                            <constraint firstItem="VWc-Zg-bnW" firstAttribute="height" secondItem="qaT-Bg-r4A" secondAttribute="height" id="cWM-fc-4Hk"/>
+                            <constraint firstItem="TRx-rE-2UU" firstAttribute="leading" secondItem="C4j-wV-qLV" secondAttribute="leading" id="i8a-Cp-vzM"/>
+                            <constraint firstAttribute="centerY" secondItem="mnQ-s7-ITo" secondAttribute="centerY" id="ij5-pm-q5F"/>
+                            <constraint firstItem="OCQ-vm-OCh" firstAttribute="top" secondItem="C4j-wV-qLV" secondAttribute="top" constant="40" id="jKy-na-p0Q"/>
+                            <constraint firstItem="OCQ-vm-OCh" firstAttribute="leading" secondItem="C4j-wV-qLV" secondAttribute="leading" constant="20" symbolic="YES" id="liU-ax-38M"/>
+                            <constraint firstItem="VWc-Zg-bnW" firstAttribute="top" secondItem="jd6-xQ-6G4" secondAttribute="bottom" constant="40" id="n7S-3e-IfE"/>
+                            <constraint firstItem="Lec-7I-9HX" firstAttribute="trailing" secondItem="wdZ-0c-YrX" secondAttribute="trailing" id="nsr-3A-fgg"/>
+                            <constraint firstItem="qaT-Bg-r4A" firstAttribute="centerY" secondItem="VWc-Zg-bnW" secondAttribute="centerY" id="nvl-t0-fDf"/>
+                            <constraint firstItem="mnQ-s7-ITo" firstAttribute="top" secondItem="Lec-7I-9HX" secondAttribute="bottom" constant="20" id="obr-RN-Sij"/>
+                            <constraint firstItem="Lec-7I-9HX" firstAttribute="top" secondItem="wdZ-0c-YrX" secondAttribute="top" id="uTN-J7-Nhw"/>
+                            <constraint firstItem="wdZ-0c-YrX" firstAttribute="top" secondItem="OCQ-vm-OCh" secondAttribute="bottom" constant="20" id="vPm-W6-XaC"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="ij5-pm-q5F"/>
+                            </mask>
+                        </variation>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XwL-tW-NkX" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2101" y="-219"/>
+        </scene>
+        <!--5-->
+        <scene sceneID="wbW-M6-dad">
+            <objects>
+                <viewController storyboardIdentifier="OB4" id="vJz-Kh-cO1" userLabel="5" customClass="OnBoardingDetailController" customModule="OnBoarding" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="fKp-fG-YBY"/>
+                        <viewControllerLayoutGuide type="bottom" id="l5T-ZA-geW"/>
+                    </layoutGuides>
+                    <view key="view" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="utq-lD-UEH">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VFg-hl-QZ6" customClass="LBLockyButton" customModule="OnBoarding" customModuleProvider="target">
+                                <rect key="frame" x="221" y="380" width="159" height="50"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <state key="normal" title="Enjoy now">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="shouldAnimateOnViewDidLoad" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="a0Alpha">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="aDuration">
+                                        <real key="value" value="0.5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Locky1" translatesAutoresizingMaskIntoConstraints="NO" id="FtF-fU-v2C" customClass="LBAnimatableImageView" customModule="OnBoarding" customModuleProvider="target">
+                                <rect key="frame" x="140" y="120" width="320" height="240"/>
+                                <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="320" id="0HB-lc-a1K"/>
+                                    <constraint firstAttribute="height" constant="240" id="DIy-uU-MOr"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="aDuration">
+                                        <real key="value" value="0.070000000000000007"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="shouldAnimateOnViewDidLoad" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="a0Alpha">
+                                        <real key="value" value="0.5"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="a1Alpha">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <outlet property="nextAnimatedImageView" destination="c2Q-bf-WNO" id="dI6-4d-JHl"/>
+                                </connections>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Locky2" translatesAutoresizingMaskIntoConstraints="NO" id="c2Q-bf-WNO" customClass="LBAnimatableImageView" customModule="OnBoarding" customModuleProvider="target">
+                                <rect key="frame" x="140" y="120" width="320" height="240"/>
+                                <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="320" id="5Pm-zY-iMg"/>
+                                    <constraint firstAttribute="height" constant="240" id="6nq-bH-Kcl"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="aDuration">
+                                        <real key="value" value="0.070000000000000007"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="shouldAnimateOnViewDidLoad" value="NO"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="a0Alpha">
+                                        <real key="value" value="0.5"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="a1Alpha">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <outlet property="nextAnimatedImageView" destination="8rq-3M-n3O" id="9Jc-bm-tNe"/>
+                                </connections>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Locky3" translatesAutoresizingMaskIntoConstraints="NO" id="8rq-3M-n3O" customClass="LBAnimatableImageView" customModule="OnBoarding" customModuleProvider="target">
+                                <rect key="frame" x="140" y="120" width="320" height="240"/>
+                                <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="240" id="omx-V7-VDI"/>
+                                    <constraint firstAttribute="width" constant="320" id="ysF-p8-AlD"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="aDuration">
+                                        <real key="value" value="0.070000000000000007"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="shouldAnimateOnViewDidLoad" value="NO"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="a0Alpha">
+                                        <real key="value" value="0.5"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="a1Alpha">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <outlet property="nextAnimatedImageView" destination="sTS-6T-RYl" id="PF9-L5-MFg"/>
+                                </connections>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Locky4" translatesAutoresizingMaskIntoConstraints="NO" id="sTS-6T-RYl" customClass="LBAnimatableImageView" customModule="OnBoarding" customModuleProvider="target">
+                                <rect key="frame" x="140" y="120" width="320" height="240"/>
+                                <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="240" id="4uI-Zc-Qhe"/>
+                                    <constraint firstAttribute="width" constant="320" id="v4t-8F-SNS"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="aDuration">
+                                        <real key="value" value="0.070000000000000007"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="shouldAnimateOnViewDidLoad" value="NO"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="a0Alpha">
+                                        <real key="value" value="0.5"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="a1Alpha">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <outlet property="nextAnimatedImageView" destination="xEH-Oe-veW" id="chS-n4-9l7"/>
+                                </connections>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Locky5" translatesAutoresizingMaskIntoConstraints="NO" id="xEH-Oe-veW" customClass="LBAnimatableImageView" customModule="OnBoarding" customModuleProvider="target">
+                                <rect key="frame" x="140" y="120" width="320" height="240"/>
+                                <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="240" id="Bdk-u9-bps"/>
+                                    <constraint firstAttribute="width" constant="320" id="KWC-pp-k27"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="aDuration">
+                                        <real key="value" value="0.070000000000000007"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="shouldAnimateOnViewDidLoad" value="NO"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="a0Alpha">
+                                        <real key="value" value="0.5"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="a1Alpha">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <outlet property="nextAnimatedImageView" destination="lfv-lc-LlD" id="BDq-v4-fk8"/>
+                                </connections>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Locky6" translatesAutoresizingMaskIntoConstraints="NO" id="lfv-lc-LlD" customClass="LBAnimatableImageView" customModule="OnBoarding" customModuleProvider="target">
+                                <rect key="frame" x="140" y="120" width="320" height="240"/>
+                                <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="320" id="BXO-6U-OaP"/>
+                                    <constraint firstAttribute="height" constant="240" id="sOM-1v-xHo"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="aDuration">
+                                        <real key="value" value="0.070000000000000007"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="shouldAnimateOnViewDidLoad" value="NO"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="a0Alpha">
+                                        <real key="value" value="0.5"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="a1Alpha">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Locky7" translatesAutoresizingMaskIntoConstraints="NO" id="031-Yy-fBO" customClass="LBAnimatableImageView" customModule="OnBoarding" customModuleProvider="target">
+                                <rect key="frame" x="140" y="120" width="320" height="240"/>
+                                <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="240" id="dQj-h0-CnJ"/>
+                                    <constraint firstAttribute="width" constant="320" id="ffr-j9-RYC"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="aDuration">
+                                        <real key="value" value="0.5"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="shouldAnimateOnViewDidLoad" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="a0Alpha">
+                                        <real key="value" value="0.5"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="a1Alpha">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.70210683350000003" green="0.41413527729999999" blue="0.88373762369999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="FtF-fU-v2C" firstAttribute="bottom" secondItem="031-Yy-fBO" secondAttribute="bottom" id="3Th-e0-svv"/>
+                            <constraint firstItem="8rq-3M-n3O" firstAttribute="trailing" secondItem="FtF-fU-v2C" secondAttribute="trailing" id="78n-lv-Fri"/>
+                            <constraint firstItem="c2Q-bf-WNO" firstAttribute="trailing" secondItem="FtF-fU-v2C" secondAttribute="trailing" id="8Dv-mO-Xzy"/>
+                            <constraint firstItem="FtF-fU-v2C" firstAttribute="leading" secondItem="lfv-lc-LlD" secondAttribute="leading" id="99J-tx-D1x"/>
+                            <constraint firstItem="FtF-fU-v2C" firstAttribute="trailing" secondItem="031-Yy-fBO" secondAttribute="trailing" id="9zM-Uv-eP7"/>
+                            <constraint firstItem="FtF-fU-v2C" firstAttribute="leading" secondItem="031-Yy-fBO" secondAttribute="leading" id="DVY-pN-k4z"/>
+                            <constraint firstItem="c2Q-bf-WNO" firstAttribute="bottom" secondItem="FtF-fU-v2C" secondAttribute="bottom" id="LtE-hZ-qPv"/>
+                            <constraint firstItem="FtF-fU-v2C" firstAttribute="trailing" secondItem="lfv-lc-LlD" secondAttribute="trailing" id="Nop-Ld-5Ja"/>
+                            <constraint firstItem="FtF-fU-v2C" firstAttribute="bottom" secondItem="xEH-Oe-veW" secondAttribute="bottom" id="QAj-gS-GmI"/>
+                            <constraint firstAttribute="centerX" secondItem="VFg-hl-QZ6" secondAttribute="centerX" id="Sdx-Qs-jd1"/>
+                            <constraint firstItem="8rq-3M-n3O" firstAttribute="leading" secondItem="FtF-fU-v2C" secondAttribute="leading" id="TLc-dd-aDH"/>
+                            <constraint firstItem="sTS-6T-RYl" firstAttribute="trailing" secondItem="FtF-fU-v2C" secondAttribute="trailing" id="TYO-kr-us9"/>
+                            <constraint firstAttribute="centerX" secondItem="FtF-fU-v2C" secondAttribute="centerX" id="UnZ-G9-B53"/>
+                            <constraint firstItem="sTS-6T-RYl" firstAttribute="leading" secondItem="FtF-fU-v2C" secondAttribute="leading" id="WIe-75-QKl"/>
+                            <constraint firstItem="FtF-fU-v2C" firstAttribute="top" secondItem="utq-lD-UEH" secondAttribute="top" constant="120" id="aOh-F4-yyG"/>
+                            <constraint firstItem="VFg-hl-QZ6" firstAttribute="top" secondItem="FtF-fU-v2C" secondAttribute="bottom" constant="20" id="bEV-IL-LQ5"/>
+                            <constraint firstItem="FtF-fU-v2C" firstAttribute="bottom" secondItem="lfv-lc-LlD" secondAttribute="bottom" id="bfF-al-AIu"/>
+                            <constraint firstItem="c2Q-bf-WNO" firstAttribute="leading" secondItem="FtF-fU-v2C" secondAttribute="leading" id="bp8-mX-PgO"/>
+                            <constraint firstItem="FtF-fU-v2C" firstAttribute="trailing" secondItem="xEH-Oe-veW" secondAttribute="trailing" id="hbh-gG-aUQ"/>
+                            <constraint firstItem="FtF-fU-v2C" firstAttribute="leading" secondItem="xEH-Oe-veW" secondAttribute="leading" id="lYZ-Ze-ViX"/>
+                            <constraint firstItem="c2Q-bf-WNO" firstAttribute="top" secondItem="FtF-fU-v2C" secondAttribute="top" id="ldh-f5-EgS"/>
+                            <constraint firstItem="FtF-fU-v2C" firstAttribute="top" secondItem="lfv-lc-LlD" secondAttribute="top" id="mU4-pv-Alt"/>
+                            <constraint firstItem="8rq-3M-n3O" firstAttribute="top" secondItem="FtF-fU-v2C" secondAttribute="top" id="ofc-Yz-ZXh"/>
+                            <constraint firstItem="8rq-3M-n3O" firstAttribute="bottom" secondItem="FtF-fU-v2C" secondAttribute="bottom" id="pZL-fO-WLG"/>
+                            <constraint firstItem="FtF-fU-v2C" firstAttribute="top" secondItem="xEH-Oe-veW" secondAttribute="top" id="snf-iA-vSy"/>
+                            <constraint firstItem="sTS-6T-RYl" firstAttribute="bottom" secondItem="FtF-fU-v2C" secondAttribute="bottom" id="t1W-hz-alh"/>
+                            <constraint firstItem="sTS-6T-RYl" firstAttribute="top" secondItem="FtF-fU-v2C" secondAttribute="top" id="tG0-Kw-wOY"/>
+                            <constraint firstItem="FtF-fU-v2C" firstAttribute="top" secondItem="031-Yy-fBO" secondAttribute="top" id="xb0-dU-5fA"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="animatableButton" destination="VFg-hl-QZ6" id="91P-Lg-Zz0"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YAI-Ac-J6o" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2845" y="-219"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="Battery-1" width="320" height="240"/>
+        <image name="Battery-2" width="320" height="240"/>
+        <image name="Battery-3" width="320" height="240"/>
+        <image name="Battery-4" width="320" height="240"/>
+        <image name="Battery-5" width="320" height="240"/>
+        <image name="Battery-6" width="320" height="240"/>
+        <image name="Battery-Empty" width="320" height="240"/>
+        <image name="Locky1" width="1354" height="1352"/>
+        <image name="Locky2" width="1354" height="1352"/>
+        <image name="Locky3" width="1354" height="1352"/>
+        <image name="Locky4" width="1354" height="1352"/>
+        <image name="Locky5" width="1354" height="1352"/>
+        <image name="Locky6" width="1354" height="1352"/>
+        <image name="Locky7" width="1354" height="1352"/>
+        <image name="Signal-1" width="320" height="240"/>
+        <image name="Signal-2" width="320" height="240"/>
+        <image name="Signal-3" width="320" height="240"/>
+        <image name="Signal-4" width="320" height="240"/>
+        <image name="Thief" width="320" height="240"/>
+        <image name="Thief-Eyes" width="320" height="240"/>
+    </resources>
+</document>

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7531" systemVersion="14C1514" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7531"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="IOSDeviceViewController">
+            <connections>
+                <outlet property="batteryImageView" destination="l0z-tX-Fxd" id="Fr0-au-UqK"/>
+                <outlet property="batteryLevelField" destination="QzY-7m-KTh" id="jxX-YH-FOn"/>
+                <outlet property="batteryLevelIndicator" destination="yeG-yz-CVR" id="fdf-a4-2v5"/>
+                <outlet property="batteryLevelIndicatorContainingView" destination="HBF-ct-don" id="yA5-51-iY4"/>
+                <outlet property="deviceImageView" destination="1zZ-Oj-qGY" id="uK2-Ow-Odv"/>
+                <outlet property="deviceNameField" destination="deb-g0-fPd" id="Uq2-v2-cDO"/>
+                <outlet property="statusField" destination="KTf-95-fWr" id="0wG-8i-gmo"/>
+                <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <customView id="Hz6-mo-xeY">
+            <rect key="frame" x="0.0" y="0.0" width="232" height="48"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <customView translatesAutoresizingMaskIntoConstraints="NO" id="HBF-ct-don">
+                    <rect key="frame" x="198" y="30" width="22" height="10"/>
+                    <subviews>
+                        <levelIndicator verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="yeG-yz-CVR">
+                            <rect key="frame" x="0.0" y="-3" width="22" height="16"/>
+                            <levelIndicatorCell key="cell" alignment="left" doubleValue="100" maxValue="100" warningValue="30" criticalValue="20" levelIndicatorStyle="continuousCapacity" id="Dqh-8S-zP6"/>
+                        </levelIndicator>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="yeG-yz-CVR" firstAttribute="leading" secondItem="HBF-ct-don" secondAttribute="leading" id="ECl-yb-QBJ"/>
+                        <constraint firstAttribute="width" constant="22" id="Ffe-eT-YYa"/>
+                        <constraint firstAttribute="trailing" secondItem="yeG-yz-CVR" secondAttribute="trailing" id="Fff-n9-IxL"/>
+                        <constraint firstItem="yeG-yz-CVR" firstAttribute="top" secondItem="HBF-ct-don" secondAttribute="top" constant="-3" id="Hhd-IC-L1x"/>
+                        <constraint firstAttribute="height" constant="10" id="OWk-RE-hWX"/>
+                        <constraint firstAttribute="bottom" secondItem="yeG-yz-CVR" secondAttribute="bottom" constant="-3" id="aei-F1-IE5"/>
+                    </constraints>
+                </customView>
+                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="l0z-tX-Fxd">
+                    <rect key="frame" x="193" y="27" width="39" height="17"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="17" id="0ai-vi-js1"/>
+                        <constraint firstAttribute="width" constant="39" id="8g6-BA-AOo"/>
+                    </constraints>
+                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" image="batteryIconIntroEmpty" id="RYS-K5-70j"/>
+                </imageView>
+                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1zZ-Oj-qGY">
+                    <rect key="frame" x="6" y="5" width="26" height="38"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="38" id="7zU-z6-moy"/>
+                        <constraint firstAttribute="width" constant="26" id="XIu-bk-nuP"/>
+                    </constraints>
+                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="iPhoneIcon" id="aEY-0J-lY4"/>
+                </imageView>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="deb-g0-fPd">
+                    <rect key="frame" x="35" y="25" width="106" height="20"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="20" id="e61-8h-xmr"/>
+                    </constraints>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="iPhone de Nico" id="Vpg-DZ-YaO">
+                        <font key="font" size="14" name="HelveticaNeue-Bold"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="KTf-95-fWr">
+                    <rect key="frame" x="35" y="5" width="67" height="18"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="18" id="zv0-4J-TQq"/>
+                    </constraints>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Connected" id="mtQ-1K-jwN">
+                        <font key="font" metaFont="cellTitle"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QzY-7m-KTh">
+                    <rect key="frame" x="157" y="27" width="41" height="16"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="16" id="0cQ-7a-E9n"/>
+                        <constraint firstAttribute="width" constant="37" id="X45-dV-Um1"/>
+                    </constraints>
+                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="100 %" id="IZu-Nh-1Pv">
+                        <font key="font" size="10" name="HelveticaNeue-Light"/>
+                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+            </subviews>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="l0z-tX-Fxd" secondAttribute="trailing" id="0RM-8A-mVW"/>
+                <constraint firstItem="KTf-95-fWr" firstAttribute="leading" secondItem="1zZ-Oj-qGY" secondAttribute="trailing" constant="5" id="413-Aa-itI"/>
+                <constraint firstItem="QzY-7m-KTh" firstAttribute="centerY" secondItem="deb-g0-fPd" secondAttribute="centerY" id="5wE-Cr-Pc0"/>
+                <constraint firstItem="deb-g0-fPd" firstAttribute="leading" secondItem="1zZ-Oj-qGY" secondAttribute="trailing" constant="5" id="6IV-nw-pr3"/>
+                <constraint firstAttribute="bottom" secondItem="1zZ-Oj-qGY" secondAttribute="bottom" constant="5" id="6PB-OS-SuS"/>
+                <constraint firstItem="KTf-95-fWr" firstAttribute="top" secondItem="deb-g0-fPd" secondAttribute="bottom" constant="2" id="7fd-Vs-Voj"/>
+                <constraint firstAttribute="bottom" secondItem="KTf-95-fWr" secondAttribute="bottom" constant="5" id="A8p-XA-aXv"/>
+                <constraint firstItem="QzY-7m-KTh" firstAttribute="leading" secondItem="deb-g0-fPd" secondAttribute="trailing" constant="20" id="G4t-Pp-cgM"/>
+                <constraint firstItem="1zZ-Oj-qGY" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="5" id="K4h-Yu-JiI"/>
+                <constraint firstItem="deb-g0-fPd" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="3" id="Vhy-Jb-mGw"/>
+                <constraint firstItem="l0z-tX-Fxd" firstAttribute="top" secondItem="HBF-ct-don" secondAttribute="top" constant="-4" id="Vpd-pc-sgC"/>
+                <constraint firstAttribute="trailing" secondItem="QzY-7m-KTh" secondAttribute="trailing" constant="36" id="bzp-xg-idK"/>
+                <constraint firstItem="l0z-tX-Fxd" firstAttribute="leading" secondItem="HBF-ct-don" secondAttribute="leading" constant="-5" id="elV-o8-DMu"/>
+                <constraint firstItem="QzY-7m-KTh" firstAttribute="centerY" secondItem="l0z-tX-Fxd" secondAttribute="centerY" constant="0.5" id="mxI-Cq-i4D"/>
+                <constraint firstItem="1zZ-Oj-qGY" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="6" id="s8o-ub-aep"/>
+            </constraints>
+            <point key="canvasLocation" x="421" y="281"/>
+        </customView>
+    </objects>
+    <resources>
+        <image name="batteryIconIntroEmpty" width="31" height="13.5"/>
+        <image name="iPhoneIcon" width="202" height="399"/>
+    </resources>
+</document>

@@ -1,0 +1,3 @@
+@interface UserPasswordFieldBackgroundView : NSView
+
+@end

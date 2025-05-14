@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7706" systemVersion="14E36b" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7706"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="LoginScreenInitializingBluetoothWindowController">
+            <connections>
+                <outlet property="lockyImageView" destination="g6v-5m-kR8" id="OYN-6Z-fAa"/>
+                <outlet property="textField" destination="g0b-ie-x0p" id="qs0-1e-VOh"/>
+                <outlet property="window" destination="CxD-fT-nNE" id="ycz-E5-XFR"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" hasShadow="NO" oneShot="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="CxD-fT-nNE" customClass="LoginScreenPanel">
+            <windowStyleMask key="styleMask" utility="YES" nonactivatingPanel="YES"/>
+            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+            <rect key="contentRect" x="196" y="132" width="960" height="600"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1177"/>
+            <view key="contentView" id="97J-by-VTN">
+                <rect key="frame" x="0.0" y="0.0" width="960" height="600"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="g6v-5m-kR8">
+                        <rect key="frame" x="456" y="518" width="48" height="48"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="48" id="X99-ug-Xet"/>
+                            <constraint firstAttribute="height" constant="48" id="y9e-kd-PEl"/>
+                        </constraints>
+                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="LockyIconWhite" id="Nlf-0N-eZA"/>
+                    </imageView>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="g0b-ie-x0p">
+                        <rect key="frame" x="410" y="490" width="141" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="qzd-Vz-HJf"/>
+                        </constraints>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Initializing Bluetooth..." id="uKy-Uj-8ei">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="centerX" secondItem="g0b-ie-x0p" secondAttribute="centerX" id="KIn-Yu-dQf"/>
+                    <constraint firstItem="g0b-ie-x0p" firstAttribute="top" secondItem="g6v-5m-kR8" secondAttribute="bottom" constant="8" id="M26-UB-Uj7"/>
+                    <constraint firstItem="g6v-5m-kR8" firstAttribute="centerX" secondItem="g0b-ie-x0p" secondAttribute="centerX" constant="-0.5" id="rDA-fd-goq"/>
+                    <constraint firstAttribute="centerY" secondItem="g0b-ie-x0p" secondAttribute="centerY" constant="200" id="y0L-gz-tbL"/>
+                </constraints>
+            </view>
+            <point key="canvasLocation" x="453" y="259"/>
+        </window>
+    </objects>
+    <resources>
+        <image name="LockyIconWhite" width="256" height="256"/>
+    </resources>
+</document>

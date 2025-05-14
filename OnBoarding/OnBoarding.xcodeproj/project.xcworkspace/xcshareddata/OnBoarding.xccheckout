@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>FD5FF0EF-AD7C-4399-9C17-3AAB1A156C1E</string>
+	<key>IDESourceControlProjectName</key>
+	<string>OnBoarding</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>C929DB9202921EC54AAAB8A2F78C8B2A8AF4CCAD</key>
+		<string>https://nicolas.dominati%2540lunabee.com@git2.projectlocker.com/Lubee/Locky.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>OnBoarding/OnBoarding.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>C929DB9202921EC54AAAB8A2F78C8B2A8AF4CCAD</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://nicolas.dominati%2540lunabee.com@git2.projectlocker.com/Lubee/Locky.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>C929DB9202921EC54AAAB8A2F78C8B2A8AF4CCAD</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>C929DB9202921EC54AAAB8A2F78C8B2A8AF4CCAD</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Locky</string>
+		</dict>
+	</array>
+</dict>
+</plist>

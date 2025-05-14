@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7706" systemVersion="14E17e" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7706"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="LoginScreenWindowController">
+            <connections>
+                <outlet property="leftWingImage" destination="oYe-Ry-cX6" id="BRd-xG-DNf"/>
+                <outlet property="rightWingImage" destination="3zA-gc-W9e" id="ZsH-AP-geo"/>
+                <outlet property="unlockButton" destination="fNq-zr-X6I" id="sVm-2b-6ge"/>
+                <outlet property="window" destination="CxD-fT-nNE" id="ycz-E5-XFR"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" hasShadow="NO" oneShot="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="CxD-fT-nNE" customClass="LoginScreenPanel">
+            <windowStyleMask key="styleMask" utility="YES" nonactivatingPanel="YES"/>
+            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+            <rect key="contentRect" x="196" y="132" width="960" height="600"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1177"/>
+            <view key="contentView" id="97J-by-VTN">
+                <rect key="frame" x="0.0" y="0.0" width="960" height="600"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3zA-gc-W9e">
+                        <rect key="frame" x="518" y="495" width="68" height="52"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="52" id="Jmf-Vk-W7V"/>
+                            <constraint firstAttribute="width" constant="68" id="ekw-RO-CG3"/>
+                        </constraints>
+                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="wingRight" id="Bg4-L2-784"/>
+                    </imageView>
+                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="oYe-Ry-cX6">
+                        <rect key="frame" x="375" y="495" width="68" height="52"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="52" id="Df8-Dh-MVG"/>
+                            <constraint firstAttribute="width" constant="68" id="mqe-Od-hjz"/>
+                        </constraints>
+                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="wingLeft" id="gMN-DA-AmY"/>
+                    </imageView>
+                    <button focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fNq-zr-X6I" customClass="UnlockButton">
+                        <rect key="frame" x="442" y="490" width="77" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="77" id="HFy-g0-9zX"/>
+                            <constraint firstAttribute="height" constant="20" id="j17-36-Ivo"/>
+                        </constraints>
+                        <buttonCell key="cell" type="bevel" title="Unlock" bezelStyle="rounded" alignment="center" focusRingType="none" imageScaling="proportionallyDown" inset="2" id="hAm-w4-Dlw">
+                            <behavior key="behavior" lightByContents="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="unlockButtonPressed:" target="-2" id="ZRg-k3-Cdn"/>
+                        </connections>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="centerY" secondItem="fNq-zr-X6I" secondAttribute="centerY" constant="200" id="5yV-Bi-NPm"/>
+                    <constraint firstItem="3zA-gc-W9e" firstAttribute="leading" secondItem="fNq-zr-X6I" secondAttribute="trailing" constant="-1" id="CrU-8O-Yaz"/>
+                    <constraint firstItem="oYe-Ry-cX6" firstAttribute="centerY" secondItem="3zA-gc-W9e" secondAttribute="centerY" id="FxP-lG-VmW"/>
+                    <constraint firstItem="fNq-zr-X6I" firstAttribute="leading" secondItem="oYe-Ry-cX6" secondAttribute="trailing" constant="-1" id="Toe-Aw-iEK"/>
+                    <constraint firstAttribute="centerX" secondItem="fNq-zr-X6I" secondAttribute="centerX" id="iBE-gm-iFa"/>
+                    <constraint firstItem="oYe-Ry-cX6" firstAttribute="centerY" secondItem="fNq-zr-X6I" secondAttribute="centerY" constant="-21" id="jQe-wk-xAu"/>
+                </constraints>
+            </view>
+            <point key="canvasLocation" x="453" y="259"/>
+        </window>
+    </objects>
+    <resources>
+        <image name="wingLeft" width="140" height="110"/>
+        <image name="wingRight" width="140" height="110"/>
+    </resources>
+</document>

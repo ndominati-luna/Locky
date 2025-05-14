@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1514" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6751"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="AboutWindowController">
+            <connections>
+                <outlet property="versionLabel" destination="mmf-4c-dfW" id="Nql-NW-Z9T"/>
+                <outlet property="window" destination="3Up-PF-f00" id="5b7-5E-Fx9"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <window allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" oneShot="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="3Up-PF-f00" customClass="KeyWindow">
+            <windowStyleMask key="styleMask" titled="YES" closable="YES" fullSizeContentView="YES"/>
+            <rect key="contentRect" x="-1724" y="246" width="445" height="176"/>
+            <rect key="screenRect" x="-1920" y="0.0" width="1920" height="1200"/>
+            <value key="minSize" type="size" width="445" height="176"/>
+            <value key="maxSize" type="size" width="445" height="176"/>
+            <view key="contentView" id="8FD-I2-j7H" customClass="ColoredView">
+                <rect key="frame" x="0.0" y="0.0" width="445" height="176"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="EIu-ep-8tU">
+                        <rect key="frame" x="27" y="36" width="112" height="104"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="112" id="7TP-8Z-7BX"/>
+                            <constraint firstAttribute="height" constant="104" id="XBA-Sh-dmN"/>
+                        </constraints>
+                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" image="LockyAppIcon" id="785-Vb-G2M"/>
+                    </imageView>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Nlf-aB-rGY">
+                        <rect key="frame" x="157" y="114" width="90" height="42"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Locky" id="bcA-Jc-fHR">
+                            <font key="font" size="35" name="HelveticaNeue-Thin"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="mmf-4c-dfW">
+                        <rect key="frame" x="157" y="92" width="270" height="17"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Version 1.0.0.1" id="feD-Sy-NkZ">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="JYJ-ve-VYG">
+                        <rect key="frame" x="157" y="50" width="270" height="13"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Copyright © 2015 Lunabee Pte Ltd. All rights reserved." id="fMv-WF-IhS">
+                            <font key="font" metaFont="system" size="10"/>
+                            <color key="textColor" name="headerColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="klg-9c-VLl">
+                        <rect key="frame" x="320" y="11" width="111" height="32"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="99" id="4QK-Dl-Ls4"/>
+                            <constraint firstAttribute="height" constant="21" id="Bdd-Av-xyn"/>
+                        </constraints>
+                        <buttonCell key="cell" type="push" title="OK" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="TNc-ua-2lt">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="okButtonPressed:" target="-2" id="deH-7x-SzJ"/>
+                        </connections>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="mmf-4c-dfW" firstAttribute="top" secondItem="Nlf-aB-rGY" secondAttribute="bottom" constant="5" id="0Kx-SP-kYF"/>
+                    <constraint firstItem="JYJ-ve-VYG" firstAttribute="top" secondItem="mmf-4c-dfW" secondAttribute="bottom" constant="29" id="2CV-hB-o6T"/>
+                    <constraint firstAttribute="trailing" secondItem="klg-9c-VLl" secondAttribute="trailing" constant="20" id="Pnt-96-cs0"/>
+                    <constraint firstAttribute="trailing" secondItem="JYJ-ve-VYG" secondAttribute="trailing" constant="20" id="RDd-aY-ML9"/>
+                    <constraint firstItem="JYJ-ve-VYG" firstAttribute="leading" secondItem="EIu-ep-8tU" secondAttribute="trailing" constant="20" id="aPf-ga-zZ2"/>
+                    <constraint firstItem="Nlf-aB-rGY" firstAttribute="leading" secondItem="EIu-ep-8tU" secondAttribute="trailing" constant="20" id="eer-5Y-pAf"/>
+                    <constraint firstItem="EIu-ep-8tU" firstAttribute="leading" secondItem="8FD-I2-j7H" secondAttribute="leading" constant="27" id="jS7-sT-xyS"/>
+                    <constraint firstAttribute="bottom" secondItem="klg-9c-VLl" secondAttribute="bottom" constant="18" id="jq1-pi-DaY"/>
+                    <constraint firstItem="mmf-4c-dfW" firstAttribute="leading" secondItem="EIu-ep-8tU" secondAttribute="trailing" constant="20" id="m01-9x-xba"/>
+                    <constraint firstItem="Nlf-aB-rGY" firstAttribute="top" secondItem="8FD-I2-j7H" secondAttribute="top" constant="20" id="qWW-wd-gKF"/>
+                    <constraint firstAttribute="centerY" secondItem="EIu-ep-8tU" secondAttribute="centerY" id="tEE-FK-Ark"/>
+                    <constraint firstAttribute="trailing" secondItem="mmf-4c-dfW" secondAttribute="trailing" constant="20" id="uyw-Qr-QYd"/>
+                </constraints>
+                <userDefinedRuntimeAttributes>
+                    <userDefinedRuntimeAttribute type="color" keyPath="color">
+                        <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </userDefinedRuntimeAttribute>
+                </userDefinedRuntimeAttributes>
+            </view>
+            <point key="canvasLocation" x="464.5" y="308"/>
+        </window>
+    </objects>
+    <resources>
+        <image name="LockyAppIcon" width="512" height="512"/>
+    </resources>
+</document>

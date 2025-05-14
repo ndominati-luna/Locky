@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="AgC-eL-Hgc">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="11077"/>
+    </dependencies>
+    <scenes>
+        <!--Locky-->
+        <scene sceneID="aou-V4-d1y">
+            <objects>
+                <controller title="Locky" id="AgC-eL-Hgc" customClass="InterfaceController" customModule="LockyWatch" customModuleProvider="target">
+                    <items>
+                        <group width="1" height="183" alignment="left" layout="vertical" id="OoJ-YR-ufG" userLabel="MainGroup">
+                            <items>
+                                <imageView width="70" height="70" alignment="center" contentMode="scaleAspectFill" id="ZSc-fG-ZdU"/>
+                                <label width="1" alignment="left" text="Not connected" textAlignment="left" numberOfLines="0" id="HvO-vz-lfH"/>
+                                <label width="1" alignment="left" text="Unlocked 10 minutes ago" textAlignment="left" numberOfLines="0" minimumScaleFactor="0.5" id="J9e-8v-qx4">
+                                    <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
+                                </label>
+                                <button width="1" alignment="left" title="Lock" id="hzj-15-KR5">
+                                    <connections>
+                                        <action selector="lockButtonPressed" destination="AgC-eL-Hgc" id="LC1-69-oAm"/>
+                                    </connections>
+                                </button>
+                            </items>
+                        </group>
+                        <group width="1" height="2" alignment="left" layout="vertical" id="bcA-Pe-a0P" userLabel="NoDataGroup">
+                            <items>
+                                <label width="1" alignment="center" verticalAlignment="center" text="Open Locky on your iPhone." textAlignment="center" numberOfLines="0" id="9dg-FF-4QG"/>
+                            </items>
+                        </group>
+                    </items>
+                    <connections>
+                        <outlet property="imageView" destination="ZSc-fG-ZdU" id="hOY-30-qz0"/>
+                        <outlet property="lockButton" destination="hzj-15-KR5" id="bGD-Yh-fZv"/>
+                        <outlet property="mainGroup" destination="OoJ-YR-ufG" id="sw4-CM-Fwc"/>
+                        <outlet property="noDataGroup" destination="bcA-Pe-a0P" id="uir-5f-A1G"/>
+                        <outlet property="openLockyLabel" destination="9dg-FF-4QG" id="pnn-1d-mbY"/>
+                        <outlet property="statusLabel" destination="HvO-vz-lfH" id="EEI-7Z-9B3"/>
+                        <outlet property="timerLabel" destination="J9e-8v-qx4" id="fXO-GT-nHT"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="235" y="332.5"/>
+        </scene>
+        <!--GlanceController-->
+        <scene sceneID="wsD-tN-U8b">
+            <objects>
+                <controller identifier="GlanceController" hidesWhenLoading="NO" id="SKg-zJ-3i0" customClass="GlanceController" customModule="LockyWatch_Extension">
+                    <items>
+                        <label alignment="left" text="Locky" id="0Tk-9N-93d"/>
+                        <label alignment="left" minimumScaleFactor="0.10000000000000001" id="M2i-b7-tcn"/>
+                        <group alignment="left" id="l09-yw-bJB">
+                            <items>
+                                <imageView width="100" height="100" alignment="center" contentMode="scaleAspectFill" id="Wvs-9q-C2h"/>
+                            </items>
+                        </group>
+                    </items>
+                    <connections>
+                        <outlet property="lockyLabel" destination="0Tk-9N-93d" id="SbN-Xn-yJd"/>
+                        <outlet property="statusLabel" destination="M2i-b7-tcn" id="ZBd-dR-548"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="484" y="332"/>
+        </scene>
+    </scenes>
+</document>

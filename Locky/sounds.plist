@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>none</key>
+	<dict>
+		<key>themename</key>
+		<string>None</string>
+	</dict>
+	<key>ossalorsinfidele</key>
+	<dict>
+		<key>filename</key>
+		<string>oai</string>
+		<key>themename</key>
+		<string>OSS 117 - Alors infidèle</string>
+	</dict>
+	<key>osslablanquette</key>
+	<dict>
+		<key>filename</key>
+		<string>ocevb</string>
+		<key>themename</key>
+		<string>OSS 117 - Comment est votre blanquette ?</string>
+	</dict>
+	<key>readytoserve</key>
+	<dict>
+		<key>filename</key>
+		<string>rts</string>
+		<key>themename</key>
+		<string>Ready to serve my Lord</string>
+	</dict>
+	<key>yesmylord</key>
+	<dict>
+		<key>filename</key>
+		<string>yml</string>
+		<key>themename</key>
+		<string>Yes my Lord</string>
+	</dict>
+	<key>default</key>
+	<dict>
+		<key>filename</key>
+		<string>lock</string>
+		<key>themename</key>
+		<string>Default sounds</string>
+	</dict>
+	<key>velo</key>
+	<dict>
+		<key>filename</key>
+		<string>velo</string>
+		<key>themename</key>
+		<string>Velo</string>
+	</dict>
+	<key>fx1</key>
+	<dict>
+		<key>filename</key>
+		<string>borg</string>
+		<key>themename</key>
+		<string>FX 1</string>
+	</dict>
+	<key>fx2</key>
+	<dict>
+		<key>filename</key>
+		<string>comp</string>
+		<key>themename</key>
+		<string>FX 2</string>
+	</dict>
+	<key>magic</key>
+	<dict>
+		<key>filename</key>
+		<string>magic</string>
+		<key>themename</key>
+		<string>Magic</string>
+	</dict>
+	<key>lazer</key>
+	<dict>
+		<key>filename</key>
+		<string>lazer</string>
+		<key>themename</key>
+		<string>Lazer</string>
+	</dict>
+	<key>chewbaka</key>
+	<dict>
+		<key>filename</key>
+		<string>chwbk</string>
+		<key>themename</key>
+		<string>Chewbaka</string>
+	</dict>
+	<key>fx3</key>
+	<dict>
+		<key>filename</key>
+		<string>fx</string>
+		<key>themename</key>
+		<string>FX 3</string>
+	</dict>
+</dict>
+</plist>

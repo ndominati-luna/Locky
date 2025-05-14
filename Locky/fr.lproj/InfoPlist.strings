@@ -1,0 +1,10 @@
+/* 
+  InfoPlist.strings
+  Locky
+
+  Created by Nicolas Dominati on 08/10/2016.
+  Copyright © 2016 Lunabee Pte Ltd. All rights reserved.
+*/
+
+"NSPhotoLibraryUsageDescription" = "Locky a besoin d'accéder à vos photos en mode démo pour configurer les captures d'écran.";
+"NSBluetoothPeripheralUsageDescription" = "Locky a besoin du Bluetooth pour connecter votre iPhone à votre Mac.";

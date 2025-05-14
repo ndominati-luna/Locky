@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="8191" systemVersion="15A282b" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="8191"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="ActivateLockyMenuViewController">
+            <connections>
+                <outlet property="lockySwitch" destination="PKd-cZ-hmP" id="vrJ-0i-vcu"/>
+                <outlet property="menuLabel" destination="NKL-vH-5oc" id="iYY-QM-HtA"/>
+                <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <customView id="Hz6-mo-xeY">
+            <rect key="frame" x="0.0" y="0.0" width="218" height="20"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="NKL-vH-5oc">
+                    <rect key="frame" x="20" y="2" width="153" height="18"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="18" id="4EI-JW-qS6"/>
+                    </constraints>
+                    <animations/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Autolock with distance" id="EMQ-L5-fVD">
+                        <font key="font" metaFont="system" size="14"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <customView translatesAutoresizingMaskIntoConstraints="NO" id="PKd-cZ-hmP" customClass="ITSwitch">
+                    <rect key="frame" x="179" y="1" width="29" height="18"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="29" id="FnH-kF-3Ct"/>
+                        <constraint firstAttribute="height" constant="18" id="Qs4-0y-Sho"/>
+                    </constraints>
+                    <animations/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="on" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="switchValueChanged:" target="-2" id="nLt-xh-7Pk"/>
+                    </connections>
+                </customView>
+            </subviews>
+            <constraints>
+                <constraint firstItem="PKd-cZ-hmP" firstAttribute="leading" secondItem="NKL-vH-5oc" secondAttribute="trailing" constant="8" id="Esl-Id-H4E"/>
+                <constraint firstAttribute="bottom" secondItem="NKL-vH-5oc" secondAttribute="bottom" constant="2" id="K6N-ws-9wb"/>
+                <constraint firstAttribute="centerY" secondItem="PKd-cZ-hmP" secondAttribute="centerY" id="KDD-lH-ueW"/>
+                <constraint firstItem="NKL-vH-5oc" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" id="RwE-eQ-IGo"/>
+                <constraint firstItem="NKL-vH-5oc" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="22" id="bBn-Kg-bch"/>
+                <constraint firstAttribute="trailing" secondItem="PKd-cZ-hmP" secondAttribute="trailing" constant="10" id="lsj-vt-9mz"/>
+            </constraints>
+            <animations/>
+            <point key="canvasLocation" x="493" y="309"/>
+        </customView>
+    </objects>
+</document>

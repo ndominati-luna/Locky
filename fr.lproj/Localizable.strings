@@ -1,0 +1,272 @@
+/* 
+  Localizable.strings
+  Locky
+
+  Created by Nicolas Dominati on 06/03/15.
+  Copyright (c) 2015 Lunabee Pte Ltd. All rights reserved.
+*/
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+//                                          watchOS                                         //
+//////////////////////////////////////////////////////////////////////////////////////////////
+"Open Locky on your iPhone" = "Ouvrez Locky sur votre iPhone";
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+//                                            iOS                                           //
+//////////////////////////////////////////////////////////////////////////////////////////////
+
+// Bluetooth
+"Please turn on Bluetooth to use Locky." = "Réactivez le Bluetooth pour permettre à Locky de fonctionner.";
+"Swipe up to open controls" = "Glisser vers le haut pour ouvrir les réglages";
+
+
+// Notifications
+"Your Mac is locked." = "Votre Mac est verrouillé.";
+"Your Mac is unlocked." = "Votre Mac est déverrouillé.";
+"Authentication required to unlock..." = "Authentification requise pour déverrouiller...";
+
+
+// TouchID
+"Touch ID service error: please reboot your device." = "Erreur du service Touch ID: merci de redémarrer votre iPhone.";
+"Authenticate to unlock your Mac" = "Authentifiez-vous pour déverrouiller votre Mac";
+
+
+// Views
+"Break-in reports" = "Rapports d'intrusion";
+"Clear all break-in reports" = "Supprimer tous les rapports d'intrusion";
+"Are you sure you want to delete all your break-in reports?" = "Voulez-vous vraiment supprimer tous les rapports d'intrusion ?";
+"Connected" = "Connecté";
+"Not connected" = "Déconnecté";
+"Locked" = "Verrouillé";
+"Unlocked" = "Déverrouillé";
+"Autolock disabled" = "Verrouillage automatique désactivé";
+"Welcome" = "Bienvenue";
+"The magic will happen soon" = "La magie va bientôt opérer";
+"To work properly, Locky needs permissions to use Bluetooth and notifications." = "Pour fonctionner correctement, Locky doit avoir les permissions d'utiliser le Bluetooth et d'envoyer des notifications.";
+"Yes, authorize now" = "Oui, autoriser maintenant";
+"Send me the download link to get Locky on Mac" = "Envoyez-moi le lien de téléchargement pour obtenir Locky sur Mac";
+"Skip" = "Passer";
+"Enter your mail..." = "Entrez votre email...";
+"Send" = "Envoyer";
+"Disconnected" = "Déconnecté";
+"Locky is not connected" = "Locky n'est pas connecté";
+"Put your iPhone close to your Mac, and check that Bluetooth is activated on both devices." = "Posez votre iPhone près de votre Mac, et vérifiez que le Bluetooth est bien activé sur votre iPhone et votre Mac.";
+"Now, download Locky for your Mac." = "Maintenant, téléchargez Locky pour votre Mac.";
+"Get the link by email" = "Obtenir le lien par email";
+"On your Mac" = "Sur votre Mac";
+"Install Locky on your Mac and follow the steps to pair your iPhone and Mac." = "Installez Locky sur votre Mac et suivez les instructions pour jumeler votre iPhone et votre Mac.";
+"Open Locky on your Mac and follow the steps to pair your iPhone and Mac." = "Ouvrez Locky sur votre Mac et suivez les instructions pour jumeler votre iPhone et votre Mac.";
+"Setup" = "Installation";
+"Next" = "Suivant";
+"Play" = "Testez";
+"Walk away from your Mac" = "Éloignez-vous de votre Mac avec votre iPhone";
+"Walk back now" = "Maintenant, rapprochez-vous de votre Mac";
+"until you reach the padlock on the scale below." = "jusqu'à ce que vous atteigniez le cadenas sur le dessin ci-dessous.";
+"and hit the \"Unlock\" button on your Mac." = "et cliquez sur le bouton \"Déverrouiller\" sur votre Mac.";
+"Congrats" = "Félicitations";
+"The magic happened!" = "La magie a opéré !";
+"Now, let's learn a bit more about Locky." = "Maintenant, apprenez-en un peu plus sur Locky.";
+"Email not received?" = "Email non reçu ?";
+"Get Locky on Mac" = "Obtenir Locky sur Mac";
+"You can download it for free on www.get-locky.com" = "Vous pouvez télécharger l'app gratuitement sur www.get-locky.com";
+
+
+// Slider
+"slide to unlock" = "Déverrouiller";
+"slide to lock" = "Verrouiller";
+
+
+// Tips
+"Battery friendly" = "Sympa avec votre batterie";
+"Bluetooth Low Energy" = "Bluetooth Low Energy";
+"Locky leverages the brand new Bluetooth version to save your iPhone's battery. Even when running in background." = "Locky s'appuie sur la toute nouvelle version du Bluetooth pour économiser votre batterie. Même quand Locky est en tâche de fond.";
+"Signal" = "Signal";
+"Keep that in mind" = "C'est important";
+"Your body and clothes reduce the signal strength, and therefore impacts the calculated distance between your Mac and iPhone." = "Votre corps et vos vêtements réduisent la puissance du signal, et impactent donc la distance calculée entre votre Mac et iPhone.";
+"Intruders" = "Intrus";
+"When you're away" = "Quand vous êtes ailleurs";
+"with your iPhone, Locky can send you a photo of intruders who try to unlock your Mac." = "avec votre iPhone, Locky peut vous envoyer une photo de l'intrus qui tente d'accèder à votre Mac à votre insu.";
+"Intruders detection" = "Détection d'intrus";
+"Enjoy now" = "Allons-y";
+"Super easy to use" = "Super facile à utiliser";
+"Swipe down, select \"Today\" tab and then touch the \"Edit\" button at the bottom to activate Locky extension." = "Glissez vers le bas, sélectionnez l'onglet \"Aujourd'hui\" et touchez le bouton \"Modifier\" pour activer l'extension Locky.";
+"with the Today extension to lock and unlock your Mac whenever you want." = "avec l'extension \"Aujoud'hui\" pour verrouiller et déverrouiller votre Mac quand vous le voulez.";
+"Extension" = "Extension";
+"Go back to Locky" = "Revenir à Locky";
+
+
+// Settings
+"Settings" = "Réglages";
+"Forget this Mac" = "Oublier ce Mac";
+"Do you really want to forget this Mac?" = "Voulez-vous vraiment oublier ce Mac ?";
+"Authenticate to change this setting" = "Authentifiez-vous pour modifier ce réglage";
+"Connect Locky to your Mac" = "Connectez Locky à votre Mac";
+"Lock/Unlock notifications" = "Notifications";
+"Sounds" = "Sons";
+"Touch ID" = "Touch ID";
+"Unlock automatically" = "Déverrouiller automatiquement";
+"Delete" = "Supprimer";
+
+"Show tips" = "Afficher les astuces";
+"Learn more" = "En savoir plus";
+"Adjust the lock distance by moving the padlock" = "Ajustez la distance de verrouillage en déplaçant le cadenas.";
+"Notifications setting footer" = "Locky vous enverra des notifications quand votre Mac est verrouillé ou déverrouillé.";
+"Autounlock setting footer" = "Locky entrera automatiquement votre mot de passe pour déverrouiller votre Mac lorsque vous êtes près de lui avec votre iPhone.";
+"Touch ID setting footer" = "Locky vous demandera de vous authentifier avec votre empreinte digitale afin de déverrouiller votre Mac.";
+"Intruders setting footer" = "Locky sur votre Mac vous enverra une photo si quelqu'un essaie de déverrouiller votre Mac lorsque vous n'êtes pas là.";
+"About Locky" = "À propos de Locky";
+"Locky needs to be connected to your Mac to change this setting." = "Locky doit être connecté à votre Mac pour pouvoir modifier ce réglage.";
+"Tips" = "Astuces";
+"Version %@" = "Version %@";
+"Default sounds" = "Son par défaut";
+"None" = "Aucun";
+"Unlock only with Apple Watch" = "Déverrouiller seulement avec l'Apple Watch";
+"Unlock only from Apple Watch activated" = "Déverrouiller seulement avec l'Apple Watch - activé";
+"Unlock only from Apple Watch deactivated" = "Déverrouiller seulement avec l'Apple Watch - désactivé";
+"Unlock using your Apple Watch" = "Déverrouillez avec votre Apple Watch";
+"settings.applewatch.unlockOnlyWithAW.footerText" = "Quand cette option est activée, l'extension \"Aujourd'hui\" sur iPhone et le bouton \"Déverrouiller\" de l'écran de connexion de votre Mac sont cachés. De cette manière, votre Mac ne peut être déverrouillé que depuis votre Apple Watch ou directement depuis Locky sur votre iPhone.\n Vous devez avoir l'application Locky installée sur votre Apple Watch pour pouvoir activer cette fonctionnalité";
+"Happy with Locky?" = "Content de Locky ?";
+
+// Errors
+"The email address is not valid" = "L'adresse email n'est pas valide.";
+
+
+// Alerts
+"Notice" = "Avertissement";
+"OK" = "Ok";
+"Yes" = "Oui";
+"No" = "Non";
+
+
+// Authorizations
+"Authorization error" = "Problème d'autorisation";
+"Locky needs access to Bluetooth Low Energy even when the App is in background to work properly.\nPlease authorize it from the App's settings page." = "Locky a besoin d'accéder au Bluetooth Low Energy même si l'application fonctionne en tâche de fond.\nMerci de l'y autoriser depuis les réglages iOS de l'application.";
+"Authorize" = "Autoriser";
+"Authorization required" = "Autorisation requise";
+"You first need to authorize Locky to send you notifications from the App's iOS settings." = "Vous devez d'abord autoriser Locky à vous envoyer des notifications depuis les réglages iOS de l'application.";
+"Cancel" = "Annuler";
+
+
+// Utils
+"%ld %@ ago" = "Il y a %ld %@";
+"years" = "années";
+"year" = "année";
+"months" = "mois";
+"month" = "mois";
+"weeks" = "semaines";
+"week" = "semaine";
+"days" = "jours";
+"day" = "jour";
+"hours" = "heures";
+"hour" = "heure";
+"minutes" = "minutes";
+"minute" = "minute";
+"seconds" = "secondes";
+"second" = "seconde";
+"Today" = "Aujourd'hui";
+"Yesterday" = "Hier";
+"History" = "Historique";
+
+
+// Parse
+"Internet is not available" = "Internet n'est pas disponible";
+"Please, connect to the internet" = "Connectez-vous à internet svp";
+"Le compte associé à cette adresse email est déjà utilisé.\nVeuillez choisir une adresse differente. \nSi vous avez oublié votre mot de passe vous pouvez le réinitialiser à partir du site web." = "Le compte associé à cette adresse email est déjà utilisé.\nVeuillez choisir une adresse differente. \nSi vous avez oublié votre mot de passe vous pouvez le réinitialiser à partir du site web.";
+"La connexion avec le serveur a échoué." = "La connexion avec le serveur a échoué.";
+"Le compte email est déjà utilisé.\nVeuillez choisir une adresse differente. \nSi vous avez oublié votre mot de passe vous pouvez le réinitialiser à partir du site web." = "Le compte email est déjà utilisé.\nVeuillez choisir une adresse differente. \nSi vous avez oublié votre mot de passe vous pouvez le réinitialiser à partir du site web.";
+"Votre nom d'utilisateur ou votre mot de passe est invalide.\nSi vous avez oublié votre mot de passe vous pouvez le réinitialiser à partir du site web." = "Votre nom d'utilisateur ou votre mot de passe est invalide.\nSi vous avez oublié votre mot de passe vous pouvez le réinitialiser à partir du site web.";
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+//                                            Mac                                           //
+//////////////////////////////////////////////////////////////////////////////////////////////
+// Pairing intro
+"You can download it on the AppStore" = "Vous pouvez le télécharger sur l'AppStore";
+"Having troubles to pair your iPhone and your Mac?" = "Vous rencontrez des difficultés pour jumeler votre iPhone et votre Mac ?";
+
+// Troubleshooting
+"(How to)" = "(Comment faire ?)";
+"OK, got it!" = "OK, j'ai compris !";
+"Help me!" = "Aidez-moi !";
+"If you're facing issues to pair your iPhone and your Mac, follow these steps:" = "Si vous rencontrez des problèmes pour jumeler votre iPhone et votre Mac, suivez les étapes ci-dessous :";
+"1. Quit Locky on your iPhone (remove it from the application switcher)." = "1. Quittez Locky sur votre iPhone (enlevez-le du sélecteur d'applications).";
+"2. Turn OFF the Bluetooth on your iPhone." = "2. Éteignez le Bluetooth sur votre iPhone.";
+"3. Turn ON the Bluetooth on your iPhone." = "3. Rallumez le Bluetooth sur votre iPhone.";
+"4. Turn OFF the Bluetooth on your Mac." = "4. Éteignez le Bluetooth sur votre Mac.";
+"5. Quit Locky on your Mac using its status bar menu." = "5. Quittez Locky sur votre Mac via son menu dans la barre de statut.";
+"6. Shutdown your Mac (not restart)." = "6. Éteignez votre Mac (pas de redémarrage).";
+"7. Start your Mac." = "7. Rallumez votre Mac.";
+"8. Turn ON the Bluetooth on your Mac." = "8. Rallumez le Bluetooth sur votre Mac.";
+"9. Open Locky on your iPhone and your Mac." = "9. Ouvrez Locky sur votre iPhone et votre Mac.";
+
+// Notifications
+"Locky not connected" = "Locky déconnecté";
+"Your iPhone is not connected to Locky" = "Votre iPhone n'est pas connecté à Locky";
+"Locky - Intruders detection" = "Locky - Détection d'intrus";
+"Intruders detection is now activated." = "La détection d'intrus a été activée.";
+"Intruders detection is now deactivated." = "La détection d'intrus a été désactivée.";
+"Locky - Unlock automatically" = "Locky - Déverrouiller automatiquement";
+"Locky - Unlock manually" = "Locky - Déverrouiller manuellement";
+"Locky can now unlock your Mac automatically" = "Locky peut maintenant déverrouiller votre Mac automatiquement.";
+"Locky will wait for a click on the \"Unlock\" button to unlock your Mac." = "Locky attendra que vous cliquiez sur le bouton \"Déverrouiller\" pour déverrouiller votre Mac.";
+"Low battery level on %@!" = "Niveau de batterie faible sur %@!";
+"Your %@'s battery is only %d%% full. Charge it if you want to have Locky working." = "Votre %@ n'a plus que %d%% de batterie. Pensez à le charger si vous voulez que Locky continue de fonctionner.";
+"Locky - Turn on Bluetooth" = "Locky - Réactivez le Bluetooth";
+"Locky on your iPhone has been disconnected." = "Locky sur votre iPhone a été déconnecté.";
+
+"Mac initializing Bluetooth" = "Mac initialise le Bluetooth";
+"iPhone detected but too far" = "iPhone detecté mais trop loin";
+"Answer" = "Réponse";
+"Yes, I like it!" = "Oui, je l'adore !";
+"Not really..." = "Pas vraiment...";
+"You have experienced Locky v%@. Please tell us if you enjoy it!" = "Vous avez utilisé Locky v%@. Qu'en avez-vous pensé ?";
+
+// Status bar
+"Unpair connected device" = "Oublier cet iPhone";
+"Options" = "Options";
+"Connect to an iPhone" = "Connecter un iPhone";
+"Quit Locky" = "Quitter Locky";
+"About Locky" = "À propos de Locky";
+"Turn on Bluetooth" = "Démarrer le Bluetooth";
+"Check for updates..." = "Vérifier les mises à jour...";
+"Autolock with distance" = "Fermeture avec la distance";
+"Unlock" = "Déverrouiller";
+"Not this one" = "Pas celui-ci";
+"Pair" = "Jumeler";
+"Please, connect to the internet" = "Connectez-vous à internet";
+"Locky on Mac has its iPhone buddy." = "Locky sur Mac a son pendant iPhone.";
+"Get it for free on\nwww.get-locky.com" = "Obtenez le gratuitement sur\nwww.get-locky.com";
+"Looking for Locky iPhones..." = "Recherche d'iPhones avec Locky en cours...";
+"appStoreBadge" = "appStoreBadge-fr";
+"Activate lock animation" = "Activer l'animation de verrouillage";
+"Contact support" = "Contacter le support";
+
+"Locky update" = "Mise à jour de Locky";
+"A new version of Locky is available for your iPhone" = "Une nouvelle version de Locky est disponible pour votre iPhone";
+"It is recommended to update the app to have Locky properly working." = "Il est recommandé d'effectuer cette mise à jour afin que Locky fonctionne correctement.";
+
+
+// Support email
+"Application ID: %@\n" = "ID de l'application : %@\n";
+"iPhone model: %@\n" = "Modèle de l'iPhone : %@\n";
+"iOS version: %@ %@\n" = "Version d'iOS : %@ %@\n";
+"Mac model: %@\n" = "Modèle du Mac : %@\n";
+"OSX version: %@" = "Version d'OS X : %@";
+"\n\nThanks" = "\n\nMerci";
+"I need your help" = "J'ai besoin de votre aide";
+
+
+// Pairing steps
+"Put your iPhone very close to your Mac.\nPlease don't touch it during the setup." = "Posez votre iPhone au plus proche de votre Mac.\nGardez-le immobile pendant la configuration.";
+"Please login to your Mac.\nMake a wish, this is the last time :)" = "Connectez-vous à votre Mac.\nEt vous savez quoi ? C'est la dernière fois :)";
+"Locky is doing some magic so that it works smoothly." = "La magie de Locky est en train d'opérer afin que ça marche parfaitement bien.";
+"Now go back to Locky on your iPhone." = "Maintenant, retournez sur Locky sur votre iPhone.";
+"You're all set.\nLocky will be available in your Mac's top bar." = "C'est tout bon. Locky sera toujours disponible dans la barre du haut sur votre Mac.";
+"OK, I'm ready" = "OK, je suis prêt";
+"Minimize Locky" = "Réduire Locky";
+"Send me an email with the iPhone App download link:" = "Envoyez-moi le lien de téléchargement pour obtenir Locky sur iPhone :";
+"Someone just tried to unlock your Mac!" = "Quelqu'un vient juste d'essayer de déverrouiller votre Mac !";
+
+"lock" = "Verrouiller";
+"unlock" = "Déverrouiller";
