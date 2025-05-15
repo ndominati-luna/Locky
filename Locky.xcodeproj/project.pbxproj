@@ -1907,6 +1907,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 				fr,
@@ -2401,6 +2402,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_RESOURCE_RULES_PATH = "";
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = EPSKWEH82C;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				ENABLE_BITCODE = YES;
 				ENABLE_TESTABILITY = YES;
@@ -2413,9 +2415,7 @@
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 3.0;
 			};
 			name = Debug;
 		};
@@ -2428,6 +2428,7 @@
 				CODE_SIGN_RESOURCE_RULES_PATH = "";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = EPSKWEH82C;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				ENABLE_BITCODE = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -2438,9 +2439,7 @@
 				PROVISIONING_PROFILE = "";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 3.0;
 			};
 			name = Release;
 		};
@@ -2452,6 +2451,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_RESOURCE_RULES_PATH = "";
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = EPSKWEH82C;
 				ENABLE_BITCODE = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -2464,9 +2464,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "LockyWatch Extension/LockyWatch Extension-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 3.0;
 			};
 			name = Debug;
 		};
@@ -2480,6 +2478,7 @@
 				CODE_SIGN_RESOURCE_RULES_PATH = "";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = EPSKWEH82C;
 				ENABLE_BITCODE = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = "LockyWatch Extension/Info.plist";
@@ -2490,9 +2489,7 @@
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "LockyWatch Extension/LockyWatch Extension-Bridging-Header.h";
-				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 3.0;
 			};
 			name = Release;
 		};
@@ -2504,6 +2501,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_RESOURCE_RULES_PATH = "";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = EPSKWEH82C;
 				ENABLE_BITCODE = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -2511,13 +2509,11 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = LockyToday/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.lunabee.sg.Locky.LockyToday;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -2530,16 +2526,15 @@
 				CODE_SIGN_RESOURCE_RULES_PATH = "";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = EPSKWEH82C;
 				ENABLE_BITCODE = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = LockyToday/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.lunabee.sg.Locky.LockyToday;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -2556,12 +2551,10 @@
 				);
 				INFOPLIST_FILE = lockyhelper/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = com.lunabee.sg.lockyhelper;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -2576,12 +2569,10 @@
 				DEVELOPMENT_TEAM = EPSKWEH82C;
 				INFOPLIST_FILE = lockyhelper/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = com.lunabee.sg.lockyhelper;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -2620,12 +2611,16 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CODE_SIGN_FLAGS = "";
 				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TVOS_DEPLOYMENT_TARGET = 18.0;
+				WATCHOS_DEPLOYMENT_TARGET = 11.0;
+				XROS_DEPLOYMENT_TARGET = 2.0;
 			};
 			name = Debug;
 		};
@@ -2658,12 +2653,16 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_CODE_SIGN_FLAGS = "";
 				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TVOS_DEPLOYMENT_TARGET = 18.0;
 				VALIDATE_PRODUCT = YES;
+				WATCHOS_DEPLOYMENT_TARGET = 11.0;
+				XROS_DEPLOYMENT_TARGET = 2.0;
 			};
 			name = Release;
 		};
@@ -2687,7 +2686,6 @@
 				);
 				GCC_PREFIX_HEADER = "Locky/Locky-Prefix.pch";
 				INFOPLIST_FILE = Locky/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_CODE_SIGN_FLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.lunabee.sg.Locky;
@@ -2695,7 +2693,6 @@
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/Locky/SwiftBridgingHeaders.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -2724,7 +2721,6 @@
 					"PROD=1",
 				);
 				INFOPLIST_FILE = Locky/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_CODE_SIGN_FLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.lunabee.sg.Locky;
@@ -2732,7 +2728,6 @@
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/Locky/SwiftBridgingHeaders.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -2757,7 +2752,6 @@
 				);
 				INFOPLIST_FILE = LockyMac/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				OTHER_LDFLAGS = (
 					"-Wl,-rpath,@loader_path/../Frameworks",
 					"$(inherited)",
@@ -2768,7 +2762,6 @@
 				SDKROOT = macosx;
 				SWIFT_OBJC_BRIDGING_HEADER = "Utils/LockyMac-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -2795,7 +2788,6 @@
 				);
 				INFOPLIST_FILE = LockyMac/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				OTHER_LDFLAGS = (
 					"-Wl,-rpath,@loader_path/../Frameworks",
 					"$(inherited)",
@@ -2805,7 +2797,6 @@
 				PRODUCT_NAME = Locky;
 				SDKROOT = macosx;
 				SWIFT_OBJC_BRIDGING_HEADER = "Utils/LockyMac-Bridging-Header.h";
-				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
