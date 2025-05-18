@@ -206,10 +206,10 @@
 	NSData *data = [photo TIFFRepresentation];
 	NSBitmapImageRep *bitmapRep = [[NSBitmapImageRep alloc] initWithData:data];
 	
-    NSData *photoData = [bitmapRep representationUsingType:NSPNGFileType properties:@{}];
+  NSData *photoData = [bitmapRep representationUsingType:NSPNGFileType properties:@{}];
 	
 	PFObject *object = [PFObject objectWithClassName:@"Intrusion"];
-	object[INTRUSION_PHOTO_KEY] = [PFFile fileWithData:photoData];
+	object[INTRUSION_PHOTO_KEY] = [PFFileObject fileObjectWithData:photoData];
 	object[INTRUSION_DATE_KEY] = [NSDate date];
 	object[INFO_KEY_UUID] = [LocalMacDevice macUUID];
 	

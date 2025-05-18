@@ -13,7 +13,7 @@ class LBLockyButton: LBAnimatableButton {
     override func applyCustomStyle ( ) {
         
         self.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
-        self.setTitleColor(UIColor.white, for: UIControlState())
+        self.setTitleColor(UIColor.white, for: UIControl.State())
         self.BackgroundC =  UIColor(white: 1, alpha: 0.3)
         self.cornerRadius = 8
         self.verticalMargin = 10

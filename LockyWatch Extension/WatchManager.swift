@@ -23,7 +23,7 @@ class WatchManager: NSObject, WCSessionDelegate {
 	var receivedLockedImageData = NSMutableData()
 	
 	func initSession() {
-		session = WCSession.default()
+		session = WCSession.default
 		session.delegate = self
 		session.activate()
 	}

@@ -736,11 +736,13 @@ CGEventRef myCGEventCallback(CGEventTapProxy proxy, CGEventType type, CGEventRef
 	
 	if ([[NSUserDefaults useLockAnimation] boolValue])
 	{
-		self.lastDesktopMainScreenScreenshot = [[OSX sharedInstance] screenshot];
-		[self showLockAnimationWindow];
-		[self.lockAnimationWindowController animateWithCompletion:^{
-			[OSX lockScreen];
-		}];
+    [[OSX sharedInstance] captureScreenshotWithCompletion:^(NSImage *image, NSError *error) {
+      self.lastDesktopMainScreenScreenshot = image;
+      [self showLockAnimationWindow];
+      [self.lockAnimationWindowController animateWithCompletion:^{
+        [OSX lockScreen];
+      }];
+    }];
 	}
 	else
 	{

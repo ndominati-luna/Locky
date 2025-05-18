@@ -11,8 +11,8 @@
 #import <sys/types.h>
 #import <sys/sysctl.h>
 #import "RSAKeysManager.h"
-#import <WatchKit/WatchKit.h>
-#import <WatchConnectivity/WatchConnectivity.h>
+@import WatchConnectivity;
+
 
 @implementation LocalDevice
 
@@ -65,14 +65,7 @@
 	deviceInfo[INFO_KEY_PUBLIC_KEY] = [RSAKeysManager publicKeyBase64String];
 	if ([WCSession isSupported]) {
 		if ([[WCSession defaultSession] isPaired]) {
-			if ([WKInterfaceDevice currentDevice]) {
-				CGRect rect = [[WKInterfaceDevice currentDevice] screenBounds];
-				if (rect.size.height == 195 && rect.size.width == 156) {
-					deviceInfo[INFO_KEY_APPLE_WATCH_MODEL] = @"Watch1,2";
-				} else {
-					deviceInfo[INFO_KEY_APPLE_WATCH_MODEL] = @"Watch1,1";
-				}
-			}
+            deviceInfo[INFO_KEY_APPLE_WATCH_MODEL] = @"N/A";
 		}
 	}
 	return [deviceInfo jsonString];
@@ -89,14 +82,7 @@
 	deviceInfo[INFO_KEY_PUBLIC_KEY] = [RSAKeysManager publicKeyBase64String];
 	if ([WCSession isSupported]) {
 		if ([[WCSession defaultSession] isPaired]) {
-			if ([WKInterfaceDevice currentDevice]) {
-				CGRect rect = [[WKInterfaceDevice currentDevice] screenBounds];
-				if (rect.size.height == 195 && rect.size.width == 156) {
-					deviceInfo[INFO_KEY_APPLE_WATCH_MODEL] = @"Watch1,2";
-				} else {
-					deviceInfo[INFO_KEY_APPLE_WATCH_MODEL] = @"Watch1,1";
-				}
-			}
+            deviceInfo[INFO_KEY_APPLE_WATCH_MODEL] = @"N/A";
 		}
 	}
 	return deviceInfo;

@@ -13,7 +13,7 @@
 
 @property (nonatomic, strong) WCSession *session;
 
-+ (id)sharedInstance;
++ (instancetype)sharedInstance;
 - (void)initSession;
 - (void)updateApplicationContext;
 - (void)sendComputerImage;

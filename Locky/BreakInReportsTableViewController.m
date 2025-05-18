@@ -187,8 +187,8 @@
 	cell.isFullyLoaded = NO;
 	cell.indexPath = indexPath;
 	cell.accessoryType = UITableViewCellAccessoryNone;
-	PFFile *image = object[INTRUSION_PHOTO_KEY];
-	
+	PFFileObject *image = object[INTRUSION_PHOTO_KEY];
+
 	if (![image isDataAvailable])
 	{
 		[cell.activityIndicator setHidden:NO];
@@ -233,7 +233,7 @@
 //		[controller setDelegate:self];
 //		[self.navigationController showViewController:controller sender:self];
 
-		PFFile *image = selectedObject[INTRUSION_PHOTO_KEY];
+		PFFileObject *image = selectedObject[INTRUSION_PHOTO_KEY];
 		[image getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
 			NSString *filePath = [NSTemporaryDirectory() stringByAppendingPathComponent:@"tmpp.png"];
 			[data writeToFile:filePath atomically:YES];

@@ -167,7 +167,7 @@
 
 - (void)breakInReportReceived
 {
-	[[ParseManager sharedInstance] setBreakInReportToDisplayDate:nil];
+	[[ParseLockyManager sharedInstance] setBreakInReportToDisplayDate:nil];
 	BreakInReportsTableViewController *controller = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"intrusionList"];
 	[controller setOpenedFromNotification:YES];
 	UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:controller];

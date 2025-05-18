@@ -116,7 +116,7 @@
 		[NSUserDefaults saveSoundTheme:SOUND_THEME_DEFAULT];
 	}
 	[self initSounds];
-	[[ParseManager sharedInstance] addPairingInformationToParse];
+	[[ParseLockyManager sharedInstance] addPairingInformationToParse];
 	if (!ACTIVATE_NEW_FEATURES && ![LockyManager isSpecialModeActivated])
 	{
 		[NSUserDefaults saveUseBreakInReport:@(NO)];
@@ -478,7 +478,7 @@
 	else if ([dict[MESSAGE_TYPE_KEY] isEqualToString:MESSAGE_TYPE_KEY_PARSE_UPDATE])
 	{
 		NSMutableDictionary *macInfo = [[NSUserDefaults pairedMacInfo] mutableCopy];
-		[[ParseManager sharedInstance] updateComputerInfoWithID:macInfo[INFO_KEY_UUID] lastSyncToken:nil withCompletion:^(NSDictionary *info, NSError *error) {
+		[[ParseLockyManager sharedInstance] updateComputerInfoWithID:macInfo[INFO_KEY_UUID] lastSyncToken:nil withCompletion:^(NSDictionary *info, NSError *error) {
 			// We test if the received info dictionary is for the currently paired mac.
 			if ([info[INFO_KEY_UUID] isEqualToString:macInfo[INFO_KEY_UUID]])
 			{
@@ -558,7 +558,7 @@
 	[NSUserDefaults removeInitialComputerImageSent];
 	self.isAutolockDisabled = NO;
 	
-	[[ParseManager sharedInstance] updateParsePushNotificationChannel:nil withDeviceTokenData:nil];
+	[[ParseLockyManager sharedInstance] updateParsePushNotificationChannel:nil withDeviceTokenData:nil];
 	
 	[KeychainManager removePasswordFromKeychain];
 	[[RSAKeysManager sharedInstance] deleteMacPublicKeys];

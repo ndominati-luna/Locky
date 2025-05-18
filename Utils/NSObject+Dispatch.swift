@@ -9,7 +9,7 @@
 import Foundation
 
 extension NSObject {
-	func dispatchMainAfter ( _ time : Double , block: @escaping ()->()) {
+	@objc func dispatchMainAfter ( _ time : Double , block: @escaping ()->()) {
 		let delay = time * Double(NSEC_PER_SEC)
 		let timeInSec = DispatchTime.now() + Double(Int64(delay)) / Double(NSEC_PER_SEC)
 		DispatchQueue.main.asyncAfter( deadline: timeInSec , execute: block)

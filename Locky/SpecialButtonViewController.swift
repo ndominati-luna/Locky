@@ -15,7 +15,7 @@ import Darwin
     func specialButtonViewControllerDidUnlock( _ controler : SpecialButtonViewController )
 }
 
-class SpecialButtonViewController: UIViewController {
+@objcMembers class SpecialButtonViewController: UIViewController {
 
 
 
@@ -64,13 +64,13 @@ class SpecialButtonViewController: UIViewController {
             self.lockLabel.text = NSLocalizedString("unlock", comment: "unlock")
             
             let animeBlock = { () -> Void in
-                self.lockButton.setImage(UIImage(named: "Locky-FlatBlue"), for: UIControlState())
+                self.lockButton.setImage(UIImage(named: "Locky-FlatBlue"), for: UIControl.State())
                 self.lockLabel.alpha = 1
                 self.extrenalCircle.color = self.flatBlue()
             }
             
             if  animated {
-                UIView.transition(with: self.lockButton, duration: 0.3, options: UIViewAnimationOptions.transitionCrossDissolve, animations: animeBlock) { (completed) -> Void in
+                UIView.transition(with: self.lockButton, duration: 0.3, options: UIView.AnimationOptions.transitionCrossDissolve, animations: animeBlock) { (completed) -> Void in
                         
                 }
             }
@@ -103,13 +103,13 @@ class SpecialButtonViewController: UIViewController {
             self.lockLabel.text = NSLocalizedString("lock", comment: "lock")
             
             let animeBlock = { () -> Void in
-                self.lockButton.setImage(UIImage(named: "Locky-FlatRed"), for: UIControlState())
+                self.lockButton.setImage(UIImage(named: "Locky-FlatRed"), for: UIControl.State())
                 self.lockLabel.alpha = 1
                 self.extrenalCircle.color = self.flatRed()
             }
             
             if  animated {
-                UIView.transition(with: self.lockButton, duration: 0.3, options: UIViewAnimationOptions.transitionCrossDissolve, animations: animeBlock ) { (completed) -> Void in
+                UIView.transition(with: self.lockButton, duration: 0.3, options: UIView.AnimationOptions.transitionCrossDissolve, animations: animeBlock ) { (completed) -> Void in
                         
                 }
             }

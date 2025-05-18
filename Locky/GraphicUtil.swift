@@ -17,9 +17,9 @@ extension UIView {
         
         let spinAnimation = CABasicAnimation(keyPath: "transform.rotation");
         
-        let value = 2 *  Float(M_PI)
-        spinAnimation.toValue        = NSNumber(value: value as Float)
-        spinAnimation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
+        let value: Float = 2.0 * .pi
+        spinAnimation.toValue        = NSNumber(value: value)
+        spinAnimation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.linear)
         spinAnimation.duration       = 1.0;
         spinAnimation.repeatCount    = Float.infinity;
         
@@ -42,7 +42,7 @@ extension UIView {
         
         
         let bezierPath = UIBezierPath()
-        bezierPath.addArc(withCenter: CGPoint(x: self.bounds.width / 2 , y: self.bounds.width / 2), radius: (self.bounds.width - circleLayer.lineWidth ) / 2.0 , startAngle: 0, endAngle:  0.2 * CGFloat(M_PI)  , clockwise: true)
+        bezierPath.addArc(withCenter: CGPoint(x: self.bounds.width / 2 , y: self.bounds.width / 2), radius: (self.bounds.width - circleLayer.lineWidth ) / 2.0 , startAngle: 0, endAngle:  0.2 * .pi, clockwise: true)
         circleLayer.path = bezierPath.cgPath
         
         circleLayer.strokeColor = UIColor.white.cgColor

@@ -131,9 +131,9 @@
 - (IBAction)sendButtonPressed:(id)sender
 {
 	[self displayHUDIndicatorWithText:nil withCompletion:^(MBProgressHUD *hud) {
-		[ParseManager testParseAvailability:^(BOOL available) {
+		[ParseLockyManager testParseAvailability:^(BOOL available) {
 			if (available) {
-				[[ParseManager sharedInstance]  sendDownloadEmailToReceiver:self.mailTextField.text withCompletion:^(BOOL succeeded, NSError *error) {
+				[[ParseLockyManager sharedInstance]  sendDownloadEmailToReceiver:self.mailTextField.text withCompletion:^(BOOL succeeded, NSError *error) {
 					
 					[hud hide:YES];
 					if (succeeded)

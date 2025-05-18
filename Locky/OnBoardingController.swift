@@ -8,7 +8,7 @@
 
 import UIKit
 
-@objc
+@objcMembers
 class OnBoardingController: UIViewController, UIPageViewControllerDelegate , UIPageViewControllerDataSource {
 
 	@IBOutlet var backgroundImageView: UIImageView!
@@ -91,13 +91,13 @@ class OnBoardingController: UIViewController, UIPageViewControllerDelegate , UIP
         
         if let startingViewController = controller {
             let viewControllers = [startingViewController]
-            self.pageViewController.setViewControllers(viewControllers, direction: UIPageViewControllerNavigationDirection.forward, animated: false, completion: {done in })
+            self.pageViewController.setViewControllers(viewControllers, direction: UIPageViewController.NavigationDirection.forward, animated: false, completion: {done in })
         }
         
         
         self.pageViewController!.dataSource = self
         
-        self.addChildViewController(self.pageViewController!)
+        self.addChild(self.pageViewController!)
         self.view.addSubview(self.pageViewController!.view)
         
         // Set the page view controller's bounds using an inset rect so that self's view is visible around the edges of the pages.
@@ -107,7 +107,7 @@ class OnBoardingController: UIViewController, UIPageViewControllerDelegate , UIP
         }
         self.pageViewController!.view.frame = pageViewRect
         
-        self.pageViewController!.didMove(toParentViewController: self)
+        self.pageViewController!.didMove(toParent: self)
         
         // Add the page view controller's gesture recognizers to the book view controller's view so that the gestures are started more easily.
         self.view.gestureRecognizers = self.pageViewController!.gestureRecognizers
@@ -126,7 +126,7 @@ class OnBoardingController: UIViewController, UIPageViewControllerDelegate , UIP
 			navController.navigationBar.isOpaque = false
 			navController.navigationBar.isTranslucent = true
 			navController.navigationBar.shadowImage = UIImage()
-			navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.stop, target: self, action: #selector(OnBoardingController.closeTips))
+            navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.stop, target: self, action: #selector(OnBoardingController.closeTips))
 		}
 		
 		if isOpenedFromSettings {
@@ -136,7 +136,7 @@ class OnBoardingController: UIViewController, UIPageViewControllerDelegate , UIP
 		setupPageController()
     }
 
-	func closeTips() {
+	@objc func closeTips() {
 		dismiss(animated: true, completion: nil)
 	}
 	
@@ -168,7 +168,7 @@ class OnBoardingController: UIViewController, UIPageViewControllerDelegate , UIP
 		}
 	}
 	
-    func pageViewController(_ pageViewController: UIPageViewController, spineLocationFor orientation: UIInterfaceOrientation) -> UIPageViewControllerSpineLocation {
+    func pageViewController(_ pageViewController: UIPageViewController, spineLocationFor orientation: UIInterfaceOrientation) -> UIPageViewController.SpineLocation {
         
         let currentViewController = self.pageViewController!.viewControllers![0]
         let viewControllers = [currentViewController]

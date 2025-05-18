@@ -18,6 +18,8 @@
 #include <pwd.h>
 #include <grp.h>
 
+@import ScreenCaptureKit;
+
 @interface OSX ()
 
 @property (nonatomic) CGDirectDisplayID *displays;
@@ -476,14 +478,58 @@ void IOBluetoothPreferenceSetControllerPowerState(int);
 	return self.displays[0];
 }
 
-- (NSImage *)screenshot
+//- (NSImage *)screenshot
+//{
+//	CGDirectDisplayID displayID = [self getMainScreen];
+//  [SCScreenshotManager cap]
+//	CGImageRef image = CGDisplayCreateImage(displayID);
+//	NSImage *snapShotImage = [[NSImage alloc] initWithCGImage:image size:[[NSScreen mainScreen] frame].size];
+//	
+//	return snapShotImage;
+//}
+
+- (void)captureScreenshotWithCompletion: (void (^_Nullable)(NSImage * _Nullable, NSError * _Nullable))completion
 {
-	CGDirectDisplayID displayID = [self getMainScreen];
-	CGImageRef image = CGDisplayCreateImage(displayID);
-	NSImage *snapShotImage = [[NSImage alloc] initWithCGImage:image size:[[NSScreen mainScreen] frame].size];
-	
-	return snapShotImage;
+  // 1️⃣ Obtenir la liste partageable (affichages, fenêtres…)
+  [SCShareableContent getShareableContentWithCompletionHandler:
+   ^(SCShareableContent *shareable, NSError *err)
+   {
+    if (err) { completion(nil, err); return; }
+
+    // 2️⃣ Sélectionner le moniteur principal
+    SCDisplay *mainDisplay = nil;
+    for (SCDisplay *display in shareable.displays) {
+      if (display.displayID == CGMainDisplayID()) { mainDisplay = display; break; }
+    }
+    if (!mainDisplay) {
+      NSError *e = [NSError errorWithDomain:@"Capture"
+                                       code:-1
+                                   userInfo:@{NSLocalizedDescriptionKey:
+                                                @"Écran principal introuvable"}];
+      completion(nil, e); return;
+    }
+
+    // 3️⃣ Créer le filtre “tout l’écran”
+    SCContentFilter *filter =
+    [[SCContentFilter alloc] initWithDisplay:mainDisplay excludingWindows:@[]];
+
+    // 4️⃣ Configuration : résolution native & format BGRA
+    SCStreamConfiguration *cfg = [[SCStreamConfiguration alloc] init];
+    cfg.width       = mainDisplay.width;
+    cfg.height      = mainDisplay.height;
+    cfg.pixelFormat = kCVPixelFormatType_32BGRA;
+
+    // 5️⃣ Capture asynchrone
+    [SCScreenshotManager captureImageWithFilter:filter configuration:cfg completionHandler: ^(CGImageRef cgImg, NSError *err2) {
+      if (err2) { completion(nil, err2); return; }
+
+      NSImage *img = [[NSImage alloc] initWithCGImage:cgImg size:NSZeroSize];
+      completion(img, nil);
+    }];
+  }];
 }
+
+
 
 + (void)showAlertWithWindowTitle:(NSString *)windowTitle title:(NSString *)title message:(NSString *)message style:(NSAlertStyle)alertStyle
 {

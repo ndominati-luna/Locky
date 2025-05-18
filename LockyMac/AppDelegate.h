@@ -7,9 +7,8 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import <HockeySDK/HockeySDK.h>
 
-@interface AppDelegate : NSObject <NSApplicationDelegate, NSUserNotificationCenterDelegate, BITHockeyManagerDelegate>
+@interface AppDelegate : NSObject <NSApplicationDelegate, NSUserNotificationCenterDelegate>
 
 - (IBAction)showAbout:(id)sender;
 

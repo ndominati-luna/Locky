@@ -10,7 +10,7 @@
 
 @implementation WatchManagerIOS
 
-+ (id)sharedInstance
++ (instancetype)sharedInstance
 {
 	static WatchManagerIOS *sharedInstance = nil;
 	static dispatch_once_t onceToken;
@@ -294,5 +294,9 @@
 		}
 	});
 }
+
+- (void)sessionDidBecomeInactive:(nonnull WCSession *)session {}
+- (void)sessionDidDeactivate:(nonnull WCSession *)session {}
+
 
 @end

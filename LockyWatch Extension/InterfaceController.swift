@@ -256,7 +256,7 @@ class InterfaceController: WKInterfaceController {
 		}
 		lockDateTimer = Timer(timeInterval: 1, target: self, selector: #selector(InterfaceController.updateLastLockActionTimer), userInfo: nil, repeats: true)
 		if let timer = lockDateTimer {
-			RunLoop.main.add(timer, forMode: RunLoopMode.commonModes)
+            RunLoop.main.add(timer, forMode: .common)
 		}
 	}
 	
@@ -266,7 +266,7 @@ class InterfaceController: WKInterfaceController {
 		}
 	}
 	
-	func updateLastLockActionTimer() {
+	@objc func updateLastLockActionTimer() {
 		updateMacStatus(false)
 		if !isAutoLockDisabled {
 			if let date = lastLockActionDate {
@@ -281,11 +281,11 @@ class InterfaceController: WKInterfaceController {
 		}
 	}
 
-	func didReceiveApplicationContext() {
+	@objc func didReceiveApplicationContext() {
 		reloadAppData()
 	}
 	
-	func didReceiveComputerImage() {
+	@objc func didReceiveComputerImage() {
 		reloadImage()
 		updateComputerImage()
 		
@@ -294,7 +294,7 @@ class InterfaceController: WKInterfaceController {
 		}
 	}
 	
-	func didReceiveHDComputerImage() {
+	@objc func didReceiveHDComputerImage() {
 		reloadImage()
 		updateComputerImage()
 		

@@ -1,8 +1,9 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7531" systemVersion="14C1514" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23727" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23721"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -12,14 +13,14 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <imageView userInteractionEnabled="NO" alpha="0.10000000000000001" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LockyIconWhite" translatesAutoresizingMaskIntoConstraints="NO" id="Ijn-af-wIg">
-                    <rect key="frame" x="92" y="115" width="296" height="250"/>
+                    <rect key="frame" x="91.666666666666657" y="115" width="296.66666666666674" height="250"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="250" id="FgR-8A-CLf"/>
                         <constraint firstAttribute="width" secondItem="Ijn-af-wIg" secondAttribute="height" multiplier="70:59" id="OT5-66-Jia"/>
                     </constraints>
                 </imageView>
             </subviews>
-            <color key="backgroundColor" red="0.10588235294117647" green="0.36862745098039218" blue="0.72156862745098038" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" red="0.10588235294117647" green="0.36862745098039218" blue="0.72156862745098038" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstAttribute="centerY" secondItem="Ijn-af-wIg" secondAttribute="centerY" id="Fn4-4y-6PG"/>
                 <constraint firstAttribute="centerX" secondItem="Ijn-af-wIg" secondAttribute="centerX" id="Nw4-Kg-s4w"/>

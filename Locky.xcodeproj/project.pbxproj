@@ -3,20 +3,16 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 90;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		37028CEB1DA86A9A00A4BE15 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 37028CED1DA86A9A00A4BE15 /* InfoPlist.strings */; };
-		37085D021AEA2F19001D9A11 /* HockeySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37085D001AEA2F04001D9A11 /* HockeySDK.framework */; };
-		37085D031AEA2F19001D9A11 /* HockeySDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 37085D001AEA2F04001D9A11 /* HockeySDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		37085D061AEA713C001D9A11 /* LockyPreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37085D051AEA713C001D9A11 /* LockyPreviewViewController.m */; };
 		37085D091AEA7787001D9A11 /* LockyPreviewItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 37085D081AEA7787001D9A11 /* LockyPreviewItem.m */; };
 		37085D0D1AEA7AC0001D9A11 /* SoundsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37085D0C1AEA7AC0001D9A11 /* SoundsViewController.m */; };
 		37085D0F1AEA86E5001D9A11 /* rts.caf in Resources */ = {isa = PBXBuildFile; fileRef = 37085D0E1AEA86E5001D9A11 /* rts.caf */; };
 		37085D111AEA8709001D9A11 /* yml.caf in Resources */ = {isa = PBXBuildFile; fileRef = 37085D101AEA8709001D9A11 /* yml.caf */; };
-		370FB4C21ACBE1640016FEE8 /* Sparkle.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 370FB4BF1ACBE1440016FEE8 /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		370FB4C31ACBE1870016FEE8 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 370FB4BF1ACBE1440016FEE8 /* Sparkle.framework */; };
 		3712776C1ADE804F00690DDE /* next.caf in Resources */ = {isa = PBXBuildFile; fileRef = 3712776B1ADE804F00690DDE /* next.caf */; };
 		37185AF61AE7BEF3004D917B /* UnlockButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 37185AF41AE7BEF3004D917B /* UnlockButton.m */; };
 		37185AF81AE7CC90004D917B /* ocevb.caf in Resources */ = {isa = PBXBuildFile; fileRef = 37185AF71AE7CC90004D917B /* ocevb.caf */; };
@@ -31,7 +27,6 @@
 		371CFE221AAEDD600061D84D /* YRKSpinningProgressIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 371CFE201AAEDD600061D84D /* YRKSpinningProgressIndicator.m */; };
 		371CFE2A1AAF08260061D84D /* DeviceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 371CFE291AAF08260061D84D /* DeviceViewController.m */; };
 		371CFE2D1AAF0A710061D84D /* NSButtonCellVerticallyCentered.m in Sources */ = {isa = PBXBuildFile; fileRef = 371CFE2C1AAF0A710061D84D /* NSButtonCellVerticallyCentered.m */; };
-		371CFE371AB02D600061D84D /* CoreWLAN.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 371CFE361AB02D5F0061D84D /* CoreWLAN.framework */; };
 		371CFE3F1AB04BC60061D84D /* OSX.m in Sources */ = {isa = PBXBuildFile; fileRef = 371CFE3E1AB04BC60061D84D /* OSX.m */; };
 		371CFE421AB09F710061D84D /* NoBluetoothMacViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 371CFE411AB09F710061D84D /* NoBluetoothMacViewController.m */; };
 		371CFE461AB0A02F0061D84D /* NSView+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 371CFE451AB0A02F0061D84D /* NSView+Utils.m */; };
@@ -41,7 +36,7 @@
 		371CFE521AB187B20061D84D /* UIView+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 371CFE511AB187B20061D84D /* UIView+Utils.m */; };
 		371CFE551AB188B40061D84D /* SendMailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 371CFE541AB188B40061D84D /* SendMailViewController.m */; };
 		371CFE591AB18C1B0061D84D /* UIImage+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 371CFE581AB18C1B0061D84D /* UIImage+Utils.m */; };
-		371CFE5D1AB18D390061D84D /* ParseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 371CFE5C1AB18D390061D84D /* ParseManager.m */; };
+		371CFE5D1AB18D390061D84D /* ParseLockyManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 371CFE5C1AB18D390061D84D /* ParseLockyManager.m */; };
 		371CFE601AB194CA0061D84D /* UIViewController+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 371CFE5F1AB194CA0061D84D /* UIViewController+Utils.m */; };
 		371CFE631AB197460061D84D /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 371CFE621AB197460061D84D /* MBProgressHUD.m */; };
 		371CFE661AB197AD0061D84D /* UIWindow+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 371CFE651AB197AD0061D84D /* UIWindow+Utils.m */; };
@@ -66,7 +61,6 @@
 		371CFEA51AB2EA8B0061D84D /* NSNotificationCenter+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 371CFEA31AB2EA8B0061D84D /* NSNotificationCenter+Utils.m */; };
 		371CFEA81AB2F72D0061D84D /* CircularImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 371CFEA71AB2F72D0061D84D /* CircularImageView.m */; };
 		371CFEAB1AB2F8E60061D84D /* UserPasswordFieldBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 371CFEAA1AB2F8E60061D84D /* UserPasswordFieldBackgroundView.m */; };
-		371CFEAD1AB312390061D84D /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 371CFEAC1AB312380061D84D /* Security.framework */; };
 		371CFEAF1AB312540061D84D /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 371CFEAE1AB312540061D84D /* Security.framework */; };
 		371CFEB71AB314BF0061D84D /* Crypto.m in Sources */ = {isa = PBXBuildFile; fileRef = 371CFEB61AB314BF0061D84D /* Crypto.m */; };
 		371CFEB81AB314BF0061D84D /* Crypto.m in Sources */ = {isa = PBXBuildFile; fileRef = 371CFEB61AB314BF0061D84D /* Crypto.m */; };
@@ -84,8 +78,6 @@
 		371E45C41B99717900E9C4C5 /* NSData+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F7ACB61AA9F3FE00A4C6AA /* NSData+Utils.m */; };
 		37306E951DA4E1A9006C7742 /* WatchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37306E941DA4E1A9006C7742 /* WatchKit.framework */; };
 		37306E971DA4E1AD006C7742 /* WatchConnectivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37306E961DA4E1AD006C7742 /* WatchConnectivity.framework */; };
-		37306E991DA4E3D7006C7742 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37306E981DA4E3D7006C7742 /* CoreBluetooth.framework */; };
-		37306E9B1DA4E6BF006C7742 /* IOBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37306E9A1DA4E6BF006C7742 /* IOBluetooth.framework */; };
 		37317B921ADBAEEC00A784DE /* DisconnectedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37317B911ADBAEEC00A784DE /* DisconnectedViewController.m */; };
 		37317B951ADC00C800A784DE /* CongratsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37317B941ADC00C800A784DE /* CongratsViewController.m */; };
 		37317B9A1ADCF7A900A784DE /* LBAnimatableObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37317B971ADCF7A900A784DE /* LBAnimatableObject.swift */; };
@@ -99,8 +91,6 @@
 		37317BA81ADCF80700A784DE /* LBGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37317BA71ADCF80700A784DE /* LBGradientView.swift */; };
 		37372F5C1B98D7850004CB5B /* NSDate+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 37B9BAEB1AD1C747000A5FEF /* NSDate+Utils.m */; };
 		37372F5F1B98E0900004CB5B /* WatchManagerIOS.m in Sources */ = {isa = PBXBuildFile; fileRef = 37372F5E1B98E0900004CB5B /* WatchManagerIOS.m */; };
-		37382A971ACF262A00666C75 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37382A961ACF262A00666C75 /* AVFoundation.framework */; };
-		37382A9C1ACF286100666C75 /* QTKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37382A9B1ACF286100666C75 /* QTKit.framework */; };
 		37382AB31AD0809D00666C75 /* MASDictionaryTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 37382AA21AD0809D00666C75 /* MASDictionaryTransformer.m */; };
 		37382AB41AD0809D00666C75 /* MASHotKey.m in Sources */ = {isa = PBXBuildFile; fileRef = 37382AA41AD0809D00666C75 /* MASHotKey.m */; };
 		37382AB51AD0809D00666C75 /* MASShortcut.m in Sources */ = {isa = PBXBuildFile; fileRef = 37382AA71AD0809D00666C75 /* MASShortcut.m */; };
@@ -121,7 +111,6 @@
 		37416F9A1B98AEDF007AC69F /* WatchManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37416F991B98AEDF007AC69F /* WatchManager.swift */; };
 		37416F9C1B98AFB0007AC69F /* WatchConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37416F9B1B98AFB0007AC69F /* WatchConstants.swift */; };
 		3744FE571B7C8326008B2DAF /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 37F7AC7C1AA9C0D600A4C6AA /* Localizable.strings */; };
-		375115B81AD3B42B005BBB8D /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 375115B71AD3B42B005BBB8D /* IOKit.framework */; };
 		375116361AD42258005BBB8D /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 375116351AD42258005BBB8D /* libsqlite3.dylib */; };
 		375116381AD42270005BBB8D /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 375116371AD42270005BBB8D /* AudioToolbox.framework */; };
 		3751163B1AD423DF005BBB8D /* BreakInReportsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3751163A1AD423DF005BBB8D /* BreakInReportsTableViewController.m */; };
@@ -144,7 +133,46 @@
 		376B71411ACB458F00D2A5F9 /* TouchIDManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 376B71401ACB458F00D2A5F9 /* TouchIDManager.m */; };
 		376B71431ACBC2E000D2A5F9 /* LocalAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 376B71421ACBC2E000D2A5F9 /* LocalAuthentication.framework */; };
 		377CC04D1AD54FC000283E12 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 377CC04C1AD54FC000283E12 /* CoreTelephony.framework */; };
-		378C8D1E1C0F58BF0056169C /* WatchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 378C8D1D1C0F58BF0056169C /* WatchKit.framework */; };
+		3788053E2DD71406009CF180 /* ParseLiveQuery in Frameworks */ = {isa = PBXBuildFile; productRef = 3788053D2DD71406009CF180 /* ParseLiveQuery */; };
+		378805402DD71406009CF180 /* ParseObjC in Frameworks */ = {isa = PBXBuildFile; productRef = 3788053F2DD71406009CF180 /* ParseObjC */; };
+		378805432DD7181F009CF180 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 378805422DD7181F009CF180 /* SDWebImage */; };
+		378805A22DD71CD1009CF180 /* twitter_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 378805932DD71CD1009CF180 /* twitter_icon@3x.png */; };
+		378805A32DD71CD1009CF180 /* ParseUI.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3788059B2DD71CD1009CF180 /* ParseUI.strings */; };
+		378805A42DD71CD1009CF180 /* parse_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 3788058E2DD71CD1009CF180 /* parse_logo.png */; };
+		378805A52DD71CD1009CF180 /* convert_images.rb in Resources */ = {isa = PBXBuildFile; fileRef = 3788059F2DD71CD1009CF180 /* convert_images.rb */; };
+		378805A62DD71CD1009CF180 /* twitter_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 378805922DD71CD1009CF180 /* twitter_icon@2x.png */; };
+		378805A72DD71CD1009CF180 /* parse_logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3788058F2DD71CD1009CF180 /* parse_logo@2x.png */; };
+		378805A82DD71CD1009CF180 /* facebook_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3788058B2DD71CD1009CF180 /* facebook_icon.png */; };
+		378805A92DD71CD1009CF180 /* facebook_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3788058D2DD71CD1009CF180 /* facebook_icon@3x.png */; };
+		378805AA2DD71CD1009CF180 /* twitter_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 378805912DD71CD1009CF180 /* twitter_icon.png */; };
+		378805AC2DD71CD1009CF180 /* parse_logo@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 378805902DD71CD1009CF180 /* parse_logo@3x.png */; };
+		378805AD2DD71CD1009CF180 /* facebook_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3788058C2DD71CD1009CF180 /* facebook_icon@2x.png */; };
+		378805AE2DD71CD1009CF180 /* PFLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 378805642DD71CD1009CF180 /* PFLoadingView.m */; };
+		378805AF2DD71CD1009CF180 /* PFPurchaseTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 378805482DD71CD1009CF180 /* PFPurchaseTableViewCell.m */; };
+		378805B02DD71CD1009CF180 /* PFLogInView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3788056C2DD71CD1009CF180 /* PFLogInView.m */; };
+		378805B12DD71CD1009CF180 /* PFResources.m in Sources */ = {isa = PBXBuildFile; fileRef = 378805862DD71CD1009CF180 /* PFResources.m */; };
+		378805B22DD71CD1009CF180 /* PFQueryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 378805782DD71CD1009CF180 /* PFQueryTableViewController.m */; };
+		378805B32DD71CD1009CF180 /* PFTextButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 378805612DD71CD1009CF180 /* PFTextButton.m */; };
+		378805B42DD71CD1009CF180 /* PFImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 378805672DD71CD1009CF180 /* PFImageCache.m */; };
+		378805B52DD71CD1009CF180 /* PFDismissButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 3788055D2DD71CD1009CF180 /* PFDismissButton.m */; };
+		378805B62DD71CD1009CF180 /* PFActionButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 3788055B2DD71CD1009CF180 /* PFActionButton.m */; };
+		378805B72DD71CD1009CF180 /* PFTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3788054A2DD71CD1009CF180 /* PFTableViewCell.m */; };
+		378805B82DD71CD1009CF180 /* PFUIAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 378805582DD71CD1009CF180 /* PFUIAlertView.m */; };
+		378805B92DD71CD1009CF180 /* PFProductTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 378805722DD71CD1009CF180 /* PFProductTableViewController.m */; };
+		378805BA2DD71CD1009CF180 /* PFLogInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3788056F2DD71CD1009CF180 /* PFLogInViewController.m */; };
+		378805BB2DD71CD1009CF180 /* PFImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 378805802DD71CD1009CF180 /* PFImageView.m */; };
+		378805BC2DD71CD1009CF180 /* PFPrimaryButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 3788055F2DD71CD1009CF180 /* PFPrimaryButton.m */; };
+		378805BD2DD71CD1009CF180 /* PFLocalization.m in Sources */ = {isa = PBXBuildFile; fileRef = 378805692DD71CD1009CF180 /* PFLocalization.m */; };
+		378805BE2DD71CD1009CF180 /* PFActivityIndicatorCollectionReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3788054D2DD71CD1009CF180 /* PFActivityIndicatorCollectionReusableView.m */; };
+		378805BF2DD71CD1009CF180 /* PFTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 378805822DD71CD1009CF180 /* PFTextField.m */; };
+		378805C02DD71CD1009CF180 /* PFSignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3788057D2DD71CD1009CF180 /* PFSignUpViewController.m */; };
+		378805C12DD71CD1009CF180 /* PFActivityIndicatorTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3788054F2DD71CD1009CF180 /* PFActivityIndicatorTableViewCell.m */; };
+		378805C22DD71CD1009CF180 /* PFQueryCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 378805752DD71CD1009CF180 /* PFQueryCollectionViewController.m */; };
+		378805C32DD71CD1009CF180 /* PFColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 378805522DD71CD1009CF180 /* PFColor.m */; };
+		378805C42DD71CD1009CF180 /* PFCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 378805462DD71CD1009CF180 /* PFCollectionViewCell.m */; };
+		378805C52DD71CD1009CF180 /* PFSignUpView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3788057B2DD71CD1009CF180 /* PFSignUpView.m */; };
+		378805C62DD71CD1009CF180 /* PFImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 378805542DD71CD1009CF180 /* PFImage.m */; };
+		378805C72DD71CD1009CF180 /* PFRect.m in Sources */ = {isa = PBXBuildFile; fileRef = 378805562DD71CD1009CF180 /* PFRect.m */; };
 		3790EEAE1AE4E4FB00673D33 /* JBroken.m in Sources */ = {isa = PBXBuildFile; fileRef = 3790EEAD1AE4E4FB00673D33 /* JBroken.m */; };
 		37955DC01B74B5A700013A33 /* TroubleShootingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37955DBF1B74B5A700013A33 /* TroubleShootingViewController.m */; };
 		37976DEB1AF0D3890005266E /* SpecialButtonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37976DEA1AF0D3890005266E /* SpecialButtonViewController.swift */; };
@@ -168,6 +196,10 @@
 		37A4F6BC1B7B21460097E432 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37A4F6BB1B7B21460097E432 /* Assets.xcassets */; };
 		37A4F6C01B7B21460097E432 /* LockyWatch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 37A4F69E1B7B21460097E432 /* LockyWatch.app */; };
 		37AB16491B998E9700A5602D /* NSObject+Dispatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A006721B04A16100A84E31 /* NSObject+Dispatch.swift */; };
+		37ADB3612DD877FB006E3CFE /* ParseLiveQuery in Frameworks */ = {isa = PBXBuildFile; productRef = 37ADB3602DD877FB006E3CFE /* ParseLiveQuery */; };
+		37ADB3632DD877FB006E3CFE /* ParseObjC in Frameworks */ = {isa = PBXBuildFile; productRef = 37ADB3622DD877FB006E3CFE /* ParseObjC */; };
+		37ADB3652DD8B50F006E3CFE /* IOBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37ADB3642DD8B50F006E3CFE /* IOBluetooth.framework */; };
+		37ADB36C2DD8B782006E3CFE /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = 37ADB36B2DD8B782006E3CFE /* Sparkle */; };
 		37B037171B35FB620007C90A /* LoginScreenInitializingBluetoothWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37B037141B35FB620007C90A /* LoginScreenInitializingBluetoothWindowController.m */; };
 		37B037181B35FB620007C90A /* LoginScreenInitializingBluetoothWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37B037161B35FB620007C90A /* LoginScreenInitializingBluetoothWindowController.xib */; };
 		37B1956E1ACD33D70043672A /* IOSDeviceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37B1956C1ACD33D70043672A /* IOSDeviceViewController.m */; };
@@ -196,7 +228,6 @@
 		37BC52F31AE52CD900C69BDD /* MacDeviceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 371CFE951AB1E59C0061D84D /* MacDeviceViewController.xib */; };
 		37C4FD8A1ADFD5FF00EAB9B1 /* oai.caf in Resources */ = {isa = PBXBuildFile; fileRef = 37C4FD891ADFD5FF00EAB9B1 /* oai.caf */; };
 		37CBD5441AC2F7E000196BB1 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37CBD5431AC2F7E000196BB1 /* CoreLocation.framework */; };
-		37CBD5461AC2F7E800196BB1 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37CBD5451AC2F7E800196BB1 /* CoreLocation.framework */; };
 		37CBD54A1AC4999E00196BB1 /* KeychainManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 37CBD5491AC4999D00196BB1 /* KeychainManager.m */; };
 		37CBEF661BA4817D00E98A27 /* AppleWatchSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37CBEF641BA4817D00E98A27 /* AppleWatchSettingViewController.m */; };
 		37CBEF681BA5990A00E98A27 /* HockeySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37CBEF671BA5990A00E98A27 /* HockeySDK.framework */; };
@@ -226,14 +257,6 @@
 		37F7AC741AA9C01C00A4C6AA /* model-identifiers.plist in Resources */ = {isa = PBXBuildFile; fileRef = 37F7AC721AA9C01C00A4C6AA /* model-identifiers.plist */; };
 		37F7AC791AA9C0D600A4C6AA /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 37F7AC7C1AA9C0D600A4C6AA /* Localizable.strings */; };
 		37F7AC7A1AA9C0D600A4C6AA /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 37F7AC7C1AA9C0D600A4C6AA /* Localizable.strings */; };
-		37F7AC7F1AA9C15300A4C6AA /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37F7AC7E1AA9C15300A4C6AA /* Cocoa.framework */; };
-		37F7AC831AA9C16300A4C6AA /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37F7AC821AA9C16300A4C6AA /* Carbon.framework */; };
-		37F7AC851AA9C16B00A4C6AA /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37F7AC841AA9C16B00A4C6AA /* ApplicationServices.framework */; };
-		37F7AC871AA9C17400A4C6AA /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37F7AC861AA9C17400A4C6AA /* CFNetwork.framework */; };
-		37F7AC891AA9C17A00A4C6AA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37F7AC881AA9C17A00A4C6AA /* CoreGraphics.framework */; };
-		37F7AC8B1AA9C18B00A4C6AA /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37F7AC8A1AA9C18B00A4C6AA /* QuartzCore.framework */; };
-		37F7AC8D1AA9C19100A4C6AA /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37F7AC8C1AA9C19100A4C6AA /* SystemConfiguration.framework */; };
-		37F7AC8F1AA9C1A400A4C6AA /* ServiceManagement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37F7AC8E1AA9C1A400A4C6AA /* ServiceManagement.framework */; };
 		37F7AC931AA9C28F00A4C6AA /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 37F7AC921AA9C28F00A4C6AA /* libz.dylib */; };
 		37F7ACA11AA9CC3F00A4C6AA /* LocalMacDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F7ACA01AA9CC3F00A4C6AA /* LocalMacDevice.m */; };
 		37F7ACA71AA9D15E00A4C6AA /* NSUserDefaults+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F7ACA61AA9D15E00A4C6AA /* NSUserDefaults+Utils.m */; };
@@ -262,8 +285,6 @@
 		37F7ACF01AAE04E800A4C6AA /* FadeSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F7ACEF1AAE04E800A4C6AA /* FadeSegue.m */; };
 		37F7ACF31AAE06DF00A4C6AA /* LockyWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F7ACF21AAE06DF00A4C6AA /* LockyWindowController.m */; };
 		37F7ACFC1AAE12B900A4C6AA /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F7ACFB1AAE12B900A4C6AA /* FirstViewController.m */; };
-		A4056C0138DF9B06E36BCB20 /* Pods_LockyMac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50EF57B4B75C9B0B24DFEFCF /* Pods_LockyMac.framework */; };
-		F29D8E2C942DF09FF526FD3F /* Pods_Locky.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BD06B77BBF0FEA31A47C949 /* Pods_Locky.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -300,68 +321,53 @@
 /* Begin PBXCopyFilesBuildPhase section */
 		370FB4BE1ACBD3AC0016FEE8 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
 			dstPath = "";
-			dstSubfolderSpec = 10;
+			dstSubfolder = Frameworks;
 			files = (
-				37085D031AEA2F19001D9A11 /* HockeySDK.framework in Embed Frameworks */,
-				370FB4C21ACBE1640016FEE8 /* Sparkle.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		37A4F6C61B7B21460097E432 /* Embed App Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
 			dstPath = "";
-			dstSubfolderSpec = 13;
+			dstSubfolder = PlugIns;
 			files = (
 				37A4F6AB1B7B21460097E432 /* LockyWatch Extension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		37A4F6C81B7B21460097E432 /* Embed Watch Content */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
 			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
-			dstSubfolderSpec = 16;
+			dstSubfolder = Product;
 			files = (
 				37A4F6C01B7B21460097E432 /* LockyWatch.app in Embed Watch Content */,
 			);
 			name = "Embed Watch Content";
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		37BC52EB1AE5250200C69BDD /* Embed App Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
 			dstPath = "";
-			dstSubfolderSpec = 13;
+			dstSubfolder = PlugIns;
 			files = (
 				37BC52E71AE5250200C69BDD /* LockyToday.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		37CD700C1AC9678A00856ABF /* Copy Files Helper */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
 			dstPath = Contents/Library/LoginItems;
-			dstSubfolderSpec = 1;
+			dstSubfolder = Wrapper;
 			files = (
 				37CD700D1AC967AA00856ABF /* lockyhelper.app in Copy Files Helper */,
 			);
 			name = "Copy Files Helper";
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		1A3163016F30F01B10618823 /* Pods-LockyMac.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LockyMac.release.xcconfig"; path = "Pods/Target Support Files/Pods-LockyMac/Pods-LockyMac.release.xcconfig"; sourceTree = "<group>"; };
-		2BD06B77BBF0FEA31A47C949 /* Pods_Locky.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Locky.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		37028CEC1DA86A9A00A4BE15 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		37028CEE1DA86A9B00A4BE15 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		37085D001AEA2F04001D9A11 /* HockeySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = HockeySDK.framework; sourceTree = "<group>"; };
 		37085D041AEA713C001D9A11 /* LockyPreviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LockyPreviewViewController.h; sourceTree = "<group>"; };
 		37085D051AEA713C001D9A11 /* LockyPreviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LockyPreviewViewController.m; sourceTree = "<group>"; };
 		37085D071AEA7787001D9A11 /* LockyPreviewItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LockyPreviewItem.h; sourceTree = "<group>"; };
@@ -370,7 +376,6 @@
 		37085D0C1AEA7AC0001D9A11 /* SoundsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SoundsViewController.m; sourceTree = "<group>"; };
 		37085D0E1AEA86E5001D9A11 /* rts.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = rts.caf; sourceTree = "<group>"; };
 		37085D101AEA8709001D9A11 /* yml.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = yml.caf; sourceTree = "<group>"; };
-		370FB4BF1ACBE1440016FEE8 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
 		3712776B1ADE804F00690DDE /* next.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = next.caf; sourceTree = "<group>"; };
 		37185AF41AE7BEF3004D917B /* UnlockButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UnlockButton.m; sourceTree = "<group>"; };
 		37185AF51AE7BEF3004D917B /* UnlockButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnlockButton.h; sourceTree = "<group>"; };
@@ -410,8 +415,8 @@
 		371CFE541AB188B40061D84D /* SendMailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendMailViewController.m; sourceTree = "<group>"; };
 		371CFE571AB18C1B0061D84D /* UIImage+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Utils.h"; sourceTree = "<group>"; };
 		371CFE581AB18C1B0061D84D /* UIImage+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Utils.m"; sourceTree = "<group>"; };
-		371CFE5B1AB18D390061D84D /* ParseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParseManager.h; sourceTree = "<group>"; };
-		371CFE5C1AB18D390061D84D /* ParseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParseManager.m; sourceTree = "<group>"; };
+		371CFE5B1AB18D390061D84D /* ParseLockyManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParseLockyManager.h; sourceTree = "<group>"; };
+		371CFE5C1AB18D390061D84D /* ParseLockyManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParseLockyManager.m; sourceTree = "<group>"; };
 		371CFE5E1AB194CA0061D84D /* UIViewController+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Utils.h"; sourceTree = "<group>"; };
 		371CFE5F1AB194CA0061D84D /* UIViewController+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Utils.m"; sourceTree = "<group>"; };
 		371CFE611AB197460061D84D /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
@@ -559,6 +564,77 @@
 		376B71401ACB458F00D2A5F9 /* TouchIDManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TouchIDManager.m; sourceTree = "<group>"; };
 		376B71421ACBC2E000D2A5F9 /* LocalAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LocalAuthentication.framework; path = System/Library/Frameworks/LocalAuthentication.framework; sourceTree = SDKROOT; };
 		377CC04C1AD54FC000283E12 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		378805452DD71CD1009CF180 /* PFCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PFCollectionViewCell.h; sourceTree = "<group>"; };
+		378805462DD71CD1009CF180 /* PFCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PFCollectionViewCell.m; sourceTree = "<group>"; };
+		378805472DD71CD1009CF180 /* PFPurchaseTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PFPurchaseTableViewCell.h; sourceTree = "<group>"; };
+		378805482DD71CD1009CF180 /* PFPurchaseTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PFPurchaseTableViewCell.m; sourceTree = "<group>"; };
+		378805492DD71CD1009CF180 /* PFTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PFTableViewCell.h; sourceTree = "<group>"; };
+		3788054A2DD71CD1009CF180 /* PFTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PFTableViewCell.m; sourceTree = "<group>"; };
+		3788054C2DD71CD1009CF180 /* PFActivityIndicatorCollectionReusableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PFActivityIndicatorCollectionReusableView.h; sourceTree = "<group>"; };
+		3788054D2DD71CD1009CF180 /* PFActivityIndicatorCollectionReusableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PFActivityIndicatorCollectionReusableView.m; sourceTree = "<group>"; };
+		3788054E2DD71CD1009CF180 /* PFActivityIndicatorTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PFActivityIndicatorTableViewCell.h; sourceTree = "<group>"; };
+		3788054F2DD71CD1009CF180 /* PFActivityIndicatorTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PFActivityIndicatorTableViewCell.m; sourceTree = "<group>"; };
+		378805512DD71CD1009CF180 /* PFColor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PFColor.h; sourceTree = "<group>"; };
+		378805522DD71CD1009CF180 /* PFColor.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PFColor.m; sourceTree = "<group>"; };
+		378805532DD71CD1009CF180 /* PFImage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PFImage.h; sourceTree = "<group>"; };
+		378805542DD71CD1009CF180 /* PFImage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PFImage.m; sourceTree = "<group>"; };
+		378805552DD71CD1009CF180 /* PFRect.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PFRect.h; sourceTree = "<group>"; };
+		378805562DD71CD1009CF180 /* PFRect.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PFRect.m; sourceTree = "<group>"; };
+		378805572DD71CD1009CF180 /* PFUIAlertView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PFUIAlertView.h; sourceTree = "<group>"; };
+		378805582DD71CD1009CF180 /* PFUIAlertView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PFUIAlertView.m; sourceTree = "<group>"; };
+		3788055A2DD71CD1009CF180 /* PFActionButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PFActionButton.h; sourceTree = "<group>"; };
+		3788055B2DD71CD1009CF180 /* PFActionButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PFActionButton.m; sourceTree = "<group>"; };
+		3788055C2DD71CD1009CF180 /* PFDismissButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PFDismissButton.h; sourceTree = "<group>"; };
+		3788055D2DD71CD1009CF180 /* PFDismissButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PFDismissButton.m; sourceTree = "<group>"; };
+		3788055E2DD71CD1009CF180 /* PFPrimaryButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PFPrimaryButton.h; sourceTree = "<group>"; };
+		3788055F2DD71CD1009CF180 /* PFPrimaryButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PFPrimaryButton.m; sourceTree = "<group>"; };
+		378805602DD71CD1009CF180 /* PFTextButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PFTextButton.h; sourceTree = "<group>"; };
+		378805612DD71CD1009CF180 /* PFTextButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PFTextButton.m; sourceTree = "<group>"; };
+		378805632DD71CD1009CF180 /* PFLoadingView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PFLoadingView.h; sourceTree = "<group>"; };
+		378805642DD71CD1009CF180 /* PFLoadingView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PFLoadingView.m; sourceTree = "<group>"; };
+		378805662DD71CD1009CF180 /* PFImageCache.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PFImageCache.h; sourceTree = "<group>"; };
+		378805672DD71CD1009CF180 /* PFImageCache.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PFImageCache.m; sourceTree = "<group>"; };
+		378805682DD71CD1009CF180 /* PFLocalization.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PFLocalization.h; sourceTree = "<group>"; };
+		378805692DD71CD1009CF180 /* PFLocalization.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PFLocalization.m; sourceTree = "<group>"; };
+		3788056B2DD71CD1009CF180 /* PFLogInView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PFLogInView.h; sourceTree = "<group>"; };
+		3788056C2DD71CD1009CF180 /* PFLogInView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PFLogInView.m; sourceTree = "<group>"; };
+		3788056D2DD71CD1009CF180 /* PFLogInView_Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PFLogInView_Private.h; sourceTree = "<group>"; };
+		3788056E2DD71CD1009CF180 /* PFLogInViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PFLogInViewController.h; sourceTree = "<group>"; };
+		3788056F2DD71CD1009CF180 /* PFLogInViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PFLogInViewController.m; sourceTree = "<group>"; };
+		378805712DD71CD1009CF180 /* PFProductTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PFProductTableViewController.h; sourceTree = "<group>"; };
+		378805722DD71CD1009CF180 /* PFProductTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PFProductTableViewController.m; sourceTree = "<group>"; };
+		378805742DD71CD1009CF180 /* PFQueryCollectionViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PFQueryCollectionViewController.h; sourceTree = "<group>"; };
+		378805752DD71CD1009CF180 /* PFQueryCollectionViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PFQueryCollectionViewController.m; sourceTree = "<group>"; };
+		378805772DD71CD1009CF180 /* PFQueryTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PFQueryTableViewController.h; sourceTree = "<group>"; };
+		378805782DD71CD1009CF180 /* PFQueryTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PFQueryTableViewController.m; sourceTree = "<group>"; };
+		3788057A2DD71CD1009CF180 /* PFSignUpView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PFSignUpView.h; sourceTree = "<group>"; };
+		3788057B2DD71CD1009CF180 /* PFSignUpView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PFSignUpView.m; sourceTree = "<group>"; };
+		3788057C2DD71CD1009CF180 /* PFSignUpViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PFSignUpViewController.h; sourceTree = "<group>"; };
+		3788057D2DD71CD1009CF180 /* PFSignUpViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PFSignUpViewController.m; sourceTree = "<group>"; };
+		3788057F2DD71CD1009CF180 /* PFImageView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PFImageView.h; sourceTree = "<group>"; };
+		378805802DD71CD1009CF180 /* PFImageView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PFImageView.m; sourceTree = "<group>"; };
+		378805812DD71CD1009CF180 /* PFTextField.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PFTextField.h; sourceTree = "<group>"; };
+		378805822DD71CD1009CF180 /* PFTextField.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PFTextField.m; sourceTree = "<group>"; };
+		378805852DD71CD1009CF180 /* PFResources.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PFResources.h; sourceTree = "<group>"; };
+		378805862DD71CD1009CF180 /* PFResources.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PFResources.m; sourceTree = "<group>"; };
+		378805882DD71CD1009CF180 /* ParseUI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ParseUI.h; sourceTree = "<group>"; };
+		378805892DD71CD1009CF180 /* ParseUIConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ParseUIConstants.h; sourceTree = "<group>"; };
+		3788058B2DD71CD1009CF180 /* facebook_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = facebook_icon.png; sourceTree = "<group>"; };
+		3788058C2DD71CD1009CF180 /* facebook_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "facebook_icon@2x.png"; sourceTree = "<group>"; };
+		3788058D2DD71CD1009CF180 /* facebook_icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "facebook_icon@3x.png"; sourceTree = "<group>"; };
+		3788058E2DD71CD1009CF180 /* parse_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = parse_logo.png; sourceTree = "<group>"; };
+		3788058F2DD71CD1009CF180 /* parse_logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "parse_logo@2x.png"; sourceTree = "<group>"; };
+		378805902DD71CD1009CF180 /* parse_logo@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "parse_logo@3x.png"; sourceTree = "<group>"; };
+		378805912DD71CD1009CF180 /* twitter_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = twitter_icon.png; sourceTree = "<group>"; };
+		378805922DD71CD1009CF180 /* twitter_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "twitter_icon@2x.png"; sourceTree = "<group>"; };
+		378805932DD71CD1009CF180 /* twitter_icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "twitter_icon@3x.png"; sourceTree = "<group>"; };
+		378805952DD71CD1009CF180 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/ParseUI.strings; sourceTree = "<group>"; };
+		378805962DD71CD1009CF180 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/ParseUI.strings; sourceTree = "<group>"; };
+		378805972DD71CD1009CF180 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/ParseUI.strings; sourceTree = "<group>"; };
+		378805982DD71CD1009CF180 /* he */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = he; path = he.lproj/ParseUI.strings; sourceTree = "<group>"; };
+		378805992DD71CD1009CF180 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/ParseUI.strings"; sourceTree = "<group>"; };
+		3788059A2DD71CD1009CF180 /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sv; path = sv.lproj/ParseUI.strings; sourceTree = "<group>"; };
+		3788059F2DD71CD1009CF180 /* convert_images.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = convert_images.rb; sourceTree = "<group>"; };
 		378C8D1D1C0F58BF0056169C /* WatchKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WatchKit.framework; path = System/Library/Frameworks/WatchKit.framework; sourceTree = SDKROOT; };
 		3790EEA21AE4D33B00673D33 /* Locky.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Locky.entitlements; sourceTree = "<group>"; };
 		3790EEAC1AE4E4FB00673D33 /* JBroken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JBroken.h; sourceTree = "<group>"; };
@@ -591,6 +667,8 @@
 		37A4F6B91B7B21460097E432 /* ComplicationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplicationController.swift; sourceTree = "<group>"; };
 		37A4F6BB1B7B21460097E432 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		37A4F6BD1B7B21460097E432 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		37ADB3642DD8B50F006E3CFE /* IOBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOBluetooth.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.4.sdk/System/Library/Frameworks/IOBluetooth.framework; sourceTree = DEVELOPER_DIR; };
+		37ADB3662DD8B700006E3CFE /* CoreAudioTypes.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudioTypes.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.4.sdk/System/Library/Frameworks/CoreAudioTypes.framework; sourceTree = DEVELOPER_DIR; };
 		37B037141B35FB620007C90A /* LoginScreenInitializingBluetoothWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginScreenInitializingBluetoothWindowController.m; sourceTree = "<group>"; };
 		37B037151B35FB620007C90A /* LoginScreenInitializingBluetoothWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginScreenInitializingBluetoothWindowController.h; sourceTree = "<group>"; };
 		37B037161B35FB620007C90A /* LoginScreenInitializingBluetoothWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginScreenInitializingBluetoothWindowController.xib; sourceTree = "<group>"; };
@@ -729,49 +807,35 @@
 		37F7ACF21AAE06DF00A4C6AA /* LockyWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LockyWindowController.m; sourceTree = "<group>"; };
 		37F7ACFA1AAE12B900A4C6AA /* FirstViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstViewController.h; sourceTree = "<group>"; };
 		37F7ACFB1AAE12B900A4C6AA /* FirstViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
-		50EF57B4B75C9B0B24DFEFCF /* Pods_LockyMac.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LockyMac.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		7E777258FFEB86E8BC3D7006 /* Pods-Locky.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Locky.release.xcconfig"; path = "Pods/Target Support Files/Pods-Locky/Pods-Locky.release.xcconfig"; sourceTree = "<group>"; };
-		ACB174FB2EEF66935077AEF0 /* Pods-LockyMac.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LockyMac.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LockyMac/Pods-LockyMac.debug.xcconfig"; sourceTree = "<group>"; };
-		FBCE2D9E65892583F44353B0 /* Pods-Locky.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Locky.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Locky/Pods-Locky.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		272605B92D4E738399634780 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		37A4F6A71B7B21460097E432 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				37306E971DA4E1AD006C7742 /* WatchConnectivity.framework in Frameworks */,
 				37306E951DA4E1A9006C7742 /* WatchKit.framework in Frameworks */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		37BC52D61AE5250200C69BDD /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				37BC52DC1AE5250200C69BDD /* NotificationCenter.framework in Frameworks */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		37CD6FE71AC9666F00856ABF /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		37F7AC1E1AA9BF9200A4C6AA /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
-				378C8D1E1C0F58BF0056169C /* WatchKit.framework in Frameworks */,
 				37F46E7B1B8B35BA00697E33 /* WatchConnectivity.framework in Frameworks */,
 				375845D41AE96ADF005F0765 /* QuickLook.framework in Frameworks */,
 				375845D21AE96AD9005F0765 /* CoreText.framework in Frameworks */,
@@ -789,39 +853,23 @@
 				37F7ACCA1AAA09D100A4C6AA /* CoreBluetooth.framework in Frameworks */,
 				37F7ACC81AAA09C600A4C6AA /* AVFoundation.framework in Frameworks */,
 				37F7ACC61AAA09BF00A4C6AA /* QuartzCore.framework in Frameworks */,
+				378805432DD7181F009CF180 /* SDWebImage in Frameworks */,
+				378805402DD71406009CF180 /* ParseObjC in Frameworks */,
 				37CBEF681BA5990A00E98A27 /* HockeySDK.framework in Frameworks */,
+				3788053E2DD71406009CF180 /* ParseLiveQuery in Frameworks */,
 				37F7ACC41AAA09B700A4C6AA /* SystemConfiguration.framework in Frameworks */,
 				37F7ACC21AAA09AD00A4C6AA /* MobileCoreServices.framework in Frameworks */,
-				F29D8E2C942DF09FF526FD3F /* Pods_Locky.framework in Frameworks */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		37F7AC4B1AA9BFA800A4C6AA /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
-				37306E9B1DA4E6BF006C7742 /* IOBluetooth.framework in Frameworks */,
-				37306E991DA4E3D7006C7742 /* CoreBluetooth.framework in Frameworks */,
-				375115B81AD3B42B005BBB8D /* IOKit.framework in Frameworks */,
-				37382A9C1ACF286100666C75 /* QTKit.framework in Frameworks */,
-				37382A971ACF262A00666C75 /* AVFoundation.framework in Frameworks */,
-				37CBD5461AC2F7E800196BB1 /* CoreLocation.framework in Frameworks */,
-				371CFEAD1AB312390061D84D /* Security.framework in Frameworks */,
-				371CFE371AB02D600061D84D /* CoreWLAN.framework in Frameworks */,
+				37ADB36C2DD8B782006E3CFE /* Sparkle in Frameworks */,
+				37ADB3612DD877FB006E3CFE /* ParseLiveQuery in Frameworks */,
+				37ADB3652DD8B50F006E3CFE /* IOBluetooth.framework in Frameworks */,
+				37ADB3632DD877FB006E3CFE /* ParseObjC in Frameworks */,
 				37F7AC931AA9C28F00A4C6AA /* libz.dylib in Frameworks */,
-				37F7AC8F1AA9C1A400A4C6AA /* ServiceManagement.framework in Frameworks */,
-				37F7AC8D1AA9C19100A4C6AA /* SystemConfiguration.framework in Frameworks */,
-				37F7AC8B1AA9C18B00A4C6AA /* QuartzCore.framework in Frameworks */,
-				37F7AC891AA9C17A00A4C6AA /* CoreGraphics.framework in Frameworks */,
-				370FB4C31ACBE1870016FEE8 /* Sparkle.framework in Frameworks */,
-				37F7AC871AA9C17400A4C6AA /* CFNetwork.framework in Frameworks */,
-				37F7AC851AA9C16B00A4C6AA /* ApplicationServices.framework in Frameworks */,
-				37F7AC831AA9C16300A4C6AA /* Carbon.framework in Frameworks */,
-				37F7AC7F1AA9C15300A4C6AA /* Cocoa.framework in Frameworks */,
-				37085D021AEA2F19001D9A11 /* HockeySDK.framework in Frameworks */,
-				A4056C0138DF9B06E36BCB20 /* Pods_LockyMac.framework in Frameworks */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
@@ -896,8 +944,8 @@
 		371CFE5A1AB18D1A0061D84D /* Parse */ = {
 			isa = PBXGroup;
 			children = (
-				371CFE5B1AB18D390061D84D /* ParseManager.h */,
-				371CFE5C1AB18D390061D84D /* ParseManager.m */,
+				371CFE5B1AB18D390061D84D /* ParseLockyManager.h */,
+				371CFE5C1AB18D390061D84D /* ParseLockyManager.m */,
 			);
 			name = Parse;
 			sourceTree = "<group>";
@@ -1132,6 +1180,239 @@
 			name = TouchID;
 			sourceTree = "<group>";
 		};
+		378805442DD71CB8009CF180 /* ExternalDependencies */ = {
+			isa = PBXGroup;
+			children = (
+				378805A12DD71CD1009CF180 /* ParseUI */,
+			);
+			path = ExternalDependencies;
+			sourceTree = "<group>";
+		};
+		3788054B2DD71CD1009CF180 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				378805452DD71CD1009CF180 /* PFCollectionViewCell.h */,
+				378805462DD71CD1009CF180 /* PFCollectionViewCell.m */,
+				378805472DD71CD1009CF180 /* PFPurchaseTableViewCell.h */,
+				378805482DD71CD1009CF180 /* PFPurchaseTableViewCell.m */,
+				378805492DD71CD1009CF180 /* PFTableViewCell.h */,
+				3788054A2DD71CD1009CF180 /* PFTableViewCell.m */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		378805502DD71CD1009CF180 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				3788054C2DD71CD1009CF180 /* PFActivityIndicatorCollectionReusableView.h */,
+				3788054D2DD71CD1009CF180 /* PFActivityIndicatorCollectionReusableView.m */,
+				3788054E2DD71CD1009CF180 /* PFActivityIndicatorTableViewCell.h */,
+				3788054F2DD71CD1009CF180 /* PFActivityIndicatorTableViewCell.m */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		378805592DD71CD1009CF180 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				378805512DD71CD1009CF180 /* PFColor.h */,
+				378805522DD71CD1009CF180 /* PFColor.m */,
+				378805532DD71CD1009CF180 /* PFImage.h */,
+				378805542DD71CD1009CF180 /* PFImage.m */,
+				378805552DD71CD1009CF180 /* PFRect.h */,
+				378805562DD71CD1009CF180 /* PFRect.m */,
+				378805572DD71CD1009CF180 /* PFUIAlertView.h */,
+				378805582DD71CD1009CF180 /* PFUIAlertView.m */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		378805622DD71CD1009CF180 /* Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				3788055A2DD71CD1009CF180 /* PFActionButton.h */,
+				3788055B2DD71CD1009CF180 /* PFActionButton.m */,
+				3788055C2DD71CD1009CF180 /* PFDismissButton.h */,
+				3788055D2DD71CD1009CF180 /* PFDismissButton.m */,
+				3788055E2DD71CD1009CF180 /* PFPrimaryButton.h */,
+				3788055F2DD71CD1009CF180 /* PFPrimaryButton.m */,
+				378805602DD71CD1009CF180 /* PFTextButton.h */,
+				378805612DD71CD1009CF180 /* PFTextButton.m */,
+			);
+			path = Buttons;
+			sourceTree = "<group>";
+		};
+		378805652DD71CD1009CF180 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				378805622DD71CD1009CF180 /* Buttons */,
+				378805632DD71CD1009CF180 /* PFLoadingView.h */,
+				378805642DD71CD1009CF180 /* PFLoadingView.m */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		3788056A2DD71CD1009CF180 /* Internal */ = {
+			isa = PBXGroup;
+			children = (
+				378805502DD71CD1009CF180 /* Cells */,
+				378805592DD71CD1009CF180 /* Extensions */,
+				378805652DD71CD1009CF180 /* Views */,
+				378805662DD71CD1009CF180 /* PFImageCache.h */,
+				378805672DD71CD1009CF180 /* PFImageCache.m */,
+				378805682DD71CD1009CF180 /* PFLocalization.h */,
+				378805692DD71CD1009CF180 /* PFLocalization.m */,
+			);
+			path = Internal;
+			sourceTree = "<group>";
+		};
+		378805702DD71CD1009CF180 /* LogInViewController */ = {
+			isa = PBXGroup;
+			children = (
+				3788056B2DD71CD1009CF180 /* PFLogInView.h */,
+				3788056C2DD71CD1009CF180 /* PFLogInView.m */,
+				3788056D2DD71CD1009CF180 /* PFLogInView_Private.h */,
+				3788056E2DD71CD1009CF180 /* PFLogInViewController.h */,
+				3788056F2DD71CD1009CF180 /* PFLogInViewController.m */,
+			);
+			path = LogInViewController;
+			sourceTree = "<group>";
+		};
+		378805732DD71CD1009CF180 /* ProductTableViewController */ = {
+			isa = PBXGroup;
+			children = (
+				378805712DD71CD1009CF180 /* PFProductTableViewController.h */,
+				378805722DD71CD1009CF180 /* PFProductTableViewController.m */,
+			);
+			path = ProductTableViewController;
+			sourceTree = "<group>";
+		};
+		378805762DD71CD1009CF180 /* QueryCollectionViewController */ = {
+			isa = PBXGroup;
+			children = (
+				378805742DD71CD1009CF180 /* PFQueryCollectionViewController.h */,
+				378805752DD71CD1009CF180 /* PFQueryCollectionViewController.m */,
+			);
+			path = QueryCollectionViewController;
+			sourceTree = "<group>";
+		};
+		378805792DD71CD1009CF180 /* QueryTableViewController */ = {
+			isa = PBXGroup;
+			children = (
+				378805772DD71CD1009CF180 /* PFQueryTableViewController.h */,
+				378805782DD71CD1009CF180 /* PFQueryTableViewController.m */,
+			);
+			path = QueryTableViewController;
+			sourceTree = "<group>";
+		};
+		3788057E2DD71CD1009CF180 /* SignUpViewController */ = {
+			isa = PBXGroup;
+			children = (
+				3788057A2DD71CD1009CF180 /* PFSignUpView.h */,
+				3788057B2DD71CD1009CF180 /* PFSignUpView.m */,
+				3788057C2DD71CD1009CF180 /* PFSignUpViewController.h */,
+				3788057D2DD71CD1009CF180 /* PFSignUpViewController.m */,
+			);
+			path = SignUpViewController;
+			sourceTree = "<group>";
+		};
+		378805832DD71CD1009CF180 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				3788057F2DD71CD1009CF180 /* PFImageView.h */,
+				378805802DD71CD1009CF180 /* PFImageView.m */,
+				378805812DD71CD1009CF180 /* PFTextField.h */,
+				378805822DD71CD1009CF180 /* PFTextField.m */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		378805842DD71CD1009CF180 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				3788054B2DD71CD1009CF180 /* Cells */,
+				3788056A2DD71CD1009CF180 /* Internal */,
+				378805702DD71CD1009CF180 /* LogInViewController */,
+				378805732DD71CD1009CF180 /* ProductTableViewController */,
+				378805762DD71CD1009CF180 /* QueryCollectionViewController */,
+				378805792DD71CD1009CF180 /* QueryTableViewController */,
+				3788057E2DD71CD1009CF180 /* SignUpViewController */,
+				378805832DD71CD1009CF180 /* Views */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		378805872DD71CD1009CF180 /* Generated */ = {
+			isa = PBXGroup;
+			children = (
+				378805852DD71CD1009CF180 /* PFResources.h */,
+				378805862DD71CD1009CF180 /* PFResources.m */,
+			);
+			path = Generated;
+			sourceTree = "<group>";
+		};
+		3788058A2DD71CD1009CF180 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				378805882DD71CD1009CF180 /* ParseUI.h */,
+				378805892DD71CD1009CF180 /* ParseUIConstants.h */,
+			);
+			path = Other;
+			sourceTree = "<group>";
+		};
+		378805942DD71CD1009CF180 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				3788058B2DD71CD1009CF180 /* facebook_icon.png */,
+				3788058C2DD71CD1009CF180 /* facebook_icon@2x.png */,
+				3788058D2DD71CD1009CF180 /* facebook_icon@3x.png */,
+				3788058E2DD71CD1009CF180 /* parse_logo.png */,
+				3788058F2DD71CD1009CF180 /* parse_logo@2x.png */,
+				378805902DD71CD1009CF180 /* parse_logo@3x.png */,
+				378805912DD71CD1009CF180 /* twitter_icon.png */,
+				378805922DD71CD1009CF180 /* twitter_icon@2x.png */,
+				378805932DD71CD1009CF180 /* twitter_icon@3x.png */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
+		3788059C2DD71CD1009CF180 /* Localization */ = {
+			isa = PBXGroup;
+			children = (
+				3788059B2DD71CD1009CF180 /* ParseUI.strings */,
+			);
+			path = Localization;
+			sourceTree = "<group>";
+		};
+		3788059E2DD71CD1009CF180 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				378805942DD71CD1009CF180 /* Images */,
+				3788059C2DD71CD1009CF180 /* Localization */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		378805A02DD71CD1009CF180 /* Scripts */ = {
+			isa = PBXGroup;
+			children = (
+				3788059F2DD71CD1009CF180 /* convert_images.rb */,
+			);
+			path = Scripts;
+			sourceTree = "<group>";
+		};
+		378805A12DD71CD1009CF180 /* ParseUI */ = {
+			isa = PBXGroup;
+			children = (
+				378805842DD71CD1009CF180 /* Classes */,
+				378805872DD71CD1009CF180 /* Generated */,
+				3788058A2DD71CD1009CF180 /* Other */,
+				3788059E2DD71CD1009CF180 /* Resources */,
+				378805A02DD71CD1009CF180 /* Scripts */,
+			);
+			path = ParseUI;
+			sourceTree = "<group>";
+		};
 		379D64991AC5DF570071489C /* Login screen view */ = {
 			isa = PBXGroup;
 			children = (
@@ -1246,7 +1527,9 @@
 		37BC52DA1AE5250200C69BDD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				37ADB3662DD8B700006E3CFE /* CoreAudioTypes.framework */,
 				37306E9A1DA4E6BF006C7742 /* IOBluetooth.framework */,
+				37ADB3642DD8B50F006E3CFE /* IOBluetooth.framework */,
 				37306E981DA4E3D7006C7742 /* CoreBluetooth.framework */,
 				37306E961DA4E1AD006C7742 /* WatchConnectivity.framework */,
 				37306E941DA4E1A9006C7742 /* WatchKit.framework */,
@@ -1258,8 +1541,6 @@
 				375845D11AE96AD9005F0765 /* CoreText.framework */,
 				37185B0F1AE91C3B004D917B /* MessageUI.framework */,
 				37BC52DB1AE5250200C69BDD /* NotificationCenter.framework */,
-				2BD06B77BBF0FEA31A47C949 /* Pods_Locky.framework */,
-				50EF57B4B75C9B0B24DFEFCF /* Pods_LockyMac.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1386,7 +1667,6 @@
 				37A4F6AE1B7B21460097E432 /* LockyWatch Extension */,
 				37BC52DA1AE5250200C69BDD /* Frameworks */,
 				37F7AC221AA9BF9200A4C6AA /* Products */,
-				58D47B21880E37987C59E960 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1406,6 +1686,7 @@
 		37F7AC231AA9BF9200A4C6AA /* Locky */ = {
 			isa = PBXGroup;
 			children = (
+				378805442DD71CB8009CF180 /* ExternalDependencies */,
 				37028CED1DA86A9A00A4BE15 /* InfoPlist.strings */,
 				37F46E771B8B358900697E33 /* Watch */,
 				3790EEA21AE4D33B00673D33 /* Locky.entitlements */,
@@ -1490,11 +1771,9 @@
 		37F7AC901AA9C1C200A4C6AA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				37085D001AEA2F04001D9A11 /* HockeySDK.framework */,
 				375115B71AD3B42B005BBB8D /* IOKit.framework */,
 				37382A9B1ACF286100666C75 /* QTKit.framework */,
 				37382A961ACF262A00666C75 /* AVFoundation.framework */,
-				370FB4BF1ACBE1440016FEE8 /* Sparkle.framework */,
 				37CBD5451AC2F7E800196BB1 /* CoreLocation.framework */,
 				371CFEAC1AB312380061D84D /* Security.framework */,
 				371CFE361AB02D5F0061D84D /* CoreWLAN.framework */,
@@ -1700,17 +1979,6 @@
 			name = Utils;
 			sourceTree = "<group>";
 		};
-		58D47B21880E37987C59E960 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				FBCE2D9E65892583F44353B0 /* Pods-Locky.debug.xcconfig */,
-				7E777258FFEB86E8BC3D7006 /* Pods-Locky.release.xcconfig */,
-				ACB174FB2EEF66935077AEF0 /* Pods-LockyMac.debug.xcconfig */,
-				1A3163016F30F01B10618823 /* Pods-LockyMac.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1742,8 +2010,6 @@
 			);
 			buildRules = (
 			);
-			dependencies = (
-			);
 			name = "LockyWatch Extension";
 			productName = "LockyWatch Extension";
 			productReference = 37A4F6AA1B7B21460097E432 /* LockyWatch Extension.appex */;
@@ -1758,8 +2024,6 @@
 				37BC52D71AE5250200C69BDD /* Resources */,
 			);
 			buildRules = (
-			);
-			dependencies = (
 			);
 			name = LockyToday;
 			productName = LockyToday;
@@ -1776,8 +2040,6 @@
 			);
 			buildRules = (
 			);
-			dependencies = (
-			);
 			name = lockyhelper;
 			productName = lockyhelper;
 			productReference = 37CD6FEA1AC9666F00856ABF /* lockyhelper.app */;
@@ -1787,14 +2049,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 37F7AC441AA9BF9200A4C6AA /* Build configuration list for PBXNativeTarget "Locky" */;
 			buildPhases = (
-				64CC5123D8F8EF4FC0EF4483 /* [CP] Check Pods Manifest.lock */,
 				37F7AC1D1AA9BF9200A4C6AA /* Sources */,
 				37F7AC1E1AA9BF9200A4C6AA /* Frameworks */,
 				37F7AC1F1AA9BF9200A4C6AA /* Resources */,
 				37BC52EB1AE5250200C69BDD /* Embed App Extensions */,
 				37A4F6C81B7B21460097E432 /* Embed Watch Content */,
-				FAF48582894FE7DA742D5040 /* [CP] Embed Pods Frameworks */,
-				05BEB976552FEF227CE3EB20 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1811,14 +2070,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 37F7AC6B1AA9BFA900A4C6AA /* Build configuration list for PBXNativeTarget "LockyMac" */;
 			buildPhases = (
-				C6AF8A808443DCC934DC6C61 /* [CP] Check Pods Manifest.lock */,
 				37F7AC4A1AA9BFA800A4C6AA /* Sources */,
 				37F7AC4B1AA9BFA800A4C6AA /* Frameworks */,
 				37F7AC4C1AA9BFA800A4C6AA /* Resources */,
 				37CD700C1AC9678A00856ABF /* Copy Files Helper */,
 				370FB4BE1ACBD3AC0016FEE8 /* Embed Frameworks */,
-				1544945350398DF6892577B3 /* [CP] Embed Pods Frameworks */,
-				E9BFFBAA87FC067F828CBA88 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1903,7 +2159,6 @@
 				};
 			};
 			buildConfigurationList = 37F7AC1C1AA9BF9200A4C6AA /* Build configuration list for PBXProject "Locky" */;
-			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -1911,8 +2166,18 @@
 				en,
 				Base,
 				fr,
+				de,
+				he,
+				sv,
+				"pt-BR",
 			);
 			mainGroup = 37F7AC181AA9BF9200A4C6AA;
+			packageReferences = (
+				3788053C2DD71406009CF180 /* XCRemoteSwiftPackageReference "Parse-SDK-iOS-OSX" */,
+				378805412DD7181F009CF180 /* XCRemoteSwiftPackageReference "SDWebImage" */,
+				37ADB36A2DD8B782006E3CFE /* XCRemoteSwiftPackageReference "Sparkle" */,
+			);
+			preferredProjectObjectVersion = 90;
 			productRefGroup = 37F7AC221AA9BF9200A4C6AA /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -1930,48 +2195,50 @@
 /* Begin PBXResourcesBuildPhase section */
 		37A4F69C1B7B21460097E432 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				37A4F6A41B7B21460097E432 /* Assets.xcassets in Resources */,
 				37A4F6A21B7B21460097E432 /* Interface.storyboard in Resources */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		37A4F6A81B7B21460097E432 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				37A4F6BC1B7B21460097E432 /* Assets.xcassets in Resources */,
 				3744FE571B7C8326008B2DAF /* Localizable.strings in Resources */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		37BC52D71AE5250200C69BDD /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				37BC52F31AE52CD900C69BDD /* MacDeviceViewController.xib in Resources */,
 				37BC52ED1AE525BB00C69BDD /* Images.xcassets in Resources */,
 				37BC52E41AE5250200C69BDD /* MainInterface.storyboard in Resources */,
 				37BC52EC1AE5254800C69BDD /* Localizable.strings in Resources */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		37CD6FE81AC9666F00856ABF /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				37CD6FF41AC9666F00856ABF /* Images.xcassets in Resources */,
 				37CD6FF71AC9666F00856ABF /* MainMenu.xib in Resources */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		37F7AC1F1AA9BF9200A4C6AA /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				373E8FA71AEE873000C7EDD8 /* chwbk.caf in Resources */,
 				373E8F931AEE5C5A00C7EDD8 /* sounds.plist in Resources */,
+				378805A22DD71CD1009CF180 /* twitter_icon@3x.png in Resources */,
+				378805A32DD71CD1009CF180 /* ParseUI.strings in Resources */,
+				378805A42DD71CD1009CF180 /* parse_logo.png in Resources */,
+				378805A52DD71CD1009CF180 /* convert_images.rb in Resources */,
+				378805A62DD71CD1009CF180 /* twitter_icon@2x.png in Resources */,
+				378805A72DD71CD1009CF180 /* parse_logo@2x.png in Resources */,
+				378805A82DD71CD1009CF180 /* facebook_icon.png in Resources */,
+				378805A92DD71CD1009CF180 /* facebook_icon@3x.png in Resources */,
+				378805AA2DD71CD1009CF180 /* twitter_icon.png in Resources */,
+				378805AC2DD71CD1009CF180 /* parse_logo@3x.png in Resources */,
+				378805AD2DD71CD1009CF180 /* facebook_icon@2x.png in Resources */,
 				376B713D1ACB426D00D2A5F9 /* lock.caf in Resources */,
 				37317BA41ADCF7BD00A784DE /* Tips.storyboard in Resources */,
 				37085D111AEA8709001D9A11 /* yml.caf in Resources */,
@@ -1996,11 +2263,9 @@
 				373E8F9F1AEE868800C7EDD8 /* borg.caf in Resources */,
 				37F7AC351AA9BF9200A4C6AA /* LaunchScreen.xib in Resources */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		37F7AC4C1AA9BFA800A4C6AA /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				379D649E1AC5DF6D0071489C /* LoginScreenWindowController.xib in Resources */,
 				373840C41B0F5F5F00CE342E /* Images.xcassets in Resources */,
@@ -2012,107 +2277,12 @@
 				37F7AC5E1AA9BFA900A4C6AA /* Main.storyboard in Resources */,
 				37F7AC741AA9C01C00A4C6AA /* model-identifiers.plist in Resources */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		05BEB976552FEF227CE3EB20 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Locky/Pods-Locky-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		1544945350398DF6892577B3 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LockyMac/Pods-LockyMac-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		64CC5123D8F8EF4FC0EF4483 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		C6AF8A808443DCC934DC6C61 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		E9BFFBAA87FC067F828CBA88 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LockyMac/Pods-LockyMac-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		FAF48582894FE7DA742D5040 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Locky/Pods-Locky-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		37A4F6A61B7B21460097E432 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				371E45C41B99717900E9C4C5 /* NSData+Utils.m in Sources */,
 				37A4F6B61B7B21460097E432 /* NotificationController.swift in Sources */,
@@ -2125,11 +2295,9 @@
 				37A4F6B81B7B21460097E432 /* GlanceController.swift in Sources */,
 				37416F9A1B98AEDF007AC69F /* WatchManager.swift in Sources */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		37BC52D51AE5250200C69BDD /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				37BC52EF1AE52C2800C69BDD /* LBLockyButton.swift in Sources */,
 				37F335181AE6289D00E292C6 /* MMWormhole.m in Sources */,
@@ -2139,24 +2307,46 @@
 				37BC52F11AE52C2800C69BDD /* LBAnimatableButton.swift in Sources */,
 				37185AFA1AE7D33D004D917B /* NSString+Utils.m in Sources */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		37CD6FE61AC9666F00856ABF /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				37CD6FF21AC9666F00856ABF /* main.m in Sources */,
 				37CD6FF01AC9666F00856ABF /* AppDelegate.m in Sources */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		37F7AC1D1AA9BF9200A4C6AA /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				37085D091AEA7787001D9A11 /* LockyPreviewItem.m in Sources */,
 				37317B9A1ADCF7A900A784DE /* LBAnimatableObject.swift in Sources */,
 				37976DEB1AF0D3890005266E /* SpecialButtonViewController.swift in Sources */,
+				378805AE2DD71CD1009CF180 /* PFLoadingView.m in Sources */,
+				378805AF2DD71CD1009CF180 /* PFPurchaseTableViewCell.m in Sources */,
+				378805B02DD71CD1009CF180 /* PFLogInView.m in Sources */,
+				378805B12DD71CD1009CF180 /* PFResources.m in Sources */,
+				378805B22DD71CD1009CF180 /* PFQueryTableViewController.m in Sources */,
+				378805B32DD71CD1009CF180 /* PFTextButton.m in Sources */,
+				378805B42DD71CD1009CF180 /* PFImageCache.m in Sources */,
+				378805B52DD71CD1009CF180 /* PFDismissButton.m in Sources */,
+				378805B62DD71CD1009CF180 /* PFActionButton.m in Sources */,
+				378805B72DD71CD1009CF180 /* PFTableViewCell.m in Sources */,
+				378805B82DD71CD1009CF180 /* PFUIAlertView.m in Sources */,
+				378805B92DD71CD1009CF180 /* PFProductTableViewController.m in Sources */,
+				378805BA2DD71CD1009CF180 /* PFLogInViewController.m in Sources */,
+				378805BB2DD71CD1009CF180 /* PFImageView.m in Sources */,
+				378805BC2DD71CD1009CF180 /* PFPrimaryButton.m in Sources */,
+				378805BD2DD71CD1009CF180 /* PFLocalization.m in Sources */,
+				378805BE2DD71CD1009CF180 /* PFActivityIndicatorCollectionReusableView.m in Sources */,
+				378805BF2DD71CD1009CF180 /* PFTextField.m in Sources */,
+				378805C02DD71CD1009CF180 /* PFSignUpViewController.m in Sources */,
+				378805C12DD71CD1009CF180 /* PFActivityIndicatorTableViewCell.m in Sources */,
+				378805C22DD71CD1009CF180 /* PFQueryCollectionViewController.m in Sources */,
+				378805C32DD71CD1009CF180 /* PFColor.m in Sources */,
+				378805C42DD71CD1009CF180 /* PFCollectionViewCell.m in Sources */,
+				378805C52DD71CD1009CF180 /* PFSignUpView.m in Sources */,
+				378805C62DD71CD1009CF180 /* PFImage.m in Sources */,
+				378805C72DD71CD1009CF180 /* PFRect.m in Sources */,
 				376B71411ACB458F00D2A5F9 /* TouchIDManager.m in Sources */,
 				371CFE691AB19B340061D84D /* UIView+Constraints.m in Sources */,
 				37F7ACB71AA9F3FE00A4C6AA /* NSData+Utils.m in Sources */,
@@ -2195,7 +2385,7 @@
 				371CFE631AB197460061D84D /* MBProgressHUD.m in Sources */,
 				37B9BAE21AD17D3D000A5FEF /* KeepAttribute.m in Sources */,
 				37B614261AE1095D0046E764 /* DemoViewController.m in Sources */,
-				371CFE5D1AB18D390061D84D /* ParseManager.m in Sources */,
+				371CFE5D1AB18D390061D84D /* ParseLockyManager.m in Sources */,
 				371CFE881AB1DCC70061D84D /* PairingViewController.m in Sources */,
 				37976DED1AF0D3F20005266E /* GraphicUtil.swift in Sources */,
 				37085D061AEA713C001D9A11 /* LockyPreviewViewController.m in Sources */,
@@ -2230,11 +2420,9 @@
 				37F7AC271AA9BF9200A4C6AA /* main.m in Sources */,
 				37CBD54A1AC4999E00196BB1 /* KeychainManager.m in Sources */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		37F7AC4A1AA9BFA800A4C6AA /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				379DEA921AD66EAA00B176EB /* ITSwitch.m in Sources */,
 				371CFE3F1AB04BC60061D84D /* OSX.m in Sources */,
@@ -2305,7 +2493,6 @@
 				371CFECE1AB4DFE00061D84D /* NSData+NSHash.m in Sources */,
 				37185B011AE8C976004D917B /* LockAnimationWindowController.m in Sources */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
@@ -2340,6 +2527,19 @@
 				37028CEE1DA86A9B00A4BE15 /* fr */,
 			);
 			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		3788059B2DD71CD1009CF180 /* ParseUI.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				378805952DD71CD1009CF180 /* en */,
+				378805962DD71CD1009CF180 /* de */,
+				378805972DD71CD1009CF180 /* fr */,
+				378805982DD71CD1009CF180 /* he */,
+				378805992DD71CD1009CF180 /* pt-BR */,
+				3788059A2DD71CD1009CF180 /* sv */,
+			);
+			name = ParseUI.strings;
 			sourceTree = "<group>";
 		};
 		37A4F6A01B7B21460097E432 /* Interface.storyboard */ = {
@@ -2394,7 +2594,7 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		37A4F6C11B7B21460097E432 /* Debug */ = {
+		37A4F6C11B7B21460097E432 /* Debug configuration for PBXNativeTarget "LockyWatch" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -2419,7 +2619,7 @@
 			};
 			name = Debug;
 		};
-		37A4F6C21B7B21460097E432 /* Release */ = {
+		37A4F6C21B7B21460097E432 /* Release configuration for PBXNativeTarget "LockyWatch" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -2443,7 +2643,7 @@
 			};
 			name = Release;
 		};
-		37A4F6C31B7B21460097E432 /* Debug */ = {
+		37A4F6C31B7B21460097E432 /* Debug configuration for PBXNativeTarget "LockyWatch Extension" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
@@ -2456,7 +2656,11 @@
 				ENABLE_TESTABILITY = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = "LockyWatch Extension/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.lunabee.sg.Locky.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
 				PROVISIONING_PROFILE = "";
@@ -2468,7 +2672,7 @@
 			};
 			name = Debug;
 		};
-		37A4F6C41B7B21460097E432 /* Release */ = {
+		37A4F6C41B7B21460097E432 /* Release configuration for PBXNativeTarget "LockyWatch Extension" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
@@ -2482,7 +2686,11 @@
 				ENABLE_BITCODE = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = "LockyWatch Extension/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.lunabee.sg.Locky.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
 				PROVISIONING_PROFILE = "";
@@ -2493,7 +2701,7 @@
 			};
 			name = Release;
 		};
-		37BC52E81AE5250200C69BDD /* Debug */ = {
+		37BC52E81AE5250200C69BDD /* Debug configuration for PBXNativeTarget "LockyToday" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = LockyToday/LockyToday.entitlements;
@@ -2509,7 +2717,11 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = LockyToday/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.lunabee.sg.Locky.LockyToday;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -2517,7 +2729,7 @@
 			};
 			name = Debug;
 		};
-		37BC52E91AE5250200C69BDD /* Release */ = {
+		37BC52E91AE5250200C69BDD /* Release configuration for PBXNativeTarget "LockyToday" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = LockyToday/LockyToday.entitlements;
@@ -2530,7 +2742,11 @@
 				ENABLE_BITCODE = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = LockyToday/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.lunabee.sg.Locky.LockyToday;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -2538,7 +2754,7 @@
 			};
 			name = Release;
 		};
-		37CD70051AC9667000856ABF /* Debug */ = {
+		37CD70051AC9667000856ABF /* Debug configuration for PBXNativeTarget "lockyhelper" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -2550,7 +2766,10 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = lockyhelper/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.lunabee.sg.lockyhelper;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
@@ -2558,7 +2777,7 @@
 			};
 			name = Debug;
 		};
-		37CD70061AC9667000856ABF /* Release */ = {
+		37CD70061AC9667000856ABF /* Release configuration for PBXNativeTarget "lockyhelper" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -2568,7 +2787,10 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = EPSKWEH82C;
 				INFOPLIST_FILE = lockyhelper/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.lunabee.sg.lockyhelper;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
@@ -2576,7 +2798,7 @@
 			};
 			name = Release;
 		};
-		37F7AC421AA9BF9200A4C6AA /* Debug */ = {
+		37F7AC421AA9BF9200A4C6AA /* Debug configuration for PBXProject "Locky" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -2624,7 +2846,7 @@
 			};
 			name = Debug;
 		};
-		37F7AC431AA9BF9200A4C6AA /* Release */ = {
+		37F7AC431AA9BF9200A4C6AA /* Release configuration for PBXProject "Locky" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -2666,9 +2888,8 @@
 			};
 			name = Release;
 		};
-		37F7AC451AA9BF9200A4C6AA /* Debug */ = {
+		37F7AC451AA9BF9200A4C6AA /* Debug configuration for PBXNativeTarget "Locky" */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FBCE2D9E65892583F44353B0 /* Pods-Locky.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Locky/Locky.entitlements;
@@ -2686,7 +2907,10 @@
 				);
 				GCC_PREFIX_HEADER = "Locky/Locky-Prefix.pch";
 				INFOPLIST_FILE = Locky/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				OTHER_CODE_SIGN_FLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.lunabee.sg.Locky;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2696,9 +2920,8 @@
 			};
 			name = Debug;
 		};
-		37F7AC461AA9BF9200A4C6AA /* Release */ = {
+		37F7AC461AA9BF9200A4C6AA /* Release configuration for PBXNativeTarget "Locky" */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7E777258FFEB86E8BC3D7006 /* Pods-Locky.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Locky/Locky.entitlements;
@@ -2721,7 +2944,10 @@
 					"PROD=1",
 				);
 				INFOPLIST_FILE = Locky/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				OTHER_CODE_SIGN_FLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.lunabee.sg.Locky;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2731,9 +2957,8 @@
 			};
 			name = Release;
 		};
-		37F7AC6C1AA9BFA900A4C6AA /* Debug */ = {
+		37F7AC6C1AA9BFA900A4C6AA /* Debug configuration for PBXNativeTarget "LockyMac" */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = ACB174FB2EEF66935077AEF0 /* Pods-LockyMac.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -2751,7 +2976,10 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = LockyMac/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
 				OTHER_LDFLAGS = (
 					"-Wl,-rpath,@loader_path/../Frameworks",
 					"$(inherited)",
@@ -2765,9 +2993,8 @@
 			};
 			name = Debug;
 		};
-		37F7AC6D1AA9BFA900A4C6AA /* Release */ = {
+		37F7AC6D1AA9BFA900A4C6AA /* Release configuration for PBXNativeTarget "LockyMac" */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1A3163016F30F01B10618823 /* Pods-LockyMac.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -2787,7 +3014,10 @@
 					"PROD=1",
 				);
 				INFOPLIST_FILE = LockyMac/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
 				OTHER_LDFLAGS = (
 					"-Wl,-rpath,@loader_path/../Frameworks",
 					"$(inherited)",
@@ -2806,67 +3036,120 @@
 		37A4F6C51B7B21460097E432 /* Build configuration list for PBXNativeTarget "LockyWatch Extension" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				37A4F6C31B7B21460097E432 /* Debug */,
-				37A4F6C41B7B21460097E432 /* Release */,
+				37A4F6C31B7B21460097E432 /* Debug configuration for PBXNativeTarget "LockyWatch Extension" */,
+				37A4F6C41B7B21460097E432 /* Release configuration for PBXNativeTarget "LockyWatch Extension" */,
 			);
-			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 		37A4F6C71B7B21460097E432 /* Build configuration list for PBXNativeTarget "LockyWatch" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				37A4F6C11B7B21460097E432 /* Debug */,
-				37A4F6C21B7B21460097E432 /* Release */,
+				37A4F6C11B7B21460097E432 /* Debug configuration for PBXNativeTarget "LockyWatch" */,
+				37A4F6C21B7B21460097E432 /* Release configuration for PBXNativeTarget "LockyWatch" */,
 			);
-			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 		37BC52EA1AE5250200C69BDD /* Build configuration list for PBXNativeTarget "LockyToday" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				37BC52E81AE5250200C69BDD /* Debug */,
-				37BC52E91AE5250200C69BDD /* Release */,
+				37BC52E81AE5250200C69BDD /* Debug configuration for PBXNativeTarget "LockyToday" */,
+				37BC52E91AE5250200C69BDD /* Release configuration for PBXNativeTarget "LockyToday" */,
 			);
-			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 		37CD70041AC9667000856ABF /* Build configuration list for PBXNativeTarget "lockyhelper" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				37CD70051AC9667000856ABF /* Debug */,
-				37CD70061AC9667000856ABF /* Release */,
+				37CD70051AC9667000856ABF /* Debug configuration for PBXNativeTarget "lockyhelper" */,
+				37CD70061AC9667000856ABF /* Release configuration for PBXNativeTarget "lockyhelper" */,
 			);
-			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 		37F7AC1C1AA9BF9200A4C6AA /* Build configuration list for PBXProject "Locky" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				37F7AC421AA9BF9200A4C6AA /* Debug */,
-				37F7AC431AA9BF9200A4C6AA /* Release */,
+				37F7AC421AA9BF9200A4C6AA /* Debug configuration for PBXProject "Locky" */,
+				37F7AC431AA9BF9200A4C6AA /* Release configuration for PBXProject "Locky" */,
 			);
-			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 		37F7AC441AA9BF9200A4C6AA /* Build configuration list for PBXNativeTarget "Locky" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				37F7AC451AA9BF9200A4C6AA /* Debug */,
-				37F7AC461AA9BF9200A4C6AA /* Release */,
+				37F7AC451AA9BF9200A4C6AA /* Debug configuration for PBXNativeTarget "Locky" */,
+				37F7AC461AA9BF9200A4C6AA /* Release configuration for PBXNativeTarget "Locky" */,
 			);
-			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 		37F7AC6B1AA9BFA900A4C6AA /* Build configuration list for PBXNativeTarget "LockyMac" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				37F7AC6C1AA9BFA900A4C6AA /* Debug */,
-				37F7AC6D1AA9BFA900A4C6AA /* Release */,
+				37F7AC6C1AA9BFA900A4C6AA /* Debug configuration for PBXNativeTarget "LockyMac" */,
+				37F7AC6D1AA9BFA900A4C6AA /* Release configuration for PBXNativeTarget "LockyMac" */,
 			);
-			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		3788053C2DD71406009CF180 /* XCRemoteSwiftPackageReference "Parse-SDK-iOS-OSX" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/parse-community/Parse-SDK-iOS-OSX";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.1.1;
+			};
+		};
+		378805412DD7181F009CF180 /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImage.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.21.0;
+			};
+		};
+		37ADB36A2DD8B782006E3CFE /* XCRemoteSwiftPackageReference "Sparkle" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/sparkle-project/Sparkle";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.7.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		3788053D2DD71406009CF180 /* ParseLiveQuery */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3788053C2DD71406009CF180 /* XCRemoteSwiftPackageReference "Parse-SDK-iOS-OSX" */;
+			productName = ParseLiveQuery;
+		};
+		3788053F2DD71406009CF180 /* ParseObjC */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3788053C2DD71406009CF180 /* XCRemoteSwiftPackageReference "Parse-SDK-iOS-OSX" */;
+			productName = ParseObjC;
+		};
+		378805422DD7181F009CF180 /* SDWebImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 378805412DD7181F009CF180 /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImage;
+		};
+		37ADB3602DD877FB006E3CFE /* ParseLiveQuery */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3788053C2DD71406009CF180 /* XCRemoteSwiftPackageReference "Parse-SDK-iOS-OSX" */;
+			productName = ParseLiveQuery;
+		};
+		37ADB3622DD877FB006E3CFE /* ParseObjC */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3788053C2DD71406009CF180 /* XCRemoteSwiftPackageReference "Parse-SDK-iOS-OSX" */;
+			productName = ParseObjC;
+		};
+		37ADB36B2DD8B782006E3CFE /* Sparkle */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 37ADB36A2DD8B782006E3CFE /* XCRemoteSwiftPackageReference "Sparkle" */;
+			productName = Sparkle;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 37F7AC191AA9BF9200A4C6AA /* Project object */;
 }

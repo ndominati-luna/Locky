@@ -7,6 +7,7 @@
 //
 
 #import "ReportDetailTableViewController.h"
+@import SDWebImage;
 
 @interface ReportDetailTableViewController ()
 
@@ -22,10 +23,8 @@
 	[self applyBackground];
 	[self configureNavigationBar];
 	
-	PFFile *image = self.report[INTRUSION_PHOTO_KEY];
-	[self.imageView setImage:[UIImage imageNamed:@"breakinReportPlaceholder"]];
-	[self.imageView setFile:image];
-	[self.imageView loadInBackground];
+	PFFileObject *image = self.report[INTRUSION_PHOTO_KEY];
+  [self.imageView sd_setImageWithURL:[NSURL URLWithString:image.url] placeholderImage:[UIImage imageNamed:@"breakinReportPlaceholder"] options:SDWebImageRetryFailed];
 	
 	[self.dateLabel setText:[self.report[INTRUSION_DATE_KEY] fullDayMonthYearHourDateString]];
 	

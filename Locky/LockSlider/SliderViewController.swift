@@ -92,7 +92,7 @@ class SliderViewController: UIViewController {
         
         if  animated {
             self.unlockGesture.isEnabled = false
-            UIView.transition(with: self.slider, duration: 0.3, options: UIViewAnimationOptions.transitionCrossDissolve, animations: { () -> Void in
+            UIView.transition(with: self.slider, duration: 0.3, options: UIView.AnimationOptions.transitionCrossDissolve, animations: { () -> Void in
                 self.slider.image = UIImage(named: "sliderUnlockButton")
                 }) { (completed) -> Void in
                     self.unlockGesture.isEnabled = true
@@ -119,7 +119,7 @@ class SliderViewController: UIViewController {
         
         if  animated {
             self.unlockGesture.isEnabled = false
-            UIView.transition(with: self.slider, duration: 0.3, options: UIViewAnimationOptions.transitionCrossDissolve, animations: { () -> Void in
+            UIView.transition(with: self.slider, duration: 0.3, options: UIView.AnimationOptions.transitionCrossDissolve, animations: { () -> Void in
                 self.slider.image = UIImage(named: "sliderLockButton")
                 }) { (completed) -> Void in
                     self.unlockGesture.isEnabled = true
@@ -143,7 +143,7 @@ class SliderViewController: UIViewController {
         
         recognizer.isEnabled = false
         
-        UIView.animate(withDuration: 0.4, delay: 0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.5, options: UIViewAnimationOptions(), animations: { () -> Void in
+        UIView.animate(withDuration: 0.4, delay: 0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.5, options: UIView.AnimationOptions(), animations: { () -> Void in
             self.moveSlider(initialPosition ? 0 : self.maxTranslation() )
             self.slider.alpha = initialPosition ? 1 : alphaForDisable
             
@@ -192,11 +192,11 @@ class SliderViewController: UIViewController {
         
     }
     
-    func swipeHandler(_ recognizer : UIPanGestureRecognizer) {
+    @objc func swipeHandler(_ recognizer : UIPanGestureRecognizer) {
         
         let translation = recognizer.translation(in: self.view)
         
-        if recognizer.state == UIGestureRecognizerState.ended || recognizer.state == UIGestureRecognizerState.cancelled{
+        if recognizer.state == UIGestureRecognizer.State.ended || recognizer.state == UIGestureRecognizer.State.cancelled{
             if translation.x >= maxTranslation()  {
                 changeState()
             }

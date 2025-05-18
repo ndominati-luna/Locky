@@ -99,7 +99,7 @@
 	[[PairingProcessManager sharedInstance] persistPairing];
 	[NSUserDefaults updateTodayExtensionDataWithStatus:[[LockyManager sharedInstance] isMacLocked]?TODAY_STATUS_LOCKED:TODAY_STATUS_UNLOCKED];
 	[[NCWidgetController widgetController] setHasContent:YES forWidgetWithBundleIdentifier:TODAY_BUNDLE_ID];
-	[[ParseManager sharedInstance] addPairingInformationToParse];
+	[[ParseLockyManager sharedInstance] addPairingInformationToParse];
 	[self.nextButton setAnimProgress:1 animated:YES];
 	[[LockyManager sharedInstance] playNextSound];
 }
@@ -234,7 +234,7 @@
 	[self.pairingViewController.macImageView setHidden:YES];
 	[self.congratsViewController animateComputerAndShowViewWithCompletion:^{
 		[self.pairingViewController.macImageView setHidden:NO];
-		[[ParseManager sharedInstance] addPairingInformationToParse];
+		[[ParseLockyManager sharedInstance] addPairingInformationToParse];
 	}];
 }
 

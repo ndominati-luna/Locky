@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <ParseUI/ParseUI.h>
 #import <QuickLook/QuickLook.h>
 #import "ReportDetailTableViewController.h"
+#import "PFQueryTableViewController.h"
 
 @interface BreakInReportsTableViewController : PFQueryTableViewController <ReportDetailTableViewControllerDelegate, QLPreviewControllerDataSource, QLPreviewControllerDelegate>
 

@@ -41,7 +41,8 @@
 + (NSURL *)userBackgroundURL;
 
 - (CGDirectDisplayID)getMainScreen;
-- (NSImage *)screenshot;
+
+- (void)captureScreenshotWithCompletion: (void (^_Nullable)(NSImage * _Nullable, NSError * _Nullable))completion;
 
 + (void)showAlertWithWindowTitle:(NSString *)title title:(NSString *)title message:(NSString *)message style:(NSAlertStyle)alertStyle;
 + (NSDictionary *)classPropsFor:(Class)klass;

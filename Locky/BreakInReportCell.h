@@ -6,7 +6,9 @@
 //  Copyright (c) 2015 Lunabee Pte Ltd. All rights reserved.
 //
 
-#import <ParseUI/ParseUI.h>
+#import "PFtableViewCell.h"
+#import "PFImageView.h"
+
 
 @interface BreakInReportCell : PFTableViewCell
 

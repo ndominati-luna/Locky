@@ -796,7 +796,7 @@ static const CGFloat kPadding = 4.f;
 		detailsLabel.textColor = self.detailsLabelColor;
 	} else if ([keyPath isEqualToString:@"progress"]) {
 		if ([indicator respondsToSelector:@selector(setProgress:)]) {
-			[(id)indicator setProgress:progress];
+			[(id)indicator setProgress:progress animated:NO];
 		}
 		return;
 	}

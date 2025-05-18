@@ -18,7 +18,7 @@
 #import "UIView+Utils.h"
 #import "UIImage+ImageEffects.h"
 #import "UIImage+Utils.h"
-#import "ParseManager.h"
+#import "ParseLockyManager.h"
 #import "UIViewController+Utils.h"
 #import "UIWindow+Utils.h"
 #import "UIView+Constraints.h"

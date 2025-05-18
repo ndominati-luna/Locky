@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Lunabee Pte Ltd. All rights reserved.
 //
 
-@import Parse;
+@import ParseCore;
 
 @interface ParseMacManager : NSObject
 

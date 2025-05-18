@@ -152,11 +152,11 @@ class GlanceController: WKInterfaceController {
 		}
 	}
 	
-	func didReceiveApplicationContext() {
+	@objc func didReceiveApplicationContext() {
 		reloadAppData()
 	}
 	
-	func didReceiveComputerImage() {
+	@objc func didReceiveComputerImage() {
 		reloadImage()
 		updateComputerImage()
 		
@@ -165,7 +165,7 @@ class GlanceController: WKInterfaceController {
 		}
 	}
 	
-	func didReceiveHDComputerImage() {
+	@objc func didReceiveHDComputerImage() {
 		reloadImage()
 		updateComputerImage()
 		

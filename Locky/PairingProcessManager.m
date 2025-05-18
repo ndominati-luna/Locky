@@ -45,7 +45,7 @@
 	[NSUserDefaults saveUnlockOnlyFromAW:@(NO)];
 	[NSUserDefaults saveTutoDone:@(NO)];
 	
-	[[ParseManager sharedInstance] updateParsePushNotificationChannel:[LocalDevice parseChannelName] withDeviceTokenData:nil];
+	[[ParseLockyManager sharedInstance] updateParsePushNotificationChannel:[LocalDevice parseChannelName] withDeviceTokenData:nil];
 	
 	[[(LockyManager *)[LockyManager sharedInstance] peripheralManager] setNeedToReinstantiateCharacteristics:YES];
 }
@@ -65,7 +65,7 @@
 {
 	if (self.macInfo)
 	{
-		[[ParseManager sharedInstance] updateComputerInfoWithID:self.macInfo[INFO_KEY_UUID] lastSyncToken:nil withCompletion:^(NSDictionary *info, NSError *error) {
+		[[ParseLockyManager sharedInstance] updateComputerInfoWithID:self.macInfo[INFO_KEY_UUID] lastSyncToken:nil withCompletion:^(NSDictionary *info, NSError *error) {
 			
 			// We test first if the pairing was not cancelled.
 			if (self.macInfo)

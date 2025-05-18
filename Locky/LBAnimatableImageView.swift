@@ -9,7 +9,7 @@
 import UIKit
 import GLKit
 
-@IBDesignable class LBAnimatableImageView: UIImageView , LBAnimatableObject{
+@IBDesignable @objcMembers class LBAnimatableImageView: UIImageView , LBAnimatableObject{
 
     // MARK: Inspectable properties ******************************
     @IBInspectable var shouldAnimateOnViewDidLoad: Bool = false    { didSet{}}

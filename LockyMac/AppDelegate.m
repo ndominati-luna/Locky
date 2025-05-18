@@ -16,17 +16,9 @@
 @implementation AppDelegate
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
-	[self initHockeyApp];
 	[[NSUserNotificationCenter defaultUserNotificationCenter] setDelegate:self];
 	[[ParseMacManager sharedInstance] initParse];
 	[[LockyMacManager sharedInstance] startLocky];
-}
-
-- (void)initHockeyApp
-{
-	[[BITHockeyManager sharedHockeyManager] configureWithIdentifier:HOCKEY_APP_OSX_APPLICATIPON_ID delegate:self];
-	[[BITHockeyManager sharedHockeyManager].crashManager setAutoSubmitCrashReport:YES];
-	[[BITHockeyManager sharedHockeyManager] startManager];
 }
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification {

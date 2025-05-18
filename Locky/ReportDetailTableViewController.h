@@ -7,8 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-@import Parse;
-@import ParseUI;
+@import ParseCore;
 
 @protocol ReportDetailTableViewControllerDelegate <NSObject>
 
@@ -19,7 +18,7 @@
 @interface ReportDetailTableViewController : UITableViewController
 
 @property (nonatomic, strong) PFObject *report;
-@property (nonatomic, strong) IBOutlet PFImageView *imageView;
+@property (nonatomic, strong) IBOutlet UIImageView *imageView;
 @property (strong, nonatomic) IBOutlet UILabel *dateLabel;
 @property (strong, nonatomic) IBOutlet UITableViewCell *deleteCell;
 @property (nonatomic) BOOL openedFromNotification;

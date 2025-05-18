@@ -31,7 +31,7 @@ class OnBoardingDetailController: UIViewController {
 		self.view.translate()
 		
 		if isOpenedFromSettings {
-			animatableButton?.setTitle(NSLocalizedString("Go back to Locky", comment: ""), for:UIControlState())
+            animatableButton?.setTitle(NSLocalizedString("Go back to Locky", comment: ""), for:UIControl.State())
 			
 			if let eyesImage = thiefEyes, let _ = intrudersSwitch, let _ = intrudersLabel {
 				eyesImage.imageColor = UIColor.darkGray

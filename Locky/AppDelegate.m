@@ -8,7 +8,7 @@
 
 #import "AppDelegate.h"
 #import "LocalDevice.h"
-@import Parse;
+@import ParseCore;
 #import "WatchManagerIOS.h"
 
 @interface AppDelegate ()
@@ -29,16 +29,15 @@
 
 - (BOOL)application:(UIApplication *)application willFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-	[self initHockeyApp];
 	[[WatchManagerIOS sharedInstance] initSession];
-	[[ParseManager sharedInstance] initParse];
+	[[ParseLockyManager sharedInstance] initParse];
 	[[UILabel appearanceWhenContainedInInstancesOfClasses:@[[UITableViewHeaderFooterView class]]] setTextColor:[UIColor whiteColor]];
 	
 	NSDictionary *notificationPayload = launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey];
 	
 	if ([notificationPayload[@"t"] isEqualToString:@"bir"])
 	{
-		[[ParseManager sharedInstance] setBreakInReportToDisplayDate:[NSDate dateWithTimeIntervalSince1970:[notificationPayload[@"d"] doubleValue]]];
+		[[ParseLockyManager sharedInstance] setBreakInReportToDisplayDate:[NSDate dateWithTimeIntervalSince1970:[notificationPayload[@"d"] doubleValue]]];
 	}
 	
 	NSString *peripheralIdentifier = [launchOptions[UIApplicationLaunchOptionsBluetoothPeripheralsKey] firstObject];
@@ -82,12 +81,12 @@
 	
 	if ([[LockyManager sharedInstance] isDevicePaired])
 	{
-		if ([[ParseManager sharedInstance] breakInReportToDisplayDate])
+		if ([[ParseLockyManager sharedInstance] breakInReportToDisplayDate])
 		{
 			[NSNotificationCenter postBreakInReportReceivedNotification];
 		}
 		[[LockyManager sharedInstance] performWaitingUnlockRequestIfAny];
-		[[ParseManager sharedInstance] updateComputerInfoWithID:[NSUserDefaults pairedMacInfo][INFO_KEY_UUID] lastSyncToken:nil withCompletion:^(NSDictionary *info, NSError *error) {
+		[[ParseLockyManager sharedInstance] updateComputerInfoWithID:[NSUserDefaults pairedMacInfo][INFO_KEY_UUID] lastSyncToken:nil withCompletion:^(NSDictionary *info, NSError *error) {
 			// We test if the received info dictionary is for the currently paired mac.
 			if ([info[INFO_KEY_UUID] isEqualToString:[NSUserDefaults pairedMacInfo][INFO_KEY_UUID]])
 			{
@@ -123,7 +122,7 @@
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
 {
 	NSLog(@"Locky did register for remote notifications");
-	[[ParseManager sharedInstance] updateParsePushNotificationChannel:[[LockyManager sharedInstance] isDevicePaired]?[LocalDevice parseChannelName]:nil withDeviceTokenData:deviceToken];
+	[[ParseLockyManager sharedInstance] updateParsePushNotificationChannel:[[LockyManager sharedInstance] isDevicePaired]?[LocalDevice parseChannelName]:nil withDeviceTokenData:deviceToken];
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
@@ -131,7 +130,7 @@
 	NSLog(@"Remote notification received");
 	if ([userInfo[@"t"] isEqualToString:@"bir"])
 	{
-		[[ParseManager sharedInstance] setBreakInReportToDisplayDate:[NSDate dateWithTimeIntervalSince1970:[userInfo[@"d"] doubleValue]]];
+		[[ParseLockyManager sharedInstance] setBreakInReportToDisplayDate:[NSDate dateWithTimeIntervalSince1970:[userInfo[@"d"] doubleValue]]];
 	}
 	
 	if ([application applicationState] == UIApplicationStateActive)
@@ -140,15 +139,6 @@
 	}
 	
 	completionHandler(UIBackgroundFetchResultNewData);
-}
-
-- (void)initHockeyApp
-{
-#if !TARGET_IPHONE_SIMULATOR
-	[[BITHockeyManager sharedHockeyManager] configureWithIdentifier:HOCKEY_APP_IOS_APPLICATION_ID delegate:self];
-	[[BITHockeyManager sharedHockeyManager].crashManager setCrashManagerStatus: BITCrashManagerStatusAutoSend];
-	[[BITHockeyManager sharedHockeyManager] startManager];
-#endif
 }
 
 @end

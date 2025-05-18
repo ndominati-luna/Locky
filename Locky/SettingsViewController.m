@@ -167,7 +167,7 @@
 {
 	NSString *themeName = [LocalDevice availableSounds][[NSUserDefaults soundTheme]][SOUND_THEME_NAME_KEY];
 	[self.soundsCell.detailTextLabel setText:NSLocalizedString(themeName, nil)];
-	[[ParseManager sharedInstance] addPairingInformationToParse];
+	[[ParseLockyManager sharedInstance] addPairingInformationToParse];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -451,7 +451,7 @@
 {
 	[TouchIDManager promptTouchIDWithMessage:NSLocalizedString(@"Authenticate to change this setting", nil) successBlock:^{
 		[NSUserDefaults saveUseTouchID:@(sender.isOn)];
-		[[ParseManager sharedInstance] addPairingInformationToParse];
+		[[ParseLockyManager sharedInstance] addPairingInformationToParse];
 	} andFailureBlock:^(BOOL authenticationFailed) {
 		[self.touchIDSwitch setOn:!self.touchIDSwitch.isOn];
 	}];

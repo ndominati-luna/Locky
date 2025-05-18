@@ -71,7 +71,7 @@ extension  UIView  {
     class func setAnimationProgressOnObject( _ animatableObject : LBAnimatableObject , progress : CGFloat , animated : Bool , delay : Float) {
         if   animated {
             
-            UIView.animate(withDuration: TimeInterval(animatableObject.aDuration), delay: TimeInterval(animatableObject.delay) + TimeInterval(delay) , usingSpringWithDamping: animatableObject.dumping, initialSpringVelocity: animatableObject.initialVelocity, options: UIViewAnimationOptions(), animations: { () -> Void in
+            UIView.animate(withDuration: TimeInterval(animatableObject.aDuration), delay: TimeInterval(animatableObject.delay) + TimeInterval(delay) , usingSpringWithDamping: animatableObject.dumping, initialSpringVelocity: animatableObject.initialVelocity, options: UIView.AnimationOptions(), animations: { () -> Void in
                 animatableObject.setAnimProgress(progress, animated: false)
                 
                 }, completion: { (succeed) -> Void in

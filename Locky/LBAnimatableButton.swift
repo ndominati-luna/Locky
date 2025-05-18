@@ -9,7 +9,7 @@
 import UIKit
 import GLKit
 
-@IBDesignable class LBAnimatableButton: UIButton , LBAnimatableObject {
+@IBDesignable @objcMembers class LBAnimatableButton: UIButton , LBAnimatableObject {
 
     // MARK: Inspectable properties ******************************
 
