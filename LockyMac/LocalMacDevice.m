@@ -130,14 +130,22 @@
     return [bitmapRep representationUsingType:NSPNGFileType properties:@{}];
 }
 
-+ (NSData *)localDeviceBackground
++ (void)localDeviceBackground: (void (^_Nullable)(NSData * _Nullable))completion
 {
-	NSImage *background = [NSImage userBackgroundImage];
-	
-	NSData *data = [background TIFFRepresentation];
-	NSBitmapImageRep *bitmapRep = [[NSBitmapImageRep alloc] initWithData:data];
-	
-	return [bitmapRep representationUsingType:NSJPEGFileType properties:@{NSImageCompressionFactor:@(0.5)}];
+  [[OSX sharedInstance] captureScreenshotWithCompletion:^(NSImage *image, NSError *error) {
+    NSImageView *finalImage = [[NSImageView alloc] initWithFrame:NSMakeRect(0, 0, 192, 120)];
+
+    [finalImage setImageScaling:NSImageScaleAxesIndependently];
+    [finalImage setImage:image];
+
+    NSImage *backgroundImage = [NSImage createImageFromView:finalImage];
+
+    NSData *data = [backgroundImage TIFFRepresentation];
+    NSBitmapImageRep *bitmapRep = [[NSBitmapImageRep alloc] initWithData:data];
+
+    NSData *imageData = [bitmapRep representationUsingType:NSJPEGFileType properties:@{NSImageCompressionFactor:@(0.5)}];
+    completion(imageData);
+  }];
 }
 
 @end

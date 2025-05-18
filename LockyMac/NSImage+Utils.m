@@ -63,8 +63,8 @@
 	[OSX runCommand:getPhotoCommandLine];
 	
 	NSImage *image = [[NSImage alloc] initWithContentsOfFile:photoPath];
-	NSImageView *finalImage = [[NSImageView alloc] initWithFrame:NSMakeRect(0, 0, 150, 150)];
-	
+	NSImageView *finalImage = [[NSImageView alloc] initWithFrame:NSMakeRect(0, 0, 300, 300)];
+
 	[finalImage setImage:image];
 	
 	NSImage *userImage = [NSImage createImageFromView:finalImage];

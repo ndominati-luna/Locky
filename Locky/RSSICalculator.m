@@ -111,7 +111,6 @@
 			}
 			else
 			{
-				[[LockyMacManager sharedInstance] hideLoginScreenBecauseIphoneIsTooFarAgain];
 				[self stopUnlockTimer];
 			}
 		}

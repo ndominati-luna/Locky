@@ -50,7 +50,6 @@
 
 - (void)cancelPairing;
 - (void)requestPasswordToTheiPhone;
-- (void)hideLoginScreenBecauseIphoneIsTooFarAgain;
 
 - (NSNumber *)currentConnectedPeripheralRSSIValue;
 - (void)sendNotificationWithTitle:(NSString *)title andMessage:(NSString *)message;

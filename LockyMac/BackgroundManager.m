@@ -23,9 +23,8 @@
 	[self.presentedItemOperationQueue setMaxConcurrentOperationCount:100];
 	
 	NSString *path = [NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-	path = [path stringByAppendingPathComponent:@"Application Support"];
-	path = [path stringByAppendingPathComponent:@"Dock"];
-	
+	path = [path stringByAppendingPathComponent:@"Application Support/com.apple.wallpaper/Store"];
+
 	_presentedItemURL = [NSURL fileURLWithPath:path];
 	
 	[NSFileCoordinator addFilePresenter:self];
@@ -41,31 +40,19 @@
 
 - (void)presentedSubitemDidChangeAtURL:(NSURL *)url
 {
-	if ([[url path] contains:@"desktoppicture.db"])
+	if ([[url path] contains:@"Index.plist"] && ![[LockyMacManager sharedInstance] isMacLocked])
 	{
-		if ([self hasBackgroundChanged])
-		{
-			NSString *backgroundPath = [[OSX userBackgroundURL] path];
-			
-			[self.delegate backgroundHasChangedWithCompletion:^(BOOL succeed) {
-				if (succeed)
-				{
-					[NSUserDefaults saveBackgroundURLPath:backgroundPath];
-					if ([[LockyMacManager sharedInstance] isIphoneConnected])
-					{
-						NSDictionary *dict = @{MESSAGE_TYPE_KEY:MESSAGE_TYPE_KEY_PARSE_UPDATE};
-						[[LockyMacManager sharedInstance] sendMessage:[dict jsonString]];
-					}
-				}
-			}];
-		}
+    [self.delegate backgroundHasChangedWithCompletion:^(BOOL succeed) {
+      if (succeed)
+      {
+        if ([[LockyMacManager sharedInstance] isIphoneConnected])
+        {
+          NSDictionary *dict = @{MESSAGE_TYPE_KEY:MESSAGE_TYPE_KEY_PARSE_UPDATE};
+          [[LockyMacManager sharedInstance] sendMessage:[dict jsonString]];
+        }
+      }
+    }];
 	}
-}
-
-- (BOOL)hasBackgroundChanged
-{
-	NSString *currentBackgroundURLPath = [[OSX userBackgroundURL] path];
-	return ![[NSUserDefaults backgroundURLPath] isEqualToString:currentBackgroundURLPath];
 }
 
 - (void)dealloc

@@ -23,6 +23,6 @@
 
 + (NSData *)localDeviceUserPicture;
 + (NSData *)localFullQualityDeviceUserPicture;
-+ (NSData *)localDeviceBackground;
++ (void)localDeviceBackground: (void (^_Nullable)(NSData * _Nullable))completion;
 
 @end

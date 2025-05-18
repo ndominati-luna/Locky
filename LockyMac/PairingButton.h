@@ -10,6 +10,7 @@
 
 @interface PairingButton : NSButton
 
+- (void)updateButtonSize;
 - (void)show;
 - (void)hide;
 

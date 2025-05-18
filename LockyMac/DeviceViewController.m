@@ -35,7 +35,9 @@
 	
 	cancelAttributedString = [[NSAttributedString alloc] initWithString:NSLocalizedString(@"Not this one", nil) attributes:@{NSFontAttributeName:self.cancelButton.font,NSForegroundColorAttributeName:[NSColor lightGrayColor],NSParagraphStyleAttributeName:rectangleStyle}];
 	[self.cancelButton setAttributedAlternateTitle:cancelAttributedString];
-	
+
+  
+
 	[self.view translateView];
 }
 

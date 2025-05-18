@@ -9,8 +9,6 @@
 #import "LockyMacManager.h"
 #import "FirstViewController.h"
 #import "RSAMacKeysManager.h"
-#import "LoginScreenWindowController.h"
-#import "LoginScreenInitializingBluetoothWindowController.h"
 #import "StatusBarManager.h"
 #import <QuartzCore/QuartzCore.h>
 #import "LocalMacDevice.h"
@@ -23,9 +21,6 @@
 
 @property (nonatomic, strong) LockyWindowController *lockyWindowController;
 @property (nonatomic, strong) BackgroundManager *backgroundManager;
-
-@property (nonatomic, strong) LoginScreenWindowController *loginScreenWindowController;
-@property (nonatomic, strong) LoginScreenInitializingBluetoothWindowController *loginScreenInitializingBluetoothWindowController;
 
 @property (nonatomic, strong) StatusBarManager *statusBarManager;
 
@@ -459,9 +454,6 @@ CGEventRef myCGEventCallback(CGEventTapProxy proxy, CGEventType type, CGEventRef
 		[self sendMessage:[dict jsonString]];
 	}
 	
-	[self hideLoginScreenWindow];
-	[self hideInitializingWindow];
-	
 	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
 		[NSThread sleepForTimeInterval:2];
 		dispatch_async(dispatch_get_main_queue(), ^{
@@ -489,9 +481,6 @@ CGEventRef myCGEventCallback(CGEventTapProxy proxy, CGEventType type, CGEventRef
 		NSDictionary *dict = @{MESSAGE_TYPE_KEY:MESSAGE_TYPE_KEY_MAC_IS_LOCKED};
 		[self sendMessage:[dict jsonString]];
 	}
-	
-	[self hideLoginScreenWindow];
-	[self hideInitializingWindow];
 	
 	self.isMacSleeping = YES;
 	self.canDetectIntrusion = NO;
@@ -589,104 +578,6 @@ CGEventRef myCGEventCallback(CGEventTapProxy proxy, CGEventType type, CGEventRef
 	NSLog(@"SCREEN LOCK SHOWN");
 	self.isPasswordPromptVisible = YES;
 	[OSX wakeUp];
-	
-	if ([[LockyMacManager sharedInstance] isIphoneConnected] && self.canUnlock)
-	{
-		NSLog(@"Showing unlock window");
-		[self showLoginScreenWindow];
-	}
-	else if (!self.canUnlock)
-	{
-		// If the bluetooth central is ON, show "Looking for Locky devices".
-		// If the bluetooth central is OFF, show "Mac initializing Bluetooth".
-		if (self.centralManager.bluetoothIsWorking) {
-			if (self.isIphoneConnected) {
-				[self showiPhoneConnectedButTooFarWindow];
-			} else {
-				[self showLookingForDevicesWindow];
-			}
-		} else {
-			[self showInitializingWindow];
-		}
-	}
-}
-
-- (void)showInitializingWindow
-{
-	if (!self.loginScreenInitializingBluetoothWindowController)
-	{
-		self.loginScreenInitializingBluetoothWindowController = [[LoginScreenInitializingBluetoothWindowController alloc] init];
-		[self.loginScreenInitializingBluetoothWindowController showWindow:self];
-	}
-	else
-	{
-		[self.loginScreenInitializingBluetoothWindowController.window makeKeyAndOrderFront:nil];
-	}
-}
-
-- (void)showLookingForDevicesWindow
-{
-	[self showTextIndicationWindowWithText:@"Looking for Locky iPhones..."];
-}
-
-- (void)showiPhoneConnectedButTooFarWindow
-{
-	[self showTextIndicationWindowWithText:@"iPhone detected but too far"];
-}
-
-- (void)showUseYourAppleWatchToUnlockWindow
-{
-	[self showTextIndicationWindowWithText:@"Unlock using your Apple Watch"];
-}
-
-- (void)showTextIndicationWindowWithText:(NSString *)text {
-	if (!self.loginScreenInitializingBluetoothWindowController)
-	{
-		self.loginScreenInitializingBluetoothWindowController = [[LoginScreenInitializingBluetoothWindowController alloc] initWithText:NSLocalizedString(text, nil)];
-		[self.loginScreenInitializingBluetoothWindowController showWindow:self];
-	}
-	else
-	{
-		[self.loginScreenInitializingBluetoothWindowController setDescriptionText:NSLocalizedString(text, nil)];
-		[self.loginScreenInitializingBluetoothWindowController.window makeKeyAndOrderFront:nil];
-	}
-}
-
-- (void)hideInitializingWindow
-{
-	[self.loginScreenInitializingBluetoothWindowController.window orderOut:nil];
-	[self.loginScreenInitializingBluetoothWindowController close];
-	self.loginScreenInitializingBluetoothWindowController = nil;
-}
-
-- (void)showLoginScreenWindow
-{
-	if ([[NSUserDefaults unlockOnlyFromAW] boolValue]) {
-		[self showUseYourAppleWatchToUnlockWindow];
-	} else {
-		[self hideInitializingWindow];
-		if (!self.loginScreenWindowController) {
-			self.loginScreenWindowController = [[LoginScreenWindowController alloc] init];
-			[self.loginScreenWindowController showWindow:self];
-			if ([[NSUserDefaults unlockAutomatically] boolValue]) {
-				[self requestPasswordToTheiPhone];
-			}
-		} else {
-			[self.loginScreenWindowController.window makeKeyAndOrderFront:nil];
-		}
-	}
-}
-
-- (void)switchToUnlockOnlyWithAppleWatchMode:(BOOL)onlyAppleWatchMode {
-	if (self.isMacLocked && self.canUnlock) {
-		if (onlyAppleWatchMode) {
-			[self hideLoginScreenWindow];
-			[self showUseYourAppleWatchToUnlockWindow];
-		} else {
-			[self hideInitializingWindow];
-			[self showLoginScreenWindow];
-		}
-	}
 }
 
 - (void)requestPasswordToTheiPhone
@@ -699,24 +590,7 @@ CGEventRef myCGEventCallback(CGEventTapProxy proxy, CGEventType type, CGEventRef
 {
 	NSLog(@"SCREEN LOCK HIDDEN");
 	self.isPasswordPromptVisible = NO;
-	[self hideLoginScreenWindow];
-	[self hideInitializingWindow];
 }
-
-- (void)hideLoginScreenBecauseIphoneIsTooFarAgain
-{
-	self.canUnlock = NO;
-	[self hideLoginScreenWindow];
-	[self showiPhoneConnectedButTooFarWindow];
-}
-
-- (void)hideLoginScreenWindow
-{
-	[self.loginScreenWindowController.window orderOut:nil];
-	[self.loginScreenWindowController close];
-	self.loginScreenWindowController = nil;
-}
-
 - (void)showLockAnimationWindow
 {
 	self.lockAnimationWindowController = [[NSStoryboard storyboardWithName:@"Main" bundle:nil] instantiateControllerWithIdentifier:@"lockAnimationWindow"];
@@ -755,14 +629,10 @@ CGEventRef myCGEventCallback(CGEventTapProxy proxy, CGEventType type, CGEventRef
 	self.canUnlock = YES;
 	[self stopIntrusionDetectionTimer];
 	
-	if (self.isPasswordPromptVisible)
+	if (!self.isPasswordPromptVisible)
 	{
-		[self showLoginScreenWindow];
-	}
-	else
-	{
-		[OSX wakeUp];
-		[OSX quitScreenSaver];
+    [OSX wakeUp];
+    [OSX quitScreenSaver];
 	}
 }
 
@@ -818,12 +688,6 @@ CGEventRef myCGEventCallback(CGEventTapProxy proxy, CGEventType type, CGEventRef
 	}
 	else
 	{
-		[self dispatchMainAfter:2 block:^{
-			if (self.isMacLocked && self.isPasswordPromptVisible) {
-				[self showLookingForDevicesWindow];
-			}
-		}];
-		
 		[self.centralManager scan];
 	}
 }
@@ -839,13 +703,6 @@ CGEventRef myCGEventCallback(CGEventTapProxy proxy, CGEventType type, CGEventRef
 		if ([self.lockyWindowController.window isVisible])
 		{
 			[(FirstViewController *)[self.lockyWindowController contentViewController] bluetoothBecameNotAvailable];
-		}
-	} else {
-		[self hideLoginScreenWindow];
-		[self hideInitializingWindow];
-		
-		if (self.isMacLocked && self.isPasswordPromptVisible) {
-			[self showInitializingWindow];
 		}
 	}
 }
@@ -915,8 +772,6 @@ CGEventRef myCGEventCallback(CGEventTapProxy proxy, CGEventType type, CGEventRef
 	// The last connected peripheral has just been disconnected.
 	self.isIphoneConnected = NO;
 	self.canUnlock = NO;
-	[self hideLoginScreenWindow];
-	[self hideInitializingWindow];
 	[self stopAuthorizeAutoLockNotificationTimer];
 	
 	if ([self isMacPaired])
@@ -925,10 +780,6 @@ CGEventRef myCGEventCallback(CGEventTapProxy proxy, CGEventType type, CGEventRef
 		
 		if (!self.isMacSleeping)
 		{
-			if (self.isMacLocked && self.isPasswordPromptVisible) {
-				[self showLookingForDevicesWindow];
-			}
-			
 			if (self.lockyWasQuittedOnMobileDevice || !self.authorizeAutoLockNotification)
 			{
 				self.lockyWasQuittedOnMobileDevice = NO;
@@ -1014,11 +865,6 @@ CGEventRef myCGEventCallback(CGEventTapProxy proxy, CGEventType type, CGEventRef
 					infoDict[INFO_KEY_LOCK_STATE] = [self isMacLocked]?LOCK_STATE_LOCKED:LOCK_STATE_UNLOCKED;
 					infoDict[INFO_KEY_AUTO_LOCK] = self.isLockyActivated?AUTO_LOCK_STATE_ACTIVATED:AUTO_LOCK_STATE_DEACTIVATED;
 					[self sendMessage:[infoDict jsonString]];
-					
-					if (self.isMacLocked && self.isPasswordPromptVisible && self.canUnlock)
-					{
-						[self showLoginScreenWindow];
-					}
 				}
 				else
 				{
@@ -1037,13 +883,11 @@ CGEventRef myCGEventCallback(CGEventTapProxy proxy, CGEventType type, CGEventRef
 			
 			// iOS finishes the calibration. It's time for the user to try Locky.
 			[NSNotificationCenter postCalibrationFinishedNotification];
-			[self registerScreenLockUINotifications];
 		}
 		else if ([messageDict[MESSAGE_TYPE_KEY] isEqualToString:MESSAGE_TYPE_KEY_LOCK_MAC])
 		{
 			// iOS asks Mac to lock.
 			[self lockMac];
-			
 		}
 		else if ([messageDict[MESSAGE_TYPE_KEY] isEqualToString:MESSAGE_TYPE_KEY_UNLOCK_MAC])
 		{
@@ -1119,7 +963,6 @@ CGEventRef myCGEventCallback(CGEventTapProxy proxy, CGEventType type, CGEventRef
 				BOOL activated = [messageDict[INFO_KEY_UNLOCK_ONLY_FROM_APPLE_WATCH] boolValue];
 				[self sendNotificationWithTitle:@"Locky" andMessage:activated?NSLocalizedString(@"Unlock only from Apple Watch activated", nil):NSLocalizedString(@"Unlock only from Apple Watch deactivated", nil)];
 				[NSUserDefaults saveUnlockOnlyFromAW:messageDict[INFO_KEY_UNLOCK_ONLY_FROM_APPLE_WATCH]];
-				[self switchToUnlockOnlyWithAppleWatchMode:activated];
 			}
 		}
 		else if ([messageDict[MESSAGE_TYPE_KEY] isEqualToString:MESSAGE_TYPE_KEY_BATTERY_LEVEL])

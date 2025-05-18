@@ -14,7 +14,6 @@
 		37085D0F1AEA86E5001D9A11 /* rts.caf in Resources */ = {isa = PBXBuildFile; fileRef = 37085D0E1AEA86E5001D9A11 /* rts.caf */; };
 		37085D111AEA8709001D9A11 /* yml.caf in Resources */ = {isa = PBXBuildFile; fileRef = 37085D101AEA8709001D9A11 /* yml.caf */; };
 		3712776C1ADE804F00690DDE /* next.caf in Resources */ = {isa = PBXBuildFile; fileRef = 3712776B1ADE804F00690DDE /* next.caf */; };
-		37185AF61AE7BEF3004D917B /* UnlockButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 37185AF41AE7BEF3004D917B /* UnlockButton.m */; };
 		37185AF81AE7CC90004D917B /* ocevb.caf in Resources */ = {isa = PBXBuildFile; fileRef = 37185AF71AE7CC90004D917B /* ocevb.caf */; };
 		37185AF91AE7D326004D917B /* NSDate+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 37B9BAEB1AD1C747000A5FEF /* NSDate+Utils.m */; };
 		37185AFA1AE7D33D004D917B /* NSString+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F7ACBA1AA9F40D00A4C6AA /* NSString+Utils.m */; };
@@ -121,6 +120,7 @@
 		375249021AD8304B00275F5B /* PairingButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 375249011AD8304B00275F5B /* PairingButton.m */; };
 		375845D21AE96AD9005F0765 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 375845D11AE96AD9005F0765 /* CoreText.framework */; };
 		375845D41AE96ADF005F0765 /* QuickLook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 375845D31AE96ADF005F0765 /* QuickLook.framework */; };
+		375E252D2DD9D31300FFEFAF /* login.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 375E252C2DD9D31300FFEFAF /* login.framework */; };
 		376B32D21AB6B9D800AEFE93 /* ColoredSecureTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 376B32D11AB6B9D700AEFE93 /* ColoredSecureTextField.m */; };
 		376B32D51AB984F900AEFE93 /* AESMacManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 376B32D41AB984F900AEFE93 /* AESMacManager.m */; };
 		376B70A81AC995A000D2A5F9 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 376B70A71AC995A000D2A5F9 /* SettingsViewController.m */; };
@@ -178,8 +178,6 @@
 		37976DEB1AF0D3890005266E /* SpecialButtonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37976DEA1AF0D3890005266E /* SpecialButtonViewController.swift */; };
 		37976DED1AF0D3F20005266E /* GraphicUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37976DEC1AF0D3F20005266E /* GraphicUtil.swift */; };
 		37976DEF1AF107540005266E /* CircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37976DEE1AF107540005266E /* CircleView.swift */; };
-		379D649D1AC5DF6D0071489C /* LoginScreenWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 379D649B1AC5DF6D0071489C /* LoginScreenWindowController.m */; };
-		379D649E1AC5DF6D0071489C /* LoginScreenWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 379D649C1AC5DF6D0071489C /* LoginScreenWindowController.xib */; };
 		379DEA8E1AD66E7200B176EB /* ActivateLockyMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 379DEA8C1AD66E7200B176EB /* ActivateLockyMenuViewController.m */; };
 		379DEA8F1AD66E7200B176EB /* ActivateLockyMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 379DEA8D1AD66E7200B176EB /* ActivateLockyMenuViewController.xib */; };
 		379DEA921AD66EAA00B176EB /* ITSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = 379DEA911AD66EAA00B176EB /* ITSwitch.m */; };
@@ -200,8 +198,6 @@
 		37ADB3632DD877FB006E3CFE /* ParseObjC in Frameworks */ = {isa = PBXBuildFile; productRef = 37ADB3622DD877FB006E3CFE /* ParseObjC */; };
 		37ADB3652DD8B50F006E3CFE /* IOBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37ADB3642DD8B50F006E3CFE /* IOBluetooth.framework */; };
 		37ADB36C2DD8B782006E3CFE /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = 37ADB36B2DD8B782006E3CFE /* Sparkle */; };
-		37B037171B35FB620007C90A /* LoginScreenInitializingBluetoothWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37B037141B35FB620007C90A /* LoginScreenInitializingBluetoothWindowController.m */; };
-		37B037181B35FB620007C90A /* LoginScreenInitializingBluetoothWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37B037161B35FB620007C90A /* LoginScreenInitializingBluetoothWindowController.xib */; };
 		37B1956E1ACD33D70043672A /* IOSDeviceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37B1956C1ACD33D70043672A /* IOSDeviceViewController.m */; };
 		37B1956F1ACD33D70043672A /* IOSDeviceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37B1956D1ACD33D70043672A /* IOSDeviceViewController.xib */; };
 		37B195781ACEBB8D0043672A /* AboutWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37B195761ACEBB8D0043672A /* AboutWindowController.m */; };
@@ -233,7 +229,6 @@
 		37CBEF681BA5990A00E98A27 /* HockeySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37CBEF671BA5990A00E98A27 /* HockeySDK.framework */; };
 		37CD6FDE1AC8256500856ABF /* ArrowButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 37CD6FDD1AC8256500856ABF /* ArrowButton.m */; };
 		37CD6FE21AC8310A00856ABF /* MainDeviceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37CD6FE11AC8310A00856ABF /* MainDeviceViewController.m */; };
-		37CD6FE51AC965F600856ABF /* LoginScreenPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 37CD6FE41AC965F600856ABF /* LoginScreenPanel.m */; };
 		37CD6FF01AC9666F00856ABF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 37CD6FEF1AC9666F00856ABF /* AppDelegate.m */; };
 		37CD6FF21AC9666F00856ABF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 37CD6FF11AC9666F00856ABF /* main.m */; };
 		37CD6FF41AC9666F00856ABF /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37CD6FF31AC9666F00856ABF /* Images.xcassets */; };
@@ -257,7 +252,6 @@
 		37F7AC741AA9C01C00A4C6AA /* model-identifiers.plist in Resources */ = {isa = PBXBuildFile; fileRef = 37F7AC721AA9C01C00A4C6AA /* model-identifiers.plist */; };
 		37F7AC791AA9C0D600A4C6AA /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 37F7AC7C1AA9C0D600A4C6AA /* Localizable.strings */; };
 		37F7AC7A1AA9C0D600A4C6AA /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 37F7AC7C1AA9C0D600A4C6AA /* Localizable.strings */; };
-		37F7AC931AA9C28F00A4C6AA /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 37F7AC921AA9C28F00A4C6AA /* libz.dylib */; };
 		37F7ACA11AA9CC3F00A4C6AA /* LocalMacDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F7ACA01AA9CC3F00A4C6AA /* LocalMacDevice.m */; };
 		37F7ACA71AA9D15E00A4C6AA /* NSUserDefaults+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F7ACA61AA9D15E00A4C6AA /* NSUserDefaults+Utils.m */; };
 		37F7ACAE1AA9D64900A4C6AA /* NSDictionary+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F7ACAD1AA9D64900A4C6AA /* NSDictionary+Utils.m */; };
@@ -319,14 +313,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		370FB4BE1ACBD3AC0016FEE8 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			dstPath = "";
-			dstSubfolder = Frameworks;
-			files = (
-			);
-			name = "Embed Frameworks";
-		};
 		37A4F6C61B7B21460097E432 /* Embed App Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			dstPath = "";
@@ -377,8 +363,6 @@
 		37085D0E1AEA86E5001D9A11 /* rts.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = rts.caf; sourceTree = "<group>"; };
 		37085D101AEA8709001D9A11 /* yml.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = yml.caf; sourceTree = "<group>"; };
 		3712776B1ADE804F00690DDE /* next.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = next.caf; sourceTree = "<group>"; };
-		37185AF41AE7BEF3004D917B /* UnlockButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UnlockButton.m; sourceTree = "<group>"; };
-		37185AF51AE7BEF3004D917B /* UnlockButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnlockButton.h; sourceTree = "<group>"; };
 		37185AF71AE7CC90004D917B /* ocevb.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ocevb.caf; sourceTree = "<group>"; };
 		37185AFF1AE8C976004D917B /* LockAnimationWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LockAnimationWindowController.h; sourceTree = "<group>"; };
 		37185B001AE8C976004D917B /* LockAnimationWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LockAnimationWindowController.m; sourceTree = "<group>"; };
@@ -397,7 +381,6 @@
 		371CFE291AAF08260061D84D /* DeviceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceViewController.m; sourceTree = "<group>"; };
 		371CFE2B1AAF0A710061D84D /* NSButtonCellVerticallyCentered.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSButtonCellVerticallyCentered.h; sourceTree = "<group>"; };
 		371CFE2C1AAF0A710061D84D /* NSButtonCellVerticallyCentered.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSButtonCellVerticallyCentered.m; sourceTree = "<group>"; };
-		371CFE361AB02D5F0061D84D /* CoreWLAN.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreWLAN.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/System/Library/Frameworks/CoreWLAN.framework; sourceTree = DEVELOPER_DIR; };
 		371CFE3D1AB04BC60061D84D /* OSX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSX.h; sourceTree = "<group>"; };
 		371CFE3E1AB04BC60061D84D /* OSX.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSX.m; sourceTree = "<group>"; };
 		371CFE401AB09F710061D84D /* NoBluetoothMacViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoBluetoothMacViewController.h; sourceTree = "<group>"; };
@@ -461,7 +444,6 @@
 		371CFEA71AB2F72D0061D84D /* CircularImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircularImageView.m; sourceTree = "<group>"; };
 		371CFEA91AB2F8E60061D84D /* UserPasswordFieldBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserPasswordFieldBackgroundView.h; sourceTree = "<group>"; };
 		371CFEAA1AB2F8E60061D84D /* UserPasswordFieldBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserPasswordFieldBackgroundView.m; sourceTree = "<group>"; };
-		371CFEAC1AB312380061D84D /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/System/Library/Frameworks/Security.framework; sourceTree = DEVELOPER_DIR; };
 		371CFEAE1AB312540061D84D /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		371CFEB51AB314BF0061D84D /* Crypto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Crypto.h; sourceTree = "<group>"; };
 		371CFEB61AB314BF0061D84D /* Crypto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Crypto.m; sourceTree = "<group>"; };
@@ -499,8 +481,6 @@
 		37317BA71ADCF80700A784DE /* LBGradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBGradientView.swift; sourceTree = "<group>"; };
 		37372F5D1B98E0900004CB5B /* WatchManagerIOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WatchManagerIOS.h; sourceTree = "<group>"; };
 		37372F5E1B98E0900004CB5B /* WatchManagerIOS.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WatchManagerIOS.m; sourceTree = "<group>"; };
-		37382A961ACF262A00666C75 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/System/Library/Frameworks/AVFoundation.framework; sourceTree = DEVELOPER_DIR; };
-		37382A9B1ACF286100666C75 /* QTKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QTKit.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/System/Library/Frameworks/QTKit.framework; sourceTree = DEVELOPER_DIR; };
 		37382AA11AD0809D00666C75 /* MASDictionaryTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASDictionaryTransformer.h; sourceTree = "<group>"; };
 		37382AA21AD0809D00666C75 /* MASDictionaryTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASDictionaryTransformer.m; sourceTree = "<group>"; };
 		37382AA31AD0809D00666C75 /* MASHotKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASHotKey.h; sourceTree = "<group>"; };
@@ -531,7 +511,6 @@
 		37416F991B98AEDF007AC69F /* WatchManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchManager.swift; sourceTree = "<group>"; };
 		37416F9B1B98AFB0007AC69F /* WatchConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchConstants.swift; sourceTree = "<group>"; };
 		37416F9D1B98B2C9007AC69F /* LockyWatch Extension-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LockyWatch Extension-Bridging-Header.h"; sourceTree = "<group>"; };
-		375115B71AD3B42B005BBB8D /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/System/Library/Frameworks/IOKit.framework; sourceTree = DEVELOPER_DIR; };
 		375116351AD42258005BBB8D /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		375116371AD42270005BBB8D /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		375116391AD423DF005BBB8D /* BreakInReportsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BreakInReportsTableViewController.h; sourceTree = "<group>"; };
@@ -548,6 +527,8 @@
 		375249011AD8304B00275F5B /* PairingButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PairingButton.m; sourceTree = "<group>"; };
 		375845D11AE96AD9005F0765 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		375845D31AE96ADF005F0765 /* QuickLook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickLook.framework; path = System/Library/Frameworks/QuickLook.framework; sourceTree = SDKROOT; };
+		375E25292DD9D2DA00FFEFAF /* login.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = login.framework; path = ../../../../../../../System/Library/PrivateFrameworks/login.framework; sourceTree = "<group>"; };
+		375E252C2DD9D31300FFEFAF /* login.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = login.framework; path = /System/Library/PrivateFrameworks/login.framework; sourceTree = "<absolute>"; };
 		376B32D01AB6B9D700AEFE93 /* ColoredSecureTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColoredSecureTextField.h; sourceTree = "<group>"; };
 		376B32D11AB6B9D700AEFE93 /* ColoredSecureTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColoredSecureTextField.m; sourceTree = "<group>"; };
 		376B32D31AB984F900AEFE93 /* AESMacManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AESMacManager.h; sourceTree = "<group>"; };
@@ -644,9 +625,6 @@
 		37976DEA1AF0D3890005266E /* SpecialButtonViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpecialButtonViewController.swift; sourceTree = "<group>"; };
 		37976DEC1AF0D3F20005266E /* GraphicUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphicUtil.swift; sourceTree = "<group>"; };
 		37976DEE1AF107540005266E /* CircleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleView.swift; sourceTree = "<group>"; };
-		379D649A1AC5DF6D0071489C /* LoginScreenWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginScreenWindowController.h; sourceTree = "<group>"; };
-		379D649B1AC5DF6D0071489C /* LoginScreenWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginScreenWindowController.m; sourceTree = "<group>"; };
-		379D649C1AC5DF6D0071489C /* LoginScreenWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginScreenWindowController.xib; sourceTree = "<group>"; };
 		379DEA8B1AD66E7200B176EB /* ActivateLockyMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivateLockyMenuViewController.h; sourceTree = "<group>"; };
 		379DEA8C1AD66E7200B176EB /* ActivateLockyMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivateLockyMenuViewController.m; sourceTree = "<group>"; };
 		379DEA8D1AD66E7200B176EB /* ActivateLockyMenuViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActivateLockyMenuViewController.xib; sourceTree = "<group>"; };
@@ -669,9 +647,6 @@
 		37A4F6BD1B7B21460097E432 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		37ADB3642DD8B50F006E3CFE /* IOBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOBluetooth.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.4.sdk/System/Library/Frameworks/IOBluetooth.framework; sourceTree = DEVELOPER_DIR; };
 		37ADB3662DD8B700006E3CFE /* CoreAudioTypes.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudioTypes.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.4.sdk/System/Library/Frameworks/CoreAudioTypes.framework; sourceTree = DEVELOPER_DIR; };
-		37B037141B35FB620007C90A /* LoginScreenInitializingBluetoothWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginScreenInitializingBluetoothWindowController.m; sourceTree = "<group>"; };
-		37B037151B35FB620007C90A /* LoginScreenInitializingBluetoothWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginScreenInitializingBluetoothWindowController.h; sourceTree = "<group>"; };
-		37B037161B35FB620007C90A /* LoginScreenInitializingBluetoothWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginScreenInitializingBluetoothWindowController.xib; sourceTree = "<group>"; };
 		37B1956B1ACD33D70043672A /* IOSDeviceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IOSDeviceViewController.h; sourceTree = "<group>"; };
 		37B1956C1ACD33D70043672A /* IOSDeviceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IOSDeviceViewController.m; sourceTree = "<group>"; };
 		37B1956D1ACD33D70043672A /* IOSDeviceViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IOSDeviceViewController.xib; sourceTree = "<group>"; };
@@ -706,7 +681,6 @@
 		37BC52EE1AE52BC900C69BDD /* LockyToday.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = LockyToday.entitlements; sourceTree = "<group>"; };
 		37C4FD891ADFD5FF00EAB9B1 /* oai.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = oai.caf; sourceTree = "<group>"; };
 		37CBD5431AC2F7E000196BB1 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
-		37CBD5451AC2F7E800196BB1 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/System/Library/Frameworks/CoreLocation.framework; sourceTree = DEVELOPER_DIR; };
 		37CBD5481AC4999D00196BB1 /* KeychainManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeychainManager.h; sourceTree = "<group>"; };
 		37CBD5491AC4999D00196BB1 /* KeychainManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeychainManager.m; sourceTree = "<group>"; };
 		37CBEF641BA4817D00E98A27 /* AppleWatchSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppleWatchSettingViewController.m; sourceTree = "<group>"; };
@@ -716,8 +690,6 @@
 		37CD6FDD1AC8256500856ABF /* ArrowButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArrowButton.m; sourceTree = "<group>"; };
 		37CD6FE01AC8310A00856ABF /* MainDeviceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainDeviceViewController.h; sourceTree = "<group>"; };
 		37CD6FE11AC8310A00856ABF /* MainDeviceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainDeviceViewController.m; sourceTree = "<group>"; };
-		37CD6FE31AC965F600856ABF /* LoginScreenPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginScreenPanel.h; sourceTree = "<group>"; };
-		37CD6FE41AC965F600856ABF /* LoginScreenPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginScreenPanel.m; sourceTree = "<group>"; };
 		37CD6FEA1AC9666F00856ABF /* lockyhelper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = lockyhelper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		37CD6FED1AC9666F00856ABF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		37CD6FEE1AC9666F00856ABF /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -755,16 +727,6 @@
 		37F7AC751AA9C02E00A4C6AA /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		37F7AC7B1AA9C0D600A4C6AA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		37F7AC7D1AA9C0E800A4C6AA /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
-		37F7AC7E1AA9C15300A4C6AA /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/System/Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
-		37F7AC801AA9C15800A4C6AA /* IOBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOBluetooth.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/System/Library/Frameworks/IOBluetooth.framework; sourceTree = DEVELOPER_DIR; };
-		37F7AC821AA9C16300A4C6AA /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/System/Library/Frameworks/Carbon.framework; sourceTree = DEVELOPER_DIR; };
-		37F7AC841AA9C16B00A4C6AA /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/System/Library/Frameworks/ApplicationServices.framework; sourceTree = DEVELOPER_DIR; };
-		37F7AC861AA9C17400A4C6AA /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/System/Library/Frameworks/CFNetwork.framework; sourceTree = DEVELOPER_DIR; };
-		37F7AC881AA9C17A00A4C6AA /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/System/Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
-		37F7AC8A1AA9C18B00A4C6AA /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/System/Library/Frameworks/QuartzCore.framework; sourceTree = DEVELOPER_DIR; };
-		37F7AC8C1AA9C19100A4C6AA /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/System/Library/Frameworks/SystemConfiguration.framework; sourceTree = DEVELOPER_DIR; };
-		37F7AC8E1AA9C1A400A4C6AA /* ServiceManagement.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ServiceManagement.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/System/Library/Frameworks/ServiceManagement.framework; sourceTree = DEVELOPER_DIR; };
-		37F7AC921AA9C28F00A4C6AA /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/usr/lib/libz.dylib; sourceTree = DEVELOPER_DIR; };
 		37F7AC9F1AA9CC3F00A4C6AA /* LocalMacDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalMacDevice.h; sourceTree = "<group>"; };
 		37F7ACA01AA9CC3F00A4C6AA /* LocalMacDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalMacDevice.m; sourceTree = "<group>"; };
 		37F7ACA51AA9D15E00A4C6AA /* NSUserDefaults+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSUserDefaults+Utils.h"; sourceTree = "<group>"; };
@@ -865,10 +827,10 @@
 			isa = PBXFrameworksBuildPhase;
 			files = (
 				37ADB36C2DD8B782006E3CFE /* Sparkle in Frameworks */,
+				375E252D2DD9D31300FFEFAF /* login.framework in Frameworks */,
 				37ADB3612DD877FB006E3CFE /* ParseLiveQuery in Frameworks */,
 				37ADB3652DD8B50F006E3CFE /* IOBluetooth.framework in Frameworks */,
 				37ADB3632DD877FB006E3CFE /* ParseObjC in Frameworks */,
-				37F7AC931AA9C28F00A4C6AA /* libz.dylib in Frameworks */,
 			);
 		};
 /* End PBXFrameworksBuildPhase section */
@@ -1413,23 +1375,6 @@
 			path = ParseUI;
 			sourceTree = "<group>";
 		};
-		379D64991AC5DF570071489C /* Login screen view */ = {
-			isa = PBXGroup;
-			children = (
-				37B037151B35FB620007C90A /* LoginScreenInitializingBluetoothWindowController.h */,
-				37B037141B35FB620007C90A /* LoginScreenInitializingBluetoothWindowController.m */,
-				37B037161B35FB620007C90A /* LoginScreenInitializingBluetoothWindowController.xib */,
-				379D649A1AC5DF6D0071489C /* LoginScreenWindowController.h */,
-				379D649B1AC5DF6D0071489C /* LoginScreenWindowController.m */,
-				379D649C1AC5DF6D0071489C /* LoginScreenWindowController.xib */,
-				37CD6FE31AC965F600856ABF /* LoginScreenPanel.h */,
-				37CD6FE41AC965F600856ABF /* LoginScreenPanel.m */,
-				37185AF51AE7BEF3004D917B /* UnlockButton.h */,
-				37185AF41AE7BEF3004D917B /* UnlockButton.m */,
-			);
-			name = "Login screen view";
-			sourceTree = "<group>";
-		};
 		37A4F69F1B7B21460097E432 /* LockyWatch */ = {
 			isa = PBXGroup;
 			children = (
@@ -1527,6 +1472,7 @@
 		37BC52DA1AE5250200C69BDD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				375E25292DD9D2DA00FFEFAF /* login.framework */,
 				37ADB3662DD8B700006E3CFE /* CoreAudioTypes.framework */,
 				37306E9A1DA4E6BF006C7742 /* IOBluetooth.framework */,
 				37ADB3642DD8B50F006E3CFE /* IOBluetooth.framework */,
@@ -1771,22 +1717,7 @@
 		37F7AC901AA9C1C200A4C6AA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				375115B71AD3B42B005BBB8D /* IOKit.framework */,
-				37382A9B1ACF286100666C75 /* QTKit.framework */,
-				37382A961ACF262A00666C75 /* AVFoundation.framework */,
-				37CBD5451AC2F7E800196BB1 /* CoreLocation.framework */,
-				371CFEAC1AB312380061D84D /* Security.framework */,
-				371CFE361AB02D5F0061D84D /* CoreWLAN.framework */,
-				37F7AC921AA9C28F00A4C6AA /* libz.dylib */,
-				37F7AC8E1AA9C1A400A4C6AA /* ServiceManagement.framework */,
-				37F7AC8C1AA9C19100A4C6AA /* SystemConfiguration.framework */,
-				37F7AC8A1AA9C18B00A4C6AA /* QuartzCore.framework */,
-				37F7AC881AA9C17A00A4C6AA /* CoreGraphics.framework */,
-				37F7AC861AA9C17400A4C6AA /* CFNetwork.framework */,
-				37F7AC841AA9C16B00A4C6AA /* ApplicationServices.framework */,
-				37F7AC821AA9C16300A4C6AA /* Carbon.framework */,
-				37F7AC801AA9C15800A4C6AA /* IOBluetooth.framework */,
-				37F7AC7E1AA9C15300A4C6AA /* Cocoa.framework */,
+				375E252C2DD9D31300FFEFAF /* login.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1896,7 +1827,6 @@
 				37185AFE1AE8C8A3004D917B /* Lock animation */,
 				37B195741ACEBB6E0043672A /* About */,
 				37CD700E1AC967EE00856ABF /* Statusbar */,
-				379D64991AC5DF570071489C /* Login screen view */,
 				371CFE471AB0A1620061D84D /* Pairing */,
 				371CFE271AAF08150061D84D /* Device view */,
 				37F7AC5C1AA9BFA900A4C6AA /* Main.storyboard */,
@@ -2074,7 +2004,6 @@
 				37F7AC4B1AA9BFA800A4C6AA /* Frameworks */,
 				37F7AC4C1AA9BFA800A4C6AA /* Resources */,
 				37CD700C1AC9678A00856ABF /* Copy Files Helper */,
-				370FB4BE1ACBD3AC0016FEE8 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -2267,12 +2196,10 @@
 		37F7AC4C1AA9BFA800A4C6AA /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			files = (
-				379D649E1AC5DF6D0071489C /* LoginScreenWindowController.xib in Resources */,
 				373840C41B0F5F5F00CE342E /* Images.xcassets in Resources */,
 				37F7AC7A1AA9C0D600A4C6AA /* Localizable.strings in Resources */,
 				37B195791ACEBB8D0043672A /* AboutWindowController.xib in Resources */,
 				379DEA8F1AD66E7200B176EB /* ActivateLockyMenuViewController.xib in Resources */,
-				37B037181B35FB620007C90A /* LoginScreenInitializingBluetoothWindowController.xib in Resources */,
 				37B1956F1ACD33D70043672A /* IOSDeviceViewController.xib in Resources */,
 				37F7AC5E1AA9BFA900A4C6AA /* Main.storyboard in Resources */,
 				37F7AC741AA9C01C00A4C6AA /* model-identifiers.plist in Resources */,
@@ -2435,21 +2362,18 @@
 				37F7ACB81AA9F3FE00A4C6AA /* NSData+Utils.m in Sources */,
 				37382ABA1AD0809D00666C75 /* MASShortcutView+Bindings.m in Sources */,
 				37B9BAED1AD1C747000A5FEF /* NSDate+Utils.m in Sources */,
-				37CD6FE51AC965F600856ABF /* LoginScreenPanel.m in Sources */,
 				371CFE731AB1AAA90061D84D /* SendMailMacViewController.m in Sources */,
 				375249021AD8304B00275F5B /* PairingButton.m in Sources */,
 				371CFE9B1AB2CAD50061D84D /* StepsBadgeView.m in Sources */,
 				376B71331ACA9FB800D2A5F9 /* MacBluetoothCentralManager.m in Sources */,
 				371CFEA81AB2F72D0061D84D /* CircularImageView.m in Sources */,
 				37F7ACAF1AA9D64900A4C6AA /* NSDictionary+Utils.m in Sources */,
-				379D649D1AC5DF6D0071489C /* LoginScreenWindowController.m in Sources */,
 				37382AB51AD0809D00666C75 /* MASShortcut.m in Sources */,
 				371CFE421AB09F710061D84D /* NoBluetoothMacViewController.m in Sources */,
 				37CD70111AC9680800856ABF /* StatusBarManager.m in Sources */,
 				37382AB81AD0809D00666C75 /* MASShortcutValidator.m in Sources */,
 				371CFE2A1AAF08260061D84D /* DeviceViewController.m in Sources */,
 				37382AB41AD0809D00666C75 /* MASHotKey.m in Sources */,
-				37185AF61AE7BEF3004D917B /* UnlockButton.m in Sources */,
 				37A006741B04A16100A84E31 /* NSObject+Dispatch.swift in Sources */,
 				371CFE6D1AB1A3480061D84D /* ParseMacManager.m in Sources */,
 				371CFE7D1AB1BB700061D84D /* BackgroundManager.m in Sources */,
@@ -2465,7 +2389,6 @@
 				371CFEB81AB314BF0061D84D /* Crypto.m in Sources */,
 				37F7ACA71AA9D15E00A4C6AA /* NSUserDefaults+Utils.m in Sources */,
 				371CFED01AB4DFE00061D84D /* NSString+NSHash.m in Sources */,
-				37B037171B35FB620007C90A /* LoginScreenInitializingBluetoothWindowController.m in Sources */,
 				37F7ACFC1AAE12B900A4C6AA /* FirstViewController.m in Sources */,
 				37B195781ACEBB8D0043672A /* AboutWindowController.m in Sources */,
 				371CFEAB1AB2F8E60061D84D /* UserPasswordFieldBackgroundView.m in Sources */,
@@ -2990,6 +2913,10 @@
 				SDKROOT = macosx;
 				SWIFT_OBJC_BRIDGING_HEADER = "Utils/LockyMac-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SYSTEM_FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks",
+				);
 			};
 			name = Debug;
 		};
@@ -3027,6 +2954,10 @@
 				PRODUCT_NAME = Locky;
 				SDKROOT = macosx;
 				SWIFT_OBJC_BRIDGING_HEADER = "Utils/LockyMac-Bridging-Header.h";
+				SYSTEM_FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks",
+				);
 			};
 			name = Release;
 		};

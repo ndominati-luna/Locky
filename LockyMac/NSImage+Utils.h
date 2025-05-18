@@ -13,7 +13,6 @@
 + (NSImage *)createImageFromView:(NSView *)view;
 + (NSImage *)userAccountImage;
 + (NSImage *)userAccountImageFullQuality;
-+ (NSImage *)userBackgroundImage;
 - (NSImage *)imageWithColor:(NSColor *)tint;
 
 @end

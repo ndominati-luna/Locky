@@ -115,55 +115,56 @@
 
 - (void)publishComputerInformationWithCompletion:(void (^)(BOOL succeeded,NSError *error))completion
 {
-    [self findExistingParseDeviceInformation:[LocalMacDevice macUUID] withCompletion:^(BOOL succeeded,NSError *error, PFObject *object)
-	{
-        if (error)
-		{
-			if (completion)
-			{
-				completion(FALSE,error);
-			}
-            return;
-        }
-		
-        PFObject *myObject = object;
-		
-        if (!myObject)
-		{
-            myObject = [PFObject objectWithClassName:@"Device"];
-        }
-        
-        myObject[INFO_KEY_UUID] = [LocalMacDevice macUUID];
-        myObject[INFO_KEY_NAME] = [LocalMacDevice macName];
-        myObject[INFO_KEY_MODEL] = [LocalMacDevice macModel];
-		myObject[INFO_KEY_UNLOCK_COUNT] = [NSUserDefaults unlockCount];
+  [self findExistingParseDeviceInformation:[LocalMacDevice macUUID] withCompletion:^(BOOL succeeded,NSError *error, PFObject *object)
+   {
+    if (error)
+    {
+      if (completion)
+      {
+        completion(FALSE,error);
+      }
+      return;
+    }
 
-        NSData *userPicture = [LocalMacDevice localDeviceUserPicture];
-		if (userPicture)
-		{
-            myObject[INFO_KEY_USER_PICTURE] = userPicture;
+    PFObject *myObject = object;
+
+    if (!myObject)
+    {
+      myObject = [PFObject objectWithClassName:@"Device"];
+    }
+
+    myObject[INFO_KEY_UUID] = [LocalMacDevice macUUID];
+    myObject[INFO_KEY_NAME] = [LocalMacDevice macName];
+    myObject[INFO_KEY_MODEL] = [LocalMacDevice macModel];
+    myObject[INFO_KEY_UNLOCK_COUNT] = [NSUserDefaults unlockCount];
+
+    NSData *userPicture = [LocalMacDevice localDeviceUserPicture];
+    if (userPicture)
+    {
+      myObject[INFO_KEY_USER_PICTURE] = userPicture;
+    }
+
+    [LocalMacDevice localDeviceBackground:^(NSData *data) {
+      if (data)
+      {
+        myObject[INFO_KEY_LOCAL_DEVICE_BACKGROUND] = data;
+      }
+
+      [myObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (error)
+        {
+          NSLog(@"Parse unexpeted error %@",error);
         }
-        
-        NSData *localDeviceBackground = [LocalMacDevice localDeviceBackground];
-        if (localDeviceBackground)
-		{
-            myObject[INFO_KEY_LOCAL_DEVICE_BACKGROUND] = localDeviceBackground;
-        }
-		
-		[myObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-			if (error)
-			{
-				NSLog(@"Parse unexpeted error %@",error);
-			}
-			
-			dispatch_async(dispatch_get_main_queue(), ^{
-				if (completion)
-				{
-					completion(succeeded,error);
-				}
-			});
-		}];
+
+        dispatch_async(dispatch_get_main_queue(), ^{
+          if (completion)
+          {
+            completion(succeeded,error);
+          }
+        });
+      }];
     }];
+  }];
 }
 
 - (void)registerUserEmailAddress:(NSString *)emailAddress

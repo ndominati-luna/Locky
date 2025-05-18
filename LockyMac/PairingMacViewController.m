@@ -48,6 +48,11 @@ typedef NS_ENUM(NSInteger, PairingStep) {
 	[self.view translateView];
 }
 
+- (void)viewWillAppear {
+  [super viewWillAppear];
+  [self.okImReadyButton updateButtonSize];
+}
+
 - (void)viewDidAppear
 {
 	[super viewDidAppear];
@@ -289,6 +294,9 @@ typedef NS_ENUM(NSInteger, PairingStep) {
 				[self.passwordEnteredButton setHidden:YES];
 				[self.accountUsernameLabel setStringValue:NSFullUserName()];
 				[self.accountImageView setImage:[[NSImage alloc] initWithData:[LocalMacDevice localFullQualityDeviceUserPicture]]];
+        self.accountImageView.imageScaling = NSImageScaleProportionallyUpOrDown;
+        self.accountImageView.layer.cornerRadius = self.accountImageView.bounds.size.width / 2;
+        self.accountImageView.layer.masksToBounds = YES;
 				[NSAnimationContext runAnimationGroup:^(NSAnimationContext *context) {
 					context.duration = 0.3;
 					context.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];

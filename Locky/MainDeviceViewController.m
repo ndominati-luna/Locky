@@ -50,12 +50,15 @@
 		[self.deviceView setTransform:CGAffineTransformMakeScale(1.2, 1.2)];
 	}
 	
-	if (![[LockyManager sharedInstance] isMacConnected])
-	{
-		[self hideLockSliderAnimated:NO];
-	}
-	
 	[self.view translateView];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+  [super viewDidAppear:animated];
+  if (![[LockyManager sharedInstance] isMacConnected])
+  {
+    [self hideLockSliderAnimated:NO];
+  }
 }
 
 - (void)viewDidLayoutSubviews
@@ -373,12 +376,12 @@
 		if (animated)
 		{
 			[UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-				[self.sliderContainerView setTransform:CGAffineTransformMakeTranslation(0, self.sliderContainerView.bounds.size.height+bottomConstraint.constant)];
+				[self.sliderContainerView setTransform:CGAffineTransformMakeTranslation(0, self.sliderContainerView.bounds.size.height+bottomConstraint.constant+self.view.window.safeAreaInsets.bottom)];
 			} completion:nil];
 		}
 		else
 		{
-			[self.sliderContainerView setTransform:CGAffineTransformMakeTranslation(0, self.sliderContainerView.bounds.size.height+bottomConstraint.constant)];
+			[self.sliderContainerView setTransform:CGAffineTransformMakeTranslation(0, self.sliderContainerView.bounds.size.height+bottomConstraint.constant+self.view.window.safeAreaInsets.bottom)];
 		}
 	}
 }

@@ -45,23 +45,6 @@
 	[[self standardUserDefaults] synchronize];
 }
 
-+ (void)saveBackgroundURLPath:(NSString *)backgroundURLPath
-{
-	[[self standardUserDefaults] setObject:backgroundURLPath forKey:USER_DEFAULTS_MAC_BACKGROUND_URL];
-	[[self standardUserDefaults] synchronize];
-}
-
-+ (NSString *)backgroundURLPath
-{
-	return [[self standardUserDefaults] objectForKey:USER_DEFAULTS_MAC_BACKGROUND_URL];
-}
-
-+ (void)removeBackgroundURLPath
-{
-	[[self standardUserDefaults] removeObjectForKey:USER_DEFAULTS_MAC_BACKGROUND_URL];
-	[[self standardUserDefaults] synchronize];
-}
-
 + (void)savePeripheralUUIDsToClean:(NSArray *)array
 {
 	[[self standardUserDefaults] setObject:array forKey:USER_DEFAULTS_CONNECTED_UUIDS_TO_CLEAN];

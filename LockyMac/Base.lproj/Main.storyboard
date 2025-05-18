@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="23727" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11201"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="23727"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Application-->
@@ -38,7 +39,7 @@
         <scene sceneID="R2V-B0-nI4">
             <objects>
                 <windowController storyboardIdentifier="LockyWindow" id="B8D-0N-5wS" customClass="LockyWindowController" sceneMemberID="viewController">
-                    <window key="window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA" customClass="KeyWindow">
+                    <window key="window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA" customClass="KeyWindow">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" fullSizeContentView="YES"/>
                         <rect key="contentRect" x="196" y="240" width="600" height="450"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
@@ -80,7 +81,7 @@
                                 </constraints>
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" image="LockyIconWhite" id="mRs-22-IzU"/>
                             </imageView>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="ZZn-bt-hsf">
+                            <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" verticalCompressionResistancePriority="1000" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZZn-bt-hsf">
                                 <rect key="frame" x="18" y="188" width="564" height="60"/>
                                 <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="Welcome" id="odR-nN-thy">
                                     <font key="font" size="50" name="HelveticaNeue-Thin"/>
@@ -88,7 +89,7 @@
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="mQd-yb-Q6S">
+                            <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" verticalCompressionResistancePriority="1000" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mQd-yb-Q6S">
                                 <rect key="frame" x="18" y="133" width="564" height="21"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Looking for Locky iPhones..." id="Fyy-3x-yx5">
                                     <font key="font" size="15" name="HelveticaNeue"/>
@@ -96,20 +97,20 @@
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="7bt-fX-gND" userLabel="Circular progress view" customClass="YRKSpinningProgressIndicator">
+                            <customView ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7bt-fX-gND" userLabel="Circular progress view" customClass="YRKSpinningProgressIndicator">
                                 <rect key="frame" x="285" y="95" width="30" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="30" id="24n-1H-jIf"/>
                                     <constraint firstAttribute="height" constant="30" id="qDG-0W-eTc"/>
                                 </constraints>
                             </customView>
-                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="gex-po-8Lq">
+                            <customView ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gex-po-8Lq">
                                 <rect key="frame" x="0.0" y="154" width="600" height="34"/>
                             </customView>
-                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="Ctb-4J-sCK">
+                            <customView ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ctb-4J-sCK">
                                 <rect key="frame" x="0.0" y="61" width="600" height="34"/>
                             </customView>
-                            <textField horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="N3q-gv-5AR">
+                            <textField focusRingType="none" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="N3q-gv-5AR">
                                 <rect key="frame" x="278" y="310" width="44" height="19"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="40" id="Ldi-BP-OHH"/>
@@ -120,16 +121,16 @@
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="55C-TG-StR">
-                                <rect key="frame" x="31" y="256" width="219" height="38"/>
+                            <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="55C-TG-StR">
+                                <rect key="frame" x="31" y="256" width="219" height="30"/>
                                 <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="You can download it on the AppStore" id="6xW-HF-aht">
                                     <font key="font" size="13" name="HelveticaNeue"/>
                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <button verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="rfb-mR-DgX">
-                                <rect key="frame" x="369" y="267" width="182" height="32"/>
+                            <button verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rfb-mR-DgX">
+                                <rect key="frame" x="368" y="267" width="184" height="32"/>
                                 <buttonCell key="cell" type="push" title="Get the link by email" bezelStyle="rounded" alignment="center" scrollable="YES" lineBreakMode="clipping" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="4PD-Ct-1L7">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -138,55 +139,55 @@
                                     <segue destination="LJX-d8-IMG" kind="sheet" identifier="emailSegue" id="izF-YG-QBb"/>
                                 </connections>
                             </button>
-                            <button focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="IcS-Ni-WqR">
+                            <button focusRingType="none" verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IcS-Ni-WqR">
                                 <rect key="frame" x="375" y="314" width="170" height="50"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="3Gn-X5-s4c"/>
-                                    <constraint firstAttribute="width" constant="170" id="bRb-id-KHb"/>
-                                </constraints>
                                 <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="appStoreBadge" imagePosition="only" alignment="center" focusRingType="none" imageScaling="proportionallyDown" inset="2" id="DXD-Xw-v6e">
                                     <behavior key="behavior" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="3Gn-X5-s4c"/>
+                                    <constraint firstAttribute="width" constant="170" id="bRb-id-KHb"/>
+                                </constraints>
                                 <connections>
                                     <action selector="appStoreButtonPressed:" target="XfG-lQ-9wD" id="dwX-Vr-H4f"/>
                                 </connections>
                             </button>
-                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Gg1-cG-eZI">
+                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Gg1-cG-eZI">
                                 <rect key="frame" x="33" y="294" width="215" height="69"/>
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="Locky_iOS+Mac" id="ccm-SI-Dvk"/>
                             </imageView>
-                            <customView hidden="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Jh1-Vg-aKU">
+                            <customView hidden="YES" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Jh1-Vg-aKU">
                                 <rect key="frame" x="0.0" y="188" width="33" height="262"/>
                             </customView>
-                            <customView hidden="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SfF-MB-JgW">
+                            <customView hidden="YES" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SfF-MB-JgW">
                                 <rect key="frame" x="248" y="188" width="32" height="262"/>
                             </customView>
-                            <customView hidden="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zuW-2N-XHT">
+                            <customView hidden="YES" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zuW-2N-XHT">
                                 <rect key="frame" x="320" y="188" width="55" height="262"/>
                             </customView>
-                            <customView hidden="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XeH-Yu-vs8">
+                            <customView hidden="YES" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XeH-Yu-vs8">
                                 <rect key="frame" x="545" y="188" width="55" height="262"/>
                             </customView>
-                            <customView hidden="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CKf-Pn-aWO">
+                            <customView hidden="YES" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CKf-Pn-aWO">
                                 <rect key="frame" x="375" y="188" width="170" height="86"/>
                             </customView>
-                            <customView hidden="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Udq-Xm-CUq">
+                            <customView hidden="YES" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Udq-Xm-CUq">
                                 <rect key="frame" x="375" y="365" width="170" height="85"/>
                             </customView>
-                            <customView hidden="YES" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="mCa-NJ-gyP">
+                            <customView hidden="YES" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mCa-NJ-gyP">
                                 <rect key="frame" x="33" y="382" width="215" height="68"/>
                             </customView>
-                            <customView hidden="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fjT-No-C1m">
+                            <customView hidden="YES" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fjT-No-C1m">
                                 <rect key="frame" x="280" y="329" width="40" height="121"/>
                             </customView>
-                            <customView hidden="YES" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="NOc-PP-f3e">
+                            <customView hidden="YES" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NOc-PP-f3e">
                                 <rect key="frame" x="33" y="188" width="215" height="68"/>
                             </customView>
-                            <customView hidden="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rBV-OX-4hP">
+                            <customView hidden="YES" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rBV-OX-4hP">
                                 <rect key="frame" x="280" y="188" width="40" height="122"/>
                             </customView>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dDw-Jb-1Xm">
+                            <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" ambiguous="YES" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dDw-Jb-1Xm">
                                 <rect key="frame" x="31" y="363" width="219" height="19"/>
                                 <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="Locky on Mac has its iPhone buddy." id="TLF-qf-9gg">
                                     <font key="font" size="13" name="HelveticaNeue"/>
@@ -195,7 +196,7 @@
                                 </textFieldCell>
                             </textField>
                             <button translatesAutoresizingMaskIntoConstraints="NO" id="ag1-vg-cTe">
-                                <rect key="frame" x="176" y="29" width="248" height="32"/>
+                                <rect key="frame" x="176" y="28" width="248" height="13"/>
                                 <buttonCell key="cell" type="bevel" title="Having troubles to pair your iPhone and your Mac?" bezelStyle="rounded" alignment="center" imageScaling="proportionallyDown" inset="2" id="mp1-mk-2UE">
                                     <behavior key="behavior" lightByContents="YES"/>
                                     <font key="font" metaFont="system" size="10"/>
@@ -206,7 +207,7 @@
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="kO5-ax-dwI">
-                                <rect key="frame" x="253" y="1" width="95" height="32"/>
+                                <rect key="frame" x="256" y="1" width="89" height="32"/>
                                 <buttonCell key="cell" type="push" title="Help me!" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="IFO-LG-fvc">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -333,7 +334,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="422" height="147"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5cG-WN-t1m">
+                            <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5cG-WN-t1m">
                                 <rect key="frame" x="18" y="91" width="386" height="36"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="Send me an email with the iPhone App download link:" id="7rz-sz-eiX">
@@ -342,12 +343,12 @@
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vYt-10-jjv">
+                            <textField focusRingType="none" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vYt-10-jjv">
                                 <rect key="frame" x="20" y="56" width="382" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="Enter your mail..." drawsBackground="YES" id="7KS-5l-Zzy">
                                     <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
@@ -417,7 +418,7 @@ Gw
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="bluetooth" id="U0y-1C-mx5"/>
                             </imageView>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BTf-xl-bGG">
+                            <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BTf-xl-bGG">
                                 <rect key="frame" x="18" y="184" width="564" height="38"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="Please turn on Bluetooth to use Locky." id="JFG-rA-qBw">
@@ -474,16 +475,16 @@ Gw
                                 </constraints>
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="axesIndependently" image="pairingWindowBackground" id="z0X-1q-cak"/>
                             </imageView>
-                            <button verticalHuggingPriority="750" placeholderIntrinsicWidth="121" placeholderIntrinsicHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="ZTk-iN-UqM" customClass="PairingButton">
+                            <button horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="ZTk-iN-UqM" customClass="PairingButton">
                                 <rect key="frame" x="240" y="67" width="121" height="39"/>
+                                <buttonCell key="cell" type="bevel" title="Pair" bezelStyle="rounded" alignment="center" imageScaling="proportionallyDown" inset="2" id="Thc-qR-Y6C" customClass="NSButtonCellVerticallyCentered" customModule="Locky" customModuleProvider="target">
+                                    <behavior key="behavior" lightByContents="YES"/>
+                                    <font key="font" size="17" name="HelveticaNeue-Bold"/>
+                                </buttonCell>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="39" id="02V-0h-Nag"/>
                                     <constraint firstAttribute="width" constant="121" id="Rbt-oy-DLr"/>
                                 </constraints>
-                                <buttonCell key="cell" type="bevel" title="Pair" bezelStyle="rounded" image="pairButton" alignment="center" imageScaling="proportionallyDown" inset="2" id="Thc-qR-Y6C" customClass="NSButtonCellVerticallyCentered">
-                                    <behavior key="behavior" lightByContents="YES"/>
-                                    <font key="font" size="17" name="HelveticaNeue-Bold"/>
-                                </buttonCell>
                                 <connections>
                                     <action selector="pairButtonPressed:" target="mpk-84-gvD" id="1nB-Qk-PXm"/>
                                 </connections>
@@ -496,8 +497,8 @@ Gw
                                 </constraints>
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="iPhone" id="DAk-yf-2Xp"/>
                             </imageView>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wiz-jK-4FK">
-                                <rect key="frame" x="257" y="170" width="87" height="151"/>
+                            <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wiz-jK-4FK">
+                                <rect key="frame" x="257" y="239" width="87" height="15"/>
                                 <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="iPhone name" id="Xgr-82-8vj">
                                     <font key="font" size="12" name="HelveticaNeue-Light"/>
                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -506,13 +507,13 @@ Gw
                             </textField>
                             <button verticalHuggingPriority="750" placeholderIntrinsicWidth="121" placeholderIntrinsicHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="DJY-i5-AX5">
                                 <rect key="frame" x="167" y="25" width="267" height="22"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="267" id="n20-iB-p43"/>
-                                </constraints>
                                 <buttonCell key="cell" type="bevel" title="Not this one" bezelStyle="rounded" imagePosition="overlaps" alignment="center" scrollable="YES" lineBreakMode="clipping" imageScaling="proportionallyDown" inset="2" id="yFp-GW-quE" customClass="NSButtonCellVerticallyCentered">
                                     <behavior key="behavior" lightByContents="YES"/>
                                     <font key="font" metaFont="system" size="10"/>
                                 </buttonCell>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="267" id="n20-iB-p43"/>
+                                </constraints>
                                 <connections>
                                     <action selector="cancelButtonPressed:" target="mpk-84-gvD" id="la1-be-7P5"/>
                                 </connections>
@@ -520,15 +521,14 @@ Gw
                         </subviews>
                         <constraints>
                             <constraint firstAttribute="centerX" secondItem="DJY-i5-AX5" secondAttribute="centerX" id="1Zj-iP-DYK"/>
-                            <constraint firstItem="nhY-Ff-dTR" firstAttribute="top" secondItem="wiz-jK-4FK" secondAttribute="top" constant="-57" id="9fw-Hg-cY8"/>
                             <constraint firstAttribute="centerX" secondItem="nhY-Ff-dTR" secondAttribute="centerX" id="Ctv-pn-Iwf"/>
                             <constraint firstItem="ZTk-iN-UqM" firstAttribute="top" secondItem="nhY-Ff-dTR" secondAttribute="bottom" constant="8" id="GoD-r1-8gg"/>
                             <constraint firstItem="nhY-Ff-dTR" firstAttribute="top" secondItem="Qbk-fs-fDB" secondAttribute="top" constant="72" id="LmW-o9-XfZ"/>
                             <constraint firstItem="atx-fv-F37" firstAttribute="top" secondItem="Qbk-fs-fDB" secondAttribute="top" id="NpU-gD-npk"/>
                             <constraint firstAttribute="trailing" secondItem="atx-fv-F37" secondAttribute="trailing" id="Pbi-qx-g7p"/>
                             <constraint firstItem="nhY-Ff-dTR" firstAttribute="leading" secondItem="wiz-jK-4FK" secondAttribute="leading" constant="-34" id="QkL-X8-aUO"/>
-                            <constraint firstItem="nhY-Ff-dTR" firstAttribute="bottom" secondItem="wiz-jK-4FK" secondAttribute="bottom" constant="56" id="QlW-7G-YJg"/>
                             <constraint firstItem="atx-fv-F37" firstAttribute="leading" secondItem="Qbk-fs-fDB" secondAttribute="leading" id="SDk-f3-jLI"/>
+                            <constraint firstItem="wiz-jK-4FK" firstAttribute="centerY" secondItem="nhY-Ff-dTR" secondAttribute="centerY" id="TBU-YN-pg7"/>
                             <constraint firstAttribute="centerX" secondItem="ZTk-iN-UqM" secondAttribute="centerX" id="Urz-35-hwh"/>
                             <constraint firstAttribute="bottom" secondItem="atx-fv-F37" secondAttribute="bottom" id="X9d-QY-CfS"/>
                             <constraint firstItem="nhY-Ff-dTR" firstAttribute="trailing" secondItem="wiz-jK-4FK" secondAttribute="trailing" constant="33" id="ZN3-js-Afg"/>
@@ -551,75 +551,75 @@ Gw
             <objects>
                 <viewController id="1Sa-6j-gdc" customClass="TroubleShootingViewController" sceneMemberID="viewController">
                     <view key="view" id="n6X-lv-ghk">
-                        <rect key="frame" x="0.0" y="0.0" width="551" height="335"/>
+                        <rect key="frame" x="0.0" y="0.0" width="551" height="324"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5BO-4n-n83">
-                                <rect key="frame" x="18" y="298" width="515" height="17"/>
+                            <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5BO-4n-n83">
+                                <rect key="frame" x="18" y="288" width="515" height="16"/>
                                 <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="If you're facing issues to pair your iPhone and your Mac, follow these steps:" id="yqz-UD-dVj">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Anj-To-fOs">
-                                <rect key="frame" x="38" y="261" width="431" height="17"/>
+                            <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Anj-To-fOs">
+                                <rect key="frame" x="38" y="250" width="431" height="17"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="1. Quit Locky on your iPhone (remove it from the application switcher)." id="Klw-B0-vc9">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3h4-uh-x2c">
-                                <rect key="frame" x="38" y="236" width="259" height="17"/>
+                            <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3h4-uh-x2c">
+                                <rect key="frame" x="38" y="225" width="259" height="17"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="2. Turn OFF the Bluetooth on your iPhone." id="Ctq-kb-Mg7">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wtT-8g-tJo">
-                                <rect key="frame" x="38" y="211" width="254" height="17"/>
+                            <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wtT-8g-tJo">
+                                <rect key="frame" x="38" y="200" width="254" height="17"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="3. Turn ON the Bluetooth on your iPhone." id="zht-AM-2In">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xzY-kb-lkc">
-                                <rect key="frame" x="38" y="136" width="221" height="17"/>
+                            <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xzY-kb-lkc">
+                                <rect key="frame" x="38" y="125" width="221" height="17"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="6. Shutdown your Mac (not restart)." id="dma-OJ-6px">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Yak-kx-U09">
-                                <rect key="frame" x="38" y="111" width="113" height="17"/>
+                            <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Yak-kx-U09">
+                                <rect key="frame" x="38" y="100" width="113" height="17"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="7. Start your Mac." id="4tq-DZ-gYP">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HyH-qv-ypn">
-                                <rect key="frame" x="38" y="86" width="238" height="17"/>
+                            <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HyH-qv-ypn">
+                                <rect key="frame" x="38" y="75" width="238" height="17"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="8. Turn ON the Bluetooth on your Mac." id="ZKJ-Zy-OYb">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7cL-1N-YVE">
-                                <rect key="frame" x="38" y="61" width="276" height="17"/>
+                            <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7cL-1N-YVE">
+                                <rect key="frame" x="38" y="50" width="276" height="17"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="9. Open Locky on your iPhone and your Mac." id="Iak-Oz-sNw">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cYB-8c-EXs">
-                                <rect key="frame" x="38" y="161" width="323" height="17"/>
+                            <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cYB-8c-EXs">
+                                <rect key="frame" x="38" y="150" width="323" height="17"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="5. Quit Locky on your Mac using its status bar menu." id="Scn-kK-fv4">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -627,7 +627,7 @@ Gw
                                 </textFieldCell>
                             </textField>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="VGk-X3-OQS">
-                                <rect key="frame" x="225" y="13" width="102" height="32"/>
+                                <rect key="frame" x="228" y="13" width="96" height="32"/>
                                 <buttonCell key="cell" type="push" title="OK, got it!" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="F3y-z3-bhE">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -639,8 +639,8 @@ DQ
                                     <action selector="okButtonPressed:" target="1Sa-6j-gdc" id="nhG-jZ-a4Q"/>
                                 </connections>
                             </button>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Sdf-Id-x0j">
-                                <rect key="frame" x="38" y="186" width="243" height="17"/>
+                            <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Sdf-Id-x0j">
+                                <rect key="frame" x="38" y="180" width="242" height="16"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="4. Turn OFF the Bluetooth on your Mac." id="5UG-EJ-Mei">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -648,7 +648,7 @@ DQ
                                 </textFieldCell>
                             </textField>
                             <button misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qBz-XI-ITc">
-                                <rect key="frame" x="475" y="254" width="56" height="32"/>
+                                <rect key="frame" x="475" y="243" width="56" height="32"/>
                                 <buttonCell key="cell" type="bevel" title="(How to)" bezelStyle="rounded" alignment="center" imageScaling="proportionallyDown" inset="2" id="JlB-pF-Lxr">
                                     <behavior key="behavior" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -741,7 +741,7 @@ DQ
                                             <constraint firstAttribute="width" constant="50" id="dgs-DC-zTy"/>
                                         </constraints>
                                     </customView>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8Ic-VK-fIt">
+                                    <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8Ic-VK-fIt">
                                         <rect key="frame" x="56" y="0.0" width="466" height="62"/>
                                         <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" id="0AB-il-a1g" customClass="NSTextFieldCellVerticallyCentered">
                                             <font key="font" size="17" name="HelveticaNeue"/>
@@ -772,7 +772,7 @@ Please don't touch it during the setup.</string>
                                             <constraint firstAttribute="width" constant="50" id="uWC-Tx-mM1"/>
                                         </constraints>
                                     </customView>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="r9H-BO-60i">
+                                    <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="r9H-BO-60i">
                                         <rect key="frame" x="56" y="0.0" width="466" height="62"/>
                                         <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" id="NE7-5J-axY" customClass="NSTextFieldCellVerticallyCentered">
                                             <font key="font" size="17" name="HelveticaNeue"/>
@@ -803,7 +803,7 @@ Make a wish, this is the last time :)</string>
                                             <constraint firstAttribute="width" constant="50" id="xjc-Jx-Y8i"/>
                                         </constraints>
                                     </customView>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PUC-U4-h6u">
+                                    <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PUC-U4-h6u">
                                         <rect key="frame" x="56" y="0.0" width="466" height="62"/>
                                         <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="Locky is doing some magic so that it works smoothly." id="Pjf-ix-IF8" customClass="NSTextFieldCellVerticallyCentered">
                                             <font key="font" size="17" name="HelveticaNeue"/>
@@ -832,7 +832,7 @@ Make a wish, this is the last time :)</string>
                                             <constraint firstAttribute="height" constant="50" id="exs-fo-4jX"/>
                                         </constraints>
                                     </customView>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Q7t-gJ-QPw">
+                                    <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Q7t-gJ-QPw">
                                         <rect key="frame" x="56" y="0.0" width="466" height="62"/>
                                         <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="Now go back to Locky on your iPhone." id="hz1-KI-VWk" customClass="NSTextFieldCellVerticallyCentered">
                                             <font key="font" size="17" name="HelveticaNeue"/>
@@ -861,7 +861,7 @@ Make a wish, this is the last time :)</string>
                                             <constraint firstAttribute="height" constant="50" id="bIz-4u-4WB"/>
                                         </constraints>
                                     </customView>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ONb-4T-aoJ">
+                                    <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ONb-4T-aoJ">
                                         <rect key="frame" x="56" y="0.0" width="466" height="62"/>
                                         <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="You're all set. Locky will be available in your Mac's top bar." id="2MT-zl-k38" customClass="NSTextFieldCellVerticallyCentered">
                                             <font key="font" size="17" name="HelveticaNeue"/>
@@ -883,27 +883,35 @@ Make a wish, this is the last time :)</string>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="ALY-0V-U4j" userLabel="User account view">
                                 <rect key="frame" x="188" y="35" width="225" height="205"/>
                                 <subviews>
-                                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7EY-Hg-OzG" customClass="CircularImageView">
+                                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7EY-Hg-OzG">
                                         <rect key="frame" x="72" y="101" width="80" height="80"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="80" id="MLA-fV-8tY"/>
+                                            <constraint firstAttribute="width" constant="80" id="tUm-QZ-ZwE"/>
+                                        </constraints>
                                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="H9P-Gl-ldh"/>
                                     </imageView>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="opW-M3-Iqq">
+                                    <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="opW-M3-Iqq">
                                         <rect key="frame" x="28" y="73" width="169" height="17"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="165" id="Q4a-2X-A3b"/>
+                                            <constraint firstAttribute="height" constant="17" id="vLf-sA-Qfi"/>
+                                        </constraints>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Username" id="VLc-uT-MFr">
                                             <font key="font" metaFont="system"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </textFieldCell>
                                     </textField>
-                                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0oP-6r-aA4" customClass="UserPasswordFieldBackgroundView">
+                                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="0oP-6r-aA4" customClass="UserPasswordFieldBackgroundView">
                                         <rect key="frame" x="39" y="29" width="147" height="24"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="24" id="Vzg-DI-3Ub"/>
+                                            <constraint firstAttribute="width" constant="147" id="uiV-nA-HyB"/>
+                                        </constraints>
                                     </customView>
-                                    <secureTextField focusRingType="none" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bH8-3f-v8y">
-                                        <rect key="frame" x="45" y="33" width="135" height="17"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    <secureTextField focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bH8-3f-v8y">
+                                        <rect key="frame" x="45" y="33" width="135" height="16"/>
                                         <secureTextFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" focusRingType="none" placeholderString="Password..." usesSingleLineMode="YES" id="5KI-fL-MLQ">
                                             <font key="font" metaFont="system"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -917,21 +925,36 @@ Make a wish, this is the last time :)</string>
                                             <outlet property="delegate" destination="kKA-dJ-udE" id="u8I-yU-HYh"/>
                                         </connections>
                                     </secureTextField>
-                                    <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SX4-KM-8xc">
-                                        <rect key="frame" x="191" y="29" width="20" height="23"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    <button translatesAutoresizingMaskIntoConstraints="NO" id="SX4-KM-8xc">
+                                        <rect key="frame" x="191" y="30" width="20" height="23"/>
                                         <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="PasswordArrow" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="uPY-lM-RJN">
                                             <behavior key="behavior" lightByContents="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="23" id="bzq-jm-Wqo"/>
+                                            <constraint firstAttribute="width" constant="20" id="x0V-aF-jEp"/>
+                                        </constraints>
                                         <connections>
                                             <action selector="passwordValidated:" target="kKA-dJ-udE" id="w7O-8D-FFR"/>
                                         </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstItem="7EY-Hg-OzG" firstAttribute="centerX" secondItem="ALY-0V-U4j" secondAttribute="centerX" id="7fP-Cr-w5x"/>
                                     <constraint firstAttribute="width" constant="225" id="FUa-20-qKh"/>
+                                    <constraint firstItem="opW-M3-Iqq" firstAttribute="centerX" secondItem="ALY-0V-U4j" secondAttribute="centerX" id="L1h-eh-Iet"/>
+                                    <constraint firstItem="7EY-Hg-OzG" firstAttribute="top" secondItem="ALY-0V-U4j" secondAttribute="top" constant="24" id="L8S-y0-Hkv"/>
+                                    <constraint firstItem="0oP-6r-aA4" firstAttribute="centerX" secondItem="ALY-0V-U4j" secondAttribute="centerX" id="LKY-Ec-u2m"/>
                                     <constraint firstAttribute="height" constant="205" id="MXK-ts-52D"/>
+                                    <constraint firstItem="SX4-KM-8xc" firstAttribute="leading" secondItem="0oP-6r-aA4" secondAttribute="trailing" constant="5" id="OtL-iR-qyl"/>
+                                    <constraint firstItem="bH8-3f-v8y" firstAttribute="trailing" secondItem="0oP-6r-aA4" secondAttribute="trailing" constant="-8" id="Pv2-ZH-BNo"/>
+                                    <constraint firstItem="bH8-3f-v8y" firstAttribute="top" secondItem="0oP-6r-aA4" secondAttribute="top" constant="4" id="SAE-kq-6K2"/>
+                                    <constraint firstItem="0oP-6r-aA4" firstAttribute="top" secondItem="opW-M3-Iqq" secondAttribute="bottom" constant="20" id="TjO-Lg-szn"/>
+                                    <constraint firstItem="SX4-KM-8xc" firstAttribute="centerY" secondItem="0oP-6r-aA4" secondAttribute="centerY" id="bFB-D4-0Xp"/>
+                                    <constraint firstItem="opW-M3-Iqq" firstAttribute="top" secondItem="7EY-Hg-OzG" secondAttribute="bottom" constant="11" id="vnR-d2-Eca"/>
+                                    <constraint firstItem="bH8-3f-v8y" firstAttribute="bottom" secondItem="0oP-6r-aA4" secondAttribute="bottom" constant="-4" id="woc-KC-1Gw"/>
+                                    <constraint firstItem="bH8-3f-v8y" firstAttribute="leading" secondItem="0oP-6r-aA4" secondAttribute="leading" constant="8" id="zdF-xs-94t"/>
                                 </constraints>
                             </customView>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="dPb-G1-jLh" customClass="YRKSpinningProgressIndicator">
@@ -943,33 +966,33 @@ Make a wish, this is the last time :)</string>
                             </customView>
                             <button translatesAutoresizingMaskIntoConstraints="NO" id="1kC-CR-xCB" customClass="PairingButton">
                                 <rect key="frame" x="243" y="165" width="114" height="39"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="114" id="OxI-rs-A0C"/>
-                                    <constraint firstAttribute="height" constant="39" id="aEP-GX-aHn"/>
-                                </constraints>
                                 <buttonCell key="cell" type="bevel" title="OK, I'm ready" bezelStyle="rounded" alignment="center" imageScaling="proportionallyDown" inset="2" id="koS-fZ-8BR" customClass="NSButtonCellVerticallyCentered">
                                     <behavior key="behavior" lightByContents="YES"/>
                                     <font key="font" size="17" name="HelveticaNeue-Bold"/>
                                 </buttonCell>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="114" id="OxI-rs-A0C"/>
+                                    <constraint firstAttribute="height" constant="39" id="aEP-GX-aHn"/>
+                                </constraints>
                                 <connections>
                                     <action selector="okImReadyButtonPressed:" target="kKA-dJ-udE" id="VhI-kn-mmX"/>
                                 </connections>
                             </button>
                             <button translatesAutoresizingMaskIntoConstraints="NO" id="30i-nl-EPm" customClass="PairingButton">
                                 <rect key="frame" x="235" y="65" width="131" height="39"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="131" id="coy-Sd-hNU"/>
-                                    <constraint firstAttribute="height" constant="39" id="z3y-Eq-iNG"/>
-                                </constraints>
                                 <buttonCell key="cell" type="bevel" title="Minimize Locky" bezelStyle="rounded" alignment="center" imageScaling="proportionallyDown" inset="2" id="AYH-MK-wER" customClass="NSButtonCellVerticallyCentered">
                                     <behavior key="behavior" lightByContents="YES"/>
                                     <font key="font" size="17" name="HelveticaNeue-Bold"/>
                                 </buttonCell>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="131" id="coy-Sd-hNU"/>
+                                    <constraint firstAttribute="height" constant="39" id="z3y-Eq-iNG"/>
+                                </constraints>
                                 <connections>
                                     <action selector="startLockyButtonPressed:" target="kKA-dJ-udE" id="C1h-zO-yZD"/>
                                 </connections>
                             </button>
-                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="CSj-Jl-oP8">
+                            <customView clipsToBounds="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CSj-Jl-oP8">
                                 <rect key="frame" x="236" y="115" width="0.0" height="110"/>
                                 <subviews>
                                     <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="KJo-LA-920">
@@ -1056,9 +1079,12 @@ Make a wish, this is the last time :)</string>
         <scene sceneID="Dw0-Es-MQB">
             <objects>
                 <windowController storyboardIdentifier="lockAnimationWindow" id="QOF-ql-hkX" customClass="LockAnimationWindowController" sceneMemberID="viewController">
-                    <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" hasShadow="NO" oneShot="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="PdX-4d-C7M" customClass="DraggableWindow">
+                    <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" hasShadow="NO" visibleAtLaunch="NO" animationBehavior="default" id="PdX-4d-C7M" customClass="DraggableWindow">
                         <rect key="contentRect" x="-1626" y="372" width="480" height="270"/>
                         <rect key="screenRect" x="-1920" y="0.0" width="1920" height="1200"/>
+                        <connections>
+                            <outlet property="delegate" destination="QOF-ql-hkX" id="YEa-HA-Vbk"/>
+                        </connections>
                     </window>
                     <connections>
                         <segue destination="yF9-9A-Zq4" kind="relationship" relationship="window.shadowedContentViewController" id="tAi-cu-PLV"/>
@@ -1127,18 +1153,17 @@ Make a wish, this is the last time :)</string>
             <point key="canvasLocation" x="3281" y="232"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="PqS-d9-OaG"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="Check-Small" width="120" height="80"/>
         <image name="LockyIconWhite" width="256" height="256"/>
         <image name="Locky_iOS+Mac" width="210" height="70"/>
         <image name="PasswordArrow" width="256" height="256"/>
         <image name="appStoreBadge" width="220" height="65"/>
-        <image name="bluetooth" width="209.75999450683594" height="283.44000244140625"/>
+        <image name="bluetooth" width="437" height="590.5"/>
         <image name="iPhone" width="113" height="232"/>
-        <image name="pairButton" width="111" height="27"/>
         <image name="pairingWindowBackground" width="447" height="283"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="PqS-d9-OaG"/>
-    </inferredMetricsTieBreakers>
 </document>

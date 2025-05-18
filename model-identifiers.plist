@@ -671,6 +671,27 @@
 		<key>isSlow</key>
 		<false/>
 	</dict>
+	<key>MacBookPro18,4</key>
+	<dict>
+		<key>Device</key>
+		<string>MacBook Pro Retina</string>
+		<key>Generation</key>
+		<string>Early 2015</string>
+		<key>Height</key>
+		<integer>116</integer>
+		<key>Image</key>
+		<string>Mac-MacBookProRetina</string>
+		<key>Variant</key>
+		<string>13-inch, Retina</string>
+		<key>Width</key>
+		<integer>184</integer>
+		<key>X</key>
+		<integer>39</integer>
+		<key>Y</key>
+		<real>63.5</real>
+		<key>isSlow</key>
+		<false/>
+	</dict>
 	<key>MacBookPro2,1</key>
 	<dict>
 		<key>Device</key>

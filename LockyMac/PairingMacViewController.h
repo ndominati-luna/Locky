@@ -33,7 +33,7 @@
 @property (nonatomic, strong) IBOutlet NSTextField *step5Label;
 
 @property (nonatomic, strong) IBOutlet NSView *accountView;
-@property (nonatomic, strong) IBOutlet CircularImageView *accountImageView;
+@property (nonatomic, strong) IBOutlet NSImageView *accountImageView;
 @property (nonatomic, strong) IBOutlet NSTextField *accountUsernameLabel;
 @property (nonatomic, strong) IBOutlet NSButton *passwordEnteredButton;
 @property (nonatomic, strong) IBOutlet NSSecureTextField *passwordTextfield;

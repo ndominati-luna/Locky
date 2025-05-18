@@ -18,10 +18,6 @@
 + (NSDictionary *)pairediOSInfo;
 + (void)removePairediOSInfo;
 
-+ (void)saveBackgroundURLPath:(NSString *)backgroundURLPath;
-+ (NSString *)backgroundURLPath;
-+ (void)removeBackgroundURLPath;
-
 + (void)savePeripheralUUIDsToClean:(NSArray *)array;
 + (NSArray *)peripheralUUIDsToClean;
 + (void)removePeripheralUUIDsToClean;

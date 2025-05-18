@@ -26,6 +26,8 @@
 
 @end
 
+extern int SACLockScreenImmediate(void);
+
 @implementation OSX
 
 + (id)sharedInstance
@@ -114,10 +116,11 @@ void IOBluetoothPreferenceSetControllerPowerState(int);
 #pragma clang diagnostic ignored "-Wundeclared-selector"
 + (void)lockScreen
 {
-	NSBundle *bundle = [NSBundle bundleWithPath:@"/Applications/Utilities/Keychain Access.app/Contents/Resources/Keychain.menu"];
-	Class principalClass = [bundle principalClass];
-	id instance = [[principalClass alloc] init];
-	[instance performSelector:@selector(_lockScreenMenuHit:) withObject:nil];
+//	NSBundle *bundle = [NSBundle bundleWithPath:@"/System/Library/CoreServices/Applications/Keychain Access.app/Contents/Resources/Keychain.menu"];
+//	Class principalClass = [bundle principalClass];
+//	id instance = [[principalClass alloc] init];
+//	[instance performSelector:@selector(_lockScreenMenuHit:) withObject:nil];
+  SACLockScreenImmediate();
 }
 #pragma clang diagnostic pop
 
@@ -490,41 +493,50 @@ void IOBluetoothPreferenceSetControllerPowerState(int);
 
 - (void)captureScreenshotWithCompletion: (void (^_Nullable)(NSImage * _Nullable, NSError * _Nullable))completion
 {
-  // 1️⃣ Obtenir la liste partageable (affichages, fenêtres…)
   [SCShareableContent getShareableContentWithCompletionHandler:
-   ^(SCShareableContent *shareable, NSError *err)
-   {
+   ^(SCShareableContent *shareable, NSError *err) {
+
     if (err) { completion(nil, err); return; }
 
-    // 2️⃣ Sélectionner le moniteur principal
-    SCDisplay *mainDisplay = nil;
-    for (SCDisplay *display in shareable.displays) {
-      if (display.displayID == CGMainDisplayID()) { mainDisplay = display; break; }
-    }
-    if (!mainDisplay) {
-      NSError *e = [NSError errorWithDomain:@"Capture"
+    // 1️⃣ moniteur principal
+    SCDisplay *main =
+    [shareable.displays firstObject];                // equiv. CGMainDisplayID()
+    if (!main) {
+      completion(nil, [NSError errorWithDomain:@"Wallpaper"
                                        code:-1
-                                   userInfo:@{NSLocalizedDescriptionKey:
-                                                @"Écran principal introuvable"}];
-      completion(nil, e); return;
+                                   userInfo:@{NSLocalizedDescriptionKey:@"No display"}]);
+      return;
     }
 
-    // 3️⃣ Créer le filtre “tout l’écran”
+    // 2️⃣ Windows qui NE sont PAS du wallpaper
+    NSMutableArray<SCWindow *> *exclude = [NSMutableArray array];
+    for (SCWindow *w in shareable.windows) {
+      BOOL isWallpaper = [w.title hasPrefix:@"Wallpaper-"] && [w.owningApplication.bundleIdentifier isEqualToString:@"com.apple.dock"];
+
+      if (!isWallpaper) {
+        [exclude addObject:w];
+      }
+    }
+
+    // 3️⃣ Filtre « wallpaper-only »
     SCContentFilter *filter =
-    [[SCContentFilter alloc] initWithDisplay:mainDisplay excludingWindows:@[]];
+    [[SCContentFilter alloc] initWithDisplay:main excludingWindows:exclude];
 
-    // 4️⃣ Configuration : résolution native & format BGRA
-    SCStreamConfiguration *cfg = [[SCStreamConfiguration alloc] init];
-    cfg.width       = mainDisplay.width;
-    cfg.height      = mainDisplay.height;
-    cfg.pixelFormat = kCVPixelFormatType_32BGRA;
+    // 4️⃣ Config : résolution native, pas de curseur
+    SCStreamConfiguration *cfg = [SCStreamConfiguration new];
+    cfg.width  = main.width;
+    cfg.height = main.height;
+    cfg.showsCursor = NO;
 
-    // 5️⃣ Capture asynchrone
-    [SCScreenshotManager captureImageWithFilter:filter configuration:cfg completionHandler: ^(CGImageRef cgImg, NSError *err2) {
-      if (err2) { completion(nil, err2); return; }
+    // 5️⃣ Capture
+    [SCScreenshotManager captureImageWithFilter:filter
+     configuration:cfg
+     completionHandler:
+       ^(CGImageRef cgImg, NSError *err2) {
 
-      NSImage *img = [[NSImage alloc] initWithCGImage:cgImg size:NSZeroSize];
-      completion(img, nil);
+      if (err2 || !cgImg) { completion(nil, err2); return; }
+      NSImage *finalImage = [[NSImage alloc] initWithCGImage:cgImg size:NSZeroSize];
+      completion(finalImage, nil);
     }];
   }];
 }
