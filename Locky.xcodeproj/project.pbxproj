@@ -15,8 +15,6 @@
 		37085D111AEA8709001D9A11 /* yml.caf in Resources */ = {isa = PBXBuildFile; fileRef = 37085D101AEA8709001D9A11 /* yml.caf */; };
 		3712776C1ADE804F00690DDE /* next.caf in Resources */ = {isa = PBXBuildFile; fileRef = 3712776B1ADE804F00690DDE /* next.caf */; };
 		37185AF81AE7CC90004D917B /* ocevb.caf in Resources */ = {isa = PBXBuildFile; fileRef = 37185AF71AE7CC90004D917B /* ocevb.caf */; };
-		37185AF91AE7D326004D917B /* NSDate+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 37B9BAEB1AD1C747000A5FEF /* NSDate+Utils.m */; };
-		37185AFA1AE7D33D004D917B /* NSString+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F7ACBA1AA9F40D00A4C6AA /* NSString+Utils.m */; };
 		37185B011AE8C976004D917B /* LockAnimationWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37185B001AE8C976004D917B /* LockAnimationWindowController.m */; };
 		37185B041AE8C994004D917B /* LockAnimationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37185B031AE8C994004D917B /* LockAnimationViewController.m */; };
 		37185B071AE8CAF7004D917B /* DraggableWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 37185B061AE8CAF7004D917B /* DraggableWindow.m */; };
@@ -212,16 +210,6 @@
 		37B9BAE51AD17D3D000A5FEF /* UIScrollView+KeepLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 37B9BADE1AD17D3D000A5FEF /* UIScrollView+KeepLayout.m */; };
 		37B9BAEC1AD1C747000A5FEF /* NSDate+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 37B9BAEB1AD1C747000A5FEF /* NSDate+Utils.m */; };
 		37B9BAED1AD1C747000A5FEF /* NSDate+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 37B9BAEB1AD1C747000A5FEF /* NSDate+Utils.m */; };
-		37BC52DC1AE5250200C69BDD /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37BC52DB1AE5250200C69BDD /* NotificationCenter.framework */; };
-		37BC52E21AE5250200C69BDD /* TodayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37BC52E11AE5250200C69BDD /* TodayViewController.m */; };
-		37BC52E41AE5250200C69BDD /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 37BC52E31AE5250200C69BDD /* MainInterface.storyboard */; };
-		37BC52E71AE5250200C69BDD /* LockyToday.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 37BC52D91AE5250200C69BDD /* LockyToday.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		37BC52EC1AE5254800C69BDD /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 37F7AC7C1AA9C0D600A4C6AA /* Localizable.strings */; };
-		37BC52ED1AE525BB00C69BDD /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 371CFE4B1AB17EF00061D84D /* Images.xcassets */; };
-		37BC52EF1AE52C2800C69BDD /* LBLockyButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37317B9F1ADCF7BD00A784DE /* LBLockyButton.swift */; };
-		37BC52F01AE52C2800C69BDD /* LBAnimatableObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37317B971ADCF7A900A784DE /* LBAnimatableObject.swift */; };
-		37BC52F11AE52C2800C69BDD /* LBAnimatableButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37317B981ADCF7A900A784DE /* LBAnimatableButton.swift */; };
-		37BC52F31AE52CD900C69BDD /* MacDeviceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 371CFE951AB1E59C0061D84D /* MacDeviceViewController.xib */; };
 		37C4FD8A1ADFD5FF00EAB9B1 /* oai.caf in Resources */ = {isa = PBXBuildFile; fileRef = 37C4FD891ADFD5FF00EAB9B1 /* oai.caf */; };
 		37CBD5441AC2F7E000196BB1 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37CBD5431AC2F7E000196BB1 /* CoreLocation.framework */; };
 		37CBD54A1AC4999E00196BB1 /* KeychainManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 37CBD5491AC4999D00196BB1 /* KeychainManager.m */; };
@@ -239,7 +227,6 @@
 		37EA92C11ACC83680077A444 /* FirstSetupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37EA92C01ACC83680077A444 /* FirstSetupViewController.m */; };
 		37F335131AE5582100E292C6 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37BC52DB1AE5250200C69BDD /* NotificationCenter.framework */; };
 		37F335171AE6289D00E292C6 /* MMWormhole.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F335161AE6289D00E292C6 /* MMWormhole.m */; };
-		37F335181AE6289D00E292C6 /* MMWormhole.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F335161AE6289D00E292C6 /* MMWormhole.m */; };
 		37F46E7B1B8B35BA00697E33 /* WatchConnectivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37F46E7A1B8B35BA00697E33 /* WatchConnectivity.framework */; };
 		37F7AC271AA9BF9200A4C6AA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F7AC261AA9BF9200A4C6AA /* main.m */; };
 		37F7AC2A1AA9BF9200A4C6AA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F7AC291AA9BF9200A4C6AA /* AppDelegate.m */; };
@@ -296,13 +283,6 @@
 			remoteGlobalIDString = 37A4F69D1B7B21460097E432;
 			remoteInfo = LockyWatch;
 		};
-		37BC52E51AE5250200C69BDD /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 37F7AC191AA9BF9200A4C6AA /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 37BC52D81AE5250200C69BDD;
-			remoteInfo = LockyToday;
-		};
 		37CD700A1AC9677300856ABF /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 37F7AC191AA9BF9200A4C6AA /* Project object */;
@@ -336,7 +316,6 @@
 			dstPath = "";
 			dstSubfolder = PlugIns;
 			files = (
-				37BC52E71AE5250200C69BDD /* LockyToday.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 		};
@@ -479,6 +458,8 @@
 		37317BA01ADCF7BD00A784DE /* Tips.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Tips.storyboard; sourceTree = "<group>"; };
 		37317BA51ADCF7CF00A784DE /* WecomeAsset.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = WecomeAsset.xcassets; sourceTree = "<group>"; };
 		37317BA71ADCF80700A784DE /* LBGradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBGradientView.swift; sourceTree = "<group>"; };
+		3731CE742DDB2EE900919F6D /* LockyMac.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = LockyMac.entitlements; sourceTree = "<group>"; };
+		3731CE752DDB2F3D00919F6D /* lockyhelper.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = lockyhelper.entitlements; sourceTree = "<group>"; };
 		37372F5D1B98E0900004CB5B /* WatchManagerIOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WatchManagerIOS.h; sourceTree = "<group>"; };
 		37372F5E1B98E0900004CB5B /* WatchManagerIOS.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WatchManagerIOS.m; sourceTree = "<group>"; };
 		37382AA11AD0809D00666C75 /* MASDictionaryTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASDictionaryTransformer.h; sourceTree = "<group>"; };
@@ -672,7 +653,6 @@
 		37B9BADE1AD17D3D000A5FEF /* UIScrollView+KeepLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+KeepLayout.m"; sourceTree = "<group>"; };
 		37B9BAEA1AD1C747000A5FEF /* NSDate+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Utils.h"; sourceTree = "<group>"; };
 		37B9BAEB1AD1C747000A5FEF /* NSDate+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Utils.m"; sourceTree = "<group>"; };
-		37BC52D91AE5250200C69BDD /* LockyToday.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = LockyToday.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		37BC52DB1AE5250200C69BDD /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
 		37BC52DF1AE5250200C69BDD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		37BC52E01AE5250200C69BDD /* TodayViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TodayViewController.h; sourceTree = "<group>"; };
@@ -782,12 +762,6 @@
 			files = (
 				37306E971DA4E1AD006C7742 /* WatchConnectivity.framework in Frameworks */,
 				37306E951DA4E1A9006C7742 /* WatchKit.framework in Frameworks */,
-			);
-		};
-		37BC52D61AE5250200C69BDD /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			files = (
-				37BC52DC1AE5250200C69BDD /* NotificationCenter.framework in Frameworks */,
 			);
 		};
 		37CD6FE71AC9666F00856ABF /* Frameworks */ = {
@@ -1523,6 +1497,7 @@
 		37CD6FEB1AC9666F00856ABF /* lockyhelper */ = {
 			isa = PBXGroup;
 			children = (
+				3731CE752DDB2F3D00919F6D /* lockyhelper.entitlements */,
 				37CD6FEE1AC9666F00856ABF /* AppDelegate.h */,
 				37CD6FEF1AC9666F00856ABF /* AppDelegate.m */,
 				37CD6FF31AC9666F00856ABF /* Images.xcassets */,
@@ -1622,7 +1597,6 @@
 				37F7AC211AA9BF9200A4C6AA /* Locky.app */,
 				37F7AC4E1AA9BFA800A4C6AA /* Locky.app */,
 				37CD6FEA1AC9666F00856ABF /* lockyhelper.app */,
-				37BC52D91AE5250200C69BDD /* LockyToday.appex */,
 				37A4F69E1B7B21460097E432 /* LockyWatch.app */,
 				37A4F6AA1B7B21460097E432 /* LockyWatch Extension.appex */,
 			);
@@ -1673,6 +1647,7 @@
 		37F7AC4F1AA9BFA800A4C6AA /* LockyMac */ = {
 			isa = PBXGroup;
 			children = (
+				3731CE742DDB2EE900919F6D /* LockyMac.entitlements */,
 				373840C31B0F5F5F00CE342E /* Images.xcassets */,
 				371CFEC11AB325AF0061D84D /* Crypto */,
 				37F7AC521AA9BFA900A4C6AA /* AppDelegate.h */,
@@ -1945,21 +1920,6 @@
 			productReference = 37A4F6AA1B7B21460097E432 /* LockyWatch Extension.appex */;
 			productType = "com.apple.product-type.watchkit2-extension";
 		};
-		37BC52D81AE5250200C69BDD /* LockyToday */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 37BC52EA1AE5250200C69BDD /* Build configuration list for PBXNativeTarget "LockyToday" */;
-			buildPhases = (
-				37BC52D51AE5250200C69BDD /* Sources */,
-				37BC52D61AE5250200C69BDD /* Frameworks */,
-				37BC52D71AE5250200C69BDD /* Resources */,
-			);
-			buildRules = (
-			);
-			name = LockyToday;
-			productName = LockyToday;
-			productReference = 37BC52D91AE5250200C69BDD /* LockyToday.appex */;
-			productType = "com.apple.product-type.app-extension";
-		};
 		37CD6FE91AC9666F00856ABF /* lockyhelper */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 37CD70041AC9667000856ABF /* Build configuration list for PBXNativeTarget "lockyhelper" */;
@@ -1988,7 +1948,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				37BC52E61AE5250200C69BDD /* PBXTargetDependency */,
 				37A4F6BF1B7B21460097E432 /* PBXTargetDependency */,
 			);
 			name = Locky;
@@ -2042,16 +2001,6 @@
 						LastSwiftMigration = 0800;
 						SystemCapabilities = {
 							com.apple.BackgroundModes.watchos.extension = {
-								enabled = 1;
-							};
-						};
-					};
-					37BC52D81AE5250200C69BDD = {
-						CreatedOnToolsVersion = 6.3;
-						DevelopmentTeam = EPSKWEH82C;
-						LastSwiftMigration = 0800;
-						SystemCapabilities = {
-							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
 							};
 						};
@@ -2112,7 +2061,6 @@
 			projectRoot = "";
 			targets = (
 				37F7AC201AA9BF9200A4C6AA /* Locky */,
-				37BC52D81AE5250200C69BDD /* LockyToday */,
 				37A4F69D1B7B21460097E432 /* LockyWatch */,
 				37A4F6A91B7B21460097E432 /* LockyWatch Extension */,
 				37F7AC4D1AA9BFA800A4C6AA /* LockyMac */,
@@ -2134,15 +2082,6 @@
 			files = (
 				37A4F6BC1B7B21460097E432 /* Assets.xcassets in Resources */,
 				3744FE571B7C8326008B2DAF /* Localizable.strings in Resources */,
-			);
-		};
-		37BC52D71AE5250200C69BDD /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			files = (
-				37BC52F31AE52CD900C69BDD /* MacDeviceViewController.xib in Resources */,
-				37BC52ED1AE525BB00C69BDD /* Images.xcassets in Resources */,
-				37BC52E41AE5250200C69BDD /* MainInterface.storyboard in Resources */,
-				37BC52EC1AE5254800C69BDD /* Localizable.strings in Resources */,
 			);
 		};
 		37CD6FE81AC9666F00856ABF /* Resources */ = {
@@ -2221,18 +2160,6 @@
 				37A4F6B21B7B21460097E432 /* InterfaceController.swift in Sources */,
 				37A4F6B81B7B21460097E432 /* GlanceController.swift in Sources */,
 				37416F9A1B98AEDF007AC69F /* WatchManager.swift in Sources */,
-			);
-		};
-		37BC52D51AE5250200C69BDD /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			files = (
-				37BC52EF1AE52C2800C69BDD /* LBLockyButton.swift in Sources */,
-				37F335181AE6289D00E292C6 /* MMWormhole.m in Sources */,
-				37BC52F01AE52C2800C69BDD /* LBAnimatableObject.swift in Sources */,
-				37BC52E21AE5250200C69BDD /* TodayViewController.m in Sources */,
-				37185AF91AE7D326004D917B /* NSDate+Utils.m in Sources */,
-				37BC52F11AE52C2800C69BDD /* LBAnimatableButton.swift in Sources */,
-				37185AFA1AE7D33D004D917B /* NSString+Utils.m in Sources */,
 			);
 		};
 		37CD6FE61AC9666F00856ABF /* Sources */ = {
@@ -2430,11 +2357,6 @@
 			target = 37A4F69D1B7B21460097E432 /* LockyWatch */;
 			targetProxy = 37A4F6BE1B7B21460097E432 /* PBXContainerItemProxy */;
 		};
-		37BC52E61AE5250200C69BDD /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 37BC52D81AE5250200C69BDD /* LockyToday */;
-			targetProxy = 37BC52E51AE5250200C69BDD /* PBXContainerItemProxy */;
-		};
 		37CD700B1AC9677300856ABF /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 37CD6FE91AC9666F00856ABF /* lockyhelper */;
@@ -2524,14 +2446,17 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_RESOURCE_RULES_PATH = "";
+				CURRENT_PROJECT_VERSION = 3001;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = EPSKWEH82C;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				ENABLE_BITCODE = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
 				IBSC_MODULE = LockyWatch_Extension;
 				INFOPLIST_FILE = LockyWatch/Info.plist;
+				MARKETING_VERSION = 3.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.lunabee.sg.Locky.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -2550,13 +2475,16 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_RESOURCE_RULES_PATH = "";
 				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 3001;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = EPSKWEH82C;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				ENABLE_BITCODE = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
 				IBSC_MODULE = LockyWatch_Extension;
 				INFOPLIST_FILE = LockyWatch/Info.plist;
+				MARKETING_VERSION = 3.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.lunabee.sg.Locky.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -2573,17 +2501,20 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_RESOURCE_RULES_PATH = "";
+				CURRENT_PROJECT_VERSION = 3001;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = EPSKWEH82C;
 				ENABLE_BITCODE = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "LockyWatch Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
+				MARKETING_VERSION = 3.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.lunabee.sg.Locky.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
 				PROVISIONING_PROFILE = "";
@@ -2604,16 +2535,19 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_RESOURCE_RULES_PATH = "";
 				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 3001;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = EPSKWEH82C;
 				ENABLE_BITCODE = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "LockyWatch Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
+				MARKETING_VERSION = 3.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.lunabee.sg.Locky.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
 				PROVISIONING_PROFILE = "";
@@ -2624,75 +2558,27 @@
 			};
 			name = Release;
 		};
-		37BC52E81AE5250200C69BDD /* Debug configuration for PBXNativeTarget "LockyToday" */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = LockyToday/LockyToday.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_RESOURCE_RULES_PATH = "";
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = EPSKWEH82C;
-				ENABLE_BITCODE = NO;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = LockyToday/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.lunabee.sg.Locky.LockyToday;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				SKIP_INSTALL = YES;
-			};
-			name = Debug;
-		};
-		37BC52E91AE5250200C69BDD /* Release configuration for PBXNativeTarget "LockyToday" */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = LockyToday/LockyToday.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_RESOURCE_RULES_PATH = "";
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = EPSKWEH82C;
-				ENABLE_BITCODE = NO;
-				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = LockyToday/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.lunabee.sg.Locky.LockyToday;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				SKIP_INSTALL = YES;
-			};
-			name = Release;
-		};
 		37CD70051AC9667000856ABF /* Debug configuration for PBXNativeTarget "lockyhelper" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = lockyhelper/lockyhelper.entitlements;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 3001;
 				DEVELOPMENT_TEAM = EPSKWEH82C;
+				ENABLE_HARDENED_RUNTIME = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
+				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = lockyhelper/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				MARKETING_VERSION = 3.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.lunabee.sg.lockyhelper;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
@@ -2704,16 +2590,21 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = lockyhelper/lockyhelper.entitlements;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
+				CURRENT_PROJECT_VERSION = 3001;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = EPSKWEH82C;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = lockyhelper/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				MARKETING_VERSION = 3.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.lunabee.sg.lockyhelper;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
@@ -2819,6 +2710,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_RESOURCE_RULES_PATH = "";
+				CURRENT_PROJECT_VERSION = 3001;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = EPSKWEH82C;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
@@ -2829,17 +2721,34 @@
 					"$(PROJECT_DIR)/Locky/HockeySDK-iOS/HockeySDKCrashOnly",
 				);
 				GCC_PREFIX_HEADER = "Locky/Locky-Prefix.pch";
+				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Locky/Info.plist;
+				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "Locky needs Bluetooth to connect your iPhone with your Mac.";
+				INFOPLIST_KEY_NSBluetoothPeripheralUsageDescription = "Locky needs Bluetooth to connect your iPhone with your Mac.";
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "Locky needs to access FaceID to activate this feature.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Locky uses your location to calculate the distance between your iPhone your Mac.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Locky needs to access your photo library in demo mode to configure the screenshots.";
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIRequiredDeviceCapabilities = "armv7 bluetooth-le";
+				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleLightContent;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 3.0.0;
 				OTHER_CODE_SIGN_FLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.lunabee.sg.Locky;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/Locky/SwiftBridgingHeaders.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -2852,6 +2761,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_RESOURCE_RULES_PATH = "";
 				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 3001;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = EPSKWEH82C;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
@@ -2866,17 +2776,34 @@
 					"$(inherited)",
 					"PROD=1",
 				);
+				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Locky/Info.plist;
+				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "Locky needs Bluetooth to connect your iPhone with your Mac.";
+				INFOPLIST_KEY_NSBluetoothPeripheralUsageDescription = "Locky needs Bluetooth to connect your iPhone with your Mac.";
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "Locky needs to access FaceID to activate this feature.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Locky uses your location to calculate the distance between your iPhone your Mac.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Locky needs to access your photo library in demo mode to configure the screenshots.";
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIRequiredDeviceCapabilities = "armv7 bluetooth-le";
+				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleLightContent;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 3.0.0;
 				OTHER_CODE_SIGN_FLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.lunabee.sg.Locky;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/Locky/SwiftBridgingHeaders.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -2885,10 +2812,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = LockyMac/LockyMac.entitlements;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 3001;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = EPSKWEH82C;
+				ENABLE_HARDENED_RUNTIME = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/LockyMac",
@@ -2898,11 +2828,13 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
+				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = LockyMac/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				MARKETING_VERSION = 3.0.0;
 				OTHER_LDFLAGS = (
 					"-Wl,-rpath,@loader_path/../Frameworks",
 					"$(inherited)",
@@ -2925,12 +2857,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = LockyMac/LockyMac.entitlements;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 3001;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = EPSKWEH82C;
+				ENABLE_HARDENED_RUNTIME = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/LockyMac",
@@ -2940,11 +2875,13 @@
 					"$(inherited)",
 					"PROD=1",
 				);
+				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = LockyMac/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				MARKETING_VERSION = 3.0.0;
 				OTHER_LDFLAGS = (
 					"-Wl,-rpath,@loader_path/../Frameworks",
 					"$(inherited)",
@@ -2977,14 +2914,6 @@
 			buildConfigurations = (
 				37A4F6C11B7B21460097E432 /* Debug configuration for PBXNativeTarget "LockyWatch" */,
 				37A4F6C21B7B21460097E432 /* Release configuration for PBXNativeTarget "LockyWatch" */,
-			);
-			defaultConfigurationName = Release;
-		};
-		37BC52EA1AE5250200C69BDD /* Build configuration list for PBXNativeTarget "LockyToday" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				37BC52E81AE5250200C69BDD /* Debug configuration for PBXNativeTarget "LockyToday" */,
-				37BC52E91AE5250200C69BDD /* Release configuration for PBXNativeTarget "LockyToday" */,
 			);
 			defaultConfigurationName = Release;
 		};

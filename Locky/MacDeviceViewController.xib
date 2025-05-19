@@ -62,22 +62,22 @@
                                 <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sOk-Xj-fpA">
                                     <rect key="frame" x="6" y="2" width="0.0" height="10"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="••••••••••••••" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Lpq-YD-Nw5">
-                                            <rect key="frame" x="0.0" y="0.0" width="73" height="10"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="••••••••••" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Lpq-YD-Nw5">
+                                            <rect key="frame" x="0.0" y="-3.6666666666666714" width="73" height="10"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="73" id="uvr-2X-a7k"/>
                                             </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
+                                        <constraint firstItem="Lpq-YD-Nw5" firstAttribute="centerY" secondItem="sOk-Xj-fpA" secondAttribute="centerY" constant="-3.5" id="B70-5G-nMw"/>
                                         <constraint firstAttribute="width" id="Bm9-dZ-bAO"/>
-                                        <constraint firstAttribute="bottom" secondItem="Lpq-YD-Nw5" secondAttribute="bottom" id="Egh-dk-DOF"/>
                                         <constraint firstItem="Lpq-YD-Nw5" firstAttribute="leading" secondItem="sOk-Xj-fpA" secondAttribute="leading" id="Hx3-Cu-8fF"/>
-                                        <constraint firstItem="Lpq-YD-Nw5" firstAttribute="top" secondItem="sOk-Xj-fpA" secondAttribute="top" id="RSR-9k-1Jb"/>
+                                        <constraint firstItem="Lpq-YD-Nw5" firstAttribute="height" secondItem="sOk-Xj-fpA" secondAttribute="height" id="u5U-5H-uGD"/>
                                     </constraints>
                                 </view>
                             </subviews>

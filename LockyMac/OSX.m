@@ -499,8 +499,10 @@ void IOBluetoothPreferenceSetControllerPowerState(int);
     if (err) { completion(nil, err); return; }
 
     // 1️⃣ moniteur principal
-    SCDisplay *main =
-    [shareable.displays firstObject];                // equiv. CGMainDisplayID()
+    NSPredicate *zeroOrigin = [NSPredicate predicateWithBlock:^BOOL(SCDisplay *d, NSDictionary *_) {
+      return d.frame.origin.x == 0 && d.frame.origin.y == 0;
+    }];
+    SCDisplay *main = [[shareable.displays filteredArrayUsingPredicate:zeroOrigin] firstObject];
     if (!main) {
       completion(nil, [NSError errorWithDomain:@"Wallpaper"
                                        code:-1
@@ -511,9 +513,14 @@ void IOBluetoothPreferenceSetControllerPowerState(int);
     // 2️⃣ Windows qui NE sont PAS du wallpaper
     NSMutableArray<SCWindow *> *exclude = [NSMutableArray array];
     for (SCWindow *w in shareable.windows) {
+      NSLog(@"ID: %@ | Title: %@", w.owningApplication.bundleIdentifier ?: @"No owning app", w.title);
       BOOL isWallpaper = [w.title hasPrefix:@"Wallpaper-"] && [w.owningApplication.bundleIdentifier isEqualToString:@"com.apple.dock"];
-
-      if (!isWallpaper) {
+      BOOL isMenubar = [w.owningApplication.bundleIdentifier isEqualToString:@""] && [w.title isEqualToString:@"Menubar"];
+      BOOL isDesktop = [w.owningApplication.bundleIdentifier isEqualToString:@"com.apple.finder"] && [w.title isEqualToString:@""];
+      BOOL isDock = [w.owningApplication.bundleIdentifier isEqualToString:@"com.apple.dock"] && [w.title isEqualToString:@"Dock"];
+      BOOL isAppleMenuItems = [@[@"com.apple.systemuiserver", @"com.apple.controlcenter"] containsObject:w.owningApplication.bundleIdentifier];
+      BOOL otherMenuItems = [w.title hasPrefix:@"Item-"];
+      if (!isWallpaper && !isDock && !isMenubar && !isDesktop && !isAppleMenuItems && !otherMenuItems) {
         [exclude addObject:w];
       }
     }
@@ -529,16 +536,40 @@ void IOBluetoothPreferenceSetControllerPowerState(int);
     cfg.showsCursor = NO;
 
     // 5️⃣ Capture
-    [SCScreenshotManager captureImageWithFilter:filter
-     configuration:cfg
-     completionHandler:
+    [self ensureScreenRecordingPermissionThen:^{
+      [SCScreenshotManager captureImageWithFilter:filter
+                                    configuration:cfg
+                                completionHandler:
        ^(CGImageRef cgImg, NSError *err2) {
 
-      if (err2 || !cgImg) { completion(nil, err2); return; }
-      NSImage *finalImage = [[NSImage alloc] initWithCGImage:cgImg size:NSZeroSize];
-      completion(finalImage, nil);
+        if (err2 || !cgImg) { completion(nil, err2); return; }
+        NSImage *finalImage = [[NSImage alloc] initWithCGImage:cgImg size:NSZeroSize];
+        completion(finalImage, nil);
+      }];
     }];
   }];
+}
+
+- (void)ensureScreenRecordingPermissionThen:(void (^)(void))grantedBlock
+{
+  // ①  déjà autorisé ?
+  if (CGPreflightScreenCaptureAccess()) {
+    grantedBlock();                         // → on peut capturer
+    return;
+  }
+
+  // ②  Demande (boîte système) – on ne l’appelle qu’une fois
+  BOOL didOpenSystemPrefs = CGRequestScreenCaptureAccess();
+  if (didOpenSystemPrefs) {
+    NSAlert *a = [[NSAlert alloc] init];
+    a.messageText = @"Autorisez l’enregistrement de l’écran";
+    a.informativeText =
+    @"Dans la fenêtre Réglages qui vient de s’ouvrir, "
+    @"cochez « VotreApp » puis relancez l’application.";
+    [a addButtonWithTitle:@"OK"];
+    [a runModal];
+  }
+  // L’utilisateur vient de refuser ? → rien à faire, on reste silencieux.
 }
 
 

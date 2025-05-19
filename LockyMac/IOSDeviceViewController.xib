@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7531" systemVersion="14C1514" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="23727" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7531"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="23727"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="IOSDeviceViewController">
@@ -26,7 +27,7 @@
                     <rect key="frame" x="198" y="30" width="22" height="10"/>
                     <subviews>
                         <levelIndicator verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="yeG-yz-CVR">
-                            <rect key="frame" x="0.0" y="-3" width="22" height="16"/>
+                            <rect key="frame" x="0.0" y="-1" width="22" height="10"/>
                             <levelIndicatorCell key="cell" alignment="left" doubleValue="100" maxValue="100" warningValue="30" criticalValue="20" levelIndicatorStyle="continuousCapacity" id="Dqh-8S-zP6"/>
                         </levelIndicator>
                     </subviews>
@@ -34,9 +35,9 @@
                         <constraint firstItem="yeG-yz-CVR" firstAttribute="leading" secondItem="HBF-ct-don" secondAttribute="leading" id="ECl-yb-QBJ"/>
                         <constraint firstAttribute="width" constant="22" id="Ffe-eT-YYa"/>
                         <constraint firstAttribute="trailing" secondItem="yeG-yz-CVR" secondAttribute="trailing" id="Fff-n9-IxL"/>
-                        <constraint firstItem="yeG-yz-CVR" firstAttribute="top" secondItem="HBF-ct-don" secondAttribute="top" constant="-3" id="Hhd-IC-L1x"/>
+                        <constraint firstItem="yeG-yz-CVR" firstAttribute="top" secondItem="HBF-ct-don" secondAttribute="top" constant="1" id="Hhd-IC-L1x"/>
                         <constraint firstAttribute="height" constant="10" id="OWk-RE-hWX"/>
-                        <constraint firstAttribute="bottom" secondItem="yeG-yz-CVR" secondAttribute="bottom" constant="-3" id="aei-F1-IE5"/>
+                        <constraint firstAttribute="bottom" secondItem="yeG-yz-CVR" secondAttribute="bottom" constant="1" id="aei-F1-IE5"/>
                     </constraints>
                 </customView>
                 <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="l0z-tX-Fxd">
@@ -55,7 +56,7 @@
                     </constraints>
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="iPhoneIcon" id="aEY-0J-lY4"/>
                 </imageView>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="deb-g0-fPd">
+                <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="deb-g0-fPd">
                     <rect key="frame" x="35" y="25" width="106" height="20"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="20" id="e61-8h-xmr"/>
@@ -66,8 +67,8 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="KTf-95-fWr">
-                    <rect key="frame" x="35" y="5" width="67" height="18"/>
+                <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="KTf-95-fWr">
+                    <rect key="frame" x="35" y="5" width="66" height="18"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="18" id="zv0-4J-TQq"/>
                     </constraints>
@@ -77,10 +78,9 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QzY-7m-KTh">
-                    <rect key="frame" x="157" y="27" width="41" height="16"/>
+                <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QzY-7m-KTh">
+                    <rect key="frame" x="157" y="29" width="41" height="12"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="16" id="0cQ-7a-E9n"/>
                         <constraint firstAttribute="width" constant="37" id="X45-dV-Um1"/>
                     </constraints>
                     <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="100 %" id="IZu-Nh-1Pv">
@@ -104,14 +104,14 @@
                 <constraint firstItem="l0z-tX-Fxd" firstAttribute="top" secondItem="HBF-ct-don" secondAttribute="top" constant="-4" id="Vpd-pc-sgC"/>
                 <constraint firstAttribute="trailing" secondItem="QzY-7m-KTh" secondAttribute="trailing" constant="36" id="bzp-xg-idK"/>
                 <constraint firstItem="l0z-tX-Fxd" firstAttribute="leading" secondItem="HBF-ct-don" secondAttribute="leading" constant="-5" id="elV-o8-DMu"/>
-                <constraint firstItem="QzY-7m-KTh" firstAttribute="centerY" secondItem="l0z-tX-Fxd" secondAttribute="centerY" constant="0.5" id="mxI-Cq-i4D"/>
+                <constraint firstItem="QzY-7m-KTh" firstAttribute="centerY" secondItem="l0z-tX-Fxd" secondAttribute="centerY" id="mxI-Cq-i4D"/>
                 <constraint firstItem="1zZ-Oj-qGY" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="6" id="s8o-ub-aep"/>
             </constraints>
             <point key="canvasLocation" x="421" y="281"/>
         </customView>
     </objects>
     <resources>
-        <image name="batteryIconIntroEmpty" width="31" height="13.5"/>
-        <image name="iPhoneIcon" width="202" height="399"/>
+        <image name="batteryIconIntroEmpty" width="62" height="26.5"/>
+        <image name="iPhoneIcon" width="202.5" height="400"/>
     </resources>
 </document>

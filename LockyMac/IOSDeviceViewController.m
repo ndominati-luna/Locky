@@ -23,7 +23,7 @@
 
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
+  [super viewDidLoad];
 	[self hideBatteryLevel];
 	[self deviceIsNotConnected];
 	[self.deviceNameField setStringValue:[NSUserDefaults pairediOSInfo][INFO_KEY_NAME]];
@@ -32,6 +32,9 @@
 	rect.size.width = width + 126;
 	[self.view setFrame:rect];
 	[self.view translateView];
+  self.batteryLevelIndicatorContainingView.clipsToBounds = YES;
+  self.batteryLevelIndicatorContainingView.layer.cornerRadius = 8.0;
+  self.batteryLevelIndicatorContainingView.layer.masksToBounds = YES;
 }
 
 - (void)updateBatteryLevelWithValue:(NSInteger)value
