@@ -137,7 +137,7 @@
 			peripheralHasLockyService = YES;
 			NSLog(@"Locky device found");
 			[self stopScan];
-			
+      [self.discoveredPeripherals removeObject:peripheral];
 			if (!self.connectedPeripheral)
 			{
 				NSLog(@"Locky peripheral connected");
