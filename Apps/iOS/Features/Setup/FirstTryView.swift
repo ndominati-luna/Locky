@@ -121,6 +121,7 @@ private struct SetupDistanceCard: View {
             DistanceGauge(
                 currentDistance: model.isConnected ? model.proximity?.distance : nil,
                 lockDistance: $preferences.lockDistance,
+                lockState: model.lockState,
                 isMoving: model.isMoving,
                 family: model.macStatus?.family ?? .unknown,
                 phoneImage: model.visuals.phone,

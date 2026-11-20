@@ -26,7 +26,7 @@ struct IntrusionsView: View {
                     ForEach(sections, id: \.title) { section in
                         Section(section.title) {
                             ForEach(section.reports) { report in
-                                NavigationLink(value: report) {
+                                NavigationLink(value: AppRoute.intrusion(id: report.id)) {
                                     IntrusionRow(report: report)
                                 }
                             }
@@ -40,9 +40,6 @@ struct IntrusionsView: View {
                             }
                         }
                     }
-                }
-                .navigationDestination(for: IntrusionReport.self) { report in
-                    IntrusionDetailView(report: report)
                 }
             }
         }

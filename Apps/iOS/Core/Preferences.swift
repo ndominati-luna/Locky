@@ -32,7 +32,7 @@ final class Preferences {
         didSet { defaults.set(unlockAutomatically, forKey: Key.unlockAutomatically) }
     }
 
-    /// Ask for Face ID before unlocking from the iPhone.
+    /// Ask for Face ID or Touch ID (or the passcode) before unlocking from the iPhone.
     var requireBiometrics: Bool {
         didSet { defaults.set(requireBiometrics, forKey: Key.requireBiometrics) }
     }

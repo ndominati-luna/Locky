@@ -3,6 +3,9 @@ import SwiftUI
 
 /// Measures the signal again with the iPhone about 1 m from the Mac, then 2 m, so that distances
 /// read right (the pairing does it once; the Mac, its place or the case of the iPhone may change).
+/// The user stands between the two, back to the Mac: the body dims the signal as when walking away,
+/// so a hand around the iPhone does not make it look farther, and facing the Mac only unlocks a
+/// little earlier.
 struct DistanceCalibrationView: View {
     @Environment(AppModel.self) private var model
     @Environment(\.dismiss) private var dismiss
@@ -71,14 +74,14 @@ struct DistanceCalibrationView: View {
         switch model.distanceCalibration {
         case .ready(.near):
             if model.isConnected {
-                String(localized: "Put your iPhone flat about 1 m from your Mac (a big step), then confirm. Don't touch it during the measure.")
+                String(localized: "Stand about 1 m from your Mac (a big step), your back to it, your iPhone in your hand in front of you: you are between them, as when you walk away. Confirm, then stay still during the measure.")
             } else {
                 String(localized: "Your iPhone must be connected to your Mac to calibrate the distance.")
             }
         case .ready(.far):
-            String(localized: "Now put your iPhone flat about 2 m from your Mac (two big steps), then confirm.")
+            String(localized: "Now step back to about 2 m from your Mac (two big steps), still with your back to it and your iPhone in front of you, then confirm.")
         case .measuring:
-            String(localized: "Don't move your iPhone, it only takes a few seconds.")
+            String(localized: "Stay still, it only takes a few seconds.")
         case .done:
             String(localized: "Locky now measures the distance from your iPhone to your Mac with this new reference.")
         case .failed:

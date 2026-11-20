@@ -20,11 +20,15 @@ struct SettingsView: View {
             Section {
                 Toggle(
                     String(localized: "Require \(BiometricGate.biometryName)"),
-                    systemImage: "faceid",
+                    systemImage: BiometricGate.biometrySymbol,
                     isOn: $preferences.requireBiometrics
                 )
             } footer: {
-                Text("Locky will ask you to authenticate before unlocking your Mac from your iPhone or from the lock screen of your Mac.")
+                if let biometry = BiometricGate.biometry {
+                    Text("Locky will ask for \(biometry.name) before unlocking your Mac from your iPhone or from the lock screen of your Mac.")
+                } else {
+                    Text("Locky will ask you to authenticate before unlocking your Mac from your iPhone or from the lock screen of your Mac.")
+                }
             }
 
             Section {
@@ -38,9 +42,9 @@ struct SettingsView: View {
                 if model.missingMacCameraAccess != nil {
                     MacCameraWarning()
                 }
-                NavigationLink {
-                    IntrusionsView()
-                } label: {
+                // Through the route, like the menu of the main screen: the reports then open their
+                // details in the same navigation stack.
+                NavigationLink(value: AppRoute.intrusions) {
                     Label("Break-in reports", systemImage: "photo.stack")
                 }
                 .badge(model.intrusions.unseenCount)
@@ -82,13 +86,21 @@ struct SettingsView: View {
                     Label("About Locky", systemImage: "info.circle")
                 }
                 Link(destination: SupportMail.url(macStatus: model.macStatus)) {
-                    Label("Contact support", systemImage: "envelope")
+                    Label {
+                        Text("Contact support")
+                    } icon: {
+                        Image(systemName: "envelope")
+                            .foregroundStyle(Color.accentColor)
+                    }
                 }
+                // A link draws its title in the tint: primary like the other rows, the icon stays blue.
+                .tint(.primary)
             }
         }
         .navigationTitle("Settings")
         .scrollContentBackground(.hidden)
-        .immersivePageBackground(wallpaper: model.visuals.backgroundWallpaper, intensity: 0.55)
+        // Faded like the main screen while the Mac is out of reach.
+        .immersivePageBackground(wallpaper: model.visuals.backgroundWallpaper, intensity: 0.55, isFaded: !model.isConnected)
         .onChange(of: [preferences.unlockAutomatically, preferences.intrusionDetection, preferences.unlockOnlyFromWatch]) {
             model.preferencesDidChange()
         }
@@ -129,6 +141,7 @@ private struct LockDistanceSection: View {
                 DistanceGauge(
                     currentDistance: model.isConnected ? model.proximity?.distance : nil,
                     lockDistance: $preferences.lockDistance,
+                    lockState: model.lockState,
                     isMoving: model.isMoving,
                     family: model.macStatus?.family ?? .unknown,
                     phoneImage: model.visuals.phone,
@@ -136,9 +149,16 @@ private struct LockDistanceSection: View {
                 )
             }
             .padding(.vertical, 6)
+            // Grayed out while the Mac is out of reach: no live distance. The lock distance can still
+            // be set, the Mac gets it when it connects.
+            .saturation(model.isConnected ? 1 : 0)
+            .fadedWhileOutOfReach(!model.isConnected)
+            // Calibrating needs the Mac.
             Button("Calibrate the distance", systemImage: "scope") {
                 isCalibrating = true
             }
+            .disabled(!model.isConnected)
+            .fadedWhileOutOfReach(!model.isConnected)
             .sheet(isPresented: $isCalibrating) {
                 DistanceCalibrationView()
             }
@@ -149,7 +169,9 @@ private struct LockDistanceSection: View {
 
     private var footer: String {
         let adjust: String = .init(localized: "Adjust the lock distance by moving the padlock.")
-        guard model.isConnected, let distance = model.proximity?.distance else { return adjust }
+        // Out of reach: why, as on the main screen ("Looking for your Mac…", "Bluetooth is off"…).
+        guard model.isConnected else { return model.connectionSummary + " " + adjust }
+        guard let distance = model.proximity?.distance else { return adjust }
         let formatted: String = Measurement(value: distance, unit: UnitLength.meters).formatted(.lockyDistance)
         return adjust + " " + String(localized: "Your iPhone is about \(formatted) from your Mac.")
     }
@@ -168,11 +190,17 @@ private struct MacSection: View {
                 LabeledContent("macOS", value: status.systemVersion)
                 LabeledContent("Unlocks by Locky", value: status.unlockCount, format: .number)
             }
-            Button("Forget this Mac", systemImage: "xmark.circle", role: .destructive) {
+            Button(role: .destructive) {
                 isConfirmingUnpair = true
+            } label: {
+                // The icon takes the tint of the list, not the red of the destructive title: red by hand.
+                Label {
+                    Text("Forget this Mac")
+                } icon: {
+                    Image(systemName: "xmark.circle")
+                        .foregroundStyle(.red)
+                }
             }
-            // The icon takes the tint of the list, not the red of the destructive title.
-            .tint(.red)
         }
     }
 }

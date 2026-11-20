@@ -153,5 +153,5 @@ private struct OnboardingPageView: View {
 
 /// Where to download the Mac app.
 enum MacAppLink {
-    static let download: URL = URL(string: "https://locky.lunabee.studio/mac")!
+    static let download: URL = URL(string: "https://locky.lunabee.studio/locky-mac-install.dmg")!
 }

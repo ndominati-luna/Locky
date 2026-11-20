@@ -67,3 +67,4 @@ DerivedData/
 *.xcresult
 .swiftpm/
 Packages/*/.build/
+build/

@@ -18,10 +18,7 @@ struct UnfoldedMainView: View {
             NavigationStack(path: $model.path) {
                 MacDashboardView()
                     .navigationDestination(for: AppRoute.self) { route in
-                        switch route {
-                        case .intrusions: IntrusionsView()
-                        case .settings: SettingsView()
-                        }
+                        AppRouteDestination(route: route)
                     }
             }
             .overlay(alignment: fold.orientation == .vertical ? .leading : .top) {

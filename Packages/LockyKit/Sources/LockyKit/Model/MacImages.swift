@@ -24,9 +24,11 @@ public struct MacImages: Codable, Sendable, Equatable {
         self.phone = phone
     }
 
-    /// Largest dimension of the wallpaper: the screen of the Mac at its largest on the iPhone (an
-    /// unfolded iPhone Duo shows the Mac 560 points wide, its screen about 1,230 pixels).
-    public static let wallpaperPixelSize: Int = 1_280
+    /// Largest dimension of the wallpaper: about the screen of the Mac at its largest on the iPhone
+    /// (an unfolded iPhone Duo shows the Mac 560 points wide, its screen about 1,230 pixels; a
+    /// little less is invisible there). Half the bytes of 1,280 pixels for a detailed painting
+    /// (330 KB instead of 640 KB), so a new wallpaper reaches the iPhone faster.
+    public static let wallpaperPixelSize: Int = 1_024
     /// Largest dimension of the user picture (a small round picture on the lock screen imitation).
     public static let userPicturePixelSize: Int = 256
     /// Largest dimension of the iPhone product image (the marker of the distance gauge).

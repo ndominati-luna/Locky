@@ -147,7 +147,8 @@ enum MacImageRenderer {
         guard let destination = CGImageDestinationCreateWithData(data, type.identifier as CFString, 1, nil) else {
             return nil
         }
-        let options: [CFString: Any] = opaque ? [kCGImageDestinationLossyCompressionQuality: 0.82] : [:]
+        // 0.7: no visible loss at the size the iPhone shows them, much smaller than 0.8 and above.
+        let options: [CFString: Any] = opaque ? [kCGImageDestinationLossyCompressionQuality: 0.7] : [:]
         CGImageDestinationAddImage(destination, scaled, options as CFDictionary)
         guard CGImageDestinationFinalize(destination) else { return nil }
         return data as Data

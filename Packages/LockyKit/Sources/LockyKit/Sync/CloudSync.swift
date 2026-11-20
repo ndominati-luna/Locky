@@ -74,11 +74,15 @@ public actor CloudSync {
 
     /// Mac side: publishes the Mac information. The images are only uploaded when their version
     /// changed, so status updates stay tiny.
-    public func publish(_ macRecord: CloudMacRecord) async throws {
+    /// - Parameter imagesAreNew: The caller knows the images changed since its last publication (a
+    ///   new wallpaper): they are uploaded without reading the record first, one round trip less.
+    public func publish(_ macRecord: CloudMacRecord, imagesAreNew: Bool = false) async throws {
         try await prepareZone()
         let recordID: CKRecord.ID = .init(recordName: "mac-\(macRecord.status.macID.uuidString)", zoneID: zoneID)
-        let record: CKRecord = try await existingRecord(recordID, keys: ["imagesVersion"])
-            ?? .init(recordType: RecordType.macStatus, recordID: recordID)
+        // Saved with `.changedKeys`: a new record object only updates the fields set below.
+        let record: CKRecord = imagesAreNew
+            ? .init(recordType: RecordType.macStatus, recordID: recordID)
+            : try await existingRecord(recordID, keys: ["imagesVersion"]) ?? .init(recordType: RecordType.macStatus, recordID: recordID)
         let status: MacStatus = macRecord.status
         record["macID"] = status.macID.uuidString
         record["name"] = status.name
@@ -266,9 +270,14 @@ public actor CloudSync {
     /// iPhone side: fetches the record of a given Mac.
     /// - Parameter knownImagesVersion: ``MacImages/version`` already on the device: the images are
     ///   only downloaded when they changed (otherwise they are `nil` in the result).
-    public func fetchMac(macID: UUID, knownImagesVersion: String? = nil) async throws -> CloudMacRecord? {
+    /// - Parameter imagesAreNew: The caller knows newer images are there (the Mac said so over
+    ///   Bluetooth): everything is fetched at once instead of the status first.
+    public func fetchMac(macID: UUID, knownImagesVersion: String? = nil, imagesAreNew: Bool = false) async throws -> CloudMacRecord? {
         try await prepareZone()
         let recordID: CKRecord.ID = .init(recordName: "mac-\(macID.uuidString)", zoneID: zoneID)
+        if imagesAreNew {
+            return try await existingRecord(recordID, keys: Self.statusKeys + Self.imageKeys).flatMap(Self.macRecord(from:))
+        }
         guard let status = try await existingRecord(recordID, keys: Self.statusKeys) else { return nil }
         guard let version = status["imagesVersion"] as? String, version != knownImagesVersion else {
             return Self.macRecord(from: status)

@@ -6,8 +6,8 @@ import WidgetKit
 /// The Locky Live Activity.
 ///
 /// - Dynamic Island, compact: the Locky logo, then the white padlock of the state (open or closed)
-///   and the distance in the color of the distance gauge where the iPhone is (the padlock alone on
-///   an iPhone Duo).
+///   and the distance with its unit, in the color of the distance gauge where the iPhone is (the
+///   padlock alone on an iPhone Duo).
 /// - Lock Screen and expanded island: the Mac over its blurred wallpaper (with the imitation of its
 ///   lock screen when locked), the distance gauge up to the padlock at the lock distance, and the
 ///   round Locky button with its title.
@@ -151,7 +151,8 @@ private struct ActivityCompactStatus: View {
             if !DeviceModel.hasUprightIsland {
                 if state.isConnected {
                     if let distance = state.distance {
-                        Text(distance, format: .number.precision(.fractionLength(1)))
+                        // With its unit ("1,3 m"): only the upright island of the Duo lacks the room.
+                        Text(Measurement(value: distance, unit: UnitLength.meters), format: .lockyDistance)
                             .monospacedDigit()
                             .lineLimit(1)
                             .contentTransition(.numericText())

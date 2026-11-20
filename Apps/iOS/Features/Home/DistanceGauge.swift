@@ -6,10 +6,11 @@ import SwiftUI
 ///
 /// Above the scale, this very iPhone (its exact product image, rendered by the Mac) points at the
 /// current estimated distance. On the scale, the padlock is the lock distance: drag it or touch
-/// anywhere to move it (or adjust it with VoiceOver).
+/// anywhere to move it (or adjust it with VoiceOver). The padlock shows the state of the Mac.
 struct DistanceGauge: View {
     let currentDistance: Double?
     @Binding var lockDistance: Double
+    let lockState: LockState
     let isMoving: Bool
     let family: MacFamily
     let phoneImage: Data?
@@ -49,7 +50,7 @@ struct DistanceGauge: View {
                         .fill(.red.opacity(0.4))
                         .frame(width: max(0, trackWidth - position(of: lockDistance)), height: 8)
                         .offset(x: position(of: lockDistance))
-                    PadlockHandle(isBeyond: (currentDistance ?? 0) > lockDistance)
+                    PadlockHandle(isLocked: isLocked)
                         .frame(width: handleSize, height: handleSize)
                         .offset(x: position(of: lockDistance) - handleSize / 2)
                 }
@@ -81,6 +82,15 @@ struct DistanceGauge: View {
         }
     }
 
+    /// The state of the Mac; before it is known, whether the iPhone is beyond the lock distance.
+    private var isLocked: Bool {
+        switch lockState {
+        case .locked: true
+        case .unlocked: false
+        case .unknown: (currentDistance ?? 0) > lockDistance
+        }
+    }
+
     private var dragGesture: some Gesture {
         DragGesture(minimumDistance: 0)
             .onChanged { value in
@@ -104,19 +114,20 @@ struct DistanceGauge: View {
     }
 }
 
-/// The draggable padlock: blue (unlocked) on this side, red once the iPhone is beyond, like on
-/// the Mac.
+/// The draggable padlock: closed and red while the Mac is locked, open and blue while it is
+/// unlocked, like the round Locky button.
 private struct PadlockHandle: View {
-    let isBeyond: Bool
+    let isLocked: Bool
 
     var body: some View {
-        Image(systemName: isBeyond ? "lock.fill" : "lock.open.fill")
+        Image(systemName: isLocked ? "lock.fill" : "lock.open.fill")
             .font(.callout.bold())
             .foregroundStyle(.white)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(isBeyond ? LockyTint.lock : LockyTint.unlock, in: .circle)
+            .background(isLocked ? LockyTint.lock : LockyTint.unlock, in: .circle)
             .shadow(radius: 3, y: 1)
             .contentTransition(.symbolEffect(.replace))
+            .animation(.smooth, value: isLocked)
     }
 }
 

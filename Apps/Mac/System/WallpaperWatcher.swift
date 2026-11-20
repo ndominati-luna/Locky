@@ -8,17 +8,18 @@ import Foundation
 /// file is opened again whenever it is replaced.
 @MainActor
 final class WallpaperWatcher {
-    /// Called once the writes of a change are over.
+    /// Called right after a write of the store, then every quarter of a second for a few seconds:
+    /// the caller compares the wallpaper itself (cheap) and acts once it changed.
     var onChange: (() -> Void)?
 
     private static let storeURL: URL = .homeDirectory
         .appending(path: "Library/Application Support/com.apple.wallpaper/Store", directoryHint: .isDirectory)
     private static let indexURL: URL = storeURL.appending(path: "Index.plist", directoryHint: .notDirectory)
-    /// The agent writes in several steps: wait for the last one.
-    private static let settleDelay: Duration = .seconds(1)
-    /// Choosing a wallpaper in System Settings writes the store a few seconds before AppKit reports
-    /// the new image (measured on macOS 27.2): look once more after this delay.
-    private static let lateCheckDelay: Duration = .seconds(4)
+    /// AppKit reports the new wallpaper a moment after the agent writes its store, up to a few
+    /// seconds when it is chosen in System Settings (measured on macOS 27.2): look at once, then
+    /// often, rather than after a fixed delay, so the iPhone gets it as soon as possible.
+    private static let checkInterval: Duration = .milliseconds(250)
+    private static let checkWindow: Duration = .seconds(5)
 
     private var folderSource: (any DispatchSourceFileSystemObject)?
     private var indexSource: (any DispatchSourceFileSystemObject)?
@@ -78,12 +79,11 @@ final class WallpaperWatcher {
         }
         settleTask?.cancel()
         settleTask = Task { [weak self] in
-            try? await Task.sleep(for: Self.settleDelay)
-            guard !Task.isCancelled else { return }
-            self?.onChange?()
-            try? await Task.sleep(for: Self.lateCheckDelay)
-            guard !Task.isCancelled else { return }
-            self?.onChange?()
+            let end: ContinuousClock.Instant = .now + Self.checkWindow
+            while !Task.isCancelled, ContinuousClock.now < end {
+                self?.onChange?()
+                try? await Task.sleep(for: Self.checkInterval)
+            }
         }
     }
 }

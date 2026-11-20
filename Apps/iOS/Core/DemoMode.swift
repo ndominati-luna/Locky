@@ -12,11 +12,12 @@ enum DemoMode {
         UserDefaults.standard.bool(forKey: "LockyDemo")
     }
 
-    /// Screen to open (`-LockyDemoTab settings|intrusions`).
+    /// Screen to open (`-LockyDemoTab settings|intrusions|intrusion`).
     static var initialPath: [AppRoute] {
         switch UserDefaults.standard.string(forKey: "LockyDemoTab") {
         case "settings": [.settings]
         case "intrusions": [.intrusions]
+        case "intrusion": [.intrusions, .intrusion(id: "demo-1")]
         default: []
         }
     }
@@ -91,7 +92,7 @@ enum DemoMode {
 
     static func intrusions(macID: UUID) -> [IntrusionReport] {
         [
-            .init(id: "demo-1", macID: macID, macName: "MacBook Pro", date: .now.addingTimeInterval(-3_600), photo: nil),
+            .init(id: "demo-1", macID: macID, macName: "MacBook Pro", date: .now.addingTimeInterval(-3_600), photo: document("demo-intruder.jpg")),
             .init(id: "demo-2", macID: macID, macName: "MacBook Pro", date: .now.addingTimeInterval(-90_000), photo: nil)
         ]
     }

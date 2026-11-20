@@ -486,9 +486,16 @@ final class AppModel {
     /// Also runs in the background, the Bluetooth link keeps the app awake.
     private func fetchMacImages(version: String) {
         guard version != preferences.macImagesVersion, let pairing = session.pairing else { return }
+        let start: ContinuousClock.Instant = .now
         Task {
             do {
-                guard let record = try await CloudSync.shared.fetchMac(macID: pairing.peerID, knownImagesVersion: preferences.macImagesVersion) else { return }
+                // The Mac announced them: status and images in a single request.
+                guard let record = try await CloudSync.shared.fetchMac(
+                    macID: pairing.peerID,
+                    knownImagesVersion: preferences.macImagesVersion,
+                    imagesAreNew: true
+                ) else { return }
+                logger.notice("Mac images \(version, privacy: .public) fetched in \(ContinuousClock.now - start, privacy: .public)")
                 apply(cloudRecord: record)
             } catch {
                 logger.notice("iCloud fetch of the Mac images failed: \(error.localizedDescription, privacy: .public)")

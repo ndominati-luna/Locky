@@ -1,8 +1,9 @@
 import Foundation
 import LockyKit
 
-/// Calibration of the distance asked from the settings: the user puts the iPhone flat about 1 m
-/// from the Mac and confirms, then at 2 m; each time the Mac measures the signal for a few seconds.
+/// Calibration of the distance asked from the settings: the user stands about 1 m from the Mac,
+/// back to it with the iPhone in hand (between the two, as when walking away), and confirms, then
+/// at 2 m; each time the Mac measures the signal for a few seconds.
 enum DistanceCalibration: Equatable {
     /// Waiting for the user to put the iPhone at the distance of the step and confirm.
     case ready(CalibrationStep)

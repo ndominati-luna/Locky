@@ -113,22 +113,7 @@ private struct ConnectionChip: View {
     }
 
     private var text: String {
-        switch model.session.connection {
-        case .connected:
-            guard let distance = model.proximity?.distance else { return String(localized: "Connected") }
-            let formatted: String = Measurement(value: distance, unit: UnitLength.meters).formatted(.lockyDistance)
-            return String(localized: "Connected · about \(formatted)")
-        case .connecting:
-            return String(localized: "Securing the connection…")
-        case .searching:
-            return String(localized: "Looking for your Mac…")
-        case .bluetoothOff:
-            return String(localized: "Bluetooth is off")
-        case .unauthorized:
-            return String(localized: "Bluetooth not allowed")
-        case .unsupported:
-            return String(localized: "Bluetooth unavailable")
-        }
+        model.connectionSummary
     }
 }
 

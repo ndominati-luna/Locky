@@ -590,6 +590,16 @@
         }
       }
     },
+    "Locky will ask for %@ before unlocking your Mac from your iPhone or from the lock screen of your Mac." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Locky vous demandera %@ avant de déverrouiller votre Mac depuis votre iPhone ou depuis l’écran de verrouillage de votre Mac."
+          }
+        }
+      }
+    },
     "Locky will ask you to authenticate before unlocking your Mac from your iPhone or from the lock screen of your Mac." : {
       "localizations" : {
         "fr" : {
@@ -1670,12 +1680,12 @@
         }
       }
     },
-    "Don't move your iPhone, it only takes a few seconds." : {
+    "Stay still, it only takes a few seconds." : {
       "localizations" : {
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ne bougez pas votre iPhone, cela ne prend que quelques secondes."
+            "value" : "Ne bougez plus, cela ne prend que quelques secondes."
           }
         }
       }
@@ -1740,12 +1750,12 @@
         }
       }
     },
-    "Put your iPhone flat about 1 m from your Mac (a big step), then confirm. Don't touch it during the measure." : {
+    "Stand about 1 m from your Mac (a big step), your back to it, your iPhone in your hand in front of you: you are between them, as when you walk away. Confirm, then stay still during the measure." : {
       "localizations" : {
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Posez votre iPhone à plat à environ 1 m de votre Mac (un grand pas), puis validez. N’y touchez plus pendant la mesure."
+            "value" : "Placez-vous à environ 1 m de votre Mac (un grand pas), dos à lui, votre iPhone en main devant vous : vous êtes entre les deux, comme quand vous partez. Validez, puis ne bougez plus pendant la mesure."
           }
         }
       }
@@ -1760,32 +1770,32 @@
         }
       }
     },
-    "Don't touch your iPhone for a few seconds." : {
+    "Don't move for a few seconds." : {
       "localizations" : {
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ne touchez pas votre iPhone pendant quelques secondes."
+            "value" : "Ne bougez plus pendant quelques secondes."
           }
         }
       }
     },
-    "Place your iPhone 1 m away" : {
+    "Stand 1 m from your Mac" : {
       "localizations" : {
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Placez votre iPhone à 1 m"
+            "value" : "Placez-vous à 1 m de votre Mac"
           }
         }
       }
     },
-    "Put your iPhone flat about 1 m from your Mac (a big step), then confirm. Locky measures the signal there, then at 2 m, to know the distance." : {
+    "Stand about 1 m from your Mac (a big step), your back to it, your iPhone in your hand in front of you: you are between them, as when you walk away. Confirm, then stay still. Locky measures the signal there, then at 2 m, to know the distance." : {
       "localizations" : {
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Posez votre iPhone à plat à environ 1 m de votre Mac (un grand pas), puis validez. Locky y mesure le signal, puis à 2 m, pour connaître la distance."
+            "value" : "Placez-vous à environ 1 m de votre Mac (un grand pas), dos à lui, votre iPhone en main devant vous : vous êtes entre les deux, comme quand vous partez. Validez, puis ne bougez plus. Locky mesure le signal ici, puis à 2 m, pour connaître la distance."
           }
         }
       }
@@ -1820,12 +1830,12 @@
         }
       }
     },
-    "Now put your iPhone flat about 2 m from your Mac (two big steps), then confirm." : {
+    "Now step back to about 2 m from your Mac (two big steps), still with your back to it and your iPhone in front of you, then confirm." : {
       "localizations" : {
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Posez maintenant votre iPhone à plat à environ 2 m de votre Mac (deux grands pas), puis validez."
+            "value" : "Reculez maintenant à environ 2 m de votre Mac (deux grands pas), toujours dos à lui et votre iPhone devant vous, puis validez."
           }
         }
       }

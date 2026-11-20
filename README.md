@@ -226,7 +226,7 @@ entitlement iCloud (build non signé), l'app fonctionne sans synchronisation.
 Les images du Mac (fond d'écran, photo de l'utilisateur, image de l'iPhone) ne passent que par iCloud, comme avec Parse : le Mac les envoie, puis prévient l'iPhone en Bluetooth (message
 `macImagesUpdated`, quelques octets) pour qu'il les télécharge aussitôt, même en arrière‑plan ; la notification
 silencieuse prend le relais quand l'iPhone n'est pas à portée. Le Bluetooth ne transporte jamais d'images : un
-transfert l'occuperait plusieurs secondes et ferait tomber le lien. Elles sont en JPEG (fond d'écran 1 280 px,
+transfert l'occuperait plusieurs secondes et ferait tomber le lien. Elles sont en JPEG (fond d'écran 1 024 px,
 photo 256 px) et en PNG (iPhone, 200 px, transparent), à la taille utile. L'image du Mac, elle, ne voyage pas : comme
 dans l'ancienne version, l'iPhone et la Watch embarquent tous les Mac Apple silicon (voir « Catalogue des Mac ») et
 posent eux‑mêmes le fond d'écran dans l'écran. Le Mac publie seulement son type exact (`deviceType`, modèle et
@@ -265,13 +265,48 @@ symbole de sa famille.
   l'App ID `.watchkitapp` (déclarées dans `LockyWatch.entitlements`, à vérifier dans Signing & Capabilities).
 - **CloudKit** : déployer le schéma de développement en production depuis la console CloudKit (types `MacStatus`,
   `NowPlaying`, `Intrusion` ; le champ `cameraAccess` de `MacStatus` apparaît quand un Mac l'a publié une fois).
-- **Sparkle** : générer les clés (`generate_keys` fourni avec Sparkle), renseigner `SUPublicEDKey` dans
-  `Apps/Mac/Info.plist` et publier l'appcast à l'adresse `SUFeedURL` (placeholder : `https://locky.lunabee.studio/mac/appcast.xml`).
-  Tant que la clé est vide, l'élément « Rechercher les mises à jour » est masqué.
-- **Liens** : `https://locky.lunabee.studio/mac` (lien envoyé depuis l'iPhone) et `https://locky.lunabee.studio/ios`
-  (QR code sur le Mac) sont des placeholders.
-- **Mac** : signature Developer ID + notarisation (Hardened Runtime activé, pas de sandbox : impossible avec la
-  saisie du mot de passe et les API privées, d'où la distribution hors Mac App Store).
+- **Mac** : distribué hors Mac App Store (pas de sandbox : impossible avec la saisie du mot de passe et les API
+  privées), signé Developer ID et notarisé ; voir « Publier une version Mac ». Tant que `SUPublicEDKey` est vide,
+  l'élément « Rechercher les mises à jour » est masqué.
+- **Liens** : l'iPhone envoie `https://locky.lunabee.studio/locky-mac-install.dmg` ; `https://locky.lunabee.studio/ios`
+  (QR code sur le Mac) est encore un placeholder.
+
+## Publier une version Mac
+
+Le site `https://locky.lunabee.studio` sert :
+- `locky-mac-install.dmg` : le téléchargement pour les nouveaux utilisateurs, toujours la dernière version ;
+- `mac/appcast.xml` : le flux Sparkle (`SUFeedURL`), que l'app consulte une fois par jour ;
+- `mac/Locky-<version>.dmg` : les mises à jour que Sparkle télécharge, et leurs deltas.
+
+**Une fois pour toutes**, sur le Mac qui publie :
+1. Certificat **Developer ID Application** de LUNABEE STUDIO (`VH79XGK7M2`) dans le trousseau. Seul le titulaire du
+   compte peut le créer (ou donner l'accès aux certificats gérés dans le cloud). C'est l'équipe de l'iPhone :
+   iCloud et l'App Group ne se partagent pas entre équipes. Le certificat Developer ID Installer ne sert pas
+   (il signe les `.pkg`).
+2. Profil de provisionnement **Developer ID** nommé exactement `Locky Mac Developer ID` (iCloud l'exige), créé sur
+   developer.apple.com (Profiles › + › Developer ID, App ID `studio.lunabee.locky.mac`, certificat Developer ID
+   de LUNABEE STUDIO) puis installé d'un double‑clic. Il est référencé par `Tools/Release/ExportOptions.plist`.
+3. Profil de notarisation : `xcrun notarytool store-credentials Locky --apple-id <Apple ID> --team-id VH79XGK7M2`
+   (mot de passe d'app créé sur appleid.apple.com, ou clé d'API App Store Connect).
+4. Clé Sparkle : `build/packages/artifacts/sparkle/Sparkle/bin/generate_keys` (après une première publication, ou
+   le même outil sous `DerivedData/…/SourcePackages`). La clé privée reste dans le trousseau ; **la sauvegarder**
+   (`generate_keys -x fichier`) : sans elle, plus aucune mise à jour ne pourra être signée pour les Mac déjà
+   installés. La clé publique affichée va dans `SUPublicEDKey` (`Apps/Mac/Info.plist`).
+
+**À chaque version** :
+1. Monter `MARKETING_VERSION` et `CURRENT_PROJECT_VERSION` de la cible LockyMac (Sparkle compare le second).
+2. Notes de version (facultatives) dans `Tools/Release/ReleaseNotes/<version>.md`, affichées par Sparkle.
+3. `Tools/Release/release_mac.sh` : archive, signature Developer ID, notarisation de l'app puis du DMG, flux
+   Sparkle signé. Le résultat est dans `build/site/`.
+4. Envoyer `build/site/locky-mac-install.dmg` et `build/site/mac/` (sans `old_updates`) à la racine du site.
+
+`build/site/mac` est le miroir du dossier `mac` du site : le garder entre deux versions (les deltas se calculent à
+partir des versions qu'il contient ; sans lui, le script reprend l'`appcast.xml` en ligne). Le DMG est fabriqué
+par `Tools/Release/make_dmg.sh` (fond et icône de volume dans `Tools/Release/DMG`, redessinés par
+`make_assets.sh`) ; Finder met la fenêtre en page, d'où une demande d'autorisation d'automatisation au premier
+lancement. Un build Developer ID utilise l'environnement **Production** de CloudKit : déployer le schéma avant, et
+le tester avec un iPhone en TestFlight (une app iPhone lancée depuis Xcode est en Development et ne voit pas ses
+données).
 
 ## À valider sur du vrai matériel
 

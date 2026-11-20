@@ -87,8 +87,8 @@ private struct PairingStepContent: View {
             } details: {
                 PairingMessage(
                     // A no-break space keeps "1 m" together.
-                    title: "Place your iPhone 1\u{00A0}m away",
-                    message: "Put your iPhone flat about 1 m from your Mac (a big step), then confirm. Locky measures the signal there, then at 2 m, to know the distance."
+                    title: "Stand 1\u{00A0}m from your Mac",
+                    message: "Stand about 1 m from your Mac (a big step), your back to it, your iPhone in your hand in front of you: you are between them, as when you walk away. Confirm, then stay still. Locky measures the signal there, then at 2 m, to know the distance."
                 )
                 Button("Confirm") {
                     model.session.startPairingCalibration()
@@ -102,7 +102,7 @@ private struct PairingStepContent: View {
             } details: {
                 PairingMessage(
                     title: "Step back to 2\u{00A0}m",
-                    message: "Now put your iPhone flat about 2 m from your Mac (two big steps), then confirm."
+                    message: "Now step back to about 2 m from your Mac (two big steps), still with your back to it and your iPhone in front of you, then confirm."
                 )
                 Button("Confirm") {
                     model.session.startPairingCalibration()
@@ -116,7 +116,7 @@ private struct PairingStepContent: View {
             } details: {
                 PairingMessage(
                     title: "The magic will happen soon",
-                    message: "Don't touch your iPhone for a few seconds."
+                    message: "Don't move for a few seconds."
                 )
                 ProgressView()
                     .tint(Color.brandArt)

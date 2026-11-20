@@ -1103,12 +1103,19 @@ final class MacAppModel {
         if preferences.isLockAnimationEnabled {
             transitions.prepareWallpaper()
         }
+        let start: ContinuousClock.Instant = .now
         let rendered: MacImages = MacImageRenderer.render(
             phoneModelIdentifier: preferences.device?.modelIdentifier ?? session.peerModelIdentifier
         )
         guard rendered.version != images?.version else { return }
+        logger.notice("New images \(rendered.version, privacy: .public) rendered in \(Self.milliseconds(since: start)) ms")
         images = rendered
         publishToCloud()
+    }
+
+    private static func milliseconds(since start: ContinuousClock.Instant) -> Int {
+        let elapsed: Duration = .now - start
+        return Int(elapsed.components.seconds * 1_000 + elapsed.components.attoseconds / 1_000_000_000_000_000)
     }
 
     /// Tells the iPhone to fetch the images from iCloud, once they are there and if it does not
@@ -1123,6 +1130,7 @@ final class MacAppModel {
         else { return }
         if session.send(.macImagesUpdated(version: images.version)) {
             announcedImagesVersion = images.version
+            logger.notice("Announced images \(images.version, privacy: .public) to the iPhone")
         }
     }
 
@@ -1135,11 +1143,14 @@ final class MacAppModel {
             userPicture: images?.userPicture,
             phoneImage: images?.phone
         )
+        // A new wallpaper since the last publication of this run: no need to read the record first.
+        let imagesAreNew: Bool = cloudImagesVersion != nil && record.imagesVersion != nil && record.imagesVersion != cloudImagesVersion
+        let start: ContinuousClock.Instant = .now
         Task {
             do {
-                try await CloudSync.shared.publish(record)
+                try await CloudSync.shared.publish(record, imagesAreNew: imagesAreNew)
                 logger.notice("""
-                    Published to iCloud: images \(record.imagesVersion ?? "none", privacy: .public), \
+                    Published to iCloud in \(Self.milliseconds(since: start)) ms: images \(record.imagesVersion ?? "none", privacy: .public), \
                     type \(record.status.deviceType ?? "unknown", privacy: .public), wallpaper \(record.wallpaper?.count ?? 0) B
                     """)
                 if let version = record.imagesVersion {

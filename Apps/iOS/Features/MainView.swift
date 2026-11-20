@@ -14,10 +14,7 @@ struct MainView: View {
             NavigationStack(path: $model.path) {
                 HomeView()
                     .navigationDestination(for: AppRoute.self) { route in
-                        switch route {
-                        case .intrusions: IntrusionsView()
-                        case .settings: SettingsView()
-                        }
+                        AppRouteDestination(route: route)
                     }
             }
         }
