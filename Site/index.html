@@ -1,0 +1,386 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Locky — votre Mac se verrouille quand vous partez</title>
+<meta name="description" content="Locky verrouille votre Mac quand vous vous éloignez avec votre iPhone et le déverrouille quand vous revenez. Pour Mac, iPhone et Apple Watch.">
+<meta name="theme-color" content="#1f73f2">
+<meta property="og:title" content="Locky">
+<meta property="og:description" content="Votre Mac se verrouille quand vous partez, et se déverrouille quand vous revenez.">
+<meta property="og:image" content="https://locky.lunabee.studio/assets/icon-512.png">
+<meta property="og:url" content="https://locky.lunabee.studio/">
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<style>
+:root {
+  --cyan: #1dd3ff;
+  --blue: #1f73f2;
+  --deep: #2161ee;
+  --red: #ff5c52;
+  --bg: #f7fcff;
+  --bg-alt: #e9f4ff;
+  --surface: #ffffff;
+  --text: #0b1b33;
+  --text-2: #4a5b73;
+  --line: rgba(11, 27, 51, 0.1);
+  --shadow: 0 24px 60px rgba(16, 52, 120, 0.18);
+  --radius: 22px;
+  color-scheme: light dark;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #030a21;
+    --bg-alt: #081638;
+    --surface: #0f1e3d;
+    --text: #f2f6fc;
+    --text-2: #9fb0c8;
+    --line: rgba(255, 255, 255, 0.1);
+    --shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+  }
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+  font-size: 17px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+img { max-width: 100%; height: auto; display: block; }
+a { color: inherit; }
+.wrap { width: min(1120px, 100% - 32px); margin-inline: auto; }
+h1, h2, h3 { font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", Arial, sans-serif; letter-spacing: -0.02em; line-height: 1.1; margin: 0; }
+h2 { font-size: clamp(30px, 4.4vw, 46px); }
+h3 { font-size: 21px; letter-spacing: -0.01em; }
+p { margin: 0; }
+.eyebrow { font-size: 14px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--blue); }
+.lead { font-size: clamp(18px, 2vw, 21px); color: var(--text-2); }
+
+/* Illustrations of the original Locky, recolored with the text around them. */
+.art { background: currentColor; -webkit-mask: var(--art) center / contain no-repeat; mask: var(--art) center / contain no-repeat; }
+.glyph { --art: url(assets/glyph.svg); }
+
+/* Header */
+.top { position: absolute; inset: 0 0 auto; z-index: 2; color: #fff; }
+.top .wrap { display: flex; align-items: center; justify-content: space-between; height: 72px; }
+.brand { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 21px; text-decoration: none; }
+.brand .art { width: 34px; height: 34px; }
+.top nav { display: flex; gap: 26px; font-size: 15px; font-weight: 500; }
+.top nav a { text-decoration: none; opacity: 0.9; }
+.top nav a:hover { opacity: 1; text-decoration: underline; }
+
+/* Hero */
+.hero {
+  position: relative;
+  overflow: hidden;
+  color: #fff;
+  background: linear-gradient(160deg, var(--cyan) 0%, var(--blue) 48%, var(--deep) 100%);
+  padding: 104px 0 0;
+}
+.hero::after { content: ""; position: absolute; inset: auto 0 0; height: 120px; background: linear-gradient(transparent, var(--bg)); pointer-events: none; }
+.hero .wrap { position: relative; z-index: 1; display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 40px; align-items: center; }
+.hero-text { padding-bottom: 40px; }
+.hero h1 { font-size: clamp(42px, 6.4vw, 74px); margin: 18px 0 22px; }
+.hero .lead { color: rgba(255, 255, 255, 0.88); max-width: 34ch; }
+.hero .eyebrow { color: rgba(255, 255, 255, 0.85); }
+.actions { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 22px; margin-top: 34px; }
+.button {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 15px 26px; border-radius: 999px;
+  background: #fff; color: var(--blue);
+  font-weight: 700; font-size: 17px; text-decoration: none;
+  box-shadow: 0 10px 30px rgba(7, 40, 110, 0.3);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.button:hover { transform: translateY(-2px); box-shadow: 0 14px 34px rgba(7, 40, 110, 0.36); }
+.button:focus-visible, .top nav a:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
+.button svg { width: 20px; height: 20px; }
+.requirements { font-size: 14px; color: rgba(255, 255, 255, 0.82); }
+.stars .art { position: absolute; color: rgba(255, 255, 255, 0.85); }
+.stars .s1 { --art: url(assets/big-star4.svg); width: 34px; height: 34px; top: 132px; left: 46%; }
+.stars .s2 { --art: url(assets/star4.svg); width: 20px; height: 20px; top: 84px; left: 30%; opacity: 0.7; }
+.stars .s3 { --art: url(assets/small-star4.svg); width: 14px; height: 14px; top: 96px; right: 12%; opacity: 0.8; }
+
+/* Devices */
+.devices { position: relative; justify-self: center; width: min(300px, 100%); }
+.phone {
+  border-radius: 54px; padding: 11px;
+  background: #0b0d12;
+  box-shadow: var(--shadow), inset 0 0 0 2px #2a2e36;
+}
+.phone img { border-radius: 44px; }
+.hero .phone { margin-bottom: -60px; }
+.watch {
+  position: absolute; left: -92px; bottom: 80px; width: 150px;
+  border-radius: 46px; padding: 12px;
+  background: #0b0d12;
+  box-shadow: var(--shadow), inset 0 0 0 2px #2a2e36;
+}
+.watch img { border-radius: 34px; }
+
+/* Sections */
+section { padding: 110px 0; }
+.center { text-align: center; }
+.center .lead { max-width: 60ch; margin: 18px auto 0; }
+
+/* How it works */
+.steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 56px; counter-reset: step; }
+.step { position: relative; padding: 30px 28px 32px; border-radius: var(--radius); background: var(--surface); border: 1px solid var(--line); }
+.step::before {
+  counter-increment: step; content: counter(step);
+  display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%;
+  background: var(--blue); color: #fff; font-weight: 700; margin-bottom: 18px;
+}
+.step h3 { margin-bottom: 8px; }
+.step p { color: var(--text-2); }
+.footsteps { display: flex; justify-content: center; gap: 6px; margin-top: 46px; color: var(--blue); opacity: 0.5; }
+.footsteps .art { width: 64px; height: 64px; }
+.footsteps .left { --art: url(assets/step-left.svg); }
+.footsteps .right { --art: url(assets/step-right.svg); margin-top: 26px; }
+
+/* Features */
+.features { background: var(--bg-alt); }
+.grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 56px; }
+.card { padding: 30px 28px; border-radius: var(--radius); background: var(--surface); border: 1px solid var(--line); }
+.card .badge { display: grid; place-items: center; width: 52px; height: 52px; border-radius: 16px; margin-bottom: 20px; color: #fff; background: linear-gradient(160deg, var(--cyan), var(--deep)); }
+.card .badge.red { background: linear-gradient(160deg, #ff8a6b, var(--red)); }
+.card .badge .art { width: 34px; height: 34px; }
+.card .badge svg { width: 28px; height: 28px; }
+.card h3 { margin-bottom: 8px; }
+.card p { color: var(--text-2); }
+.thief { --art: url(assets/thief-hat.svg); }
+.macbook { --art: url(assets/mac-book-outline.svg); }
+
+/* Showcase */
+.showcase .wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+.showcase .phone { width: min(330px, 100%); justify-self: center; }
+.showcase ul { list-style: none; padding: 0; margin: 28px 0 0; display: grid; gap: 16px; }
+.showcase li { display: flex; gap: 14px; color: var(--text-2); }
+.showcase li strong { color: var(--text); }
+.check { flex: none; width: 24px; height: 24px; margin-top: 2px; border-radius: 50%; background: var(--blue); color: #fff; display: grid; place-items: center; }
+.check svg { width: 14px; height: 14px; }
+
+/* Security */
+.security { color: #fff; background: linear-gradient(180deg, #0f2b5e, #030a21); }
+.security .eyebrow { color: var(--cyan); }
+.security .lead { color: rgba(255, 255, 255, 0.78); }
+.security .grid { margin-top: 48px; }
+.security .card { background: rgba(255, 255, 255, 0.06); border-color: rgba(255, 255, 255, 0.12); }
+.security .card p { color: rgba(255, 255, 255, 0.75); }
+.security .card h3 { font-size: 19px; }
+
+/* Download */
+.download .grid { grid-template-columns: repeat(2, 1fr); max-width: 880px; margin-inline: auto; }
+.platform { display: flex; flex-direction: column; align-items: flex-start; gap: 14px; padding: 36px 32px; }
+.platform img { width: 76px; height: 76px; }
+.platform .meta { font-size: 15px; color: var(--text-2); }
+.platform .button { background: var(--blue); color: #fff; margin-top: 8px; }
+.platform .button.secondary { background: transparent; color: var(--blue); box-shadow: inset 0 0 0 1.5px var(--blue); }
+.note { margin-top: 26px; font-size: 15px; color: var(--text-2); }
+
+/* Footer */
+footer { padding: 48px 0 56px; border-top: 1px solid var(--line); font-size: 15px; color: var(--text-2); }
+footer .wrap { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 18px; }
+footer .brand { color: var(--text); font-size: 18px; }
+footer .brand .art { width: 28px; height: 28px; color: var(--blue); }
+footer a { text-decoration: none; color: var(--blue); }
+footer a:hover { text-decoration: underline; }
+
+@media (max-width: 900px) {
+  .top nav { display: none; }
+  .hero { padding-top: 100px; }
+  .hero .wrap { grid-template-columns: 1fr; text-align: center; }
+  .hero-text { padding-bottom: 20px; }
+  .hero .lead { margin-inline: auto; }
+  .actions { justify-content: center; }
+  .devices { width: min(300px, 78%); margin-top: 10px; }
+  .watch { left: -12%; width: 44%; bottom: 60px; }
+  .stars .s1 { top: 78px; left: auto; right: 8%; }
+  .stars .s2 { display: none; }
+  .steps, .grid, .download .grid { grid-template-columns: 1fr; }
+  .showcase .wrap { grid-template-columns: 1fr; gap: 48px; }
+  section { padding: 80px 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .button { transition: none; }
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#"><span class="art glyph" aria-hidden="true"></span>Locky</a>
+    <nav aria-label="Sections">
+      <a href="#fonctionnement">Comment ça marche</a>
+      <a href="#fonctionnalites">Fonctionnalités</a>
+      <a href="#securite">Sécurité</a>
+      <a href="#telecharger">Télécharger</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="stars" aria-hidden="true"><span class="art s1"></span><span class="art s2"></span><span class="art s3"></span></div>
+    <div class="wrap">
+      <div class="hero-text">
+        <p class="eyebrow">Pour Mac, iPhone et Apple Watch</p>
+        <h1 id="hero-title">Vous partez,<br>il se verrouille.</h1>
+        <p class="lead">Locky fait de votre iPhone la clé de votre Mac&nbsp;: éloignez-vous, il se verrouille. Revenez, il se déverrouille. Sans y penser.</p>
+        <div class="actions">
+          <a class="button" href="locky-mac-install.dmg" download>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11m0 0-4.5-4.5M12 15l4.5-4.5M5 20h14"/></svg>
+            Télécharger pour Mac
+          </a>
+          <span class="requirements">macOS 27 · Mac avec puce Apple<br>iPhone et Apple Watch&nbsp;: via TestFlight, sur invitation</span>
+        </div>
+      </div>
+      <div class="devices">
+        <div class="phone"><img src="assets/iphone-locked.jpg" width="607" height="1320" alt="L’app Locky sur iPhone : le Mac est verrouillé, l’iPhone est connecté à environ 1,3 m, avec le bouton Déverrouiller."></div>
+        <div class="watch"><img src="assets/watch-locked.jpg" width="416" height="432" alt="Locky sur Apple Watch : le Mac est verrouillé, avec le bouton Déverrouiller."></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="fonctionnement" aria-labelledby="how-title">
+    <div class="wrap center">
+      <p class="eyebrow">Comment ça marche</p>
+      <h2 id="how-title">Trois étapes, puis plus rien à faire.</h2>
+      <p class="lead">Locky mesure en permanence la distance entre votre iPhone et votre Mac grâce au Bluetooth. À vous de choisir à partir de quand votre Mac se verrouille.</p>
+    </div>
+    <div class="wrap steps">
+      <div class="step">
+        <h3>Installez Locky</h3>
+        <p>Sur votre Mac, puis sur votre iPhone avec TestFlight. Votre Apple Watch suit d’elle-même.</p>
+      </div>
+      <div class="step">
+        <h3>Appairez vos appareils</h3>
+        <p>Comparez le code à 6 chiffres affiché sur les deux écrans, puis faites quelques pas pour calibrer la distance.</p>
+      </div>
+      <div class="step">
+        <h3>Partez, revenez</h3>
+        <p>Éloignez-vous&nbsp;: votre Mac se verrouille. Revenez&nbsp;: Locky tape votre mot de passe pour vous.</p>
+      </div>
+    </div>
+    <div class="footsteps" aria-hidden="true"><span class="art left"></span><span class="art right"></span><span class="art left"></span><span class="art right"></span></div>
+  </section>
+
+  <section id="fonctionnalites" class="features" aria-labelledby="features-title">
+    <div class="wrap center">
+      <p class="eyebrow">Fonctionnalités</p>
+      <h2 id="features-title">Votre Mac veille sur lui-même.</h2>
+    </div>
+    <div class="wrap grid">
+      <article class="card">
+        <div class="badge"><span class="art glyph" aria-hidden="true"></span></div>
+        <h3>Verrouillage automatique</h3>
+        <p>Au-delà de la distance que vous avez choisie, votre Mac se verrouille, avec l’animation Locky. Le réglage se fait d’un geste sur l’iPhone.</p>
+      </article>
+      <article class="card">
+        <div class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2.5"/><path d="M8.5 11V7.5a3.5 3.5 0 0 1 6.8-1.2"/></svg></div>
+        <h3>Déverrouillage à votre retour</h3>
+        <p>De retour devant votre Mac, il s’ouvre tout seul. Vous préférez confirmer&nbsp;? Exigez Face ID ou Touch ID sur votre iPhone.</p>
+      </article>
+      <article class="card">
+        <div class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="6" width="12" height="12" rx="3.5"/><path d="M9 6l.6-3h4.8L15 6M9 18l.6 3h4.8l.6-3"/></svg></div>
+        <h3>Apple Watch</h3>
+        <p>Verrouillez ou déverrouillez votre Mac depuis votre poignet. Vous pouvez même réserver le déverrouillage à votre montre.</p>
+      </article>
+      <article class="card">
+        <div class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6.5" y="2.5" width="11" height="19" rx="3"/><path d="M9 15.5h6M10.5 5.5h3"/></svg></div>
+        <h3>Écran verrouillé et Dynamic Island</h3>
+        <p>L’état de votre Mac et la distance en direct, avec le bouton Locky, sans ouvrir l’app. Et des widgets sur iPhone, Apple Watch et Mac.</p>
+      </article>
+      <article class="card">
+        <div class="badge red"><span class="art thief" aria-hidden="true"></span></div>
+        <h3>Détection des intrus</h3>
+        <p>Quelqu’un utilise votre Mac pendant votre absence&nbsp;? Il est pris en photo et vous êtes prévenu sur votre iPhone.</p>
+      </article>
+      <article class="card">
+        <div class="badge"><span class="art macbook" aria-hidden="true"></span></div>
+        <h3>Votre Mac sur iPhone Duo</h3>
+        <p>Déplié, l’iPhone Duo affiche le tableau de bord de votre Mac&nbsp;: musique en cours, processeur, mémoire et batterie.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="showcase" aria-labelledby="glance-title">
+    <div class="wrap">
+      <div class="phone"><img src="assets/iphone-live-activity.jpg" width="607" height="1320" loading="lazy" alt="L’écran verrouillé de l’iPhone avec l’activité en direct de Locky : MacBook Pro verrouillé, iPhone à 1,3 m pour une limite de 1,5 m, bouton Déverrouiller."></div>
+      <div>
+        <p class="eyebrow">D’un coup d’œil</p>
+        <h2 id="glance-title">Tout se passe sur l’écran verrouillé.</h2>
+        <ul>
+          <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><span><strong>Votre Mac tel qu’il est</strong>, avec son fond d’écran et son écran de verrouillage.</span></li>
+          <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><span><strong>La distance en direct</strong>, et le cadenas qui marque la limite de verrouillage.</span></li>
+          <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><span><strong>Le bouton Locky</strong> pour verrouiller ou déverrouiller sans ouvrir l’app.</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="securite" class="security" aria-labelledby="security-title">
+    <div class="wrap center">
+      <p class="eyebrow">Sécurité</p>
+      <h2 id="security-title">Votre mot de passe ne quitte jamais vos appareils.</h2>
+      <p class="lead">Locky n’a pas de serveur. Tout se passe entre votre Mac, votre iPhone et votre compte iCloud.</p>
+    </div>
+    <div class="wrap grid">
+      <article class="card">
+        <h3>Un appairage qui ne se devine pas</h3>
+        <p>Vos appareils échangent des clés à usage unique, confirmées par un code à 6 chiffres que vous comparez vous-même.</p>
+      </article>
+      <article class="card">
+        <h3>Chaque message chiffré</h3>
+        <p>Tout ce qui passe en Bluetooth est chiffré de bout en bout, et un message intercepté ne peut pas être rejoué.</p>
+      </article>
+      <article class="card">
+        <h3>Gardé dans le trousseau</h3>
+        <p>Le mot de passe de votre Mac est conservé dans le trousseau de votre iPhone, et ne voyage que chiffré.</p>
+      </article>
+    </div>
+  </section>
+
+  <section id="telecharger" class="download" aria-labelledby="download-title">
+    <div class="wrap center">
+      <p class="eyebrow">Télécharger</p>
+      <h2 id="download-title">Commencez par votre Mac.</h2>
+    </div>
+    <div class="wrap grid">
+      <article class="card platform">
+        <img src="assets/icon-512.png" width="76" height="76" alt="">
+        <h3>Locky pour Mac</h3>
+        <p class="meta">macOS 27 ou ultérieur · Mac avec puce Apple</p>
+        <a class="button" href="locky-mac-install.dmg" download>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11m0 0-4.5-4.5M12 15l4.5-4.5M5 20h14"/></svg>
+          Télécharger
+        </a>
+      </article>
+      <article class="card platform">
+        <img src="assets/icon-512.png" width="76" height="76" alt="">
+        <h3>Locky pour iPhone et Apple Watch</h3>
+        <p class="meta">iOS 27 · watchOS 27 · réservé à l’équipe Lunabee</p>
+        <p class="meta">Installez TestFlight, puis acceptez l’invitation reçue par e-mail.</p>
+        <a class="button secondary" href="https://testflight.apple.com/">Installer TestFlight</a>
+      </article>
+    </div>
+    <p class="wrap center note">Ouvrez le fichier téléchargé, puis glissez Locky dans le dossier Applications. Les mises à jour s’installent ensuite d’elles-mêmes.</p>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <a class="brand" href="#"><span class="art glyph" aria-hidden="true"></span>Locky</a>
+    <span>Une app <strong>Lunabee Studio</strong> · <a href="mailto:contact-locky@lunabee.com">contact-locky@lunabee.com</a></span>
+    <span>© 2026 Lunabee Studio</span>
+  </div>
+</footer>
+
+</body>
+</html>

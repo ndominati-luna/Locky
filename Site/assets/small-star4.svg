@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="52pt" height="33pt" viewBox="0 0 52 33">
+<defs>
+<filter id="filter-remove-color" x="0%" y="0%" width="100%" height="100%">
+<feColorMatrix color-interpolation-filters="sRGB" values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 1 0" />
+</filter>
+<filter id="filter-color-to-alpha" x="0%" y="0%" width="100%" height="100%">
+<feColorMatrix color-interpolation-filters="sRGB" values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0.2126 0.7152 0.0722 0 0"/>
+</filter>
+<image id="source-7" x="0" y="0" width="52" height="33" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADQAAAAhCAAAAACzCNcfAAAAAmJLR0QA/4ePzL8AAACQSURBVDiNY2AYBUQCJqKEUAE7N+mamJR4SNck5PaFBE2M7JwMDAxc9SafMeVYcGn6zyClJ8rp4HWY6xsBx6CaJ1318f//9xmsGDLMuDX9+3xY0IyZQ+fTyx//UGUY8Vqmu/F7zwOGj48//CbBhSrbnBkYGBhZCcYmMjAJxfQQQaAmTroeBl6cMTIKRsEowAQAoF8b/GsEvdUAAAAASUVORK5CYII="/>
+<mask id="mask-0">
+<g filter="url(#filter-remove-color)">
+<use xlink:href="#source-7" filter="url(#filter-color-to-alpha)"/>
+</g>
+</mask>
+<image id="source-6" x="0" y="0" width="52" height="33" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADQAAAAhCAIAAAAZAR+UAAAABmJLR0QA/wD/AP+gvaeTAAAAc0lEQVRYhe3UQQrAIAxE0aR4/yunCyEbsW3iJHQxbylYPtooQkStzCy38cJ2rNJlUh13UiYNJ3dCUR/yQ1LV3UoULE4eLzHXh4wTdB84zu0qQ4ndAxGa31HXMa3z8V15nEv8c7XXmn5Epl8/wkRERET06gaTcR4T9iUV4gAAAABJRU5ErkJggg=="/>
+</defs>
+<g mask="url(#mask-0)">
+<use xlink:href="#source-6"/>
+</g>
+</svg>
