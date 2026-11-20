@@ -22,7 +22,7 @@
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>WKApplication</key>
 	<true/>
-	<key>WKBackgroundModes</key>
+	<key>UIBackgroundModes</key>
 	<array>
 		<string>remote-notification</string>
 	</array>
