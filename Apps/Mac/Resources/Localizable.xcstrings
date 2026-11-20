@@ -1,0 +1,1155 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "%@ %@" : {
+      "shouldTranslate" : false
+    },
+    "%@ is about %@ away" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ est à environ %2$@"
+          }
+        }
+      }
+    },
+    "%lld%%" : {
+      "shouldTranslate" : false
+    },
+    "About %@ away" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "À environ %@"
+          }
+        }
+      }
+    },
+    "About Locky" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "À propos de Locky"
+          }
+        }
+      }
+    },
+    "Accessibility" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Accessibilité"
+          }
+        }
+      }
+    },
+    "Activated" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Activé"
+          }
+        }
+      }
+    },
+    "Allow Accessibility first: Locky types your password to unlock your Mac." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Autorisez d'abord l'accessibilité : Locky tape votre mot de passe pour déverrouiller votre Mac."
+          }
+        }
+      }
+    },
+    "Allow Locky in System Settings > Privacy & Security > Accessibility." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Autorisez Locky dans Réglages Système > Confidentialité et sécurité > Accessibilité."
+          }
+        }
+      }
+    },
+    "Allow Locky to type your password…" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Autoriser Locky à saisir votre mot de passe…"
+          }
+        }
+      }
+    },
+    "Allow…" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Autoriser…"
+          }
+        }
+      }
+    },
+    "Appears under the Locky logo when your Mac locks. Leave empty to show “Locky”." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "S’affiche sous le logo Locky quand votre Mac se verrouille. Laissez vide pour afficher « Locky »."
+          }
+        }
+      }
+    },
+    "Bluetooth is off" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bluetooth désactivé"
+          }
+        }
+      }
+    },
+    "Bluetooth not allowed" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bluetooth non autorisé"
+          }
+        }
+      }
+    },
+    "Bluetooth unavailable" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bluetooth indisponible"
+          }
+        }
+      }
+    },
+    "Calibrating" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Calibrage"
+          }
+        }
+      }
+    },
+    "Camera" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Caméra"
+          }
+        }
+      }
+    },
+    "Cancel" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Annuler"
+          }
+        }
+      }
+    },
+    "Check for updates…" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rechercher les mises à jour…"
+          }
+        }
+      }
+    },
+    "Check the code" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vérifiez le code"
+          }
+        }
+      }
+    },
+    "Close" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fermer"
+          }
+        }
+      }
+    },
+    "Confirm on %@" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Confirmez sur %@"
+          }
+        }
+      }
+    },
+    "Confirmed" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Confirmé"
+          }
+        }
+      }
+    },
+    "Confirmed on the iPhone" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Confirmé sur l’iPhone"
+          }
+        }
+      }
+    },
+    "Connect to an iPhone" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Se connecter à un iPhone"
+          }
+        }
+      }
+    },
+    "Connect to my iPhone" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Me connecter à mon iPhone"
+          }
+        }
+      }
+    },
+    "Connected" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Connecté"
+          }
+        }
+      }
+    },
+    "Connecting…" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Connexion…"
+          }
+        }
+      }
+    },
+    "Contact support" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Contacter le support"
+          }
+        }
+      }
+    },
+    "Continue" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Continuer"
+          }
+        }
+      }
+    },
+    "Customize the animation…" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Personnaliser l’animation…"
+          }
+        }
+      }
+    },
+    "Distance of the iPhone" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Distance de l'iPhone"
+          }
+        }
+      }
+    },
+    "Done" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Terminé"
+          }
+        }
+      }
+    },
+    "Far enough: your Mac locks as soon as you stop using it." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Assez loin : votre Mac se verrouille dès que vous ne l'utilisez plus."
+          }
+        }
+      }
+    },
+    "Full screen preview" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aperçu plein écran"
+          }
+        }
+      }
+    },
+    "I need your help" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "J’ai besoin de votre aide"
+          }
+        }
+      }
+    },
+    "If you changed the password of your macOS session, type the new one: Locky checks it and sends it to the keychain of %@." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Si vous avez changé le mot de passe de votre session macOS, saisissez le nouveau : Locky le vérifie puis l’envoie dans le trousseau de %@."
+          }
+        }
+      }
+    },
+    "Intruders detection is now activated." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La détection des intrus est maintenant activée."
+          }
+        }
+      }
+    },
+    "Intruders detection is now deactivated." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La détection des intrus est maintenant désactivée."
+          }
+        }
+      }
+    },
+    "iPhone" : {
+      "shouldTranslate" : false
+    },
+    "Is this your iPhone?" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Est-ce votre iPhone ?"
+          }
+        }
+      }
+    },
+    "Lock and unlock animations" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Animations de verrouillage et de déverrouillage"
+          }
+        }
+      }
+    },
+    "Lock animation" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Animation de verrouillage"
+          }
+        }
+      }
+    },
+    "Lock Mac" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verrouiller le Mac"
+          }
+        }
+      }
+    },
+    "Lock now" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verrouiller maintenant"
+          }
+        }
+      }
+    },
+    "Lock when my iPhone walks away" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verrouiller quand mon iPhone s’éloigne"
+          }
+        }
+      }
+    },
+    "Locks this Mac now." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verrouille ce Mac maintenant."
+          }
+        }
+      }
+    },
+    "Locky - Intruders detection" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Locky - Détection des intrus"
+          }
+        }
+      }
+    },
+    "Locky Activated" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Locky activé"
+          }
+        }
+      }
+    },
+    "Locky activated" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Locky activé"
+          }
+        }
+      }
+    },
+    "Locky can't unlock your Mac" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Locky ne peut pas déverrouiller votre Mac"
+          }
+        }
+      }
+    },
+    "Locky could not save the pairing in the keychain." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Locky n’a pas pu enregistrer l’appairage dans le trousseau."
+          }
+        }
+      }
+    },
+    "Locky locked your Mac when you walked away and unlocked it when you came back. From now on, it watches over your Mac from the menu bar." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Locky a verrouillé votre Mac pendant votre absence et l'a déverrouillé à votre retour. Désormais, il veille sur votre Mac depuis la barre des menus."
+          }
+        }
+      }
+    },
+    "Locky locks your Mac when you walk away with your iPhone and unlocks it when you come back." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Locky verrouille votre Mac quand vous vous éloignez avec votre iPhone et le déverrouille à votre retour."
+          }
+        }
+      }
+    },
+    "Locky not connected" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Locky non connecté"
+          }
+        }
+      }
+    },
+    "Locky types it on the lock screen to unlock your Mac. It is checked here, then kept only in the keychain of %@." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Locky le saisit sur l’écran de verrouillage pour déverrouiller votre Mac. Il est vérifié ici, puis conservé uniquement dans le trousseau de %@."
+          }
+        }
+      }
+    },
+    "Locky will be available in your Mac's top bar. A few permissions make it work at its best:" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Locky sera disponible dans la barre des menus de votre Mac. Quelques autorisations lui permettent de fonctionner au mieux :"
+          }
+        }
+      }
+    },
+    "Locky will stop locking and unlocking this Mac." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Locky ne verrouillera et ne déverrouillera plus ce Mac."
+          }
+        }
+      }
+    },
+    "Looking for Locky iPhones…" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Recherche d’iPhone avec Locky…"
+          }
+        }
+      }
+    },
+    "Low battery level on %@!" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Batterie faible sur %@ !"
+          }
+        }
+      }
+    },
+    "Make sure %@ displays the same code, then confirm on both devices." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vérifiez que %@ affiche le même code, puis confirmez sur les deux appareils."
+          }
+        }
+      }
+    },
+    "New password" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nouveau mot de passe"
+          }
+        }
+      }
+    },
+    "Not the same code" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Code différent"
+          }
+        }
+      }
+    },
+    "Not this one" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pas celui-ci"
+          }
+        }
+      }
+    },
+    "Open at login" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ouvrir à l’ouverture de session"
+          }
+        }
+      }
+    },
+    "Open Locky at login" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ouvrir Locky à l’ouverture de session"
+          }
+        }
+      }
+    },
+    "Open Locky on your iPhone and keep it close to your Mac." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ouvrez Locky sur votre iPhone et gardez-le près de votre Mac."
+          }
+        }
+      }
+    },
+    "Optional: photos of intruders." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Facultatif : photos des intrus."
+          }
+        }
+      }
+    },
+    "Options" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Options"
+          }
+        }
+      }
+    },
+    "Pair" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Appairer"
+          }
+        }
+      }
+    },
+    "Pairing failed" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Échec de l’appairage"
+          }
+        }
+      }
+    },
+    "Password of %@" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mot de passe de %@"
+          }
+        }
+      }
+    },
+    "Password updated" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mot de passe mis à jour"
+          }
+        }
+      }
+    },
+    "QR code to download Locky on iPhone" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "QR code pour télécharger Locky sur iPhone"
+          }
+        }
+      }
+    },
+    "Quit Locky" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quitter Locky"
+          }
+        }
+      }
+    },
+    "Replay" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rejouer"
+          }
+        }
+      }
+    },
+    "Required to type your password on the lock screen." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nécessaire pour saisir votre mot de passe sur l’écran de verrouillage."
+          }
+        }
+      }
+    },
+    "Scan this code with your iPhone to install Locky, then open it." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Scannez ce code avec votre iPhone pour installer Locky, puis ouvrez-le."
+          }
+        }
+      }
+    },
+    "Take your iPhone with you. Beyond %@, Locky locks your Mac. Then come back: Locky unlocks it." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Prenez votre iPhone avec vous. Au-delà de %@, Locky verrouille votre Mac. Revenez ensuite : Locky le déverrouille."
+          }
+        }
+      }
+    },
+    "Text under the logo" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Texte sous le logo"
+          }
+        }
+      }
+    },
+    "The codes match" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Les codes correspondent"
+          }
+        }
+      }
+    },
+    "The connection with the iPhone was lost. Keep both devices close and try again." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La connexion avec l’iPhone a été perdue. Gardez les deux appareils proches et réessayez."
+          }
+        }
+      }
+    },
+    "The key of the iPhone is invalid. Please try again." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La clé de l’iPhone est invalide. Veuillez réessayer."
+          }
+        }
+      }
+    },
+    "The magic happened!" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La magie a opéré !"
+          }
+        }
+      }
+    },
+    "This password is not the one of your session." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ce mot de passe n’est pas celui de votre session."
+          }
+        }
+      }
+    },
+    "Try again" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Réessayer"
+          }
+        }
+      }
+    },
+    "Try it now" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Essayer maintenant"
+          }
+        }
+      }
+    },
+    "Turn on Bluetooth" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Activer le Bluetooth"
+          }
+        }
+      }
+    },
+    "Turns automatic locking on or off." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Active ou désactive le verrouillage automatique."
+          }
+        }
+      }
+    },
+    "Unknown" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inconnue"
+          }
+        }
+      }
+    },
+    "Unlock" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Déverrouiller"
+          }
+        }
+      }
+    },
+    "Unlock from your Apple Watch" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Déverrouillez depuis votre Apple Watch"
+          }
+        }
+      }
+    },
+    "Unpair" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Désappairer"
+          }
+        }
+      }
+    },
+    "Unpair %@?" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Désappairer %@ ?"
+          }
+        }
+      }
+    },
+    "Unpair %@…" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Désappairer %@…"
+          }
+        }
+      }
+    },
+    "Update" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mettre à jour"
+          }
+        }
+      }
+    },
+    "Update session password" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mettre à jour le mot de passe de session"
+          }
+        }
+      }
+    },
+    "Update session password…" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mettre à jour le mot de passe de session…"
+          }
+        }
+      }
+    },
+    "Waiting for %@…" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "En attente de %@…"
+          }
+        }
+      }
+    },
+    "Waiting for the confirmation on the iPhone…" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "En attente de la confirmation sur l’iPhone…"
+          }
+        }
+      }
+    },
+    "Walk away from your Mac" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Éloignez-vous de votre Mac"
+          }
+        }
+      }
+    },
+    "Walk away with your iPhone, then come back." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Éloignez-vous avec votre iPhone, puis revenez."
+          }
+        }
+      }
+    },
+    "Welcome to Locky" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bienvenue dans Locky"
+          }
+        }
+      }
+    },
+    "You're all set" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tout est prêt"
+          }
+        }
+      }
+    },
+    "Your iPhone is not connected to Locky." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Votre iPhone n’est pas connecté à Locky."
+          }
+        }
+      }
+    },
+    "Your iPhone must be connected." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Votre iPhone doit être connecté."
+          }
+        }
+      }
+    },
+    "Your iPhone's battery is only %lld%% full. Charge it if you want to have Locky working." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La batterie de votre iPhone n’est chargée qu’à %lld %%. Rechargez-le pour que Locky continue de fonctionner."
+          }
+        }
+      }
+    },
+    "Your session password" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Votre mot de passe de session"
+          }
+        }
+      }
+    },
+    "“Unlock with Locky” on the lock screen" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "« Déverrouiller avec Locky » sur l’écran de verrouillage"
+          }
+        }
+      }
+    },
+    "Put your iPhone about 1 m from your Mac, then 2 m, confirming each time on your iPhone.\nPlease don't touch it during the measures." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Posez votre iPhone à environ 1 m de votre Mac, puis à 2 m, en validant à chaque fois sur l’iPhone.\nN’y touchez pas pendant les mesures."
+          }
+        }
+      }
+    },
+    "Intruders detection is now activated. This Mac has no camera: attempts will be reported without a photo." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La détection des intrus est activée. Ce Mac n’a pas de caméra : les tentatives seront signalées sans photo."
+          }
+        }
+      }
+    },
+    "Locky can't use the camera: intruders won't be photographed. Click to allow it in System Settings." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Locky ne peut pas utiliser la caméra : les intrus ne seront pas photographiés. Cliquez pour l’autoriser dans Réglages Système."
+          }
+        }
+      }
+    },
+    "Allow the camera for intruder photos…" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Autoriser la caméra pour photographier les intrus…"
+          }
+        }
+      }
+    },
+    "Out of reach" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hors de portée"
+          }
+        }
+      }
+    },
+    "Wallpaper" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fond d’écran"
+          }
+        }
+      }
+    },
+    "Optional: your wallpaper is in a protected folder. Locky shows it on your iPhone and in its animations." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Facultatif : votre fond d’écran est dans un dossier protégé. Locky l’affiche sur votre iPhone et dans ses animations."
+          }
+        }
+      }
+    },
+    "Show my wallpaper on my iPhone…" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Afficher mon fond d’écran sur mon iPhone…"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

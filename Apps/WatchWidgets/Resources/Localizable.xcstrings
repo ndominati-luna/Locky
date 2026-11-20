@@ -1,0 +1,26 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "Lock state of your Mac." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "État de verrouillage de votre Mac."
+          }
+        }
+      }
+    },
+    "My Mac" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mon Mac"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

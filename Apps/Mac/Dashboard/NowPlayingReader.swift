@@ -1,0 +1,244 @@
+import AppKit
+import CryptoKit
+import Foundation
+import ImageIO
+import LockyKit
+import OSLog
+
+/// What the Mac is playing, and the playback commands.
+///
+/// 1. MediaRemote (private, loaded with `dlsym`): every player, artwork included. Recent macOS
+///    versions return nothing to apps that are not Apple's: then
+/// 2. the distributed notifications of Music and Spotify (no permission, no polling);
+/// 3. AppleScript only for the artwork, and to read the state of a player that announced nothing
+///    yet when the user already allowed Locky to control it (never asks for it then).
+///
+/// Commands go through the media keys (any player), or MediaRemote without Accessibility.
+@MainActor
+final class NowPlayingReader {
+    private typealias GetInfoFunction = @convention(c) (DispatchQueue, @escaping @convention(block) (CFDictionary?) -> Void) -> Void
+    private typealias GetPIDFunction = @convention(c) (DispatchQueue, @escaping @convention(block) (Int32) -> Void) -> Void
+    private typealias SendCommandFunction = @convention(c) (UInt32, CFDictionary?) -> Bool
+
+    private static let mediaRemote: String = "/System/Library/PrivateFrameworks/MediaRemote.framework/MediaRemote"
+    private let logger: Logger = .init(subsystem: "studio.lunabee.locky", category: "NowPlaying")
+    private let getInfo: GetInfoFunction? = PrivateSymbols.load("MRMediaRemoteGetNowPlayingInfo", from: mediaRemote, as: GetInfoFunction.self)
+    private let getPID: GetPIDFunction? = PrivateSymbols.load("MRMediaRemoteGetNowPlayingApplicationPID", from: mediaRemote, as: GetPIDFunction.self)
+    private let sendCommand: SendCommandFunction? = PrivateSymbols.load("MRMediaRemoteSendCommand", from: mediaRemote, as: SendCommandFunction.self)
+    /// Artwork prepared for the current track.
+    private var artwork: (trackKey: String, id: String?, data: Data?)?
+    private var artworkTask: Task<Void, Never>?
+    private let announcements: PlayerAnnouncements = .init()
+
+    func current() async -> NowPlaying? {
+        var track: PlayerTrack? = await mediaRemoteTrack()
+        if track == nil {
+            track = announcements.current
+        }
+        if track == nil, !announcements.hasAnnouncements {
+            // Playing since before Locky started: ask the players already allowed, silently.
+            track = await scriptedTrack()
+        }
+        guard let track else { return nil }
+        let prepared: (id: String?, data: Data?)? = preparedArtwork(for: track)
+        return .init(
+            title: track.title,
+            artist: track.artist,
+            album: track.album,
+            appName: track.appName,
+            isPlaying: track.isPlaying,
+            duration: track.duration,
+            elapsed: track.elapsed,
+            elapsedDate: track.elapsedDate,
+            artworkID: prepared?.id,
+            artwork: prepared?.data
+        )
+    }
+
+    func perform(_ command: MediaCommand) {
+        switch command {
+        case .playPause: press(.playPause, mediaRemoteCommand: 2)
+        case .nextTrack: press(.next, mediaRemoteCommand: 4)
+        case .previousTrack: press(.previous, mediaRemoteCommand: 5)
+        case let .setVolume(volume): SystemVolume.setVolume(volume)
+        case .toggleMute: SystemVolume.toggleMute()
+        }
+    }
+
+    private func press(_ key: MediaKeys.Key, mediaRemoteCommand: UInt32) {
+        if AccessibilityPermission.isGranted {
+            MediaKeys.press(key)
+        } else if let sendCommand {
+            _ = sendCommand(mediaRemoteCommand, nil)
+        }
+    }
+
+    // MARK: - MediaRemote
+
+    private func mediaRemoteTrack() async -> PlayerTrack? {
+        guard let getInfo else { return nil }
+        let fields: MediaRemoteFields? = await withCheckedContinuation { continuation in
+            let once: OneShotContinuation<MediaRemoteFields?> = .init(continuation)
+            // MediaRemote calls back on the queue it is given.
+            getInfo(DispatchQueue.main) { info in
+                once.resume(returning: MediaRemoteFields(info as? [String: Any]))
+            }
+            Task {
+                try? await Task.sleep(for: .seconds(1))
+                once.resume(returning: nil)
+            }
+        }
+        guard let fields else { return nil }
+        return .init(
+            title: fields.title,
+            artist: fields.artist,
+            album: fields.album,
+            appName: await playingAppName(),
+            isPlaying: (fields.rate ?? 0) > 0,
+            duration: fields.duration,
+            elapsed: fields.elapsed,
+            elapsedDate: fields.timestamp ?? .now,
+            artwork: fields.artwork.map { .data($0) }
+        )
+    }
+
+    private func playingAppName() async -> String? {
+        guard let getPID else { return nil }
+        let pid: Int32 = await withCheckedContinuation { continuation in
+            let once: OneShotContinuation<Int32> = .init(continuation)
+            getPID(DispatchQueue.main) { pid in
+                once.resume(returning: pid)
+            }
+            Task {
+                try? await Task.sleep(for: .seconds(1))
+                once.resume(returning: 0)
+            }
+        }
+        return pid > 0 ? NSRunningApplication(processIdentifier: pid)?.localizedName : nil
+    }
+
+    // MARK: - AppleScript (Music, Spotify)
+
+    private func scriptedTrack() async -> PlayerTrack? {
+        var paused: PlayerTrack?
+        for player in ScriptablePlayer.allCases where player.isRunning && player.isAutomationAllowed {
+            guard let output = await Self.runAppleScript(player.trackScript), let track = player.track(from: output) else { continue }
+            if track.isPlaying {
+                return track
+            }
+            paused = paused ?? track
+        }
+        return paused
+    }
+
+    // MARK: - Artwork
+
+    /// The artwork of the track when ready; prepares it in the background when the track changes.
+    private func preparedArtwork(for track: PlayerTrack) -> (id: String?, data: Data?)? {
+        if let artwork, artwork.trackKey == track.key {
+            return (artwork.id, artwork.data)
+        }
+        let key: String = track.key
+        artwork = (key, nil, nil)
+        artworkTask?.cancel()
+        guard let source = track.artwork else { return nil }
+        artworkTask = Task { [weak self] in
+            let fetched: (image: Data?, position: TimeInterval?, date: Date) = await Self.artworkData(from: source)
+            guard !Task.isCancelled, let self, self.artwork?.trackKey == key else { return }
+            if case let .script(player) = source, let position = fetched.position {
+                self.announcements.correct(player, trackKey: key, elapsed: position, at: fetched.date)
+            }
+            let image: Data? = fetched.image
+            let encoded: Data? = image.flatMap(Self.encodeArtwork)
+            let id: String? = encoded.map { data in
+                SHA256.hash(data: data).prefix(8).map { String(format: "%02x", $0) }.joined()
+            }
+            self.artwork = (key, id, encoded)
+        }
+        return nil
+    }
+
+    /// The artwork, and the position in the track when AppleScript told it.
+    private static func artworkData(from source: PlayerTrack.Artwork) async -> (image: Data?, position: TimeInterval?, date: Date) {
+        switch source {
+        case let .data(data):
+            return (data, nil, .now)
+        case let .url(url):
+            return (try? await URLSession.shared.data(from: url).0, nil, .now)
+        case let .script(player):
+            // macOS asks once for the permission to control the player.
+            let file: URL = URL.temporaryDirectory.appending(path: "locky-artwork")
+            try? FileManager.default.removeItem(at: file)
+            let date: Date = .now
+            let fields: [String] = (await runAppleScript(player.artworkScript(writingTo: file)))?.components(separatedBy: "\u{1F}") ?? []
+            let position: TimeInterval? = fields.first.flatMap(Double.init).map { $0 / 1_000 }
+            if fields.count > 1, let url = URL(string: fields[1]), url.scheme == "https" {
+                return (try? await URLSession.shared.data(from: url).0, position, date)
+            }
+            return (try? Data(contentsOf: file), position, date)
+        }
+    }
+
+    /// Small HEIC: the artwork travels over Bluetooth.
+    private static func encodeArtwork(_ data: Data) -> Data? {
+        let options: [CFString: Any] = [
+            kCGImageSourceCreateThumbnailFromImageAlways: true,
+            kCGImageSourceThumbnailMaxPixelSize: 300,
+            kCGImageSourceCreateThumbnailWithTransform: true
+        ]
+        guard
+            let source = CGImageSourceCreateWithData(data as CFData, nil),
+            let image = CGImageSourceCreateThumbnailAtIndex(source, 0, options as CFDictionary)
+        else { return nil }
+        return MacImageRenderer.encode(image, maxPixelSize: 300, opaque: true)
+    }
+
+    /// Runs a script with `osascript`, off the main thread (the permission prompt may wait for the
+    /// user). Returns its output, `nil` on error.
+    @concurrent
+    private nonisolated static func runAppleScript(_ source: String) async -> String? {
+        await withCheckedContinuation { continuation in
+            let process: Process = .init()
+            process.executableURL = URL(filePath: "/usr/bin/osascript")
+            process.arguments = ["-e", source]
+            let output: Pipe = .init()
+            process.standardOutput = output
+            process.standardError = FileHandle.nullDevice
+            process.terminationHandler = { finished in
+                let data: Data = output.fileHandleForReading.readDataToEndOfFile()
+                let text: String? = finished.terminationStatus == 0 ? String(data: data, encoding: .utf8) : nil
+                continuation.resume(returning: text?.trimmingCharacters(in: .newlines))
+            }
+            do {
+                try process.run()
+            } catch {
+                continuation.resume(returning: nil)
+            }
+        }
+    }
+}
+
+/// Fields of the MediaRemote now playing dictionary.
+private struct MediaRemoteFields: Sendable {
+    let title: String
+    let artist: String?
+    let album: String?
+    let duration: TimeInterval?
+    let elapsed: TimeInterval?
+    let rate: Double?
+    let timestamp: Date?
+    let artwork: Data?
+
+    init?(_ info: [String: Any]?) {
+        let prefix: String = "kMRMediaRemoteNowPlayingInfo"
+        guard let info, let title = info[prefix + "Title"] as? String, !title.isEmpty else { return nil }
+        self.title = title
+        artist = info[prefix + "Artist"] as? String
+        album = info[prefix + "Album"] as? String
+        duration = (info[prefix + "Duration"] as? NSNumber)?.doubleValue
+        elapsed = (info[prefix + "ElapsedTime"] as? NSNumber)?.doubleValue
+        rate = (info[prefix + "PlaybackRate"] as? NSNumber)?.doubleValue
+        timestamp = info[prefix + "Timestamp"] as? Date
+        artwork = info[prefix + "ArtworkData"] as? Data
+    }
+}

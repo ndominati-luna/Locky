@@ -1,0 +1,62 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "Lock" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verrouiller"
+          }
+        }
+      }
+    },
+    "Locky" : {
+      "shouldTranslate" : false
+    },
+    "OK" : {
+      "shouldTranslate" : false
+    },
+    "Pair your Mac from the Locky app on your iPhone." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Appairez votre Mac depuis l’app Locky sur votre iPhone."
+          }
+        }
+      }
+    },
+    "Unlock" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Déverrouiller"
+          }
+        }
+      }
+    },
+    "Your iPhone is not reachable." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Votre iPhone n’est pas joignable."
+          }
+        }
+      }
+    },
+    "Your Mac is not connected to your iPhone." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Votre Mac n’est pas connecté à votre iPhone."
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

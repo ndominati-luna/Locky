@@ -1,0 +1,269 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "Lock" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verrouiller"
+          }
+        }
+      }
+    },
+    "Lock Mac" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verrouiller le Mac"
+          }
+        }
+      }
+    },
+    "Lock or Unlock Mac" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verrouiller ou déverrouiller le Mac"
+          }
+        }
+      }
+    },
+    "Lock or unlock Mac" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verrouiller ou déverrouiller le Mac"
+          }
+        }
+      }
+    },
+    "Locked" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verrouillé"
+          }
+        }
+      }
+    },
+    "Locks the Mac paired with Locky." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verrouille le Mac appairé avec Locky."
+          }
+        }
+      }
+    },
+    "Locks your Mac immediately." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verrouille votre Mac immédiatement."
+          }
+        }
+      }
+    },
+    "Mac" : {
+      "shouldTranslate" : false
+    },
+    "My Mac" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mon Mac"
+          }
+        }
+      }
+    },
+    "See whether your Mac is locked and lock or unlock it." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Voyez si votre Mac est verrouillé et verrouillez-le ou déverrouillez-le."
+          }
+        }
+      }
+    },
+    "Shows whether your Mac is locked and toggles it." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Indique si votre Mac est verrouillé et bascule son état."
+          }
+        }
+      }
+    },
+    "Unlock" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Déverrouiller"
+          }
+        }
+      }
+    },
+    "Unlock Mac" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Déverrouiller le Mac"
+          }
+        }
+      }
+    },
+    "Unlocked" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Déverrouillé"
+          }
+        }
+      }
+    },
+    "Unlocks the Mac paired with Locky." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Déverrouille le Mac appairé avec Locky."
+          }
+        }
+      }
+    },
+    "Unlock your Mac" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Déverrouiller votre Mac"
+          }
+        }
+      }
+    },
+    "Lock your Mac" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verrouiller votre Mac"
+          }
+        }
+      }
+    },
+    "Pair your Mac in the Locky app." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Appairez votre Mac dans l’app Locky."
+          }
+        }
+      }
+    },
+    "Your Mac is out of reach" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Votre Mac est hors de portée"
+          }
+        }
+      }
+    },
+    "Automatic locking paused" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verrouillage auto en pause"
+          }
+        }
+      }
+    },
+    "Automatic locking on" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verrouillage auto activé"
+          }
+        }
+      }
+    },
+    "Locks beyond %@" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Se verrouille au-delà de %@"
+          }
+        }
+      }
+    },
+    "Out of reach" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hors de portée"
+          }
+        }
+      }
+    },
+    "Unlocking…" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Déverrouillage…"
+          }
+        }
+      }
+    },
+    "%@ away · locks beyond %@" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "À %1$@ · se verrouille au-delà de %2$@"
+          }
+        }
+      }
+    },
+    "Connected" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Connecté"
+          }
+        }
+      }
+    },
+    "%@ · limit %@" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ · limite %2$@"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

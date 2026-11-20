@@ -1,0 +1,76 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "${applicationName} lock my Mac" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "fr" : {
+          "stringSet" : {
+            "state" : "translated",
+            "values" : [
+              "${applicationName} verrouille mon Mac"
+            ]
+          }
+        }
+      }
+    },
+    "${applicationName} unlock my Mac" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "fr" : {
+          "stringSet" : {
+            "state" : "translated",
+            "values" : [
+              "${applicationName} déverrouille mon Mac"
+            ]
+          }
+        }
+      }
+    },
+    "Lock my Mac with ${applicationName}" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringSet" : {
+            "state" : "new",
+            "values" : [
+              "Lock my Mac with ${applicationName}",
+              "${applicationName} lock my Mac"
+            ]
+          }
+        },
+        "fr" : {
+          "stringSet" : {
+            "state" : "needs_review",
+            "values" : [
+              "Verrouille mon Mac avec ${applicationName}"
+            ]
+          }
+        }
+      }
+    },
+    "Unlock my Mac with ${applicationName}" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringSet" : {
+            "state" : "new",
+            "values" : [
+              "Unlock my Mac with ${applicationName}",
+              "${applicationName} unlock my Mac"
+            ]
+          }
+        },
+        "fr" : {
+          "stringSet" : {
+            "state" : "needs_review",
+            "values" : [
+              "Déverrouille mon Mac avec ${applicationName}"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

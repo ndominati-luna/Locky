@@ -1,0 +1,192 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "%lld%%" : {
+      "shouldTranslate" : false
+    },
+    "About %@ away" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "À environ %@"
+          }
+        }
+      }
+    },
+    "Activated" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Activé"
+          }
+        }
+      }
+    },
+    "Connected" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Connecté"
+          }
+        }
+      }
+    },
+    "Lock" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verrouiller"
+          }
+        }
+      }
+    },
+    "Lock Mac" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verrouiller le Mac"
+          }
+        }
+      }
+    },
+    "Locks this Mac now." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verrouille ce Mac maintenant."
+          }
+        }
+      }
+    },
+    "Locks your Mac immediately." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verrouille votre Mac immédiatement."
+          }
+        }
+      }
+    },
+    "Locky" : {
+      "shouldTranslate" : false
+    },
+    "Locky Activated" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Locky activé"
+          }
+        }
+      }
+    },
+    "Locky activated" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Locky activé"
+          }
+        }
+      }
+    },
+    "Locky on" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Locky activé"
+          }
+        }
+      }
+    },
+    "Locky paused" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Locky en pause"
+          }
+        }
+      }
+    },
+    "My iPhone" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mon iPhone"
+          }
+        }
+      }
+    },
+    "Pair your iPhone from the Locky menu." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Appairez votre iPhone depuis le menu Locky."
+          }
+        }
+      }
+    },
+    "Paused" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "En pause"
+          }
+        }
+      }
+    },
+    "See whether your iPhone is close to your Mac and control Locky." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Voyez si votre iPhone est près de votre Mac et contrôlez Locky."
+          }
+        }
+      }
+    },
+    "Turns automatic locking on or off." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Active ou désactive le verrouillage automatique."
+          }
+        }
+      }
+    },
+    "Turns locking your Mac when your iPhone walks away on or off." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Active ou désactive le verrouillage de votre Mac quand votre iPhone s’éloigne."
+          }
+        }
+      }
+    },
+    "Out of reach" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hors de portée"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}
