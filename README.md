@@ -295,7 +295,8 @@ Le site `https://locky.lunabee.studio` sert :
 
 **À chaque version** :
 1. Monter `MARKETING_VERSION` et `CURRENT_PROJECT_VERSION` de la cible LockyMac (Sparkle compare le second).
-2. Notes de version (facultatives) dans `Tools/Release/ReleaseNotes/<version>.md`, affichées par Sparkle.
+2. Notes de version (facultatives), **en français** et en Markdown, dans `Tools/Release/ReleaseNotes/<version>.md` :
+   Sparkle les affiche dans sa fenêtre de mise à jour, quelle que soit la langue du Mac.
 3. `Tools/Release/release_mac.sh` : archive, signature Developer ID, notarisation de l'app puis du DMG, flux
    Sparkle signé. Le résultat est dans `build/site/`.
 4. Envoyer `build/site/locky-mac-install.dmg` et `build/site/mac/` (sans `old_updates`) à la racine du site.
