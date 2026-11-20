@@ -1,7 +1,7 @@
 import AppIntents
 
 /// Siri and Spotlight phrases. App Store Connect refuses Apple product names in them (ITMS-90626):
-/// "computer", never "Mac".
+/// "computer", never "Mac" (in the short titles too).
 struct LockyShortcuts: AppShortcutsProvider {
     static var appShortcuts: [AppShortcut] {
         AppShortcut(
@@ -11,7 +11,7 @@ struct LockyShortcuts: AppShortcutsProvider {
                 "\(.applicationName) lock my computer",
                 "Lock with \(.applicationName)"
             ],
-            shortTitle: "Lock Mac",
+            shortTitle: "Lock",
             systemImageName: "lock.fill"
         )
         AppShortcut(
@@ -21,7 +21,7 @@ struct LockyShortcuts: AppShortcutsProvider {
                 "\(.applicationName) unlock my computer",
                 "Unlock with \(.applicationName)"
             ],
-            shortTitle: "Unlock Mac",
+            shortTitle: "Unlock",
             systemImageName: "lock.open.fill"
         )
     }
