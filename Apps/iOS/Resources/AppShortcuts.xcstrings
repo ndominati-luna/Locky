@@ -1,71 +1,51 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "${applicationName} lock my Mac" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "fr" : {
-          "stringSet" : {
-            "state" : "translated",
-            "values" : [
-              "${applicationName} verrouille mon Mac"
-            ]
-          }
-        }
-      }
-    },
-    "${applicationName} unlock my Mac" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "fr" : {
-          "stringSet" : {
-            "state" : "translated",
-            "values" : [
-              "${applicationName} déverrouille mon Mac"
-            ]
-          }
-        }
-      }
-    },
-    "Lock my Mac with ${applicationName}" : {
+    "Lock my computer with ${applicationName}" : {
       "extractionState" : "extracted_with_value",
       "localizations" : {
         "en" : {
           "stringSet" : {
             "state" : "new",
             "values" : [
-              "Lock my Mac with ${applicationName}",
-              "${applicationName} lock my Mac"
+              "Lock my computer with ${applicationName}",
+              "${applicationName} lock my computer",
+              "Lock with ${applicationName}"
             ]
           }
         },
         "fr" : {
           "stringSet" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "values" : [
-              "Verrouille mon Mac avec ${applicationName}"
+              "Verrouille mon ordinateur avec ${applicationName}",
+              "${applicationName} verrouille mon ordinateur",
+              "Verrouille avec ${applicationName}"
             ]
           }
         }
       }
     },
-    "Unlock my Mac with ${applicationName}" : {
+    "Unlock my computer with ${applicationName}" : {
       "extractionState" : "extracted_with_value",
       "localizations" : {
         "en" : {
           "stringSet" : {
             "state" : "new",
             "values" : [
-              "Unlock my Mac with ${applicationName}",
-              "${applicationName} unlock my Mac"
+              "Unlock my computer with ${applicationName}",
+              "${applicationName} unlock my computer",
+              "Unlock with ${applicationName}"
             ]
           }
         },
         "fr" : {
           "stringSet" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "values" : [
-              "Déverrouille mon Mac avec ${applicationName}"
+              "Déverrouille mon ordinateur avec ${applicationName}",
+              "${applicationName} déverrouille mon ordinateur",
+              "Déverrouille avec ${applicationName}"
             ]
           }
         }

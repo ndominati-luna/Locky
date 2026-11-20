@@ -51,12 +51,12 @@
         }
       }
     },
-    "Locks the Mac paired with Locky." : {
+    "Locks the computer paired with Locky." : {
       "localizations" : {
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Verrouille le Mac appairé avec Locky."
+            "value" : "Verrouille l’ordinateur appairé avec Locky."
           }
         }
       }
@@ -134,12 +134,12 @@
         }
       }
     },
-    "Unlocks the Mac paired with Locky." : {
+    "Unlocks the computer paired with Locky." : {
       "localizations" : {
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Déverrouille le Mac appairé avec Locky."
+            "value" : "Déverrouille l’ordinateur appairé avec Locky."
           }
         }
       }
