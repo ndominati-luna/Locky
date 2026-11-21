@@ -77,9 +77,19 @@ final class MacAppModel {
     @ObservationIgnored private var isCameraRequestPending: Bool = false
     /// Follows the camera permission while System Settings is open (macOS sends no event).
     @ObservationIgnored private var cameraWatch: Task<Void, Never>?
+    /// The settings the iPhone left in iCloud are being read.
+    @ObservationIgnored private var isFetchingCloudSettings: Bool = false
+    /// The Mac gets a push from iCloud as soon as the iPhone leaves settings there.
+    @ObservationIgnored private var isPushEnabled: Bool = false
+    /// Remote notifications are registered: the subscription can be saved.
+    @ObservationIgnored private var isPushRegistered: Bool = false
 
     /// Seconds without any input after which the Mac is considered unused.
     private static let inUseIdleThreshold: TimeInterval = 3
+    /// How often the settings the iPhone left in iCloud are read while it is away, without push
+    /// and with push (in case one was lost).
+    private static let cloudSettingsInterval: Duration = .seconds(60)
+    private static let cloudSettingsPushedInterval: Duration = .seconds(15 * 60)
 
     // MARK: - Lifecycle
 
@@ -164,6 +174,7 @@ final class MacAppModel {
         rebuildEngine()
         session.start()
         startBackgroundTasks()
+        watchCloudSettings()
         widgets.onCommand = { [weak self] command in self?.perform(command) }
         widgets.start()
         observeWidgetState()
@@ -404,8 +415,11 @@ final class MacAppModel {
         timeout.cancel()
     }
 
-    func setAutoLockEnabled(_ enabled: Bool) {
+    /// - Parameter date: When it was chosen: now on the Mac or over Bluetooth, earlier when the
+    ///   iPhone chose it out of reach.
+    func setAutoLockEnabled(_ enabled: Bool, chosenAt date: Date = .now) {
         preferences.isAutoLockEnabled = enabled
+        preferences.settingsClock.autoLock = date
         session.send(.autoLock(isEnabled: enabled))
         publishToCloud()
     }
@@ -417,6 +431,7 @@ final class MacAppModel {
 
     /// Changed in the animation window: the settings of the iPhone show it.
     func lockAnimationDidChange() {
+        preferences.settingsClock.lockAnimation = .now
         sendLockAnimation()
     }
 
@@ -637,7 +652,9 @@ final class MacAppModel {
         case let .deviceStatus(status):
             let modelChanged: Bool = preferences.device?.modelIdentifier != status.modelIdentifier
             preferences.device = status
+            // The current choices of the iPhone, whatever it left in iCloud before.
             apply(status.preferences)
+            preferences.settingsClock.preferences = .now
             checkBattery(status.batteryLevel)
             if modelChanged {
                 // New iPhone (or first status): render its picture for it.
@@ -648,6 +665,7 @@ final class MacAppModel {
             sendLockAnimation()
         case let .preferences(phonePreferences):
             apply(phonePreferences)
+            preferences.settingsClock.preferences = .now
         case .cameraAccessRequest:
             allowCamera()
         case let .battery(level):
@@ -676,8 +694,11 @@ final class MacAppModel {
         case let .lockAnimation(settings):
             // Chosen on the iPhone: applied, then sent back as the Mac keeps it.
             preferences.apply(settings)
+            preferences.settingsClock.lockAnimation = .now
             transitions.prepareWallpaper()
             sendLockAnimation()
+        case let .macSettings(envelope):
+            merge(envelope, from: "Bluetooth")
         case .previewLockAnimation:
             previewLockAnimation()
         case .checkForUpdates:
@@ -694,7 +715,13 @@ final class MacAppModel {
         engine?.lockDistance = phonePreferences.lockDistance
         if phonePreferences.intrusionDetection, !previous.intrusionDetection {
             intrusionDetectionTurnedOn()
+            // Turned on while the Mac is locked (from afar, through iCloud): the next attempts are
+            // reported.
+            if isLocked, isPaired, !isSleeping {
+                intrusions.start()
+            }
         } else if !phonePreferences.intrusionDetection, previous.intrusionDetection {
+            intrusions.stop()
             isCameraRequestPending = false
             notifier.remove(MacNotifier.Identifier.camera)
             notifier.post(
@@ -702,6 +729,94 @@ final class MacAppModel {
                 title: String(localized: "Locky - Intruders detection"),
                 body: String(localized: "Intruders detection is now deactivated.")
             )
+        }
+    }
+
+    // MARK: - Settings chosen on the iPhone out of reach
+
+    /// Applies the settings the iPhone chose after those of the Mac: out of reach, it leaves them
+    /// in iCloud, then sends them again when it comes back (see ``MacSettingsEnvelope``).
+    private func merge(_ envelope: MacSettingsEnvelope, from source: StaticString) {
+        let newer: MacSettingsEnvelope = envelope.newer(than: preferences.settingsClock)
+        guard !newer.isEmpty else { return }
+        let autoLock: String = newer.autoLock.map { String($0.value) } ?? "-"
+        logger.notice("""
+            Settings chosen on the iPhone (\(source, privacy: .public)): preferences \(newer.preferences != nil), \
+            auto lock \(autoLock, privacy: .public), animation \(newer.lockAnimation != nil)
+            """)
+        if let preferences = newer.preferences {
+            apply(preferences.value)
+        }
+        if let autoLock = newer.autoLock, autoLock.value != preferences.isAutoLockEnabled {
+            setAutoLockEnabled(autoLock.value, chosenAt: autoLock.date)
+        }
+        if let lockAnimation = newer.lockAnimation {
+            preferences.apply(lockAnimation.value)
+            transitions.prepareWallpaper()
+            sendLockAnimation()
+        }
+        preferences.settingsClock.advance(to: newer)
+    }
+
+    /// While the iPhone is away, it leaves the settings changed out of reach in iCloud: read at once
+    /// on the push iCloud sends then, when the Mac wakes up, and regularly in case a push was lost
+    /// (every minute without push).
+    private func watchCloudSettings() {
+        backgroundTasks.append(Task { [weak self] in
+            while !Task.isCancelled {
+                guard let self else { return }
+                if !self.session.connection.isConnected, !self.isSleeping {
+                    await self.fetchCloudSettings()
+                }
+                try? await Task.sleep(for: self.isPushEnabled ? Self.cloudSettingsPushedInterval : Self.cloudSettingsInterval)
+            }
+        })
+    }
+
+    private func fetchCloudSettings() async {
+        guard isPaired, !isFetchingCloudSettings, let key = session.pairingKey else { return }
+        isFetchingCloudSettings = true
+        defer { isFetchingCloudSettings = false }
+        let macID: UUID = session.macID
+        do {
+            guard let sealed = try await CloudSync.shared.fetchMacSettings(macID: macID) else { return }
+            merge(try MacSettingsEnvelope(sealed: sealed, key: key, macID: macID), from: "iCloud")
+            if !isPushEnabled {
+                // The record type exists now: the subscription can be saved.
+                await subscribeToCloudSettings()
+            }
+        } catch {
+            // Offline, no iCloud account, or left by an earlier pairing (another key).
+            logger.info("Settings in iCloud not read: \(String(describing: error), privacy: .public)")
+        }
+    }
+
+    func remoteNotificationsDidRegister() {
+        isPushRegistered = true
+        Task { await subscribeToCloudSettings() }
+    }
+
+    func remoteNotificationsDidFail(_ error: any Error) {
+        logger.notice("No push from iCloud, the settings are read every minute: \(String(describing: error), privacy: .public)")
+    }
+
+    /// Only the push of the settings matters here: the pushes the iPhone subscribed to (Mac state,
+    /// intrusions) reach every Locky of the iCloud account, this Mac included.
+    func didReceiveRemoteNotification(_ userInfo: [String: Any]) {
+        guard CloudSync.isMacSettingsNotification(userInfo) else { return }
+        Task { await fetchCloudSettings() }
+    }
+
+    private func subscribeToCloudSettings() async {
+        guard isPushRegistered, !isPushEnabled else { return }
+        do {
+            try await CloudSync.shared.registerMacSettingsSubscription()
+            isPushEnabled = true
+            logger.info("Subscribed to the settings in iCloud")
+        } catch {
+            // No iCloud account, offline, or no iPhone ever left settings (no record type yet): the
+            // settings are read every minute, and the subscription saved once some are found.
+            logger.info("Not subscribed to the settings in iCloud: \(String(describing: error), privacy: .public)")
         }
     }
 
@@ -1025,6 +1140,12 @@ final class MacAppModel {
             }
             self.intrusions.didWake()
             self.session.start()
+            // The iPhone may have changed settings out of reach meanwhile (once the network is back).
+            Task { [weak self] in
+                try? await Task.sleep(for: .seconds(8))
+                guard let self, !self.session.connection.isConnected else { return }
+                await self.fetchCloudSettings()
+            }
         }
         events.onSessionResignActive = { [weak self] in
             self?.cancelNotConnectedNotification()

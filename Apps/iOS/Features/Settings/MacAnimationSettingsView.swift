@@ -2,7 +2,8 @@ import LockyKit
 import SwiftUI
 
 /// The lock animation of the Mac, chosen from the iPhone: previewed here over the wallpaper of the
-/// Mac, applied by the Mac at once. The background image can only be chosen on the Mac.
+/// Mac, applied by the Mac at once, or through iCloud while it is out of reach. The background
+/// image can only be chosen on the Mac.
 struct MacAnimationSettingsView: View {
     @Environment(AppModel.self) private var model
     @Environment(\.colorScheme) private var colorScheme
@@ -33,6 +34,8 @@ struct MacAnimationSettingsView: View {
                     .padding(.init(top: 6, leading: 12, bottom: 28, trailing: 12))
                     .listRowInsets(.init())
                     .listRowBackground(Color.clear)
+                } footer: {
+                    OutOfReachNote()
                 }
                 Section {
                     Picker("Animation", selection: binding(\.style)) {
@@ -91,17 +94,21 @@ struct MacAnimationSettingsView: View {
                     Button("Preview on your Mac", systemImage: "play.rectangle") {
                         model.previewMacLockAnimation()
                     }
-                    .disabled(!isAnimated)
+                    .disabled(!isAnimated || !model.isConnected)
                 } footer: {
                     Text("Plays the animation on your Mac without locking it.")
                 }
-            } else {
+            } else if model.isConnected {
                 ProgressView()
                     .frame(maxWidth: .infinity)
                     .listRowBackground(Color.clear)
+            } else {
+                Text("The animation of your Mac shows up here once it is in reach.")
+                    .foregroundStyle(.secondary)
+                    .listRowBackground(Color.clear)
             }
         }
-        .disabled(!model.isConnected)
+        .disabled(!model.canChangeMacSettings)
         .navigationTitle("Lock animation")
         .scrollContentBackground(.hidden)
         .immersivePageBackground(wallpaper: model.visuals.backgroundWallpaper, intensity: 0.55, isFaded: !model.isConnected)

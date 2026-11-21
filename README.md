@@ -32,11 +32,13 @@ swift test --package-path Packages/LockyKit
 Le simulateur n'a pas de Bluetooth. Pour voir l'app appairée : argument de lancement `-LockyDemo YES` (le
 bouton rond « Verrouiller / Déverrouiller » simule alors un Mac qui répond). Options : `-LockyDemoTab settings|intrusions`,
 `-LockyDemoLocked YES`, `-LockyDemoAutoUnlock YES` (déverrouille puis reverrouille tout seul, pour voir les
-transitions), `-LockyDemoPairing code|calibrating|done`, `-LockyDemoOnboardingPage 0…5` (avec
+transitions), `-LockyDemoWalk YES` (sur l'écran principal, l'iPhone s'éloigne jusqu'au verrouillage puis revient
+jusqu'au déverrouillage, pour les films de démo), `-LockyDemoPairing code|calibrating|done`, `-LockyDemoOnboardingPage 0…5` (avec
 `-locky.onboardingCompleted NO`), `-LockyDemoSetup waiting|walkAway|comeBack|magic|tour` (premier essai guidé ;
 `tour` le joue en entier : l'iPhone s'éloigne, le Mac se verrouille, l'iPhone revient, il se déverrouille),
 `-LockyDemoMacName "…"` (nom du Mac, pour vérifier les noms longs dans les widgets et la Live Activity),
-`-LockyDemoOutOfReach YES` (Mac hors de portée : widgets estompés, île grise),
+`-LockyDemoOutOfReach YES` (Mac hors de portée : widgets estompés, île grise), `-LockyDemoMacPanel YES` (tableau
+de bord du Mac ouvert en feuille),
 `-LockyDemoCamera denied|notDetermined|unavailable` (caméra du Mac non autorisée, avec
 `-locky.intrusionDetection YES` : avertissement dans les réglages et les rapports d'intrusion). Pour que
 les widgets et la Live Activity voient les images du groupe d'apps au simulateur, compiler signé localement
@@ -69,6 +71,11 @@ Le menu du Mac n'a plus d'élément « Essayer Locky ». Les images de démo son
 
 ### iPhone Duo
 - **Fermé** (écran externe, 466 × 678 pt) : l'interface iPhone telle quelle.
+- **Sur iPhone, Duo fermé ou debout à plat** (pas de page pour le Mac) : le tableau de bord « Ton Mac » s'ouvre en
+  feuille depuis un bouton à l'icône du Mac, à côté de celui des rapports d'intrusion (verre rond comme ses
+  voisins : le symbole du Mac, plus large que haut, est mis au carré par `SquareSymbol`). La feuille a sa propre
+  navigation (les rapports s'y ouvrent) et se ferme d'elle‑même si une notification d'intrusion ouvre les
+  rapports. Démo : `-LockyDemoMacPanel YES`.
 - **Tenu comme un livre** (écran interne en paysage, 951 × 669 pt, à plat ou à moitié ouvert) : deux pages de
   part et d'autre du pli, rien à cheval dessus. Accueil à gauche (le même écran que sur iPhone), tableau de bord
   du Mac à droite, un seul fond d'écran pour les deux et un trait fin sur le pli, au bord du tableau de bord.
@@ -110,6 +117,9 @@ Le menu du Mac n'a plus d'élément « Essayer Locky ». Les images de démo son
   fenêtre (milieu du grand côté de l'écran interne, dès que les deux côtés font au moins 600 pt), voir
   `Apps/iOS/Design/Fold`. La mise en page ne dépend donc pas de l'angle de la charnière.
 
+**Textes en français : on tutoie l'utilisateur, partout** (apps, widgets, autorisations, raccourcis, notes de
+version Sparkle), sur un ton simple et amical : « Ton Mac », « Éloigne‑toi avec ton iPhone ».
+
 ## Organisation
 
 ```
@@ -147,7 +157,10 @@ Legacy/                Ancienne app, pour référence
   la session (`LockyProtocolError.unknownMessage`) ; avant Locky 1.0.2, il relançait la session à chaque fois.
   Depuis 1.0.2 : verrouillage automatique réglé depuis l'iPhone (`autoLock` dans les deux sens), animation de
   verrouillage (`lockAnimation`, `previewLockAnimation`) et mise à jour du Mac (`checkForUpdates`, version de
-  Locky dans `MacStatus`).
+  Locky dans `MacStatus`). Dans les réglages de l'iPhone, « Mettre à jour vers Locky x » quand le flux Sparkle
+  annonce une version plus récente, sinon « Rechercher les mises à jour » : le même message, comme l'élément du
+  menu du Mac (Sparkle répond sur le Mac : nouvelle version ou « à jour »), et l'iPhone relit le flux. Depuis 1.0.3 : réglages du Mac changés hors de portée (`cloudSettings`, message
+  `macSettings`, voir « Réglages changés hors de portée »).
 
 ### Sécurité
 - Appairage : clés éphémères P‑256 avec **engagement** (le Mac s'engage sur sa clé avant de voir celle de
@@ -158,6 +171,10 @@ Legacy/                Ancienne app, pour référence
 - Le mot de passe de session Mac est vérifié sur le Mac (OpenDirectory, plus de `sudo`), stocké **dans le
   trousseau de l'iPhone** (accessible après le premier déverrouillage, pour fonctionner iPhone en poche) et ne
   voyage que dans le canal chiffré.
+- Les réglages que l'iPhone dépose dans iCloud pour le Mac sont scellés avec une clé dérivée de la clé d'appairage
+  (ChaCha20‑Poly1305, liés à l'identifiant du Mac) : un accès au compte iCloud ne permet ni de les lire ni d'en
+  forger (couper la détection des intrus, par exemple), et une ancienne copie rejouée est plus vieille que ce que
+  le Mac a déjà.
 
 ### Distance
 Filtre de Kalman 1D sur le RSSI (bruit de processus plus fort quand l'iPhone bouge, chutes de signal
@@ -217,9 +234,29 @@ désactive au lieu d'empêcher l'app de démarrer.
 Base privée CloudKit, zone `Locky` : enregistrements `MacStatus` (nom, modèle, utilisateur, état de verrouillage,
 autorisation de la caméra `cameraAccess` et images avec leur version `imagesVersion`), `NowPlaying` (pochette du morceau en cours, 216 px, une seule par
 Mac, remplacée quand elle change, effacée quand Locky quitte et à son lancement s'il a été tué ; Locky 1.0.0 pour
-Mac y mettait aussi le morceau) et `Intrusion` (photos
-d'intrus). L'iPhone s'abonne : notification visible pour une intrusion,
-silencieuse pour l'état du Mac. Tout se lit par identifiant ou par changements de zone : aucun index à configurer.
+Mac y mettait aussi le morceau), `Intrusion` (photos
+d'intrus) et `MacSettings` (réglages du Mac changés sur l'iPhone hors de portée, un seul champ `sealed`). L'iPhone
+s'abonne : notification visible pour une intrusion, silencieuse pour l'état du Mac ; le Mac s'abonne aux
+`MacSettings` (silencieuse). Les abonnements appartiennent au compte iCloud, pas à un appareil : chaque Locky du
+compte reçoit les notifications de tous. L'iPhone et la Watch ignorent donc celle des réglages, et le Mac celles de
+l'iPhone (il n'affiche aucune notification venue d'iCloud quand il est au premier plan ; l'alerte d'intrusion est
+traduite côté Mac au cas où un autre Mac du compte la montrerait). Tout se lit par identifiant ou par changements de
+zone : aucun index à configurer.
+
+**Réglages changés hors de portée.** Les réglages que le Mac applique (verrouillage automatique, distance, détection
+des intrus, déverrouillage automatique ou par la Watch seule, animation) restent modifiables sur l'iPhone quand le
+Mac n'est pas à portée, si le Mac annonce `cloudSettings`. L'iPhone garde chacun avec sa date de choix
+(`MacSettingsEnvelope`). À portée, le changement part en Bluetooth comme avant. Hors de portée, l'iPhone dépose
+l'ensemble dans iCloud, scellé (enregistrement `settings-<macID>`) ; iCloud prévient aussitôt le Mac (notification
+silencieuse), qui le relit aussi toutes les 15 minutes au cas où une notification se perdrait (toutes les minutes
+sans notification : abonnement impossible tant que le type `MacSettings` n'existe pas, pas d'iCloud) tant que
+l'iPhone est loin, et 8 s après son réveil. Au retour, l'iPhone le renvoie aussi en Bluetooth (`macSettings`), au cas
+où le Mac n'aurait pas pu lire iCloud. Le Mac garde, réglage par réglage, le choix le plus récent entre ceux‑là et
+les siens (`MacSettingsClock` : changement fait sur le Mac, reçu en Bluetooth, ou appliqué depuis iCloud) ; un
+Mac qui passe à cette version date ses réglages du moment, pour qu'un ancien choix de l'iPhone ne les écrase pas.
+Activée de loin sur un Mac verrouillé, la détection des intrus démarre aussitôt. Face à un Mac plus
+ancien, l'iPhone garde le comportement d'avant : préférences transmises à la prochaine connexion, verrouillage
+automatique et animation modifiables seulement à portée.
 
 **Fond d'écran rangé dans un dossier protégé.** macOS fait pointer le fond d'écran vers le fichier choisi, sans copie
 lisible. S'il est dans Documents, Bureau, Téléchargements, iCloud Drive ou sur un autre disque, le lire déclenche la
@@ -228,8 +265,8 @@ ligne « Fond d'écran » (facultative) de l'étape Autorisations, et entrée «
 du menu tant que l'accès manque. Après un refus, le bouton ouvre Réglages Système › Fichiers et dossiers ; l'accès est
 suivi toutes les 2 s. Sans accès, l'iPhone et les animations prennent le fond bleu Locky.
 
-**Détection des intrus et caméra du Mac.** Le réglage se règle sur l'iPhone et part vers le Mac (tout de suite, ou à
-la prochaine connexion). À l'activation, le Mac vérifie la caméra : autorisée, il confirme par une notification ;
+**Détection des intrus et caméra du Mac.** Le réglage se règle sur l'iPhone et part vers le Mac (tout de suite à
+portée, par iCloud hors de portée, voir plus haut). À l'activation, le Mac vérifie la caméra : autorisée, il confirme par une notification ;
 jamais demandée, macOS pose la question, mais seulement sur un Mac déverrouillé (verrouillé, elle attend le
 prochain déverrouillage) ; refusée, une notification l'explique et ouvre Réglages Système › Confidentialité ›
 Caméra au clic, seul endroit où un refus se défait ; pas de caméra, les tentatives sont signalées sans photo. Le Mac
@@ -280,8 +317,13 @@ symbole de sa famille.
   `VH79XGK7M2.studio.lunabee.locky.mac` pour `studio.lunabee.locky.mac` et `studio.lunabee.locky.mac.widgets`.
 - **Apple Watch** : capacités iCloud (CloudKit, conteneur `iCloud.studio.lunabee.locky`) et Push Notifications sur
   l'App ID `.watchkitapp` (déclarées dans `LockyWatch.entitlements`, à vérifier dans Signing & Capabilities).
+- **Mac** : Push Notifications sur l'App ID `studio.lunabee.locky.mac` (`com.apple.developer.aps-environment` dans
+  `LockyMac.entitlements`, activé par Xcode en signature automatique) ; le profil Developer ID doit l'inclure (voir
+  « Publier une version Mac »).
 - **CloudKit** : déployer le schéma de développement en production depuis la console CloudKit (types `MacStatus`,
-  `NowPlaying`, `Intrusion` ; le champ `cameraAccess` de `MacStatus` apparaît quand un Mac l'a publié une fois).
+  `NowPlaying`, `Intrusion`, `MacSettings` ; le champ `cameraAccess` de `MacStatus` apparaît quand un Mac l'a publié
+  une fois, le type `MacSettings` et son champ `sealed` (Bytes) quand un iPhone de développement a changé un réglage
+  hors de portée, ou à créer à la main dans la console).
 - **Mac** : distribué hors Mac App Store (pas de sandbox : impossible avec la saisie du mot de passe et les API
   privées), signé Developer ID et notarisé ; voir « Publier une version Mac ». Tant que `SUPublicEDKey` est vide,
   l'élément « Rechercher les mises à jour » est masqué.
@@ -303,6 +345,8 @@ Le site `https://locky.lunabee.studio` sert :
 2. Profil de provisionnement **Developer ID** nommé exactement `Locky Mac Developer ID` (iCloud l'exige), créé sur
    developer.apple.com (Profiles › + › Developer ID, App ID `studio.lunabee.locky.mac`, certificat Developer ID
    de LUNABEE STUDIO) puis installé d'un double‑clic. Il est référencé par `Tools/Release/ExportOptions.plist`.
+   Il doit contenir iCloud et Push Notifications : après tout changement de capacité de l'App ID, le portail le marque
+   « Invalid » ; le régénérer (Edit › Save) et le réinstaller, sinon l'export échoue.
 3. Profil de notarisation : `xcrun notarytool store-credentials Locky --apple-id <Apple ID> --team-id VH79XGK7M2`
    (mot de passe d'app créé sur appleid.apple.com, ou clé d'API App Store Connect).
 4. Clé Sparkle : `build/packages/artifacts/sparkle/Sparkle/bin/generate_keys` (après une première publication, ou

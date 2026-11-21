@@ -24,6 +24,7 @@ final class MacPreferences {
         static let unlockCount: String = "locky.unlockCount"
         static let setupCompleted: String = "locky.setupCompleted"
         static let lowBatteryWarned: String = "locky.lowBatteryWarned"
+        static let settingsClock: String = "locky.settingsClock"
     }
 
     @ObservationIgnored private let defaults: UserDefaults = .standard
@@ -115,6 +116,12 @@ final class MacPreferences {
         didSet { defaults.set(try? JSONEncoder().encode(phonePreferences), forKey: Key.phonePreferences) }
     }
 
+    /// When the settings shared with the iPhone were chosen: a setting the iPhone left in iCloud
+    /// only applies when it was chosen later (see ``MacSettingsEnvelope``).
+    @ObservationIgnored var settingsClock: MacSettingsClock {
+        didSet { defaults.set(try? JSONEncoder().encode(settingsClock), forKey: Key.settingsClock) }
+    }
+
     /// Last status sent by the iPhone.
     var device: DeviceStatus? {
         didSet { defaults.set(device.flatMap { try? JSONEncoder().encode($0) }, forKey: Key.device) }
@@ -144,8 +151,16 @@ final class MacPreferences {
         phonePreferences = defaults.data(forKey: Key.phonePreferences)
             .flatMap { try? JSONDecoder().decode(PhonePreferences.self, from: $0) } ?? .init()
         device = defaults.data(forKey: Key.device).flatMap { try? JSONDecoder().decode(DeviceStatus.self, from: $0) }
+        // Updated from an earlier version: what the Mac holds was chosen before anything the iPhone
+        // leaves in iCloud from now on.
+        settingsClock = defaults.data(forKey: Key.settingsClock)
+            .flatMap { try? JSONDecoder().decode(MacSettingsClock.self, from: $0) } ?? .init(preferences: .now, autoLock: .now, lockAnimation: .now)
         unlockCount = defaults.integer(forKey: Key.unlockCount)
         isSetupCompleted = defaults.object(forKey: Key.setupCompleted) as? Bool
+        if defaults.data(forKey: Key.settingsClock) == nil {
+            // Kept, so that it does not move forward at each launch.
+            defaults.set(try? JSONEncoder().encode(settingsClock), forKey: Key.settingsClock)
+        }
     }
 
     func resetPairingRelatedValues() {
@@ -153,5 +168,6 @@ final class MacPreferences {
         device = nil
         unlockCount = 0
         isAutoLockEnabled = true
+        settingsClock = .init(preferences: .now, autoLock: .now, lockAnimation: .now)
     }
 }

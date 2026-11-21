@@ -57,6 +57,11 @@ enum DemoMode {
         UserDefaults.standard.bool(forKey: "LockyDemoLocked")
     }
 
+    /// The page of the Mac open in its sheet (`-LockyDemoMacPanel YES`).
+    static var showsMacPanel: Bool {
+        isEnabled && UserDefaults.standard.bool(forKey: "LockyDemoMacPanel")
+    }
+
     /// The Mac out of reach (`-LockyDemoOutOfReach YES`).
     static var isOutOfReach: Bool {
         UserDefaults.standard.bool(forKey: "LockyDemoOutOfReach")

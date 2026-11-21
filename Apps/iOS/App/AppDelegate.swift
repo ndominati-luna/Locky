@@ -1,3 +1,4 @@
+import LockyKit
 import UIKit
 
 /// Owns the model so it exists even when iOS launches Locky in background (Bluetooth restoration,
@@ -19,6 +20,8 @@ final class AppDelegate: NSObject, UIApplicationDelegate {
         _ application: UIApplication,
         didReceiveRemoteNotification userInfo: [AnyHashable: Any]
     ) async -> UIBackgroundFetchResult {
+        // Settings left for the Mac: only the Mac cares.
+        guard !CloudSync.isMacSettingsNotification(userInfo) else { return .noData }
         await model.refreshFromCloud()
         return .newData
     }

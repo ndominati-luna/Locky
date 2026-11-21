@@ -1,3 +1,4 @@
+import LockyKit
 import SwiftUI
 import WatchKit
 
@@ -34,6 +35,8 @@ final class WatchAppDelegate: NSObject, WKApplicationDelegate {
     }
 
     func didReceiveRemoteNotification(_ userInfo: [AnyHashable: Any]) async -> WKBackgroundFetchResult {
+        // Settings left for the Mac: only the Mac cares.
+        guard !CloudSync.isMacSettingsNotification(userInfo) else { return .noData }
         await WatchModel.shared.refreshFromCloud()
         return .newData
     }

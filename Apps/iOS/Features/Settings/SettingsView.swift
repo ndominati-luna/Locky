@@ -9,12 +9,19 @@ struct SettingsView: View {
     var body: some View {
         @Bindable var preferences = model.preferences
         Form {
+            // What the Mac applies, changed even out of reach.
             AutoLockSection()
 
             LockDistanceSection()
 
+            IntrusionSection()
+
+            LockAnimationSection()
+
             Section {
                 Toggle("Unlock automatically", systemImage: "wave.3.right", isOn: $preferences.unlockAutomatically)
+            } header: {
+                Text("Unlocking")
             } footer: {
                 Text("Locky will automatically enter your password to unlock your Mac when you're close to it with your iPhone.")
             }
@@ -37,21 +44,6 @@ struct SettingsView: View {
                 Toggle("Unlock only from Apple Watch", systemImage: "applewatch", isOn: $preferences.unlockOnlyFromWatch)
             } footer: {
                 Text("Your Mac will only be unlocked from the Locky app on your Apple Watch. Locking still works everywhere.")
-            }
-
-            Section {
-                Toggle("Intruder detection", systemImage: "camera.fill", isOn: $preferences.intrusionDetection)
-                if model.missingMacCameraAccess != nil {
-                    MacCameraWarning()
-                }
-                // Through the route, like the menu of the main screen: the reports then open their
-                // details in the same navigation stack.
-                NavigationLink(value: AppRoute.intrusions) {
-                    Label("Break-in reports", systemImage: "photo.stack")
-                }
-                .badge(model.intrusions.unseenCount)
-            } footer: {
-                Text("Locky on your Mac will send you a photo if someone tries to unlock it while you're not there. Photos are stored in your iCloud account.")
             }
 
             Section {
@@ -123,8 +115,8 @@ struct SettingsView: View {
     }
 }
 
-/// "Locky activated" on the Mac: locking when the iPhone walks away. Set on the Mac, shown and
-/// changed here while it is in reach.
+/// "Locky activated" on the Mac: locking when the iPhone walks away. Set on the Mac too; changed
+/// here in reach, or out of reach with a Mac that reads its settings in iCloud.
 private struct AutoLockSection: View {
     @Environment(AppModel.self) private var model
 
@@ -138,12 +130,79 @@ private struct AutoLockSection: View {
                     set: { model.setMacAutoLock($0) }
                 )
             )
-            .disabled(!model.isConnected || model.macStatus == nil)
+            .disabled(!model.canChangeMacSettings || model.macStatus == nil)
+        } header: {
+            Text("Your Mac")
         } footer: {
-            if model.isConnected {
-                Text("Locky locks your Mac when you walk away with your iPhone. Same as “Locky activated” in the Locky menu on your Mac.")
+            if model.canChangeMacSettings {
+                VStack(alignment: .leading, spacing: 6) {
+                    Text("Locky locks your Mac when you walk away with your iPhone. Same as “Locky activated” in the Locky menu on your Mac.")
+                    OutOfReachNote()
+                }
             } else {
                 Text("Your Mac must be in reach to change it.")
+            }
+        }
+    }
+}
+
+/// Photos of the people trying to unlock the Mac while the iPhone is away: precisely when the Mac
+/// is out of reach, hence changed through iCloud then.
+private struct IntrusionSection: View {
+    @Environment(AppModel.self) private var model
+
+    var body: some View {
+        @Bindable var preferences = model.preferences
+        Section {
+            Toggle("Intruder detection", systemImage: "camera.fill", isOn: $preferences.intrusionDetection)
+            if model.missingMacCameraAccess != nil {
+                MacCameraWarning()
+            }
+            // Through the route, like the menu of the main screen: the reports then open their
+            // details in the same navigation stack.
+            NavigationLink(value: AppRoute.intrusions) {
+                Label("Break-in reports", systemImage: "photo.stack")
+            }
+            .badge(model.intrusions.unseenCount)
+        } footer: {
+            VStack(alignment: .leading, spacing: 6) {
+                Text("Locky on your Mac will send you a photo if someone tries to unlock it while you're not there. Photos are stored in your iCloud account.")
+                OutOfReachNote()
+            }
+        }
+    }
+}
+
+private struct LockAnimationSection: View {
+    @Environment(AppModel.self) private var model
+
+    var body: some View {
+        let status: MacStatus? = model.macStatus
+        Section {
+            NavigationLink {
+                MacAnimationSettingsView()
+            } label: {
+                Label("Lock animation", systemImage: "sparkles")
+            }
+            .disabled(status?.supports(.lockAnimation) != true)
+        } footer: {
+            if status != nil, status?.supports(.lockAnimation) != true {
+                Text("Update Locky on your Mac to choose its lock animation from here.")
+            }
+        }
+    }
+}
+
+/// Out of reach, how a change of a setting the Mac applies gets to it.
+struct OutOfReachNote: View {
+    @Environment(AppModel.self) private var model
+
+    var body: some View {
+        if !model.isConnected {
+            if model.macStatus?.supports(.cloudSettings) == true {
+                Text("Your Mac is out of reach: it will receive the change through iCloud.")
+            } else {
+                Text("Your Mac will receive the change when it is back in reach.")
             }
         }
     }
@@ -205,10 +264,11 @@ private struct LockDistanceSection: View {
     }
 }
 
-/// Information about the paired Mac and unpairing.
-/// Locky on the Mac: its version and its updates, its release notes, its lock animation.
+/// Locky on the Mac: its version and its updates, its release notes.
 private struct MacAppSection: View {
     @Environment(AppModel.self) private var model
+    /// The Mac was just asked to check: for a few seconds, a word says where to look.
+    @State private var hasAskedMac: Bool = false
 
     var body: some View {
         let status: MacStatus? = model.macStatus
@@ -255,28 +315,57 @@ private struct MacAppSection: View {
                             .foregroundStyle(.tint)
                     }
                 }
+            } else if status?.supports(.macUpdates) == true {
+                // As "Check for updates…" in the menu of the Mac: Sparkle answers there, with the
+                // new version or "You're up to date".
+                Button {
+                    checkForUpdates()
+                } label: {
+                    Label {
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text("Check for updates")
+                            Text(checkCaption)
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
+                                .contentTransition(.opacity)
+                        }
+                    } icon: {
+                        Image(systemName: "arrow.triangle.2.circlepath")
+                    }
+                }
+                .disabled(!model.isConnected)
+                .sensoryFeedback(.success, trigger: hasAskedMac) { _, asked in asked }
             }
             NavigationLink {
                 ReleaseNotesView()
             } label: {
                 Label("Release notes", systemImage: "doc.text")
             }
-            NavigationLink {
-                MacAnimationSettingsView()
-            } label: {
-                Label("Lock animation", systemImage: "sparkles")
-            }
-            .disabled(status?.supports(.lockAnimation) != true)
         } header: {
             Text("Locky for Mac")
-        } footer: {
-            if status != nil, status?.supports(.lockAnimation) != true {
-                Text("Update Locky on your Mac to choose its lock animation from here.")
-            }
+        }
+    }
+
+    private var checkCaption: LocalizedStringKey {
+        if hasAskedMac {
+            return "Done! Have a look at your Mac."
+        }
+        return model.isConnected ? "Your Mac looks for a new version and shows you the answer." : "Your Mac must be in reach."
+    }
+
+    private func checkForUpdates() {
+        model.updateMac()
+        withAnimation { hasAskedMac = true }
+        Task {
+            // The iPhone checks too, to show the new version here if there is one.
+            await model.loadMacReleases()
+            try? await Task.sleep(for: .seconds(4))
+            withAnimation { hasAskedMac = false }
         }
     }
 }
 
+/// Information about the paired Mac and unpairing.
 private struct MacSection: View {
     @Environment(AppModel.self) private var model
     @Binding var isConfirmingUnpair: Bool

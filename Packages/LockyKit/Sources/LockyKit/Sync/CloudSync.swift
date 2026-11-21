@@ -9,7 +9,10 @@ import OSLog
 ///   iPhone over Bluetooth to fetch new images right away (``LockyMessage/macImagesUpdated(version:)``);
 /// - the Mac uploads intrusion photos (`Intrusion` records);
 /// - the iPhone subscribes to both: intrusions trigger a visible push, Mac changes a silent one
-///   (for when the iPhone is away from the Mac).
+///   (for when the iPhone is away from the Mac);
+/// - the iPhone drops the settings of the Mac chosen out of reach (`MacSettings` record, sealed
+///   with the pairing key, see ``MacSettingsEnvelope``); the Mac subscribes to them (silent push)
+///   and reads them while the iPhone is away.
 ///
 /// Everything lives in a custom zone and is read with zone change fetches, so no query index has
 /// to be configured in the CloudKit console.
@@ -23,11 +26,13 @@ public actor CloudSync {
         static let macStatus: String = "MacStatus"
         static let intrusion: String = "Intrusion"
         static let nowPlaying: String = "NowPlaying"
+        static let macSettings: String = "MacSettings"
     }
 
     private enum SubscriptionID {
         static let intrusions: String = "locky-intrusions"
         static let macStatus: String = "locky-mac-status"
+        static let macSettings: String = "locky-mac-settings"
     }
 
     /// Number of intrusion reports kept in iCloud.
@@ -226,6 +231,28 @@ public actor CloudSync {
         return .init(revision: record["revision"] as? String ?? "", playing: playing, artworkID: artworkID, artwork: artwork)
     }
 
+    // MARK: - Settings of the Mac
+
+    /// iPhone side: the settings of the Mac chosen out of reach, sealed (see
+    /// ``MacSettingsEnvelope/sealed(key:macID:)``). One record per Mac, replaced each time.
+    public func publishMacSettings(_ sealed: Data, macID: UUID) async throws {
+        try await prepareZone()
+        // A new record object saved with `.changedKeys` only updates this field: no read first.
+        let record: CKRecord = .init(recordType: RecordType.macSettings, recordID: macSettingsID(macID))
+        record["sealed"] = sealed
+        try await modify(saving: [record], savePolicy: .changedKeys)
+    }
+
+    /// Mac side: the sealed settings the iPhone left, `nil` when it never left any.
+    public func fetchMacSettings(macID: UUID) async throws -> Data? {
+        try await prepareZone()
+        return try await existingRecord(macSettingsID(macID), keys: ["sealed"])?["sealed"] as? Data
+    }
+
+    private func macSettingsID(_ macID: UUID) -> CKRecord.ID {
+        .init(recordName: "settings-\(macID.uuidString)", zoneID: zoneID)
+    }
+
     // MARK: - Intrusions
 
     /// Mac side: uploads an intrusion photo. The iPhone gets a push notification.
@@ -385,6 +412,30 @@ public actor CloudSync {
         }
 
         _ = try await database.modifySubscriptions(saving: subscriptions, deleting: [])
+    }
+
+    /// Mac side: a silent push whenever the iPhone leaves settings for a Mac (idempotent). It fails
+    /// while the `MacSettings` record type does not exist yet (no iPhone ever left any).
+    public func registerMacSettingsSubscription() async throws {
+        try await prepareZone()
+        let info: CKSubscription.NotificationInfo = .init()
+        info.shouldSendContentAvailable = true
+        let subscription: CKQuerySubscription = .init(
+            recordType: RecordType.macSettings,
+            predicate: .init(value: true),
+            subscriptionID: SubscriptionID.macSettings,
+            options: [.firesOnRecordCreation, .firesOnRecordUpdate]
+        )
+        subscription.zoneID = zoneID
+        subscription.notificationInfo = info
+        _ = try await database.modifySubscriptions(saving: [subscription], deleting: [])
+    }
+
+    /// `true` for the push of ``registerMacSettingsSubscription()``. Subscriptions belong to the
+    /// iCloud account, not to a device: every Locky of the account gets the pushes of all of them,
+    /// and only the Mac cares about this one.
+    public nonisolated static func isMacSettingsNotification(_ userInfo: [AnyHashable: Any]) -> Bool {
+        CKNotification(fromRemoteNotificationDictionary: userInfo)?.subscriptionID == SubscriptionID.macSettings
     }
 
     // MARK: - Mapping

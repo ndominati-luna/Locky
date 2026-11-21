@@ -30,7 +30,9 @@ final class AppModel {
     /// The About sheet, opened from the toolbar of the main screen.
     var isAboutPresented: Bool = false
     /// Lock animation of the Mac, sent by Locky for Mac 1.0.2 and later.
-    private(set) var macLockAnimation: LockAnimationSettings?
+    private(set) var macLockAnimation: LockAnimationSettings? {
+        didSet { preferences.macLockAnimation = macLockAnimation }
+    }
     /// Versions of Locky for Mac, newest first; `nil` until read from the Sparkle feed.
     private(set) var macReleases: [MacRelease]?
     /// Guided first try after the pairing; `nil` once done or skipped.
@@ -69,12 +71,15 @@ final class AppModel {
     /// that a text being typed is not set back to its previous letters.
     @ObservationIgnored private var lockAnimationEditedAt: ContinuousClock.Instant?
     @ObservationIgnored private var calibrationTimeout: Task<Void, Never>?
+    /// The settings of the Mac changed out of reach, on their way to iCloud.
+    @ObservationIgnored private var macSettingsUpload: Task<Void, Never>?
 
     init() {
         preferences = .init()
         session = .init()
         intrusions = .init()
         macStatus = MacStatusCache.load()
+        macLockAnimation = preferences.macLockAnimation
         visuals = .stored()
         motion.baseline = preferences.motionBaseline
         wireCallbacks()
@@ -426,8 +431,54 @@ final class AppModel {
 
     /// Sends the preferences to the Mac after a change.
     func preferencesDidChange() {
-        session.send(.preferences(preferences.phonePreferences))
+        let current: PhonePreferences = preferences.phonePreferences
+        macSettingDidChange(.preferences(current)) { $0.preferences = .init(current, date: $1) }
         publishState()
+    }
+
+    /// The settings of the Mac can be changed here: in reach, or out of reach with a Mac that reads
+    /// them in iCloud.
+    var canChangeMacSettings: Bool {
+        isConnected || macStatus?.supports(.cloudSettings) == true
+    }
+
+    /// Records a change of a setting of the Mac with its date, then delivers it: over Bluetooth in
+    /// reach, otherwise through iCloud to a Mac that reads it there (an older one gets the
+    /// preferences when it comes back in reach).
+    private func macSettingDidChange(_ message: LockyMessage, record: (inout MacSettingsEnvelope, Date) -> Void) {
+        record(&preferences.macSettings, .now)
+        #if DEBUG
+        if DemoMode.isEnabled {
+            return
+        }
+        #endif
+        guard !session.send(message), macStatus?.supports(.cloudSettings) == true else { return }
+        preferences.isMacSettingsUploadPending = true
+        macSettingsUpload?.cancel()
+        // A moment after the last change: a text being typed goes once.
+        macSettingsUpload = Task { [weak self] in
+            try? await Task.sleep(for: .seconds(1.5))
+            guard !Task.isCancelled else { return }
+            await self?.uploadMacSettings()
+        }
+    }
+
+    /// Leaves the settings of the Mac changed out of reach in iCloud, sealed with the pairing key.
+    /// Kept pending when it fails: tried again at the next iCloud refresh.
+    private func uploadMacSettings() async {
+        guard preferences.isMacSettingsUploadPending, let pairing = session.pairing, let key = session.pairingKey else { return }
+        let envelope: MacSettingsEnvelope = preferences.macSettings
+        do {
+            let sealed: Data = try envelope.sealed(key: key, macID: pairing.peerID)
+            try await CloudSync.shared.publishMacSettings(sealed, macID: pairing.peerID)
+            // A change made meanwhile goes with the next upload.
+            if preferences.macSettings == envelope {
+                preferences.isMacSettingsUploadPending = false
+            }
+            logger.notice("Settings of the Mac left in iCloud")
+        } catch {
+            logger.notice("Settings of the Mac not left in iCloud: \(error.localizedDescription, privacy: .public)")
+        }
     }
 
     /// Forgets the Mac.
@@ -468,6 +519,7 @@ final class AppModel {
             logger.notice("iCloud fetch of the Mac failed: \(error.localizedDescription, privacy: .public)")
         }
         await intrusions.refresh(macID: pairing.peerID)
+        await uploadMacSettings()
         // The silent push brings the new wallpaper of the Mac even without intrusion detection.
         try? await CloudSync.shared.registerSubscriptions(
             intrusionAlertKey: preferences.intrusionDetection ? "Someone just tried to unlock your Mac!" : nil
@@ -481,6 +533,10 @@ final class AppModel {
             cloudStatus.appVersion = macStatus?.appVersion
             cloudStatus.appBuild = macStatus?.appBuild
             cloudStatus.features = macStatus?.features
+            // Changed here out of reach after the Mac published: the Mac has not read it yet.
+            if let autoLock = preferences.macSettings.autoLock, autoLock.date > cloudRecord.modifiedAt ?? .distantPast {
+                cloudStatus.isAutoLockEnabled = autoLock.value
+            }
             updateStatus(cloudStatus)
         }
         logger.notice("""
@@ -572,6 +628,41 @@ final class AppModel {
                 await simulateDemoCommand(.lock)
             }
         }
+        if UserDefaults.standard.bool(forKey: "LockyDemoWalk") {
+            Task { await playDemoWalk() }
+        }
+    }
+
+    /// The walk of `-LockyDemoWalk` on the main screen, for demo films: the iPhone walks away until
+    /// the Mac locks, waits, then comes back until it unlocks, with the thresholds of
+    /// ``ProximityEngine`` (the lock distance, then 70 % of it).
+    private func playDemoWalk() async {
+        let lockDistance: Double = preferences.lockDistance
+        let near: Double = 0.6
+        let far: Double = lockDistance + 1.5
+        let step: Double = 0.1
+        let pace: Duration = .seconds(0.18)
+        proximity = .init(rssi: -55, distance: near)
+        try? await Task.sleep(for: .seconds(2.5))
+        isMoving = true
+        for distance in stride(from: near, through: far, by: step) {
+            proximity = .init(rssi: -60, distance: distance)
+            if distance >= lockDistance, lockState != .locked {
+                await simulateDemoCommand(.lock)
+            }
+            try? await Task.sleep(for: pace)
+        }
+        isMoving = false
+        try? await Task.sleep(for: .seconds(3))
+        isMoving = true
+        for distance in stride(from: far, through: near, by: -step) {
+            proximity = .init(rssi: -60, distance: distance)
+            if distance <= lockDistance * ProximityEngine.unlockDistanceRatio, lockState == .locked, !isUnlocking {
+                Task { await simulateDemoCommand(.unlock) }
+            }
+            try? await Task.sleep(for: pace)
+        }
+        isMoving = false
     }
 
     /// Guided first try demo (`-LockyDemoSetup waiting|walkAway|comeBack|magic|tour`). The tour
@@ -707,6 +798,13 @@ final class AppModel {
             features: LockyFeature.current
         )
         session.send(.deviceStatus(status))
+        // Settings changed out of reach: the Mac may not have read them in iCloud. It keeps those
+        // chosen after its own.
+        if macStatus?.supports(.cloudSettings) == true, !preferences.macSettings.isEmpty,
+           session.send(.macSettings(preferences.macSettings)) {
+            preferences.isMacSettingsUploadPending = false
+            macSettingsUpload?.cancel()
+        }
         session.send(.motion(isMoving: motion.isMoving))
         session.send(.call(isActive: calls.isOnCall))
         if isDashboardVisible {
@@ -812,13 +910,8 @@ final class AppModel {
         guard settings != macLockAnimation else { return }
         macLockAnimation = settings
         lockAnimationEditedAt = .now
-        #if DEBUG
-        if DemoMode.isEnabled {
-            return
-        }
-        #endif
         guard macStatus?.supports(.lockAnimation) == true else { return }
-        session.send(.lockAnimation(settings))
+        macSettingDidChange(.lockAnimation(settings)) { $0.lockAnimation = .init(settings, date: $1) }
     }
 
     /// Plays the lock animation on the Mac, without locking it.
@@ -854,12 +947,7 @@ final class AppModel {
         guard var status = macStatus, status.isAutoLockEnabled != isEnabled else { return }
         status.isAutoLockEnabled = isEnabled
         updateStatus(status)
-        #if DEBUG
-        if DemoMode.isEnabled {
-            return
-        }
-        #endif
-        session.send(.autoLock(isEnabled: isEnabled))
+        macSettingDidChange(.autoLock(isEnabled: isEnabled)) { $0.autoLock = .init(isEnabled, date: $1) }
     }
 
     func sendMediaCommand(_ command: MediaCommand) {

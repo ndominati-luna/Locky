@@ -26,16 +26,33 @@ struct MainView: View {
     }
 }
 
-/// The buttons of the main screen, each in its own glass: About on the leading side, the break-in
-/// reports (a red dot while some are unseen) and the settings on the trailing side.
+/// The buttons of the main screen, each in its own glass: About on the leading side; on the
+/// trailing side the page of the Mac where it has no page of its own, the break-in reports (a red
+/// dot while some are unseen) and the settings.
 struct MainToolbar: ToolbarContent {
     @Environment(AppModel.self) private var model
+    @Environment(\.displayScale) private var displayScale
+    /// Opens the page of the Mac in a sheet (``MacPanelSheet``); `nil` when it is already on screen.
+    var openMacPanel: (() -> Void)?
 
     var body: some ToolbarContent {
         ToolbarItem(placement: .topBarLeading) {
             Button("About Locky", systemImage: "info") {
                 model.isAboutPresented = true
             }
+        }
+        if let openMacPanel {
+            ToolbarItem(placement: .topBarTrailing) {
+                Button(action: openMacPanel) {
+                    Label {
+                        Text("Your Mac")
+                    } icon: {
+                        SquareSymbol.image((model.macStatus?.family ?? .unknown).systemImage, scale: displayScale)
+                    }
+                }
+                .accessibilityHint(Text("Shows what is happening on your Mac."))
+            }
+            ToolbarSpacer(.fixed, placement: .topBarTrailing)
         }
         ToolbarItem(placement: .topBarTrailing) {
             Button {

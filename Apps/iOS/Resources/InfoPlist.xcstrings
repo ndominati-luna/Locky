@@ -38,7 +38,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Locky utilise le Bluetooth pour rester connecté à votre Mac et mesurer la distance entre votre iPhone et votre Mac."
+            "value" : "Locky utilise le Bluetooth pour rester connecté à ton Mac et mesurer la distance entre ton iPhone et ton Mac."
           }
         }
       }
@@ -56,7 +56,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Locky peut demander Face ID avant de déverrouiller votre Mac."
+            "value" : "Locky peut demander Face ID avant de déverrouiller ton Mac."
           }
         }
       }
@@ -74,7 +74,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Locky ne verrouille votre Mac que lorsque votre iPhone s’en éloigne, pas quand le signal fluctue pendant que vous êtes à votre bureau."
+            "value" : "Locky ne verrouille ton Mac que lorsque ton iPhone s’en éloigne, pas quand le signal fluctue pendant que tu es à ton bureau."
           }
         }
       }

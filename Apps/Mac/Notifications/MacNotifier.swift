@@ -46,7 +46,10 @@ extension MacNotifier: UNUserNotificationCenterDelegate {
         _ center: UNUserNotificationCenter,
         willPresent notification: UNNotification
     ) async -> UNNotificationPresentationOptions {
-        [.banner, .list, .sound]
+        // The intrusion alerts of iCloud are meant for the iPhone: subscriptions belong to the
+        // iCloud account, so they reach the Mac too since it registers for pushes.
+        guard !(notification.request.trigger is UNPushNotificationTrigger) else { return [] }
+        return [.banner, .list, .sound]
     }
 
     nonisolated func userNotificationCenter(

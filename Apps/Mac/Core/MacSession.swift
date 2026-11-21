@@ -28,7 +28,8 @@ final class MacSession {
     private let logger: Logger = .init(subsystem: "studio.lunabee.locky", category: "MacSession")
     private let vault: PairingVault = .init()
     private let link: MacLink
-    private var pairingKey: SymmetricKey?
+    /// Also seals the settings the iPhone leaves in iCloud (``MacSettingsEnvelope``).
+    private(set) var pairingKey: SymmetricKey?
     private var channel: SecureChannel?
     private var pendingLocalNonce: Data?
     private var lastHandshakeRequest: ContinuousClock.Instant?

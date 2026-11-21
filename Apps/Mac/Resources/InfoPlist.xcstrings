@@ -38,7 +38,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Locky affiche sur votre iPhone ce que Musique ou Spotify joue sur votre Mac, pour que vous puissiez le contrôler de là."
+            "value" : "Locky affiche sur ton iPhone ce que Musique ou Spotify joue sur ton Mac, pour que tu puisses le contrôler de là."
           }
         }
       }
@@ -56,7 +56,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Locky utilise le Bluetooth pour communiquer avec votre iPhone et mesurer sa distance avec votre Mac."
+            "value" : "Locky utilise le Bluetooth pour communiquer avec ton iPhone et mesurer sa distance avec ton Mac."
           }
         }
       }
@@ -74,7 +74,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Quand la détection des intrus est activée, Locky photographie les personnes qui essaient d’utiliser votre Mac en votre absence."
+            "value" : "Quand la détection des intrus est activée, Locky photographie les personnes qui essaient d’utiliser ton Mac en ton absence."
           }
         }
       }

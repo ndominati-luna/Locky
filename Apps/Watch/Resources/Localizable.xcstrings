@@ -22,7 +22,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Appairez votre Mac depuis l’app Locky sur votre iPhone."
+            "value" : "Appaire ton Mac depuis l’app Locky sur ton iPhone."
           }
         }
       }
@@ -42,7 +42,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Votre iPhone n’est pas joignable."
+            "value" : "Ton iPhone n’est pas joignable."
           }
         }
       }
@@ -52,7 +52,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Votre Mac n’est pas connecté à votre iPhone."
+            "value" : "Ton Mac n’est pas connecté à ton iPhone."
           }
         }
       }

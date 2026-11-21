@@ -69,7 +69,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Verrouille votre Mac immédiatement."
+            "value" : "Verrouille ton Mac immédiatement."
           }
         }
       }
@@ -132,7 +132,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Appairez votre iPhone depuis le menu Locky."
+            "value" : "Appaire ton iPhone depuis le menu Locky."
           }
         }
       }
@@ -152,7 +152,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Voyez si votre iPhone est près de votre Mac et contrôlez Locky."
+            "value" : "Vois si ton iPhone est près de ton Mac et contrôle Locky."
           }
         }
       }
@@ -172,7 +172,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Active ou désactive le verrouillage de votre Mac quand votre iPhone s’éloigne."
+            "value" : "Active ou désactive le verrouillage de ton Mac quand ton iPhone s’éloigne."
           }
         }
       }

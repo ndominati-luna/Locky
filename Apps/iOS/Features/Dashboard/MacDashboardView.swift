@@ -1,14 +1,17 @@
 import LockyKit
 import SwiftUI
 
-/// Second page of an unfolded iPhone Duo: what happens on the Mac, in glass cards like widgets.
-/// The Mac streams its state only while this page is on screen. Out of reach, a single message
-/// explains why, and only the break-in reports remain.
+/// What happens on the Mac, in glass cards like widgets: the second page of an unfolded iPhone
+/// Duo, a sheet elsewhere (``MacPanelSheet``). The Mac streams its state only while this page is
+/// on screen. Out of reach, a single message explains why, and only the break-in reports remain.
 struct MacDashboardView: View {
     @Environment(AppModel.self) private var model
     @Environment(\.scenePhase) private var scenePhase
     @Environment(\.screenFold) private var fold
+    @Environment(\.dismiss) private var dismiss
     @State private var isOnScreen: Bool = false
+    /// In a sheet: a close button instead of the buttons of the main screen.
+    var isModal: Bool = false
 
     var body: some View {
         Group {
@@ -26,7 +29,15 @@ struct MacDashboardView: View {
         // Over the shared wallpaper, like the Mac on the first page.
         .toolbarBackground(.hidden, for: .navigationBar)
         .toolbar {
-            MainToolbar()
+            if isModal {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button(role: .close) {
+                        dismiss()
+                    }
+                }
+            } else {
+                MainToolbar()
+            }
         }
         .immersivePageBackground(wallpaper: model.visuals.backgroundWallpaper, intensity: 0.45)
         .onAppear {

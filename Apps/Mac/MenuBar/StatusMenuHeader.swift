@@ -19,7 +19,7 @@ struct StatusMenuHeader: View {
                         .foregroundStyle(.secondary)
                 }
                 Spacer()
-                Toggle("Locky activated", isOn: Binding(get: { model.preferences.isAutoLockEnabled }, set: model.setAutoLockEnabled))
+                Toggle("Locky activated", isOn: Binding(get: { model.preferences.isAutoLockEnabled }, set: { model.setAutoLockEnabled($0) }))
                     .toggleStyle(MenuSwitchToggleStyle())
                     .labelsHidden()
             }

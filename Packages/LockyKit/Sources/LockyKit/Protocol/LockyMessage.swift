@@ -99,6 +99,9 @@ public enum LockyMessage: Codable, Sendable, Equatable {
     /// iPhone → Mac (``LockyFeature/macUpdates``): look for a new version of Locky for Mac and show
     /// the update window of Sparkle on the Mac.
     case checkForUpdates
+    /// iPhone → Mac (``LockyFeature/cloudSettings``), when the session opens: the settings of the Mac
+    /// as last chosen on the iPhone, dated. The Mac applies those chosen after its own.
+    case macSettings(MacSettingsEnvelope)
 
     /// `true` for messages allowed without encryption.
     public var isHandshake: Bool {

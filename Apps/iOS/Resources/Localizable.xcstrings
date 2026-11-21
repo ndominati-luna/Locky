@@ -9,7 +9,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@ a trouvé votre iPhone"
+            "value" : "%@ a trouvé ton iPhone"
           }
         }
       }
@@ -49,7 +49,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Vous pouvez aussi choisir une image sur votre Mac, dans la fenêtre d’animation du menu Locky."
+            "value" : "Tu peux aussi choisir une image sur ton Mac, dans la fenêtre d’animation du menu Locky."
           }
         }
       }
@@ -79,7 +79,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "S’affiche sous le logo Locky quand votre Mac se verrouille. Laissez vide pour afficher « Locky »."
+            "value" : "S’affiche sous le logo Locky quand ton Mac se verrouille. Laisse vide pour afficher « Locky »."
           }
         }
       }
@@ -89,7 +89,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Le verrouillage automatique est en pause. Réactivez-le dans les réglages ou dans le menu Locky de votre Mac."
+            "value" : "Le verrouillage automatique est en pause. Réactive-le dans les réglages ou dans le menu Locky de ton Mac."
           }
         }
       }
@@ -104,12 +104,22 @@
         }
       }
     },
+    "Check for updates" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rechercher les mises à jour"
+          }
+        }
+      }
+    },
     "Check your internet connection." : {
       "localizations" : {
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Vérifiez votre connexion à Internet."
+            "value" : "Vérifie ta connexion à Internet."
           }
         }
       }
@@ -119,7 +129,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Choisissez « Rechercher les mises à jour… » dans le menu Locky de votre Mac."
+            "value" : "Choisis « Rechercher les mises à jour… » dans le menu Locky de ton Mac."
           }
         }
       }
@@ -150,6 +160,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Découvrir Lunabee Studio"
+          }
+        }
+      }
+    },
+    "Done! Have a look at your Mac." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "C’est parti ! Jette un œil à ton Mac."
           }
         }
       }
@@ -239,7 +259,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Locky %@ est disponible pour votre Mac."
+            "value" : "Locky %@ est disponible pour ton Mac."
           }
         }
       }
@@ -269,7 +289,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Locky verrouille votre Mac quand vous vous éloignez avec votre iPhone. C’est le même réglage que « Locky activé » dans le menu Locky de votre Mac."
+            "value" : "Locky verrouille ton Mac quand tu t’éloignes avec ton iPhone. C’est le même réglage que « Locky activé » dans le menu Locky de ton Mac."
           }
         }
       }
@@ -299,7 +319,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ouvre la fenêtre de mise à jour sur votre Mac."
+            "value" : "Ouvre la fenêtre de mise à jour sur ton Mac."
           }
         }
       }
@@ -319,7 +339,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Joue l’animation sur votre Mac sans le verrouiller."
+            "value" : "Joue l’animation sur ton Mac sans le verrouiller."
           }
         }
       }
@@ -329,7 +349,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Aperçu sur votre Mac"
+            "value" : "Aperçu sur ton Mac"
           }
         }
       }
@@ -374,6 +394,16 @@
         }
       }
     },
+    "Shows what is happening on your Mac." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Montre ce qui se passe sur ton Mac."
+          }
+        }
+      }
+    },
     "Text" : {
       "localizations" : {
         "fr" : {
@@ -394,6 +424,16 @@
         }
       }
     },
+    "The animation of your Mac shows up here once it is in reach." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "L’animation de ton Mac s’affichera ici dès qu’il sera à portée."
+          }
+        }
+      }
+    },
     "The desktop fades into its wallpaper, then an iris closes on the Locky logo." : {
       "localizations" : {
         "fr" : {
@@ -409,7 +449,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Le logo Locky arrive en volant comme un oiseau et se pose, puis redécolle quand vous revenez."
+            "value" : "Le logo Locky arrive en volant comme un oiseau et se pose, puis redécolle quand tu reviens."
           }
         }
       }
@@ -444,6 +484,16 @@
         }
       }
     },
+    "Unlocking" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Déverrouillage"
+          }
+        }
+      }
+    },
     "Up to date" : {
       "localizations" : {
         "fr" : {
@@ -459,7 +509,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Mettez à jour Locky sur votre Mac pour choisir son animation de verrouillage d’ici."
+            "value" : "Mets à jour Locky sur ton Mac pour choisir son animation de verrouillage d’ici."
           }
         }
       }
@@ -504,12 +554,32 @@
         }
       }
     },
+    "Your Mac is out of reach: it will receive the change through iCloud." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ton Mac est hors de portée : il recevra le changement via iCloud."
+          }
+        }
+      }
+    },
     "Your Mac locks at once. The wings still appear on the lock screen when your iPhone is near." : {
       "localizations" : {
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Votre Mac se verrouille aussitôt. Les ailes apparaissent quand même sur l’écran de verrouillage quand votre iPhone est proche."
+            "value" : "Ton Mac se verrouille aussitôt. Les ailes apparaissent quand même sur l’écran de verrouillage quand ton iPhone est proche."
+          }
+        }
+      }
+    },
+    "Your Mac looks for a new version and shows you the answer." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ton Mac cherche une nouvelle version et t’affiche la réponse."
           }
         }
       }
@@ -519,7 +589,27 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Votre Mac doit être à portée pour le modifier."
+            "value" : "Ton Mac doit être à portée pour le modifier."
+          }
+        }
+      }
+    },
+    "Your Mac must be in reach." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ton Mac doit être à portée."
+          }
+        }
+      }
+    },
+    "Your Mac will receive the change when it is back in reach." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ton Mac recevra le changement dès qu’il sera de nouveau à portée."
           }
         }
       }
@@ -552,7 +642,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ajustez la distance de verrouillage en déplaçant le cadenas."
+            "value" : "Ajuste la distance de verrouillage en déplaçant le cadenas."
           }
         }
       }
@@ -562,7 +652,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Authentifiez-vous pour déverrouiller votre Mac"
+            "value" : "Authentifie-toi pour déverrouiller ton Mac"
           }
         }
       }
@@ -572,7 +662,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Touchez pour déverrouiller votre Mac avec %@."
+            "value" : "Touche pour déverrouiller ton Mac avec %@."
           }
         }
       }
@@ -682,7 +772,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Vérifiez le code"
+            "value" : "Vérifie le code"
           }
         }
       }
@@ -692,7 +782,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Cliquez sur « Appairer » sur votre Mac pour continuer."
+            "value" : "Clique sur « Appairer » sur ton Mac pour continuer."
           }
         }
       }
@@ -702,7 +792,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Revenez, il se déverrouille. Locky surveille si votre iPhone bouge : votre Mac ne se verrouille jamais pendant que vous êtes à votre bureau."
+            "value" : "Reviens, il se déverrouille. Locky surveille si ton iPhone bouge : ton Mac ne se verrouille jamais pendant que tu es à ton bureau."
           }
         }
       }
@@ -782,7 +872,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Terminez sur votre Mac"
+            "value" : "Termine sur ton Mac"
           }
         }
       }
@@ -832,7 +922,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "J’ai besoin de votre aide"
+            "value" : "J’ai besoin de ton aide"
           }
         }
       }
@@ -952,7 +1042,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Verrouiller votre Mac"
+            "value" : "Verrouiller ton Mac"
           }
         }
       }
@@ -985,7 +1075,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Locky n’a pas pu enregistrer l’appairage. Veuillez réessayer."
+            "value" : "Locky n’a pas pu enregistrer l’appairage. Réessaie."
           }
         }
       }
@@ -995,7 +1085,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Locky ne connaît pas encore le mot de passe de votre Mac. Utilisez « Mettre à jour le mot de passe de session » dans le menu Locky de votre Mac."
+            "value" : "Locky ne connaît pas encore le mot de passe de ton Mac. Utilise « Mettre à jour le mot de passe de session » dans le menu Locky de ton Mac."
           }
         }
       }
@@ -1005,7 +1095,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Locky est réglé pour ne déverrouiller votre Mac que depuis votre Apple Watch."
+            "value" : "Locky est réglé pour ne déverrouiller ton Mac que depuis ton Apple Watch."
           }
         }
       }
@@ -1015,7 +1105,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Locky a verrouillé votre Mac pendant votre absence et l'a déverrouillé à votre retour. Il fonctionne désormais tout seul, même avec votre iPhone dans la poche."
+            "value" : "Locky a verrouillé ton Mac pendant ton absence et l’a déverrouillé à ton retour. Il fonctionne désormais tout seul, même avec ton iPhone dans la poche."
           }
         }
       }
@@ -1025,7 +1115,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Locky verrouille votre Mac quand vous vous éloignez avec votre iPhone et le déverrouille à votre retour."
+            "value" : "Locky verrouille ton Mac quand tu t’éloignes avec ton iPhone et le déverrouille à ton retour."
           }
         }
       }
@@ -1035,7 +1125,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Locky a besoin du Bluetooth pour joindre votre Mac."
+            "value" : "Locky a besoin du Bluetooth pour joindre ton Mac."
           }
         }
       }
@@ -1045,7 +1135,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Locky a besoin du mot de passe de votre session macOS pour déverrouiller votre Mac. Il est vérifié sur votre Mac, puis conservé uniquement dans le trousseau de cet iPhone."
+            "value" : "Locky a besoin du mot de passe de ta session macOS pour déverrouiller ton Mac. Il est vérifié sur ton Mac, puis conservé uniquement dans le trousseau de cet iPhone."
           }
         }
       }
@@ -1055,7 +1145,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Locky sur votre Mac"
+            "value" : "Locky sur ton Mac"
           }
         }
       }
@@ -1065,7 +1155,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Locky sur votre Mac vous enverra une photo si quelqu’un essaie de le déverrouiller en votre absence. Les photos sont stockées dans votre compte iCloud."
+            "value" : "Locky sur ton Mac t’enverra une photo si quelqu’un essaie de le déverrouiller en ton absence. Les photos sont stockées dans ton compte iCloud."
           }
         }
       }
@@ -1075,7 +1165,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Locky vous demandera %@ avant de déverrouiller votre Mac depuis votre iPhone ou depuis l’écran de verrouillage de votre Mac."
+            "value" : "Locky te demandera %@ avant de déverrouiller ton Mac depuis ton iPhone ou depuis l’écran de verrouillage de ton Mac."
           }
         }
       }
@@ -1085,7 +1175,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Locky vous demandera de vous authentifier avant de déverrouiller votre Mac depuis votre iPhone ou depuis l’écran de verrouillage de votre Mac."
+            "value" : "Locky te demandera de t’authentifier avant de déverrouiller ton Mac depuis ton iPhone ou depuis l’écran de verrouillage de ton Mac."
           }
         }
       }
@@ -1095,7 +1185,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Locky entrera automatiquement votre mot de passe pour déverrouiller votre Mac lorsque vous êtes près de lui avec votre iPhone."
+            "value" : "Locky saisira ton mot de passe tout seul pour déverrouiller ton Mac quand tu es près de lui avec ton iPhone."
           }
         }
       }
@@ -1105,7 +1195,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Locky vous enverra des notifications quand votre Mac est verrouillé ou déverrouillé."
+            "value" : "Locky t’enverra des notifications quand ton Mac est verrouillé ou déverrouillé."
           }
         }
       }
@@ -1115,7 +1205,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Locky ne verrouillera et ne déverrouillera plus ce Mac. Vous pourrez l’appairer à nouveau à tout moment."
+            "value" : "Locky ne verrouillera et ne déverrouillera plus ce Mac. Tu pourras l’appairer à nouveau à tout moment."
           }
         }
       }
@@ -1125,7 +1215,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Recherche de votre Mac…"
+            "value" : "Recherche de ton Mac…"
           }
         }
       }
@@ -1144,7 +1234,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Vérifiez que %@ affiche le même code."
+            "value" : "Vérifie que %@ affiche le même code."
           }
         }
       }
@@ -1154,7 +1244,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Vérifiez que Locky est lancé sur votre Mac et que le Bluetooth est activé."
+            "value" : "Vérifie que Locky est lancé sur ton Mac et que le Bluetooth est activé."
           }
         }
       }
@@ -1284,7 +1374,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Revenez maintenant : Locky déverrouille votre Mac à votre approche."
+            "value" : "Reviens maintenant : Locky déverrouille ton Mac à ton approche."
           }
         }
       }
@@ -1314,7 +1404,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Maintenant, téléchargez Locky pour votre Mac."
+            "value" : "Maintenant, télécharge Locky pour ton Mac."
           }
         }
       }
@@ -1387,7 +1477,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ouvrez Locky sur votre Mac et choisissez « Se connecter à un iPhone ». Posez votre iPhone près de votre Mac, et vérifiez que le Bluetooth est bien activé sur les deux appareils."
+            "value" : "Ouvre Locky sur ton Mac et choisis « Se connecter à un iPhone ». Pose ton iPhone près de ton Mac, et vérifie que le Bluetooth est bien activé sur les deux appareils."
           }
         }
       }
@@ -1483,7 +1573,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Lancez de la musique sur votre Mac pour la contrôler d’ici."
+            "value" : "Lance de la musique sur ton Mac pour la contrôler d’ici."
           }
         }
       }
@@ -1523,7 +1613,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Lecture de l’activité de votre Mac…"
+            "value" : "Lecture de l’activité de ton Mac…"
           }
         }
       }
@@ -1564,7 +1654,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Envoyez-moi le lien de téléchargement pour obtenir Locky sur Mac"
+            "value" : "Envoie-moi le lien de téléchargement pour obtenir Locky sur Mac"
           }
         }
       }
@@ -1594,7 +1684,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Connectez-vous à iCloud sur votre iPhone et votre Mac avec le même compte Apple pour recevoir les rapports d’intrusion."
+            "value" : "Connecte-toi à iCloud sur ton iPhone et ton Mac avec le même compte Apple pour recevoir les rapports d’intrusion."
           }
         }
       }
@@ -1625,7 +1715,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Quelqu’un vient juste d’essayer de déverrouiller votre Mac !"
+            "value" : "Quelqu’un vient d’essayer de déverrouiller ton Mac !"
           }
         }
       }
@@ -1645,7 +1735,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Gardez votre iPhone avec vous, en main ou dans la poche. Au-delà de %@, Locky verrouille votre Mac."
+            "value" : "Garde ton iPhone avec toi, en main ou dans la poche. Au-delà de %@, Locky verrouille ton Mac."
           }
         }
       }
@@ -1665,7 +1755,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "La caméra de votre Mac n’était pas disponible."
+            "value" : "La caméra de ton Mac n’était pas disponible."
           }
         }
       }
@@ -1685,7 +1775,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "La clé du Mac ne correspond pas. Veuillez recommencer l’appairage."
+            "value" : "La clé du Mac ne correspond pas. Recommence l’appairage."
           }
         }
       }
@@ -1715,7 +1805,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "L’appairage a échoué. Veuillez le relancer depuis votre Mac."
+            "value" : "L’appairage a échoué. Relance-le depuis ton Mac."
           }
         }
       }
@@ -1725,7 +1815,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "État thermique de votre Mac"
+            "value" : "État thermique de ton Mac"
           }
         }
       }
@@ -1735,7 +1825,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Pour fonctionner correctement, Locky doit avoir les permissions d’utiliser le Bluetooth et d’envoyer des notifications. Le mot de passe de votre Mac reste dans le trousseau de votre iPhone et ne voyage que chiffré de bout en bout vers votre Mac."
+            "value" : "Pour bien fonctionner, Locky doit pouvoir utiliser le Bluetooth et t’envoyer des notifications. Le mot de passe de ton Mac reste dans le trousseau de ton iPhone et ne voyage que chiffré de bout en bout vers ton Mac."
           }
         }
       }
@@ -1765,7 +1855,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Activez le Bluetooth et autorisez Locky à l’utiliser."
+            "value" : "Active le Bluetooth et autorise Locky à l’utiliser."
           }
         }
       }
@@ -1775,7 +1865,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Activez le Bluetooth pour que Locky puisse joindre votre Mac."
+            "value" : "Active le Bluetooth pour que Locky puisse joindre ton Mac."
           }
         }
       }
@@ -1795,7 +1885,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Saisissez votre mot de passe sur %@"
+            "value" : "Saisis ton mot de passe sur %@"
           }
         }
       }
@@ -1845,7 +1935,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Déverrouiller votre Mac"
+            "value" : "Déverrouiller ton Mac"
           }
         }
       }
@@ -1905,7 +1995,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Volume de votre Mac"
+            "value" : "Volume de ton Mac"
           }
         }
       }
@@ -1915,7 +2005,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "En attente de votre Mac…"
+            "value" : "En attente de ton Mac…"
           }
         }
       }
@@ -1925,7 +2015,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Éloignez-vous de votre Mac"
+            "value" : "Éloigne-toi de ton Mac"
           }
         }
       }
@@ -1935,7 +2025,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Éloignez-vous avec votre iPhone : votre Mac se verrouille. Revenez : il se déverrouille."
+            "value" : "Éloigne-toi avec ton iPhone : ton Mac se verrouille. Reviens : il se déverrouille."
           }
         }
       }
@@ -1945,7 +2035,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Vous partez, il se verrouille"
+            "value" : "Tu pars, il se verrouille"
           }
         }
       }
@@ -1975,7 +2065,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Quand la détection des intrus est activée, votre Mac photographie toute personne qui essaie de l’utiliser en votre absence et vous envoie la photo ici."
+            "value" : "Quand la détection des intrus est activée, ton Mac photographie toute personne qui essaie de l’utiliser en ton absence et t’envoie la photo ici."
           }
         }
       }
@@ -1985,7 +2075,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Quand vous êtes loin avec votre iPhone, Locky peut vous envoyer une photo de l’intrus si une activité est détectée sur votre Mac."
+            "value" : "Quand tu es loin avec ton iPhone, Locky peut t’envoyer une photo de l’intrus si une activité est détectée sur ton Mac."
           }
         }
       }
@@ -2005,7 +2095,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Votre corps et vos vêtements atténuent le signal, et donc la distance calculée entre votre Mac et votre iPhone. Vous pouvez ajuster la distance de verrouillage à tout moment."
+            "value" : "Ton corps et tes vêtements atténuent le signal, et donc la distance calculée entre ton Mac et ton iPhone. Tu peux ajuster la distance de verrouillage à tout moment."
           }
         }
       }
@@ -2015,7 +2105,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Votre iPhone est à environ %@ de votre Mac."
+            "value" : "Ton iPhone est à environ %@ de ton Mac."
           }
         }
       }
@@ -2025,7 +2115,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Votre iPhone est appairé avec %@. Autorisez Locky sur votre Mac, puis cliquez sur « Essayer maintenant » : éloignez-vous, revenez, et la magie opère."
+            "value" : "Ton iPhone est appairé avec %@. Autorise Locky sur ton Mac, puis clique sur « Essayer maintenant » : éloigne-toi, reviens, et la magie opère."
           }
         }
       }
@@ -2035,7 +2125,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Votre Mac"
+            "value" : "Ton Mac"
           }
         }
       }
@@ -2045,7 +2135,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Votre Mac ne peut être déverrouillé que depuis votre Apple Watch."
+            "value" : "Ton Mac ne peut être déverrouillé que depuis ton Apple Watch."
           }
         }
       }
@@ -2055,7 +2145,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Votre Mac est verrouillé"
+            "value" : "Ton Mac est verrouillé"
           }
         }
       }
@@ -2065,7 +2155,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Votre Mac est verrouillé."
+            "value" : "Ton Mac est verrouillé."
           }
         }
       }
@@ -2075,7 +2165,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Votre Mac n’est pas connecté."
+            "value" : "Ton Mac n’est pas connecté."
           }
         }
       }
@@ -2085,7 +2175,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Votre Mac chauffe"
+            "value" : "Ton Mac chauffe"
           }
         }
       }
@@ -2095,7 +2185,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Votre Mac est déverrouillé."
+            "value" : "Ton Mac est déverrouillé."
           }
         }
       }
@@ -2105,7 +2195,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Votre Mac a refusé le mot de passe. Si vous l’avez changé, choisissez « Mettre à jour le mot de passe de session » dans le menu Locky de votre Mac."
+            "value" : "Ton Mac a refusé le mot de passe. Si tu l’as changé, choisis « Mettre à jour le mot de passe de session » dans le menu Locky de ton Mac."
           }
         }
       }
@@ -2115,7 +2205,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Votre Mac ne pourra être déverrouillé que depuis l’app Locky de votre Apple Watch. Le verrouillage fonctionne toujours partout."
+            "value" : "Ton Mac ne pourra être déverrouillé que depuis l’app Locky de ton Apple Watch. Le verrouillage fonctionne toujours partout."
           }
         }
       }
@@ -2165,7 +2255,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Votre iPhone doit être connecté à votre Mac pour calibrer la distance."
+            "value" : "Ton iPhone doit être connecté à ton Mac pour calibrer la distance."
           }
         }
       }
@@ -2175,7 +2265,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ne bougez plus, cela ne prend que quelques secondes."
+            "value" : "Ne bouge plus, ça ne prend que quelques secondes."
           }
         }
       }
@@ -2185,7 +2275,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Locky mesure désormais la distance entre votre iPhone et votre Mac avec cette nouvelle référence."
+            "value" : "Locky mesure désormais la distance entre ton iPhone et ton Mac avec cette nouvelle référence."
           }
         }
       }
@@ -2195,7 +2285,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Vérifiez que votre iPhone est connecté à votre Mac, puis réessayez."
+            "value" : "Vérifie que ton iPhone est connecté à ton Mac, puis réessaie."
           }
         }
       }
@@ -2225,7 +2315,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "La distance à votre Mac et son état sur l’écran verrouillé et dans la Dynamic Island, avec le bouton Locky. iOS l’arrête au bout de 8 heures : elle reprend dès que vous ouvrez Locky."
+            "value" : "La distance à ton Mac et son état sur l’écran verrouillé et dans la Dynamic Island, avec le bouton Locky. iOS l’arrête au bout de 8 heures : elle reprend dès que tu ouvres Locky."
           }
         }
       }
@@ -2245,7 +2335,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Placez-vous à environ 1 m de votre Mac (un grand pas), dos à lui, votre iPhone en main devant vous : vous êtes entre les deux, comme quand vous partez. Validez, puis ne bougez plus pendant la mesure."
+            "value" : "Place-toi à environ 1 m de ton Mac (un grand pas), dos à lui, ton iPhone en main devant toi : tu es entre les deux, comme quand tu pars. Valide, puis ne bouge plus pendant la mesure."
           }
         }
       }
@@ -2265,7 +2355,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ne bougez plus pendant quelques secondes."
+            "value" : "Ne bouge plus pendant quelques secondes."
           }
         }
       }
@@ -2275,7 +2365,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Placez-vous à 1 m de votre Mac"
+            "value" : "Place-toi à 1 m de ton Mac"
           }
         }
       }
@@ -2285,7 +2375,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Placez-vous à environ 1 m de votre Mac (un grand pas), dos à lui, votre iPhone en main devant vous : vous êtes entre les deux, comme quand vous partez. Validez, puis ne bougez plus. Locky mesure le signal ici, puis à 2 m, pour connaître la distance."
+            "value" : "Place-toi à environ 1 m de ton Mac (un grand pas), dos à lui, ton iPhone en main devant toi : tu es entre les deux, comme quand tu pars. Valide, puis ne bouge plus. Locky mesure le signal ici, puis à 2 m, pour connaître la distance."
           }
         }
       }
@@ -2315,7 +2405,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Reculez à 2 m"
+            "value" : "Recule à 2 m"
           }
         }
       }
@@ -2325,7 +2415,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Reculez maintenant à environ 2 m de votre Mac (deux grands pas), toujours dos à lui et votre iPhone devant vous, puis validez."
+            "value" : "Recule maintenant à environ 2 m de ton Mac (deux grands pas), toujours dos à lui et ton iPhone devant toi, puis valide."
           }
         }
       }
@@ -2335,7 +2425,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Votre Mac est hors de portée"
+            "value" : "Ton Mac est hors de portée"
           }
         }
       }
@@ -2345,7 +2435,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Votre iPhone et votre Mac se vérifient l’un l’autre."
+            "value" : "Ton iPhone et ton Mac se vérifient l’un l’autre."
           }
         }
       }
@@ -2355,7 +2445,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Locky n’a pas accès à la caméra de votre Mac : les intrus ne seront pas photographiés."
+            "value" : "Locky n’a pas accès à la caméra de ton Mac : les intrus ne seront pas photographiés."
           }
         }
       }
@@ -2365,7 +2455,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Votre Mac n’a pas encore donné accès à sa caméra à Locky : les intrus ne seront pas photographiés."
+            "value" : "Ton Mac n’a pas encore donné accès à sa caméra à Locky : les intrus ne seront pas photographiés."
           }
         }
       }
@@ -2375,7 +2465,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Votre Mac n’a pas de caméra : les tentatives d’intrusion seront signalées sans photo."
+            "value" : "Ton Mac n’a pas de caméra : les tentatives d’intrusion seront signalées sans photo."
           }
         }
       }
@@ -2405,7 +2495,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Déverrouillez votre Mac pour continuer dessus."
+            "value" : "Déverrouille ton Mac pour continuer dessus."
           }
         }
       }
@@ -2415,7 +2505,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Continuez sur votre Mac."
+            "value" : "Continue sur ton Mac."
           }
         }
       }
@@ -2425,7 +2515,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Votre Mac doit être connecté."
+            "value" : "Ton Mac doit être connecté."
           }
         }
       }

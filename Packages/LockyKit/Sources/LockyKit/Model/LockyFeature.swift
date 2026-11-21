@@ -10,6 +10,9 @@ public enum LockyFeature: String, Sendable, CaseIterable {
     case macUpdates
     /// ``LockyMessage/autoLock(isEnabled:)`` from the iPhone.
     case autoLockFromPhone
+    /// The settings of the Mac changed on the iPhone out of reach: through iCloud, then
+    /// ``LockyMessage/macSettings(_:)`` (see ``MacSettingsEnvelope``).
+    case cloudSettings
 
     /// What this version announces.
     public static var current: [String] {

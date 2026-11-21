@@ -37,6 +37,8 @@ final class MacAppDelegate: NSObject, NSApplicationDelegate {
 
     private func startEverything() {
         model.start()
+        // Silent pushes of iCloud: settings the iPhone left out of reach.
+        NSApp.registerForRemoteNotifications()
         let windows: WindowManager = .init(model: model)
         self.windows = windows
         statusMenu = .init(model: model, windows: windows)
@@ -62,6 +64,18 @@ final class MacAppDelegate: NSObject, NSApplicationDelegate {
             windows.show(.releaseNotes)
         }
         #endif
+    }
+
+    func application(_ application: NSApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        model.remoteNotificationsDidRegister()
+    }
+
+    func application(_ application: NSApplication, didFailToRegisterForRemoteNotificationsWithError error: any Error) {
+        model.remoteNotificationsDidFail(error)
+    }
+
+    func application(_ application: NSApplication, didReceiveRemoteNotification userInfo: [String: Any]) {
+        model.didReceiveRemoteNotification(userInfo)
     }
 
     func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {

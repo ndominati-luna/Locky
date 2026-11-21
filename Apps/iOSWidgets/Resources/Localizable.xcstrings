@@ -66,7 +66,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Verrouille votre Mac immédiatement."
+            "value" : "Verrouille ton Mac immédiatement."
           }
         }
       }
@@ -89,7 +89,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Voyez si votre Mac est verrouillé et verrouillez-le ou déverrouillez-le."
+            "value" : "Vois si ton Mac est verrouillé et verrouille-le ou déverrouille-le."
           }
         }
       }
@@ -99,7 +99,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Indique si votre Mac est verrouillé et bascule son état."
+            "value" : "Indique si ton Mac est verrouillé et bascule son état."
           }
         }
       }
@@ -149,7 +149,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Déverrouiller votre Mac"
+            "value" : "Déverrouiller ton Mac"
           }
         }
       }
@@ -159,7 +159,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Verrouiller votre Mac"
+            "value" : "Verrouiller ton Mac"
           }
         }
       }
@@ -169,7 +169,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Appairez votre Mac dans l’app Locky."
+            "value" : "Appaire ton Mac dans l’app Locky."
           }
         }
       }
@@ -179,7 +179,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Votre Mac est hors de portée"
+            "value" : "Ton Mac est hors de portée"
           }
         }
       }

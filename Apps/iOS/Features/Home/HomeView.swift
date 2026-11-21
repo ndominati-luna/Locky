@@ -8,6 +8,8 @@ struct HomeView: View {
     /// Side by side when the available space is wider than tall (landscape, top page of a Duo
     /// turned like a laptop), stacked otherwise (portrait, a page of an unfolded Duo).
     @State private var isWide: Bool = false
+    /// The page of the Mac, in a sheet where it has no page of its own (button of ``MainToolbar``).
+    @State private var isMacPanelPresented: Bool = Self.showsMacPanelAtLaunch
 
     var body: some View {
         Group {
@@ -46,11 +48,27 @@ struct HomeView: View {
             }
         }
         .toolbar {
-            MainToolbar()
+            // Unfolded, the Mac has its own page instead.
+            MainToolbar(openMacPanel: fold == nil ? { isMacPanelPresented = true } : nil)
         }
         .toolbarBackground(.hidden, for: .navigationBar)
         .navigationBarTitleDisplayMode(.inline)
         .animation(.spring(duration: 0.5), value: model.lockState)
+        .sheet(isPresented: $isMacPanelPresented) {
+            MacPanelSheet()
+        }
+        // A break-in notification opens the reports on the main screen: out of the way.
+        .onChange(of: model.path) {
+            isMacPanelPresented = false
+        }
+    }
+
+    private static var showsMacPanelAtLaunch: Bool {
+        #if DEBUG
+        DemoMode.showsMacPanel
+        #else
+        false
+        #endif
     }
 }
 

@@ -19,6 +19,9 @@ final class Preferences {
         static let motionBaseline: String = "locky.motionBaseline"
         static let macImagesVersion: String = "locky.macImagesVersion"
         static let liveActivityEnabled: String = "locky.liveActivityEnabled"
+        static let macSettings: String = "locky.macSettings"
+        static let macSettingsUploadPending: String = "locky.macSettingsUploadPending"
+        static let macLockAnimation: String = "locky.macLockAnimation"
     }
 
     @ObservationIgnored private let defaults: UserDefaults
@@ -77,6 +80,22 @@ final class Preferences {
         didSet { defaults.set(macImagesVersion, forKey: Key.macImagesVersion) }
     }
 
+    /// The settings of the Mac as last chosen here, each with its date: left in iCloud when the Mac
+    /// is out of reach, sent again when it comes back (see ``MacSettingsEnvelope``).
+    @ObservationIgnored var macSettings: MacSettingsEnvelope {
+        didSet { defaults.set(try? JSONEncoder().encode(macSettings), forKey: Key.macSettings) }
+    }
+
+    /// ``macSettings`` changed out of reach and not in iCloud yet.
+    @ObservationIgnored var isMacSettingsUploadPending: Bool {
+        didSet { defaults.set(isMacSettingsUploadPending, forKey: Key.macSettingsUploadPending) }
+    }
+
+    /// The lock animation of the Mac as it last told it, shown while it is out of reach.
+    @ObservationIgnored var macLockAnimation: LockAnimationSettings? {
+        didSet { defaults.set(macLockAnimation.flatMap { try? JSONEncoder().encode($0) }, forKey: Key.macLockAnimation) }
+    }
+
     init(defaults: UserDefaults = .standard) {
         self.defaults = defaults
         onboardingCompleted = defaults.bool(forKey: Key.onboardingCompleted)
@@ -99,6 +118,11 @@ final class Preferences {
         motionBaseline = defaults.data(forKey: Key.motionBaseline)
             .flatMap { try? JSONDecoder().decode(MotionBaseline.self, from: $0) } ?? .zero
         macImagesVersion = defaults.string(forKey: Key.macImagesVersion)
+        macSettings = defaults.data(forKey: Key.macSettings)
+            .flatMap { try? JSONDecoder().decode(MacSettingsEnvelope.self, from: $0) } ?? .init()
+        isMacSettingsUploadPending = defaults.bool(forKey: Key.macSettingsUploadPending)
+        macLockAnimation = defaults.data(forKey: Key.macLockAnimation)
+            .flatMap { try? JSONDecoder().decode(LockAnimationSettings.self, from: $0) }
     }
 
     /// Preferences the Mac needs to know.
@@ -118,5 +142,8 @@ final class Preferences {
         lockDistance = DistanceModel.defaultLockDistance
         motionBaseline = .zero
         macImagesVersion = nil
+        macSettings = .init()
+        isMacSettingsUploadPending = false
+        macLockAnimation = nil
     }
 }
