@@ -46,9 +46,7 @@ struct HomeView: View {
             }
         }
         .toolbar {
-            ToolbarItem(placement: .topBarTrailing) {
-                MainMenu()
-            }
+            MainToolbar()
         }
         .toolbarBackground(.hidden, for: .navigationBar)
         .navigationBarTitleDisplayMode(.inline)

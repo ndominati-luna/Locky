@@ -12,9 +12,32 @@ final class IntruderCamera {
         AVCaptureDevice.authorizationStatus(for: .video) == .authorized
     }
 
+    /// The camera facing whoever sits at the Mac: the built-in one, otherwise a camera plugged in
+    /// (lid closed). Never an iPhone (Continuity Camera), nor a virtual camera such as a Persona:
+    /// macOS may pick one as the default camera, and it films nobody.
+    static var camera: AVCaptureDevice? {
+        let builtIn: [AVCaptureDevice] = AVCaptureDevice.DiscoverySession(
+            deviceTypes: [.builtInWideAngleCamera],
+            mediaType: .video,
+            position: .unspecified
+        ).devices
+        if let camera = builtIn.first(where: { $0.isConnected && !$0.isSuspended }) {
+            return camera
+        }
+        let external: [AVCaptureDevice] = AVCaptureDevice.DiscoverySession(
+            deviceTypes: [.external],
+            mediaType: .video,
+            position: .unspecified
+        ).devices
+        return external.first { $0.isConnected && !$0.isSuspended && !$0.isContinuityCamera && $0.transportType != virtualTransport }
+    }
+
+    /// Transport of the virtual cameras ("virt").
+    private static let virtualTransport: Int32 = 0x7669_7274
+
     /// The permission of Locky for the camera, or no camera at all.
     static var access: CameraAccess {
-        guard AVCaptureDevice.default(for: .video) != nil else { return .unavailable }
+        guard camera != nil else { return .unavailable }
         switch AVCaptureDevice.authorizationStatus(for: .video) {
         case .authorized: return .authorized
         case .notDetermined: return .notDetermined
@@ -35,7 +58,10 @@ final class IntruderCamera {
 
     /// Captures one JPEG photo, `nil` when no camera is available or access is denied.
     func takePhoto() async -> Data? {
-        guard Self.isAuthorized, let device = AVCaptureDevice.default(for: .video) else { return nil }
+        guard Self.isAuthorized, let device = Self.camera else {
+            logger.notice("No camera to photograph the intruder")
+            return nil
+        }
         let session: AVCaptureSession = .init()
         session.sessionPreset = .photo
         let output: AVCapturePhotoOutput = .init()
@@ -58,6 +84,9 @@ final class IntruderCamera {
             output.capturePhoto(with: AVCapturePhotoSettings(format: [AVVideoCodecKey: AVVideoCodecType.jpeg]), delegate: delegate)
         }
         await runner.stop()
+        if data == nil {
+            logger.notice("\(device.localizedName, privacy: .public) returned no photo")
+        }
         return data
     }
 }

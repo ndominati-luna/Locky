@@ -18,6 +18,7 @@ struct NowPlayingCard: View {
                 // Hidden while the Mac does not know the position (track started before Locky).
                 if let duration = playing.duration, duration > 0, playing.elapsed != nil {
                     PlaybackProgress(playing: playing, duration: duration)
+                        .disabled(!model.isConnected)
                 }
                 PlaybackControls(isPlaying: playing.isPlaying, isEnabled: model.isConnected)
             } else {
@@ -64,24 +65,11 @@ private struct TrackHeader: View {
 
     var body: some View {
         HStack(spacing: 14) {
-            Group {
-                if let image = artwork.flatMap(UIImage.init(data:)) {
-                    Image(uiImage: image)
-                        .resizable()
-                        .scaledToFill()
-                } else {
-                    LinearGradient(colors: [.pink, .orange], startPoint: .topLeading, endPoint: .bottomTrailing)
-                        .overlay {
-                            Image(systemName: "music.note")
-                                .font(.title)
-                                .foregroundStyle(.white)
-                        }
-                }
-            }
-            .frame(width: 72, height: 72)
-            .clipShape(.rect(cornerRadius: 14))
-            .shadow(color: .black.opacity(0.25), radius: 8, y: 4)
-            .accessibilityHidden(true)
+            TrackArtwork(artwork: artwork, artworkID: playing.artworkID)
+                .frame(width: 72, height: 72)
+                .clipShape(.rect(cornerRadius: 14))
+                .shadow(color: .black.opacity(0.25), radius: 8, y: 4)
+                .accessibilityHidden(true)
             VStack(alignment: .leading, spacing: 3) {
                 Text(playing.title)
                     .font(.headline)
@@ -105,17 +93,60 @@ private struct TrackHeader: View {
     }
 }
 
-/// Position in the track, advancing on its own between two updates of the Mac.
+/// The artwork over its placeholder: a new artwork, or none, fades in 0.2 s.
+private struct TrackArtwork: View {
+    let artwork: Data?
+    let artworkID: String?
+
+    var body: some View {
+        ZStack {
+            LinearGradient(colors: [.pink, .orange], startPoint: .topLeading, endPoint: .bottomTrailing)
+                .overlay {
+                    Image(systemName: "music.note")
+                        .font(.title)
+                        .foregroundStyle(.white)
+                }
+            if let image = artwork.flatMap(UIImage.init(data:)) {
+                Image(uiImage: image)
+                    .resizable()
+                    .scaledToFill()
+                    .id(artworkID)
+                    .transition(.opacity)
+            }
+        }
+        .animation(.easeInOut(duration: 0.2), value: artwork == nil ? nil : artworkID ?? "")
+    }
+}
+
+/// Position in the track, advancing on its own between two updates of the Mac. Dragging the bar
+/// moves in the track on the Mac.
 private struct PlaybackProgress: View {
+    @Environment(AppModel.self) private var model
     let playing: NowPlaying
     let duration: TimeInterval
+    /// Fraction of the track under the finger, `nil` while not dragging.
+    @State private var scrubbed: Double?
+    /// Fraction when the finger touched the bar: a tap without moving does not seek.
+    @State private var scrubStart: Double?
 
     var body: some View {
         TimelineView(.periodic(from: .now, by: 1)) { context in
-            let elapsed: TimeInterval = playing.elapsed(at: context.date) ?? 0
-            VStack(spacing: 4) {
-                ProgressView(value: min(elapsed, duration), total: duration)
-                    .tint(Color.primary)
+            let elapsed: TimeInterval = scrubbed.map { $0 * duration } ?? playing.elapsed(at: context.date) ?? 0
+            VStack(spacing: 2) {
+                MediaScrubber(
+                    value: .init(get: { min(elapsed / duration, 1) }, set: { scrubbed = $0 }),
+                    accessibilityLabel: Text("Position in the track")
+                ) { isEditing in
+                    if isEditing {
+                        scrubStart = min(elapsed / duration, 1)
+                        return
+                    }
+                    if let scrubbed, let scrubStart, abs(scrubbed - scrubStart) * duration >= 0.5 {
+                        model.sendMediaCommand(.seek(scrubbed * duration))
+                    }
+                    scrubbed = nil
+                    scrubStart = nil
+                }
                 HStack {
                     Text(Self.time(elapsed))
                     Spacer()
@@ -124,9 +155,9 @@ private struct PlaybackProgress: View {
                 .font(.caption2)
                 .monospacedDigit()
                 .foregroundStyle(Color.secondary)
+                .accessibilityHidden(true)
             }
         }
-        .accessibilityHidden(true)
     }
 
     private static func time(_ seconds: TimeInterval) -> String {
@@ -186,14 +217,12 @@ private struct VolumeRow: View {
             .buttonStyle(.plain)
             .contentTransition(.symbolEffect(.replace))
             .frame(width: 24)
-            Slider(value: $volume, in: 0...1) { editing in
+            MediaScrubber(value: $volume, accessibilityLabel: Text("Volume of your Mac")) { editing in
                 isEditing = editing
                 if !editing {
                     model.sendMediaCommand(.setVolume(volume))
                 }
             }
-            .tint(Color.primary)
-            .accessibilityLabel(Text("Volume of your Mac"))
             Image(systemName: "speaker.wave.3.fill")
                 .accessibilityHidden(true)
         }

@@ -26,6 +26,21 @@ final class TransitionController {
     /// Wallpaper of each display at its resolution, decoded once per wallpaper. It stands for the
     /// desktop in the animations: capturing the screen would require the Screen Recording permission.
     private var wallpaperCache: [CGDirectDisplayID: (signature: String, image: NSImage)] = [:]
+    private var screenObserver: (any NSObjectProtocol)?
+    /// Places the prompt again once the displays settle.
+    private var relayoutTask: Task<Void, Never>?
+
+    init() {
+        screenObserver = NotificationCenter.default.addObserver(
+            forName: NSApplication.didChangeScreenParametersNotification,
+            object: nil,
+            queue: .main
+        ) { [weak self] _ in
+            MainActor.assumeIsolated {
+                self?.screensChanged()
+            }
+        }
+    }
 
     // MARK: - Lock screen prompt
 
@@ -69,6 +84,8 @@ final class TransitionController {
     func hidePrompt(animated: Bool = true) {
         promptTask?.cancel()
         promptTask = nil
+        relayoutTask?.cancel()
+        relayoutTask = nil
         promptContent = nil
         let panels: [OverlayPanel] = [promptPanel, wingsPanel].compactMap { $0 }
         promptPanel = nil
@@ -84,6 +101,33 @@ final class TransitionController {
         }
         Task {
             await fadeOut(panels, duration: 0.2)
+        }
+    }
+
+    /// Displays plugged in or unplugged under the lock screen: macOS moves the login to the new
+    /// primary display in several jumps. Once they settle, the wings and the button follow it
+    /// instead of staying where the login used to be.
+    private func screensChanged() {
+        guard promptPanel != nil else { return }
+        relayoutTask?.cancel()
+        relayoutTask = Task {
+            try? await Task.sleep(for: .seconds(1.2))
+            guard !Task.isCancelled else { return }
+            var anchors: LockScreenLayout.Anchors = LockScreenLayout.anchors()
+            if anchors.avatar == nil {
+                // The login may still be drawing on its new display.
+                try? await Task.sleep(for: .milliseconds(700))
+                guard !Task.isCancelled else { return }
+                anchors = LockScreenLayout.anchors()
+            }
+            relayoutTask = nil
+            guard let content = promptContent, let promptPanel else { return }
+            logger.info("Displays changed, lock screen \(anchors.description, privacy: .public)")
+            promptPanel.hideNow()
+            wingsPanel?.hideNow()
+            self.promptPanel = nil
+            wingsPanel = nil
+            placePrompt(content, anchors: anchors)
         }
     }
 

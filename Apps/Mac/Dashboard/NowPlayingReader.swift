@@ -30,6 +30,14 @@ final class NowPlayingReader {
     private var artwork: (trackKey: String, id: String?, data: Data?)?
     private var artworkTask: Task<Void, Never>?
     private let announcements: PlayerAnnouncements = .init()
+    /// Last track read: the one to move in, whose position to read again.
+    private var lastTrack: PlayerTrack?
+    /// A player announced a change, or the artwork of the track is ready: read again now.
+    var onChange: (() -> Void)?
+
+    init() {
+        announcements.onChange = { [weak self] in self?.onChange?() }
+    }
 
     func current() async -> NowPlaying? {
         var track: PlayerTrack? = await mediaRemoteTrack()
@@ -40,6 +48,7 @@ final class NowPlayingReader {
             // Playing since before Locky started: ask the players with AppleScript.
             track = await scriptedTrack()
         }
+        lastTrack = track
         guard let track else { return nil }
         let prepared: (id: String?, data: Data?)? = preparedArtwork(for: track)
         return .init(
@@ -56,14 +65,32 @@ final class NowPlayingReader {
         )
     }
 
-    func perform(_ command: MediaCommand) {
+    func perform(_ command: MediaCommand) async {
         switch command {
         case .playPause: press(.playPause, mediaRemoteCommand: 2)
         case .nextTrack: press(.next, mediaRemoteCommand: 4)
         case .previousTrack: press(.previous, mediaRemoteCommand: 5)
+        case let .seek(position): await seek(to: position)
         case let .setVolume(volume): SystemVolume.setVolume(volume)
         case .toggleMute: SystemVolume.toggleMute()
         }
+    }
+
+    /// Reads the position again after a playback command: Music announces neither a move in the
+    /// track nor a return to its start (Previous), and the position would keep running from the
+    /// old one.
+    func readPosition() async {
+        guard let track = lastTrack, let player = track.scriptablePlayer, player.isRunning, !player.isAutomationDenied else { return }
+        let date: Date = .now
+        guard let output = await Self.runAppleScript(player.positionScript), let milliseconds = Double(output) else { return }
+        announcements.correct(player, trackKey: track.key, elapsed: milliseconds / 1_000, at: date)
+    }
+
+    /// Moves in the track with AppleScript (Music, Spotify): no media key does it.
+    private func seek(to position: TimeInterval) async {
+        guard let track = lastTrack, let player = track.scriptablePlayer, player.isRunning, !player.isAutomationDenied else { return }
+        guard await Self.runAppleScript(player.seekScript(to: position)) != nil else { return }
+        announcements.correct(player, trackKey: track.key, elapsed: position, at: .now)
     }
 
     private func press(_ key: MediaKeys.Key, mediaRemoteCommand: UInt32) {
@@ -155,6 +182,7 @@ final class NowPlayingReader {
                 SHA256.hash(data: data).prefix(8).map { String(format: "%02x", $0) }.joined()
             }
             self.artwork = (key, id, encoded)
+            self.onChange?()
         }
         return nil
     }
@@ -180,18 +208,21 @@ final class NowPlayingReader {
         }
     }
 
-    /// Small HEIC: the artwork travels over Bluetooth.
+    /// Side of the artwork, in pixels: the iPhone shows it 72 points wide, at 3 pixels per point.
+    private static let artworkPixelSize: Int = 216
+
+    /// Small JPEG at the size the iPhone shows it: it goes through iCloud at every new artwork.
     private static func encodeArtwork(_ data: Data) -> Data? {
         let options: [CFString: Any] = [
             kCGImageSourceCreateThumbnailFromImageAlways: true,
-            kCGImageSourceThumbnailMaxPixelSize: 300,
+            kCGImageSourceThumbnailMaxPixelSize: artworkPixelSize,
             kCGImageSourceCreateThumbnailWithTransform: true
         ]
         guard
             let source = CGImageSourceCreateWithData(data as CFData, nil),
             let image = CGImageSourceCreateThumbnailAtIndex(source, 0, options as CFDictionary)
         else { return nil }
-        return MacImageRenderer.encode(image, maxPixelSize: 300, opaque: true)
+        return MacImageRenderer.encode(image, maxPixelSize: artworkPixelSize, opaque: true)
     }
 
     /// Runs a script with `osascript`, off the main thread (the permission prompt may wait for the

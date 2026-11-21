@@ -81,7 +81,21 @@ struct WireCodecTests {
                 date: date
             )),
             .nowPlayingChanged(revision: "r1"),
+            .nowPlaying(.init(
+                title: "Clair de lune",
+                artist: "Claude Debussy",
+                album: "Suite bergamasque",
+                appName: "Musique",
+                isPlaying: true,
+                duration: 301,
+                elapsed: 96.5,
+                elapsedDate: date,
+                artworkID: "8283bd9a1d227d20",
+                artwork: nil
+            )),
+            .nowPlaying(nil),
             .mediaCommand(.setVolume(0.4)),
+            .mediaCommand(.seek(83.5)),
             .dashboard(isVisible: true)
         ]
         for message in messages {

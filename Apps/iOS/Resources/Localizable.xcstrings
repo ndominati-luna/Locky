@@ -77,12 +77,12 @@
         }
       }
     },
-    "Authentication required to unlock your Mac." : {
+    "Tap to unlock your Mac with %@." : {
       "localizations" : {
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Authentification requise pour déverrouiller votre Mac."
+            "value" : "Touchez pour déverrouiller votre Mac avec %@."
           }
         }
       }
@@ -1004,6 +1004,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Lancez de la musique sur votre Mac pour la contrôler d’ici."
+          }
+        }
+      }
+    },
+    "Position in the track" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Position dans le morceau"
           }
         }
       }

@@ -15,6 +15,8 @@ final class PlayerAnnouncements {
     /// Players that announced something since Locky started (a stop included).
     private var heard: Set<ScriptablePlayer> = []
     private var observers: [any NSObjectProtocol] = []
+    /// A player announced a change.
+    var onChange: (() -> Void)?
 
     init() {
         let center: DistributedNotificationCenter = .default()
@@ -52,7 +54,10 @@ final class PlayerAnnouncements {
 
     private func received(_ announcement: PlayerAnnouncement?, from player: ScriptablePlayer) {
         guard let announcement else { return }
-        defer { heard.insert(player) }
+        defer {
+            heard.insert(player)
+            onChange?()
+        }
         guard announcement.state != .stopped else {
             announced[player] = nil
             return

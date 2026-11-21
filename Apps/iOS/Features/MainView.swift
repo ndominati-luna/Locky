@@ -1,6 +1,6 @@
 import SwiftUI
 
-/// Main interface once paired: the Mac in full screen, other screens behind the "•••" menu. On
+/// Main interface once paired: the Mac in full screen, the other screens behind two buttons. On
 /// the large screen of an unfolded iPhone Duo, two pages instead (see ``UnfoldedMainView``).
 struct MainView: View {
     @Environment(AppModel.self) private var model
@@ -21,35 +21,30 @@ struct MainView: View {
     }
 }
 
-/// The "•••" button of the main screen.
-struct MainMenu: View {
+/// The buttons of the main screen, side by side in one glass capsule: the break-in reports (a red
+/// dot while some are unseen) and the settings.
+struct MainToolbar: ToolbarContent {
     @Environment(AppModel.self) private var model
 
-    var body: some View {
-        Menu {
+    var body: some ToolbarContent {
+        ToolbarItemGroup(placement: .topBarTrailing) {
             Button {
                 model.path.append(.intrusions)
             } label: {
                 Label(intrusionsTitle, systemImage: "person.crop.badge.magnifyingglass")
-            }
-            Button {
-                model.path.append(.settings)
-            } label: {
-                Label("Settings", systemImage: "gearshape")
-            }
-        } label: {
-            Label("More", systemImage: "ellipsis")
-                .labelStyle(.iconOnly)
-                .overlay(alignment: .topTrailing) {
-                    if model.intrusions.unseenCount > 0 {
-                        Circle()
-                            .fill(.red)
-                            .frame(width: 9, height: 9)
-                            .offset(x: 5, y: -5)
+                    .overlay(alignment: .topTrailing) {
+                        if model.intrusions.unseenCount > 0 {
+                            Circle()
+                                .fill(.red)
+                                .frame(width: 9, height: 9)
+                                .offset(x: 5, y: -5)
+                        }
                     }
-                }
+            }
+            Button("Settings", systemImage: "gearshape") {
+                model.path.append(.settings)
+            }
         }
-        .accessibilityLabel(Text("More"))
     }
 
     private var intrusionsTitle: String {

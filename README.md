@@ -81,8 +81,9 @@ Le menu du Mac n'a plus d'élément « Essayer Locky ». Les images de démo son
   précédent / lecture / suivant, volume du Mac), processeur, mémoire (avec la pression), stockage, batterie du
   MacBook (ou état thermique sur un Mac de bureau), modèle, macOS et durée depuis le démarrage, puis Locky
   (verrouillage automatique, déverrouillages, rapports d'intrusion). Le Mac n'envoie ces données que pendant que
-  la page est à l'écran (message `dashboard(isVisible:)`) : mesures toutes les 2 s, lecture en cours quand elle
-  change, pochette une seule fois par morceau. Mac hors de portée : un seul message centré qui explique pourquoi
+  la page est à l'écran (message `dashboard(isVisible:)`) : mesures toutes les 2 s, lecture en cours dès
+  qu'elle change, pochette une seule fois par pochette. Barre de lecture et volume façon Now Playing d'iOS
+  (sans curseur, la barre s'épaissit sous le doigt) ; la barre de lecture déplace la lecture sur le Mac. Mac hors de portée : un seul message centré qui explique pourquoi
   (Mac introuvable, Bluetooth éteint ou refusé, connexion en cours) et le bouton des rapports d'intrusion, qui
   passent par iCloud.
 - **Hors de portée** (iPhone comme Duo) : le fond d'écran se désature, l'état du Mac, son image et son nom
@@ -92,8 +93,11 @@ Le menu du Mac n'a plus d'élément « Essayer Locky ». Les images de démo son
   notifications distribuées de Musique (`com.apple.Music.playerInfo`) et de Spotify
   (`com.spotify.client.PlaybackStateChanged`), écoutées dès le lancement de Locky : titre, artiste, album, durée,
   état, sans autorisation ni interrogation périodique (position estimée d'après les lectures et pauses pour
-  Musique, fournie par Spotify). AppleScript ne sert plus qu'aux pochettes (macOS demande une fois l'autorisation
-  de piloter le lecteur) et à relire un lecteur déjà autorisé quand il jouait avant le lancement de Locky. Les
+  Musique, fournie par Spotify). AppleScript sert aux pochettes, à déplacer la lecture, à relire la position
+  (après chaque commande et toutes les 10 s : Musique n'annonce ni un déplacement ni un retour au début du
+  morceau) et à lire un lecteur qui jouait avant le lancement de Locky (macOS demande une fois l'autorisation de
+  piloter le lecteur, jamais plus une fois refusée). Le Mac renvoie la lecture en cours dès qu'un lecteur annonce
+  un changement ou qu'une pochette est prête. Les
   notifications Darwin ne servent à rien ici : sans contenu, et MediaRemote passe par XPC. Commandes : touches
   multimédia (tous les lecteurs, via l'autorisation Accessibilité déjà accordée). En DEBUG, `-LockyDemoDashboardLog YES` affiche dans la console ce que l'iPhone
   recevrait.
@@ -199,8 +203,9 @@ désactive au lieu d'empêcher l'app de démarrer.
 
 ### iCloud (remplace Parse)
 Base privée CloudKit, zone `Locky` : enregistrements `MacStatus` (nom, modèle, utilisateur, état de verrouillage,
-autorisation de la caméra `cameraAccess` et images avec leur version `imagesVersion`), `NowPlaying` (morceau en cours et sa pochette, un seul par Mac,
-remplacé à chaque changement, effacé quand Locky quitte et à son lancement s'il a été tué) et `Intrusion` (photos
+autorisation de la caméra `cameraAccess` et images avec leur version `imagesVersion`), `NowPlaying` (pochette du morceau en cours, 216 px, une seule par
+Mac, remplacée quand elle change, effacée quand Locky quitte et à son lancement s'il a été tué ; Locky 1.0.0 pour
+Mac y mettait aussi le morceau) et `Intrusion` (photos
 d'intrus). L'iPhone s'abonne : notification visible pour une intrusion,
 silencieuse pour l'état du Mac. Tout se lit par identifiant ou par changements de zone : aucun index à configurer.
 
@@ -233,10 +238,10 @@ posent eux‑mêmes le fond d'écran dans l'écran. Le Mac publie seulement son 
 couleur, déduit de l'icône que macOS lui donne) ; à défaut, le modèle (`hw.model`) donne la couleur par défaut.
 L'iPhone prépare ensuite pour les widgets et la Live Activity de petites copies en PNG/JPEG dans l'App Group (Mac
 avec son fond à 690 et 280 px, fonds réduits, photo) : les extensions n'embarquent pas le catalogue, et iOS refuse
-d'afficher une Live Activity dont les images dépassent leur place. Puis il recharge ses widgets. Le morceau en cours (tableau de bord de l'iPhone Duo) suit le même chemin : titre, artiste,
-lecture et pochette partent dans iCloud, puis le message `nowPlayingChanged` ; l'iPhone ne retélécharge la
-pochette que si elle a changé. Seules les mesures du Mac (processeur, mémoire, volume…), de quelques octets,
-passent directement en Bluetooth.
+d'afficher une Live Activity dont les images dépassent leur place. Puis il recharge ses widgets. Le morceau en cours (tableau de bord de l'iPhone Duo) passe en Bluetooth (message
+`nowPlaying`, quelques centaines d'octets : titre, artiste, lecture, position), comme les mesures du Mac ; seule
+sa pochette suit le chemin des images : le Mac la dépose dans iCloud, puis la nomme dans le message, et l'iPhone
+ne la télécharge que si elle a changé (l'iPhone comprend encore `nowPlayingChanged` de Locky 1.0.0 pour Mac).
 
 L'**Apple Watch est autonome** : elle lit elle‑même le Mac dans iCloud (à l'ouverture, sur la notification
 silencieuse, en actualisation d'arrière‑plan toutes les 30 min environ, et dès que l'iPhone lui signale une nouvelle

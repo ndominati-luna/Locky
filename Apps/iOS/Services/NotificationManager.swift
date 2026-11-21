@@ -16,6 +16,8 @@ final class NotificationManager: NSObject {
 
     /// The user chose "Unlock" on an unlock request (the system already authenticated them).
     var onUnlockAction: (() -> Void)?
+    /// The user opened an unlock request: the app comes to the front, authentication still due.
+    var onUnlockRequestOpened: (() -> Void)?
     /// The user opened an intrusion notification.
     var onIntrusionOpened: (() -> Void)?
 
@@ -88,6 +90,8 @@ extension NotificationManager: UNUserNotificationCenterDelegate {
         await MainActor.run {
             if action == Action.unlock {
                 onUnlockAction?()
+            } else if category == Category.unlockRequest, action == UNNotificationDefaultActionIdentifier {
+                onUnlockRequestOpened?()
             } else if category == Category.intrusion || category.isEmpty && action == UNNotificationDefaultActionIdentifier {
                 onIntrusionOpened?()
             }

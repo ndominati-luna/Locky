@@ -26,6 +26,15 @@ struct PlayerTrack: Sendable {
         return duration.map { min(position, $0) } ?? position
     }
 
+    /// The player the track comes from when it can be scripted (Music, Spotify): to move in the
+    /// track and to read its position.
+    var scriptablePlayer: ScriptablePlayer? {
+        if case let .script(player) = artwork {
+            return player
+        }
+        return ScriptablePlayer.allCases.first { $0.isRunning && $0.localizedName == appName }
+    }
+
     /// Identifies the track (and therefore its artwork).
     var key: String {
         [title, artist ?? "", album ?? "", appName ?? ""].joined(separator: "\u{1F}")

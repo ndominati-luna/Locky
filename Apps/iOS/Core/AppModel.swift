@@ -25,7 +25,7 @@ final class AppModel {
     }
     /// Transient message displayed to the user (errors, refused commands).
     var alertMessage: String?
-    /// Navigation from the main screen (the "•••" menu, intrusion notifications).
+    /// Navigation from the main screen (its toolbar buttons, intrusion notifications).
     var path: [AppRoute] = []
     /// Guided first try after the pairing; `nil` once done or skipped.
     private(set) var setup: SetupPhase?
@@ -54,9 +54,11 @@ final class AppModel {
     @ObservationIgnored private var isDashboardVisible: Bool = false
     /// Last artwork fetched, kept for the next tracks with the same one.
     @ObservationIgnored private var lastArtwork: (id: String, data: Data)?
-    /// Revision of ``nowPlaying`` in iCloud.
+    /// Revision of ``nowPlaying`` in iCloud (Mac on Locky 1.0.0).
     @ObservationIgnored private var nowPlayingRevision: String?
     @ObservationIgnored private var nowPlayingFetch: Task<Void, Never>?
+    /// Artwork being fetched from iCloud.
+    @ObservationIgnored private var fetchingArtworkID: String?
     @ObservationIgnored private var calibrationTimeout: Task<Void, Never>?
 
     init() {
@@ -345,12 +347,26 @@ final class AppModel {
             } else {
                 notifications.post(
                     identifier: "unlock-request",
-                    body: String(localized: "Authentication required to unlock your Mac."),
+                    body: String(localized: "Tap to unlock your Mac with \(BiometricGate.biometryName)."),
                     category: NotificationManager.Category.unlockRequest,
                     interruption: .timeSensitive
                 )
             }
         }
+    }
+
+    /// The user opened the notification asking to authenticate (Unlock pressed on the lock screen
+    /// of the Mac): once the app is in front, Face ID or Touch ID, without a second prompt when it
+    /// just unlocked the iPhone, then the password goes to the Mac.
+    private func unlockFromOpenedRequest() async {
+        var attempts: Int = 0
+        while UIApplication.shared.applicationState != .active, attempts < 30 {
+            try? await Task.sleep(for: .milliseconds(100))
+            attempts += 1
+        }
+        let reason: String = .init(localized: "Authenticate to unlock your Mac")
+        guard await BiometricGate.authenticate(reason: reason, reusingRecentUnlock: true) else { return }
+        _ = sendPassword(origin: .notification)
     }
 
     // MARK: - Preferences
@@ -651,6 +667,9 @@ final class AppModel {
             guard let self else { return }
             _ = self.sendPassword(origin: .notification)
         }
+        notifications.onUnlockRequestOpened = { [weak self] in
+            Task { await self?.unlockFromOpenedRequest() }
+        }
         notifications.onIntrusionOpened = { [weak self] in self?.path = [.intrusions] }
         widgets.onCommand = { [weak self] pending in
             Task { await self?.perform(pending.command, origin: pending.origin) }
@@ -686,6 +705,7 @@ final class AppModel {
         macMetrics = nil
         // Only true while the Mac is there (it forgets it in iCloud when Locky quits).
         nowPlayingFetch?.cancel()
+        fetchingArtworkID = nil
         nowPlaying = nil
         nowPlayingArtwork = nil
         nowPlayingRevision = nil
@@ -743,6 +763,8 @@ final class AppModel {
             macMetrics = metrics
         case let .nowPlayingChanged(revision):
             fetchNowPlaying(revision: revision)
+        case let .nowPlaying(playing):
+            receiveNowPlaying(playing)
         default:
             break
         }
@@ -771,6 +793,12 @@ final class AppModel {
                 playing.elapsed = playing.elapsed(at: .now)
                 playing.elapsedDate = .now
                 playing.isPlaying.toggle()
+                nowPlaying = playing
+            }
+        case let .seek(position):
+            if var playing = nowPlaying {
+                playing.elapsed = position
+                playing.elapsedDate = .now
                 nowPlaying = playing
             }
         case let .setVolume(volume):
@@ -807,7 +835,41 @@ final class AppModel {
         nowPlaying = stored
     }
 
-    /// What the Mac is playing changed: fetch it from iCloud, its artwork only when it is new.
+    /// What the Mac is playing, straight over Bluetooth. A new artwork comes from iCloud, the
+    /// next tracks of the album reuse it.
+    private func receiveNowPlaying(_ playing: NowPlaying?) {
+        updateNowPlaying(playing)
+        guard
+            let artworkID = playing?.artworkID,
+            lastArtwork?.id != artworkID,
+            artworkID != fetchingArtworkID,
+            let pairing = session.pairing
+        else { return }
+        nowPlayingFetch?.cancel()
+        fetchingArtworkID = artworkID
+        nowPlayingFetch = Task {
+            defer {
+                if fetchingArtworkID == artworkID {
+                    fetchingArtworkID = nil
+                }
+            }
+            let image: Data?
+            do {
+                image = try await CloudSync.shared.fetchNowPlayingArtwork(macID: pairing.peerID, artworkID: artworkID)
+            } catch {
+                logger.notice("iCloud fetch of the artwork failed: \(error.localizedDescription, privacy: .public)")
+                return
+            }
+            guard !Task.isCancelled, let image else { return }
+            lastArtwork = (artworkID, image)
+            if nowPlaying?.artworkID == artworkID {
+                nowPlayingArtwork = image
+            }
+        }
+    }
+
+    /// A Mac still on Locky 1.0.0 published what it plays: fetch it from iCloud, its artwork only
+    /// when it is new.
     private func fetchNowPlaying(revision: String) {
         guard revision != nowPlayingRevision, let pairing = session.pairing else { return }
         nowPlayingFetch?.cancel()

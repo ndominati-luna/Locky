@@ -26,9 +26,7 @@ struct MacDashboardView: View {
         // Over the shared wallpaper, like the Mac on the first page.
         .toolbarBackground(.hidden, for: .navigationBar)
         .toolbar {
-            ToolbarItem(placement: .topBarTrailing) {
-                MainMenu()
-            }
+            MainToolbar()
         }
         .immersivePageBackground(wallpaper: model.visuals.backgroundWallpaper, intensity: 0.45)
         .onAppear {

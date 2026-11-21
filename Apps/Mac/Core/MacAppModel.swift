@@ -94,18 +94,18 @@ final class MacAppModel {
         }
         intrusions.onReport = { [weak self] photo in self?.reportIntrusion(photo: photo) }
         dashboard.send = { [weak self] message in self?.session.send(message) ?? false }
-        // What was playing is only true while Locky runs: forget it at launch (Locky may have been
-        // killed) before publishing anything new.
+        // The artwork of what was playing is only true while Locky runs: forget it at launch (Locky
+        // may have been killed) before publishing a new one.
         let macID: UUID = session.macID
         let launchCleanup: Task<Void, Never> = Task { try? await CloudSync.shared.clearNowPlaying(macID: macID) }
-        dashboard.publishNowPlaying = { [weak self] playing, revision in
+        dashboard.publishArtwork = { [weak self] artworkID, image in
             await launchCleanup.value
             guard let macID = self?.session.macID else { return false }
             do {
-                try await CloudSync.shared.publishNowPlaying(macID: macID, playing: playing, revision: revision)
+                try await CloudSync.shared.publishNowPlayingArtwork(macID: macID, artworkID: artworkID, image: image)
                 return true
             } catch {
-                self?.logger.notice("Now playing publication failed: \(String(describing: error), privacy: .public)")
+                self?.logger.notice("Artwork publication failed: \(String(describing: error), privacy: .public)")
                 return false
             }
         }

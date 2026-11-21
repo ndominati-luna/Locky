@@ -170,29 +170,30 @@ public actor CloudSync {
 
     // MARK: - Now playing
 
-    /// Mac side: what the Mac is playing (`nil`: nothing). One record per Mac, replaced at every
-    /// change; no subscription fires for it, the iPhone is told over Bluetooth with `revision`.
-    /// The artwork is only uploaded when it changes.
-    public func publishNowPlaying(macID: UUID, playing: NowPlaying?, revision: String) async throws {
+    /// Mac side: the artwork of what the Mac plays, once per artwork (the track itself goes over
+    /// Bluetooth, see ``LockyMessage/nowPlaying(_:)``). One record per Mac.
+    public func publishNowPlayingArtwork(macID: UUID, artworkID: String, image: Data) async throws {
         try await prepareZone()
         let recordID: CKRecord.ID = .init(recordName: "nowplaying-\(macID.uuidString)", zoneID: zoneID)
-        let record: CKRecord = try await existingRecord(recordID, keys: ["artworkID"])
-            ?? .init(recordType: RecordType.nowPlaying, recordID: recordID)
-        record["revision"] = revision
-        record["track"] = try playing.map { String(decoding: try JSONEncoder().encode($0), as: UTF8.self) }
-        var temporaryFile: URL?
-        defer { temporaryFile.map { try? FileManager.default.removeItem(at: $0) } }
-        if record["artworkID"] as? String != playing?.artworkID {
-            record["artworkID"] = playing?.artworkID
-            if let artwork = playing?.artwork {
-                let url: URL = try Self.temporaryFile(artwork)
-                temporaryFile = url
-                record["image"] = CKAsset(fileURL: url)
-            } else {
-                record["image"] = nil
-            }
-        }
+        // A new record object saved with `.changedKeys` only updates these fields: no read first.
+        let record: CKRecord = .init(recordType: RecordType.nowPlaying, recordID: recordID)
+        record["artworkID"] = artworkID
+        let url: URL = try Self.temporaryFile(image)
+        defer { try? FileManager.default.removeItem(at: url) }
+        record["image"] = CKAsset(fileURL: url)
         try await modify(saving: [record], savePolicy: .changedKeys)
+    }
+
+    /// iPhone side: the artwork `artworkID` of what the Mac plays, `nil` when another one already
+    /// replaced it.
+    public func fetchNowPlayingArtwork(macID: UUID, artworkID: String) async throws -> Data? {
+        try await prepareZone()
+        let recordID: CKRecord.ID = .init(recordName: "nowplaying-\(macID.uuidString)", zoneID: zoneID)
+        guard
+            let record = try await existingRecord(recordID, keys: ["artworkID", "image"]),
+            record["artworkID"] as? String == artworkID
+        else { return nil }
+        return Self.assetData(record["image"])
     }
 
     /// Mac side: forgets what was playing (Locky quits, or starts after being killed).
@@ -203,8 +204,8 @@ public actor CloudSync {
         try await modify(saving: [], deleting: [recordID])
     }
 
-    /// iPhone side: what the Mac is playing. The artwork is only downloaded when it is not
-    /// `knownArtworkID`; `nil` when the Mac published nothing.
+    /// iPhone side, with a Mac still on Locky 1.0.0: what the Mac is playing. The artwork is only
+    /// downloaded when it is not `knownArtworkID`; `nil` when the Mac published nothing.
     public func fetchNowPlaying(macID: UUID, knownArtworkID: String?) async throws -> CloudNowPlaying? {
         try await prepareZone()
         let recordID: CKRecord.ID = .init(recordName: "nowplaying-\(macID.uuidString)", zoneID: zoneID)

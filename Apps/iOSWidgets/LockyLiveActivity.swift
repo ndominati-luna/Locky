@@ -55,8 +55,12 @@ struct LockyLiveActivity: Widget {
                 ActivityCompactStatus(state: state)
             } minimal: {
                 ActivityPadlock(state: state)
+                    .frame(width: 24, height: 24)
             }
-            .keylineTint(ActivityTint.distance(state))
+            // Not the color of the distance: the island would be redrawn at every distance update
+            // (every 2 seconds), even on an iPhone Duo where it shows no distance, and its icons
+            // would jump.
+            .keylineTint(ActivityTint.lockState(state))
         }
     }
 }
@@ -147,8 +151,13 @@ private struct ActivityCompactStatus: View {
 
     var body: some View {
         HStack(spacing: 2) {
-            ActivityPadlock(state: state)
-            if !DeviceModel.hasUprightIsland {
+            if DeviceModel.hasUprightIsland {
+                // Same square as the Locky logo facing it: the open padlock is wider than the closed
+                // one, and the island would resize, shifting both icons, at every change.
+                ActivityPadlock(state: state)
+                    .frame(width: 24, height: 24)
+            } else {
+                ActivityPadlock(state: state)
                 if state.isConnected {
                     if let distance = state.distance {
                         // With its unit ("1,3 m"): only the upright island of the Duo lacks the room.

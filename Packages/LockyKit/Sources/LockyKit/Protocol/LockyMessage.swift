@@ -59,10 +59,14 @@ public enum LockyMessage: Codable, Sendable, Equatable {
     case dashboard(isVisible: Bool)
     /// Mac → iPhone: processor, memory, disk, battery, volume.
     case macMetrics(MacMetrics)
-    /// Mac → iPhone: what the Mac is playing changed, it is in iCloud
-    /// (``CloudSync/fetchNowPlaying(macID:knownArtworkID:)``): a few bytes over Bluetooth instead of
-    /// the track and its artwork.
+    /// Mac (Locky 1.0.0) → iPhone: what the Mac is playing changed, it is in iCloud
+    /// (``CloudSync/fetchNowPlaying(macID:knownArtworkID:)``). Newer Macs send ``nowPlaying(_:)``.
     case nowPlayingChanged(revision: String)
+    /// Mac → iPhone: what the Mac is playing (`nil`: nothing), right when it changes. A few hundred
+    /// bytes: the artwork stays in iCloud
+    /// (``CloudSync/fetchNowPlayingArtwork(macID:artworkID:)``), named by its identifier once
+    /// uploaded.
+    case nowPlaying(NowPlaying?)
     /// iPhone → Mac: playback and volume.
     case mediaCommand(MediaCommand)
 

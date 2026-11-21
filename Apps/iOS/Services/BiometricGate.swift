@@ -4,8 +4,13 @@ import LocalAuthentication
 /// Face ID, Touch ID or passcode check before sensitive actions.
 enum BiometricGate {
     /// Asks the user to authenticate. Returns `true` on success.
-    static func authenticate(reason: String) async -> Bool {
+    /// - Parameter reusingRecentUnlock: The iPhone unlocked with Face ID or Touch ID a few seconds
+    ///   ago counts (opening a notification on a locked iPhone): no second prompt then.
+    static func authenticate(reason: String, reusingRecentUnlock: Bool = false) async -> Bool {
         let context: LAContext = .init()
+        if reusingRecentUnlock {
+            context.touchIDAuthenticationAllowableReuseDuration = 30
+        }
         var error: NSError?
         guard context.canEvaluatePolicy(.deviceOwnerAuthentication, error: &error) else {
             // No passcode on the device: nothing more to check.

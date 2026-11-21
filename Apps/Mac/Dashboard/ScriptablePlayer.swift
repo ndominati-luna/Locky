@@ -45,6 +45,17 @@ enum ScriptablePlayer: CaseIterable {
         return status != noErr && status != OSStatus(errAEEventWouldRequireUserConsent)
     }
 
+    /// Returns the position in the current track, in milliseconds.
+    var positionScript: String {
+        "tell application id \"\(bundleIdentifier)\" to return (player position * 1000) as integer"
+    }
+
+    /// Moves to `position` (seconds) in the current track. Written in milliseconds divided by
+    /// 1 000: a decimal number would depend on the decimal separator of the region.
+    func seekScript(to position: TimeInterval) -> String {
+        "tell application id \"\(bundleIdentifier)\" to set player position to (\(Int((position * 1_000).rounded())) / 1000)"
+    }
+
     /// Returns the position (ms) and writes the artwork of the current track to `file` (Music) or
     /// returns its URL (Spotify), separated by the unit separator.
     func artworkScript(writingTo file: URL) -> String {
