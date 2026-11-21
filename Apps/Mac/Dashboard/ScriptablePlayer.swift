@@ -36,11 +36,13 @@ enum ScriptablePlayer: CaseIterable {
         NSRunningApplication.runningApplications(withBundleIdentifier: bundleIdentifier).first?.localizedName ?? name
     }
 
-    /// The user already allowed Locky to control the player: AppleScript runs without a prompt.
-    var isAutomationAllowed: Bool {
+    /// Whether the user refused to let Locky control the player. Not asked yet, AppleScript shows
+    /// the prompt of macOS once.
+    var isAutomationDenied: Bool {
         let target: NSAppleEventDescriptor = .init(bundleIdentifier: bundleIdentifier)
-        guard let descriptor = target.aeDesc else { return false }
-        return AEDeterminePermissionToAutomateTarget(descriptor, typeWildCard, typeWildCard, false) == noErr
+        guard let descriptor = target.aeDesc else { return true }
+        let status: OSStatus = AEDeterminePermissionToAutomateTarget(descriptor, typeWildCard, typeWildCard, false)
+        return status != noErr && status != OSStatus(errAEEventWouldRequireUserConsent)
     }
 
     /// Returns the position (ms) and writes the artwork of the current track to `file` (Music) or

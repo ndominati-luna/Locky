@@ -33,9 +33,17 @@ final class DashboardStreamer {
         loop = nil
     }
 
-    /// Runs a command from the dashboard, then reports its effect right away.
+    /// Runs a command from the dashboard, then reports the effect of a playback command right away.
     func perform(_ command: MediaCommand) {
         player.perform(command)
+        switch command {
+        case .setVolume, .toggleMute:
+            // The iPhone already shows the new volume, and the slider sends many commands: reading
+            // the player at each one would run AppleScript as often. The next refresh confirms it.
+            return
+        case .playPause, .nextTrack, .previousTrack:
+            break
+        }
         Task {
             try? await Task.sleep(for: .milliseconds(400))
             await refresh()

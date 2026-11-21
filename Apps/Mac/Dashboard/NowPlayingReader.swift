@@ -11,7 +11,8 @@ import OSLog
 ///    versions return nothing to apps that are not Apple's: then
 /// 2. the distributed notifications of Music and Spotify (no permission, no polling);
 /// 3. AppleScript only for the artwork, and to read the state of a player that announced nothing
-///    yet when the user already allowed Locky to control it (never asks for it then).
+///    yet (playing since before Locky started): macOS asks once to let Locky control it, never
+///    again once refused.
 ///
 /// Commands go through the media keys (any player), or MediaRemote without Accessibility.
 @MainActor
@@ -36,7 +37,7 @@ final class NowPlayingReader {
             track = announcements.current
         }
         if track == nil, !announcements.hasAnnouncements {
-            // Playing since before Locky started: ask the players already allowed, silently.
+            // Playing since before Locky started: ask the players with AppleScript.
             track = await scriptedTrack()
         }
         guard let track else { return nil }
@@ -121,7 +122,7 @@ final class NowPlayingReader {
 
     private func scriptedTrack() async -> PlayerTrack? {
         var paused: PlayerTrack?
-        for player in ScriptablePlayer.allCases where player.isRunning && player.isAutomationAllowed {
+        for player in ScriptablePlayer.allCases where player.isRunning && !player.isAutomationDenied {
             guard let output = await Self.runAppleScript(player.trackScript), let track = player.track(from: output) else { continue }
             if track.isPlaying {
                 return track

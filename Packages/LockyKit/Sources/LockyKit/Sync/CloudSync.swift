@@ -119,7 +119,7 @@ public actor CloudSync {
                 record[asset.key] = CKAsset(fileURL: url)
             }
         }
-        _ = try await database.modifyRecords(saving: [record], deleting: [], savePolicy: .changedKeys)
+        try await modify(saving: [record], savePolicy: .changedKeys)
     }
 
     /// Mac side: only updates the lock state (cheap, called on every lock and unlock).
@@ -129,7 +129,27 @@ public actor CloudSync {
         guard let record = try await existingRecord(recordID, keys: ["lockState"]) else { throw CKError(.unknownItem) }
         record["lockState"] = lockState.rawValue
         record["lockStateDate"] = date
-        _ = try await database.modifyRecords(saving: [record], deleting: [], savePolicy: .changedKeys)
+        try await modify(saving: [record], savePolicy: .changedKeys)
+    }
+
+    /// Saves and deletes records. CloudKit reports a refused record (a field missing from the
+    /// production schema, for example) in its results without throwing: rethrown here. Deleting a
+    /// record already gone is not an error.
+    private func modify(
+        saving records: [CKRecord],
+        deleting recordIDs: [CKRecord.ID] = [],
+        savePolicy: CKModifyRecordsOperation.RecordSavePolicy = .ifServerRecordUnchanged
+    ) async throws {
+        let results: (
+            saveResults: [CKRecord.ID: Result<CKRecord, any Error>],
+            deleteResults: [CKRecord.ID: Result<Void, any Error>]
+        ) = try await database.modifyRecords(saving: records, deleting: recordIDs, savePolicy: savePolicy)
+        for case let .failure(error) in results.saveResults.values {
+            throw error
+        }
+        for case let .failure(error) in results.deleteResults.values where (error as? CKError)?.code != .unknownItem {
+            throw error
+        }
     }
 
     /// The record with only `keys`, without downloading its images: enough to update it with the
@@ -172,7 +192,7 @@ public actor CloudSync {
                 record["image"] = nil
             }
         }
-        _ = try await database.modifyRecords(saving: [record], deleting: [], savePolicy: .changedKeys)
+        try await modify(saving: [record], savePolicy: .changedKeys)
     }
 
     /// Mac side: forgets what was playing (Locky quits, or starts after being killed).
@@ -180,11 +200,7 @@ public actor CloudSync {
         guard await isAvailable() else { return }
         try await prepareZone()
         let recordID: CKRecord.ID = .init(recordName: "nowplaying-\(macID.uuidString)", zoneID: zoneID)
-        do {
-            _ = try await database.modifyRecords(saving: [], deleting: [recordID])
-        } catch let error as CKError where error.code == .unknownItem {
-            return
-        }
+        try await modify(saving: [], deleting: [recordID])
     }
 
     /// iPhone side: what the Mac is playing. The artwork is only downloaded when it is not
@@ -193,7 +209,14 @@ public actor CloudSync {
         try await prepareZone()
         let recordID: CKRecord.ID = .init(recordName: "nowplaying-\(macID.uuidString)", zoneID: zoneID)
         guard let record = try await existingRecord(recordID, keys: ["revision", "track", "artworkID"]) else { return nil }
-        let playing: NowPlaying? = (record["track"] as? String).flatMap { try? JSONDecoder().decode(NowPlaying.self, from: Data($0.utf8)) }
+        var playing: NowPlaying?
+        if let track = record["track"] as? String {
+            do {
+                playing = try JSONDecoder().decode(NowPlaying.self, from: Data(track.utf8))
+            } catch {
+                logger.error("Undecodable now playing: \(String(describing: error), privacy: .public)")
+            }
+        }
         let artworkID: String? = record["artworkID"] as? String
         var artwork: Data?
         if let artworkID, artworkID != knownArtworkID {
@@ -221,7 +244,7 @@ public actor CloudSync {
             record["photo"] = CKAsset(fileURL: url)
         }
         defer { temporaryFile.map { try? FileManager.default.removeItem(at: $0) } }
-        _ = try await database.modifyRecords(saving: [record], deleting: [])
+        try await modify(saving: [record])
         try await pruneIntrusions(macID: macID)
     }
 
@@ -230,7 +253,7 @@ public actor CloudSync {
         guard !ids.isEmpty else { return }
         try await prepareZone()
         let recordIDs: [CKRecord.ID] = ids.map { .init(recordName: $0, zoneID: zoneID) }
-        _ = try await database.modifyRecords(saving: [], deleting: recordIDs)
+        try await modify(saving: [], deleting: recordIDs)
     }
 
     private func pruneIntrusions(macID: UUID) async throws {

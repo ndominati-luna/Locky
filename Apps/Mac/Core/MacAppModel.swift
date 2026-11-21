@@ -105,7 +105,7 @@ final class MacAppModel {
                 try await CloudSync.shared.publishNowPlaying(macID: macID, playing: playing, revision: revision)
                 return true
             } catch {
-                self?.logger.notice("Now playing publication failed: \(error.localizedDescription)")
+                self?.logger.notice("Now playing publication failed: \(String(describing: error), privacy: .public)")
                 return false
             }
         }

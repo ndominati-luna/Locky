@@ -813,10 +813,22 @@ final class AppModel {
         nowPlayingFetch?.cancel()
         let knownArtworkID: String? = lastArtwork?.id
         nowPlayingFetch = Task {
-            guard
-                let cloud = try? await CloudSync.shared.fetchNowPlaying(macID: pairing.peerID, knownArtworkID: knownArtworkID),
-                !Task.isCancelled
-            else { return }
+            let fetched: CloudNowPlaying?
+            do {
+                fetched = try await CloudSync.shared.fetchNowPlaying(macID: pairing.peerID, knownArtworkID: knownArtworkID)
+            } catch {
+                logger.notice("iCloud fetch of what the Mac plays failed: \(error.localizedDescription, privacy: .public)")
+                return
+            }
+            guard !Task.isCancelled else { return }
+            guard let cloud = fetched else {
+                logger.notice("Nothing playing in iCloud for revision \(revision, privacy: .public)")
+                return
+            }
+            logger.notice("""
+            Now playing \(cloud.revision, privacy: .public) fetched: \(cloud.playing == nil ? "nothing" : "a track", privacy: .public), \
+            artwork \(cloud.artworkID ?? "none", privacy: .public)
+            """)
             nowPlayingRevision = cloud.revision
             var playing: NowPlaying? = cloud.playing
             playing?.artwork = cloud.artwork
