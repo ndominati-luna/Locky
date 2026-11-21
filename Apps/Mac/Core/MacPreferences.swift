@@ -1,6 +1,7 @@
 import Foundation
 import LockyKit
 import Observation
+import SwiftUI
 
 /// Preferences of the Mac app. iPhone driven preferences are mirrored here so they apply even
 /// before the iPhone reconnects.
@@ -9,7 +10,13 @@ import Observation
 final class MacPreferences {
     private enum Key {
         static let autoLock: String = "locky.autoLockEnabled"
+        /// Before the styles: `false` when the animations were turned off.
         static let lockAnimation: String = "locky.lockAnimation"
+        static let lockAnimationStyle: String = "locky.lockAnimationStyle"
+        static let lockTitleStyle: String = "locky.lockTitleStyle"
+        static let lockBackgroundKind: String = "locky.lockBackgroundKind"
+        static let lockBackgroundColor: String = "locky.lockBackgroundColor"
+        static let lockBackgroundImageVersion: String = "locky.lockBackgroundImageVersion"
         static let lockScreenOverlay: String = "locky.lockScreenOverlay"
         static let lockAnimationTitle: String = "locky.lockAnimationTitle"
         static let phonePreferences: String = "locky.phonePreferences"
@@ -26,9 +33,65 @@ final class MacPreferences {
         didSet { defaults.set(isAutoLockEnabled, forKey: Key.autoLock) }
     }
 
-    /// Animated transitions when locking and unlocking.
-    var isLockAnimationEnabled: Bool {
-        didSet { defaults.set(isLockAnimationEnabled, forKey: Key.lockAnimation) }
+    /// Transition when locking and unlocking; ``LockAnimationStyle/none`` locks at once.
+    var lockAnimationStyle: LockAnimationStyle {
+        didSet { defaults.set(lockAnimationStyle.rawValue, forKey: Key.lockAnimationStyle) }
+    }
+
+    /// How the text under the logo appears.
+    var lockTitleStyle: LockTitleStyle {
+        didSet { defaults.set(lockTitleStyle.rawValue, forKey: Key.lockTitleStyle) }
+    }
+
+    /// Behind the logo of the animation.
+    var lockBackgroundKind: LockBackgroundKind {
+        didSet { defaults.set(lockBackgroundKind.rawValue, forKey: Key.lockBackgroundKind) }
+    }
+
+    /// Color behind the logo, `RRGGBB`.
+    var lockBackgroundColor: String {
+        didSet { defaults.set(lockBackgroundColor, forKey: Key.lockBackgroundColor) }
+    }
+
+    /// Raised each time an image is chosen for the background (see ``LockBackgroundImage``).
+    var lockBackgroundImageVersion: Int {
+        didSet { defaults.set(lockBackgroundImageVersion, forKey: Key.lockBackgroundImageVersion) }
+    }
+
+    /// Everything the animations need.
+    var lockAnimation: LockAnimation {
+        .init(
+            style: lockAnimationStyle,
+            title: effectiveLockAnimationTitle,
+            titleStyle: lockTitleStyle,
+            background: .init(kind: lockBackgroundKind, colorHex: lockBackgroundColor, imageVersion: lockBackgroundImageVersion)
+        )
+    }
+
+    /// The animation as the iPhone sees and changes it.
+    var lockAnimationSettings: LockAnimationSettings {
+        .init(
+            style: lockAnimationStyle,
+            title: lockAnimationTitle,
+            titleStyle: lockTitleStyle,
+            backgroundKind: lockBackgroundKind,
+            backgroundColor: lockBackgroundColor,
+            hasBackgroundImage: LockBackgroundImage.image(version: lockBackgroundImageVersion) != nil
+        )
+    }
+
+    /// Chosen on the iPhone. The image cannot be: without one on the Mac, the background stays as it
+    /// was.
+    func apply(_ settings: LockAnimationSettings) {
+        lockAnimationStyle = settings.style
+        lockAnimationTitle = String(settings.title.prefix(LockAnimationSettings.maximumTitleLength))
+        lockTitleStyle = settings.titleStyle
+        if settings.backgroundKind != .image || LockBackgroundImage.image(version: lockBackgroundImageVersion) != nil {
+            lockBackgroundKind = settings.backgroundKind
+        }
+        if settings.backgroundColor.count == 6, UInt64(settings.backgroundColor, radix: 16) != nil {
+            lockBackgroundColor = settings.backgroundColor.uppercased()
+        }
     }
 
     /// Text under the Locky logo in the lock animation; empty for "Locky".
@@ -70,7 +133,12 @@ final class MacPreferences {
 
     init() {
         isAutoLockEnabled = defaults.object(forKey: Key.autoLock) as? Bool ?? true
-        isLockAnimationEnabled = defaults.object(forKey: Key.lockAnimation) as? Bool ?? true
+        let wasAnimationOff: Bool = defaults.object(forKey: Key.lockAnimation) as? Bool == false
+        lockAnimationStyle = defaults.string(forKey: Key.lockAnimationStyle).flatMap(LockAnimationStyle.init) ?? (wasAnimationOff ? .none : .iris)
+        lockTitleStyle = defaults.string(forKey: Key.lockTitleStyle).flatMap(LockTitleStyle.init) ?? .reveal
+        lockBackgroundKind = defaults.string(forKey: Key.lockBackgroundKind).flatMap(LockBackgroundKind.init) ?? .color
+        lockBackgroundColor = defaults.string(forKey: Key.lockBackgroundColor) ?? "000000"
+        lockBackgroundImageVersion = defaults.integer(forKey: Key.lockBackgroundImageVersion)
         isLockScreenOverlayEnabled = defaults.object(forKey: Key.lockScreenOverlay) as? Bool ?? true
         lockAnimationTitle = defaults.string(forKey: Key.lockAnimationTitle) ?? ""
         phonePreferences = defaults.data(forKey: Key.phonePreferences)

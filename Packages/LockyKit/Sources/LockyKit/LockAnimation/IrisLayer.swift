@@ -4,7 +4,7 @@ import SwiftUI
 /// glowing edge. Animatable, so the diameter shrinks at a constant visual pace (logarithmic
 /// interpolation) instead of rushing at the end.
 struct IrisLayer: View, @MainActor Animatable {
-    let image: NSImage?
+    let image: PlatformImage?
     let size: CGSize
     let center: CGPoint
     /// Diameter of the ring of the logo.
@@ -25,7 +25,7 @@ struct IrisLayer: View, @MainActor Animatable {
     var body: some View {
         ZStack {
             if let image {
-                Image(nsImage: image)
+                Image(platformImage: image)
                     .resizable()
                     .scaledToFill()
                     .frame(width: size.width, height: size.height)

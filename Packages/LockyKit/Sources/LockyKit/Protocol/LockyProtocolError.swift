@@ -18,4 +18,7 @@ public enum LockyProtocolError: Error, Sendable, Equatable {
     case wrongDirection
     /// The peer public key is invalid.
     case invalidPublicKey
+    /// Authentic, but a message this version does not know (sent by a newer peer): to ignore,
+    /// the session is fine.
+    case unknownMessage
 }

@@ -41,7 +41,10 @@ public enum WireCodec {
             guard var current = channel else { throw LockyProtocolError.noSession }
             let plaintext: Data = try current.open(body)
             channel = current
-            let message: LockyMessage = try JSONDecoder().decode(LockyMessage.self, from: plaintext)
+            // Authentic: a message that does not decode comes from a newer peer.
+            guard let message = try? JSONDecoder().decode(LockyMessage.self, from: plaintext) else {
+                throw LockyProtocolError.unknownMessage
+            }
             guard !message.isHandshake else { throw LockyProtocolError.malformedPayload }
             return message
         }

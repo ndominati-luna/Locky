@@ -12,7 +12,8 @@ import OSLog
 /// 2. the distributed notifications of Music and Spotify (no permission, no polling);
 /// 3. AppleScript only for the artwork, and to read the state of a player that announced nothing
 ///    yet (playing since before Locky started): macOS asks once to let Locky control it, never
-///    again once refused.
+///    again once refused. Music has no artwork for a streamed track that is not in the library:
+///    the Apple Music catalog gives it (``CatalogArtwork``).
 ///
 /// Commands go through the media keys (any player), or MediaRemote without Accessibility.
 @MainActor
@@ -22,7 +23,7 @@ final class NowPlayingReader {
     private typealias SendCommandFunction = @convention(c) (UInt32, CFDictionary?) -> Bool
 
     private static let mediaRemote: String = "/System/Library/PrivateFrameworks/MediaRemote.framework/MediaRemote"
-    private let logger: Logger = .init(subsystem: "studio.lunabee.locky", category: "NowPlaying")
+    private static let logger: Logger = .init(subsystem: "studio.lunabee.locky", category: "NowPlaying")
     private let getInfo: GetInfoFunction? = PrivateSymbols.load("MRMediaRemoteGetNowPlayingInfo", from: mediaRemote, as: GetInfoFunction.self)
     private let getPID: GetPIDFunction? = PrivateSymbols.load("MRMediaRemoteGetNowPlayingApplicationPID", from: mediaRemote, as: GetPIDFunction.self)
     private let sendCommand: SendCommandFunction? = PrivateSymbols.load("MRMediaRemoteSendCommand", from: mediaRemote, as: SendCommandFunction.self)
@@ -171,41 +172,80 @@ final class NowPlayingReader {
         artworkTask?.cancel()
         guard let source = track.artwork else { return nil }
         artworkTask = Task { [weak self] in
-            let fetched: (image: Data?, position: TimeInterval?, date: Date) = await Self.artworkData(from: source)
+            let image: Data? = await self?.artworkImage(of: track, from: source)
             guard !Task.isCancelled, let self, self.artwork?.trackKey == key else { return }
-            if case let .script(player) = source, let position = fetched.position {
-                self.announcements.correct(player, trackKey: key, elapsed: position, at: fetched.date)
+            guard let encoded = image.flatMap(Self.encodeArtwork) else {
+                Self.logger.notice("No artwork for the track")
+                return
             }
-            let image: Data? = fetched.image
-            let encoded: Data? = image.flatMap(Self.encodeArtwork)
-            let id: String? = encoded.map { data in
-                SHA256.hash(data: data).prefix(8).map { String(format: "%02x", $0) }.joined()
-            }
+            let id: String = SHA256.hash(data: encoded).prefix(8).map { String(format: "%02x", $0) }.joined()
             self.artwork = (key, id, encoded)
             self.onChange?()
         }
         return nil
     }
 
-    /// The artwork, and the position in the track when AppleScript told it.
-    private static func artworkData(from source: PlayerTrack.Artwork) async -> (image: Data?, position: TimeInterval?, date: Date) {
+    /// The artwork of `track`: from the player, otherwise from the Apple Music catalog when Music
+    /// streams a track that is not in the library (AppleScript then gives no artwork at all).
+    private func artworkImage(of track: PlayerTrack, from source: PlayerTrack.Artwork) async -> Data? {
         switch source {
         case let .data(data):
-            return (data, nil, .now)
+            return data
         case let .url(url):
-            return (try? await URLSession.shared.data(from: url).0, nil, .now)
+            return try? await URLSession.shared.data(from: url).0
         case let .script(player):
-            // macOS asks once for the permission to control the player.
-            let file: URL = URL.temporaryDirectory.appending(path: "locky-artwork")
-            try? FileManager.default.removeItem(at: file)
-            let date: Date = .now
-            let fields: [String] = (await runAppleScript(player.artworkScript(writingTo: file)))?.components(separatedBy: "\u{1F}") ?? []
-            let position: TimeInterval? = fields.first.flatMap(Double.init).map { $0 / 1_000 }
-            if fields.count > 1, let url = URL(string: fields[1]), url.scheme == "https" {
-                return (try? await URLSession.shared.data(from: url).0, position, date)
+            for delay in Self.scriptAttemptDelays {
+                try? await Task.sleep(for: delay)
+                guard !Task.isCancelled else { return nil }
+                // Not yet the announced track (or the script failed): read again.
+                guard let reading = await Self.scriptedArtwork(of: player, title: track.title) else { continue }
+                guard !Task.isCancelled else { return nil }
+                if let position = reading.position {
+                    announcements.correct(player, trackKey: track.key, elapsed: position, at: reading.date)
+                }
+                if let image = reading.image {
+                    return image
+                }
+                guard player == .music else { return nil }
+                Self.logger.info("Music has no artwork for the track: asking the Apple Music catalog")
+                return await CatalogArtwork.fetch(
+                    title: track.title,
+                    artist: track.artist,
+                    album: track.album,
+                    pixelSize: Self.artworkPixelSize
+                )
             }
-            return (try? Data(contentsOf: file), position, date)
+            return nil
         }
+    }
+
+    /// Before each reading with AppleScript: right after announcing a track, the player may still
+    /// answer with the previous one.
+    private static let scriptAttemptDelays: [Duration] = [.zero, .milliseconds(500), .seconds(1), .seconds(2)]
+
+    /// The artwork of the current track of `player` (none for a streamed track of Music), and the
+    /// position in it. `nil` when the player still plays another track than `title`, or when the
+    /// script failed.
+    private static func scriptedArtwork(of player: ScriptablePlayer, title: String) async -> (image: Data?, position: TimeInterval?, date: Date)? {
+        // A file per reading: a cancelled one may still be writing its own. macOS asks once for the
+        // permission to control the player.
+        let file: URL = URL.temporaryDirectory.appending(path: "locky-artwork-\(UUID().uuidString)")
+        defer { try? FileManager.default.removeItem(at: file) }
+        let date: Date = .now
+        guard let output = await runAppleScript(player.artworkScript(writingTo: file)) else {
+            logger.info("The artwork script failed")
+            return nil
+        }
+        let fields: [String] = output.components(separatedBy: "\u{1F}")
+        guard fields.count >= 3, fields[2] == title else {
+            logger.info("The player still plays another track")
+            return nil
+        }
+        let position: TimeInterval? = Double(fields[0]).map { $0 / 1_000 }
+        if let url = URL(string: fields[1]), url.scheme == "https" {
+            return (try? await URLSession.shared.data(from: url).0, position, date)
+        }
+        return (try? Data(contentsOf: file), position, date)
     }
 
     /// Side of the artwork, in pixels: the iPhone shows it 72 points wide, at 3 pixels per point.

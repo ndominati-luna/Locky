@@ -27,6 +27,12 @@ final class AppModel {
     var alertMessage: String?
     /// Navigation from the main screen (its toolbar buttons, intrusion notifications).
     var path: [AppRoute] = []
+    /// The About sheet, opened from the toolbar of the main screen.
+    var isAboutPresented: Bool = false
+    /// Lock animation of the Mac, sent by Locky for Mac 1.0.2 and later.
+    private(set) var macLockAnimation: LockAnimationSettings?
+    /// Versions of Locky for Mac, newest first; `nil` until read from the Sparkle feed.
+    private(set) var macReleases: [MacRelease]?
     /// Guided first try after the pairing; `nil` once done or skipped.
     private(set) var setup: SetupPhase?
     /// Live state of the Mac, streamed while the dashboard is on screen (unfolded iPhone Duo).
@@ -59,6 +65,9 @@ final class AppModel {
     @ObservationIgnored private var nowPlayingFetch: Task<Void, Never>?
     /// Artwork being fetched from iCloud.
     @ObservationIgnored private var fetchingArtworkID: String?
+    /// Last change of the lock animation made here: the echo of the Mac is ignored meanwhile, so
+    /// that a text being typed is not set back to its previous letters.
+    @ObservationIgnored private var lockAnimationEditedAt: ContinuousClock.Instant?
     @ObservationIgnored private var calibrationTimeout: Task<Void, Never>?
 
     init() {
@@ -466,8 +475,12 @@ final class AppModel {
     }
 
     private func apply(cloudRecord: CloudMacRecord) {
-        let cloudStatus: MacStatus = cloudRecord.status
+        var cloudStatus: MacStatus = cloudRecord.status
         if !isConnected, cloudStatus.lockStateDate > (macStatus?.lockStateDate ?? .distantPast) {
+            // iCloud does not keep the version of Locky for Mac nor its features (Bluetooth only).
+            cloudStatus.appVersion = macStatus?.appVersion
+            cloudStatus.appBuild = macStatus?.appBuild
+            cloudStatus.features = macStatus?.features
             updateStatus(cloudStatus)
         }
         logger.notice("""
@@ -536,6 +549,7 @@ final class AppModel {
             pairedAt: .now
         ))
         macStatus = DemoMode.macStatus(macID: macID)
+        macLockAnimation = DemoMode.lockAnimation
         visuals = DemoMode.visuals
         // Widgets and the Live Activity read the images from the App Group.
         visuals.store()
@@ -689,7 +703,8 @@ final class AppModel {
             appVersion: LocalDevice.appVersion,
             batteryLevel: battery.level,
             preferences: preferences.phonePreferences,
-            macImagesVersion: preferences.macImagesVersion
+            macImagesVersion: preferences.macImagesVersion,
+            features: LockyFeature.current
         )
         session.send(.deviceStatus(status))
         session.send(.motion(isMoving: motion.isMoving))
@@ -765,6 +780,12 @@ final class AppModel {
             fetchNowPlaying(revision: revision)
         case let .nowPlaying(playing):
             receiveNowPlaying(playing)
+        case let .lockAnimation(settings):
+            // The echo of a change made here is skipped; a change made on the Mac shows up.
+            if let lockAnimationEditedAt, ContinuousClock.now - lockAnimationEditedAt < .seconds(1.5) {
+                return
+            }
+            macLockAnimation = settings
         default:
             break
         }
@@ -786,6 +807,61 @@ final class AppModel {
     }
 
     /// Playback and volume of the Mac. The dashboard reflects the command at once.
+    /// Changes the lock animation of the Mac, which applies it at once.
+    func setMacLockAnimation(_ settings: LockAnimationSettings) {
+        guard settings != macLockAnimation else { return }
+        macLockAnimation = settings
+        lockAnimationEditedAt = .now
+        #if DEBUG
+        if DemoMode.isEnabled {
+            return
+        }
+        #endif
+        guard macStatus?.supports(.lockAnimation) == true else { return }
+        session.send(.lockAnimation(settings))
+    }
+
+    /// Plays the lock animation on the Mac, without locking it.
+    func previewMacLockAnimation() {
+        guard macStatus?.supports(.lockAnimation) == true else { return }
+        session.send(.previewLockAnimation)
+    }
+
+    /// Opens the update window of Sparkle on the Mac.
+    func updateMac() {
+        guard macStatus?.supports(.macUpdates) == true else { return }
+        session.send(.checkForUpdates)
+    }
+
+    /// Reads the versions of Locky for Mac from the Sparkle feed; `false` when it failed.
+    @discardableResult
+    func loadMacReleases() async -> Bool {
+        guard let releases = try? await MacReleaseFeed.fetch() else { return false }
+        macReleases = releases
+        return true
+    }
+
+    /// A version newer than the one on the Mac. A Mac that does not tell its version runs Locky
+    /// 1.0.1 or earlier.
+    var availableMacUpdate: MacRelease? {
+        guard let latest = macReleases?.first, let status = macStatus else { return nil }
+        return latest.build > (status.appBuild ?? 0) ? latest : nil
+    }
+
+    /// "Locky activated" on the Mac: automatic locking when the iPhone walks away. Shown at once;
+    /// the Mac confirms with the same message.
+    func setMacAutoLock(_ isEnabled: Bool) {
+        guard var status = macStatus, status.isAutoLockEnabled != isEnabled else { return }
+        status.isAutoLockEnabled = isEnabled
+        updateStatus(status)
+        #if DEBUG
+        if DemoMode.isEnabled {
+            return
+        }
+        #endif
+        session.send(.autoLock(isEnabled: isEnabled))
+    }
+
     func sendMediaCommand(_ command: MediaCommand) {
         switch command {
         case .playPause:

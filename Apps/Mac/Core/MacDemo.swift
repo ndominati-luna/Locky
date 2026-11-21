@@ -6,6 +6,10 @@ import Foundation
 /// - `-LockyDemo YES`: a paired and connected iPhone, to review the menu and the widget.
 /// - `-LockyDemoPairingTour YES`: the pairing window walks through every step in a loop.
 /// - `-LockyDemoLockAnimation YES`: plays the lock and unlock animations without locking.
+/// - `-LockyDemoAnimationWindow YES`: opens the animation window.
+///
+/// The animation demos start neither Bluetooth nor the widgets, and leave a running Locky alone.
+/// Launch arguments such as `-locky.lockAnimationStyle flight` try a choice without saving it.
 /// - `-LockyDemoSetup permissions|firstTry|magic`: the pairing window shows that setup step.
 enum MacDemo {
     static var isEnabled: Bool {
@@ -55,6 +59,21 @@ enum MacDemo {
     /// `-LockyDemoLockAnimation YES`: plays the lock and unlock animations, without locking.
     static var isLockAnimation: Bool {
         UserDefaults.standard.bool(forKey: "LockyDemoLockAnimation")
+    }
+
+    /// `-LockyDemoAnimationWindow YES`: opens the animation window, to review it.
+    static var isAnimationWindow: Bool {
+        UserDefaults.standard.bool(forKey: "LockyDemoAnimationWindow")
+    }
+
+    /// `-LockyDemoReleaseNotes YES`: opens the release notes window.
+    static var isReleaseNotesWindow: Bool {
+        UserDefaults.standard.bool(forKey: "LockyDemoReleaseNotes")
+    }
+
+    /// Demos of windows and animations only: no Bluetooth, no widgets, the running Locky stays.
+    static var isAnimationOnly: Bool {
+        isLockAnimation || isAnimationWindow || isReleaseNotesWindow
     }
 
     static var isPairingTour: Bool {

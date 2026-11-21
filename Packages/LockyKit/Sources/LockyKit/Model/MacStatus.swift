@@ -21,6 +21,12 @@ public struct MacStatus: Codable, Sendable, Equatable {
     public var unlockCount: Int
     /// Camera of the Mac for intruder detection, `nil` when not reported yet.
     public var cameraAccess: CameraAccess?
+    /// Version of Locky for Mac, e.g. "1.0.2"; `nil` before Locky 1.0.2 for Mac.
+    public var appVersion: String?
+    /// Build of Locky for Mac, the version Sparkle compares; `nil` before Locky 1.0.2 for Mac.
+    public var appBuild: Int?
+    /// See ``LockyFeature``; `nil` before Locky 1.0.2 for Mac. Sent over Bluetooth only.
+    public var features: [String]?
 
     public init(
         macID: UUID,
@@ -35,7 +41,10 @@ public struct MacStatus: Codable, Sendable, Equatable {
         isAutoLockEnabled: Bool,
         unlockCount: Int,
         cameraAccess: CameraAccess? = nil,
-        deviceType: String? = nil
+        deviceType: String? = nil,
+        appVersion: String? = nil,
+        appBuild: Int? = nil,
+        features: [String]? = nil
     ) {
         self.macID = macID
         self.name = name
@@ -50,5 +59,8 @@ public struct MacStatus: Codable, Sendable, Equatable {
         self.unlockCount = unlockCount
         self.cameraAccess = cameraAccess
         self.deviceType = deviceType
+        self.appVersion = appVersion
+        self.appBuild = appBuild
+        self.features = features
     }
 }

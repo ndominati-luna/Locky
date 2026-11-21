@@ -11,6 +11,7 @@ final class WindowManager: NSObject {
         case pairing
         case password
         case animation
+        case releaseNotes
     }
 
     private let model: MacAppModel
@@ -61,6 +62,14 @@ final class WindowManager: NSObject {
             window = .init(contentViewController: controller)
             window.styleMask = [.titled, .closable]
             window.title = String(localized: "Lock animation")
+        case .releaseNotes:
+            controller = NSHostingController(
+                rootView: ReleaseNotesView()
+                    .environment(\.closeWindow, close)
+            )
+            window = .init(contentViewController: controller)
+            window.styleMask = [.titled, .closable]
+            window.title = String(localized: "Release notes")
         }
         window.isReleasedWhenClosed = false
         window.delegate = self

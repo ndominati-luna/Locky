@@ -1,30 +1,168 @@
 import SwiftUI
 
-/// About Locky.
+/// About Locky, in a sheet over the wallpaper of the Mac like the main screen: the logo assembles
+/// itself, then the version and the sites of Locky and of Lunabee Studio, opened inside the app.
 struct AboutView: View {
+    @Environment(AppModel.self) private var model
+    @Environment(\.dismiss) private var dismiss
+    @State private var openedSite: OpenedSite?
+
     var body: some View {
-        VStack(spacing: 16) {
-            Image(.lockyGlyph)
-                .resizable()
-                .scaledToFit()
-                .frame(width: 120)
-                .foregroundStyle(.tint)
-                .accessibilityHidden(true)
-            Text("Locky")
-                .font(.largeTitle.bold())
-            Text("Version \(LocalDevice.appVersion)")
-                .foregroundStyle(.secondary)
+        NavigationStack {
+            ScrollView {
+                VStack(spacing: 32) {
+                    AboutHeader()
+                    GlassEffectContainer(spacing: 12) {
+                        VStack(spacing: 12) {
+                            SiteButton(
+                                title: "Visit the Locky website",
+                                address: "locky.lunabee.studio",
+                                open: { openedSite = .init(url: Self.lockySite) }
+                            ) {
+                                Image(.lockyGlyph)
+                                    .resizable()
+                                    .scaledToFit()
+                                    .padding(10)
+                            }
+                            SiteButton(
+                                title: "Discover Lunabee Studio",
+                                address: "lunabee.studio",
+                                open: { openedSite = .init(url: Self.studioSite) }
+                            ) {
+                                Image(.lunabeeStudioLogo)
+                                    .resizable()
+                                    .scaledToFit()
+                                    .padding(11)
+                            }
+                            NavigationLink {
+                                ReleaseNotesView()
+                            } label: {
+                                AboutRow(title: "Release notes", subtitle: Text("Locky for Mac"), trailingSymbol: "chevron.right") {
+                                    Image(systemName: "doc.text")
+                                        .resizable()
+                                        .scaledToFit()
+                                        .padding(13)
+                                }
+                            }
+                            .buttonStyle(.plain)
+                            .glassEffect(.regular.interactive(), in: .rect(cornerRadius: 24))
+                        }
+                    }
+                    StudioSignature()
+                }
+                .padding(.horizontal, 24)
+                .padding(.bottom, 24)
+                .frame(maxWidth: 460)
+                .frame(maxWidth: .infinity)
+            }
+            .scrollBounceBehavior(.basedOnSize)
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button(role: .close) {
+                        dismiss()
+                    }
+                }
+            }
+            .toolbarBackground(.hidden, for: .navigationBar)
+        }
+        .safari($openedSite)
+        .presentationBackground {
+            ImmersiveBackground(wallpaper: model.visuals.backgroundWallpaper, intensity: 0.5, isFaded: !model.isConnected)
+        }
+    }
+
+    private static let lockySite: URL = .init(string: "https://locky.lunabee.studio")!
+    private static let studioSite: URL = .init(string: "https://lunabee.studio")!
+}
+
+/// The logo assembling itself, the name, the version and what Locky does.
+private struct AboutHeader: View {
+    var body: some View {
+        VStack(spacing: 18) {
+            LockyAssemblyIllustration()
+                .frame(height: 150)
+                .padding(.top, 8)
+            VStack(spacing: 10) {
+                Text(verbatim: "Locky")
+                    .font(.system(.largeTitle, design: .rounded, weight: .bold))
+                Text("Version \(LocalDevice.appVersion)")
+                    .font(.footnote.monospaced())
+                    .foregroundStyle(.secondary)
+                    .padding(.horizontal, 12)
+                    .padding(.vertical, 5)
+                    .glassEffect(.regular, in: .capsule)
+            }
             Text("Locky locks your Mac when you walk away with your iPhone and unlocks it when you come back.")
+                .font(.body)
+                .foregroundStyle(.secondary)
                 .multilineTextAlignment(.center)
-                .padding(.horizontal)
-            Link("lunabee.studio", destination: URL(string: "https://lunabee.studio")!)
-            Spacer()
-            Text("© Lunabee Studio")
-                .font(.footnote)
+                .fixedSize(horizontal: false, vertical: true)
+        }
+    }
+}
+
+/// A site to open: its icon, an invitation and its address.
+private struct SiteButton<Icon: View>: View {
+    let title: LocalizedStringKey
+    let address: String
+    let open: () -> Void
+    @ViewBuilder var icon: Icon
+
+    var body: some View {
+        Button(action: open) {
+            AboutRow(title: title, subtitle: Text(verbatim: address), trailingSymbol: "arrow.up.right") {
+                icon
+            }
+        }
+        .buttonStyle(.plain)
+        .glassEffect(.regular.interactive(), in: .rect(cornerRadius: 24))
+        .accessibilityHint(Text(verbatim: address))
+    }
+}
+
+/// A row of the About sheet: an icon in a glass circle, a title, a subtitle and a symbol saying
+/// where it leads.
+private struct AboutRow<Icon: View>: View {
+    let title: LocalizedStringKey
+    let subtitle: Text
+    let trailingSymbol: String
+    @ViewBuilder var icon: Icon
+
+    var body: some View {
+        HStack(spacing: 14) {
+            icon
+                .foregroundStyle(Color.brandArt)
+                .frame(width: 48, height: 48)
+                .glassEffect(.regular, in: .circle)
+            VStack(alignment: .leading, spacing: 2) {
+                Text(title)
+                    .font(.headline)
+                    .foregroundStyle(.primary)
+                subtitle
+                    .font(.subheadline)
+                    .foregroundStyle(.secondary)
+            }
+            Spacer(minLength: 0)
+            Image(systemName: trailingSymbol)
+                .font(.subheadline.weight(.semibold))
                 .foregroundStyle(.secondary)
         }
-        .padding()
-        .navigationTitle("About")
-        .navigationBarTitleDisplayMode(.inline)
+        .padding(12)
+        .contentShape(.rect)
+    }
+}
+
+/// Who made Locky.
+private struct StudioSignature: View {
+    var body: some View {
+        VStack(spacing: 6) {
+            Text("Locky is designed and built by Lunabee Studio.")
+                .font(.footnote)
+                .multilineTextAlignment(.center)
+            Text(verbatim: "© \(Date.now.formatted(.dateTime.year())) Lunabee Studio")
+                .font(.caption2)
+        }
+        .foregroundStyle(.secondary)
+        .padding(.top, 8)
     }
 }

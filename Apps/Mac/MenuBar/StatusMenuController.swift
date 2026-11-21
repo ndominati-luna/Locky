@@ -75,6 +75,9 @@ final class StatusMenuController: NSObject {
             updates.isEnabled = model.updater.canCheckForUpdates
             menu.addItem(updates)
         }
+        menu.addItem(ClosureMenuItem(String(localized: "Release notes…"), image: "doc.text") { [weak self] in
+            self?.windows.show(.releaseNotes)
+        })
         menu.addItem(ClosureMenuItem(String(localized: "Contact support"), image: "envelope") { [weak self] in
             guard let self else { return }
             NSWorkspace.shared.open(MacSupportMail.url(model: self.model))
@@ -133,16 +136,6 @@ final class StatusMenuController: NSObject {
         options.autoenablesItems = false
         let preferences: MacPreferences = model.preferences
         options.addItem(ClosureMenuItem(
-            String(localized: "Lock and unlock animations"),
-            state: preferences.isLockAnimationEnabled ? .on : .off
-        ) { [weak self] in
-            guard let self else { return }
-            self.model.setLockAnimationEnabled(!self.model.preferences.isLockAnimationEnabled)
-        })
-        options.addItem(ClosureMenuItem(String(localized: "Customize the animation…")) { [weak self] in
-            self?.windows.show(.animation)
-        })
-        options.addItem(ClosureMenuItem(
             String(localized: "“Unlock with Locky” on the lock screen"),
             state: preferences.isLockScreenOverlayEnabled ? .on : .off
         ) {
@@ -154,6 +147,11 @@ final class StatusMenuController: NSObject {
         ) { [weak self] in
             guard let self else { return }
             self.model.setLaunchAtLogin(!self.model.isLaunchAtLoginEnabled)
+        })
+        options.addItem(.separator())
+        // The animation in a section of its own: its style (none included), text and background.
+        options.addItem(ClosureMenuItem(String(localized: "Customize the animation…"), image: "sparkles") { [weak self] in
+            self?.windows.show(.animation)
         })
         options.addItem(.separator())
         options.addItem(ClosureMenuItem(String(localized: "Update session password…"), image: "key") { [weak self] in

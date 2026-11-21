@@ -56,27 +56,35 @@ enum ScriptablePlayer: CaseIterable {
         "tell application id \"\(bundleIdentifier)\" to set player position to (\(Int((position * 1_000).rounded())) / 1000)"
     }
 
-    /// Returns the position (ms) and writes the artwork of the current track to `file` (Music) or
-    /// returns its URL (Spotify), separated by the unit separator.
+    /// Returns the position (ms), the artwork URL (Spotify) and the title of the current track,
+    /// separated by the unit separator; Music writes the artwork to `file` instead. The title tells
+    /// whether the player already moved to the announced track. Music has no artwork for a
+    /// streamed track that is not in the library: only the fields then.
     func artworkScript(writingTo file: URL) -> String {
         switch self {
         case .music:
             """
             tell application id "\(bundleIdentifier)"
                 set p to (player position * 1000) as integer
-                set d to raw data of artwork 1 of current track
+                set n to name of current track
+                set d to missing value
+                try
+                    set d to raw data of artwork 1 of current track
+                end try
             end tell
-            set f to open for access (POSIX file "\(file.path(percentEncoded: false))") with write permission
-            set eof f to 0
-            write d to f
-            close access f
-            return p as text
+            if d is not missing value then
+                set f to open for access (POSIX file "\(file.path(percentEncoded: false))") with write permission
+                set eof f to 0
+                write d to f
+                close access f
+            end if
+            return (p as text) & (ASCII character 31) & "" & (ASCII character 31) & n
             """
         case .spotify:
             """
             tell application id "\(bundleIdentifier)"
                 set p to (player position * 1000) as integer
-                return (p as text) & (ASCII character 31) & (artwork url of current track)
+                return (p as text) & (ASCII character 31) & (artwork url of current track) & (ASCII character 31) & (name of current track)
             end tell
             """
         }

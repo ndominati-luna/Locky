@@ -134,6 +134,15 @@ final class MacAppModel {
             // with another Locky for the iPhone (it shares the pairing when signed by the team).
             return
         }
+        if MacDemo.isAnimationOnly {
+            if MacDemo.isLockAnimation {
+                Task {
+                    try? await Task.sleep(for: .seconds(1.5))
+                    previewLockAnimation()
+                }
+            }
+            return
+        }
         if let step = MacDemo.setupStep {
             startSetupDemo(step)
             return
@@ -214,11 +223,11 @@ final class MacAppModel {
     private func demoLockScreenOverlay() {
         Task {
             try? await Task.sleep(for: .seconds(1))
-            transitions.lock(animated: true, title: preferences.effectiveLockAnimationTitle) {
+            transitions.lock(preferences.lockAnimation) {
                 SessionLocker.lock()
             }
             // Is the animation still above the lock screen after the lock?
-            try? await Task.sleep(for: .seconds(TransitionController.lockDuration + 0.25))
+            try? await Task.sleep(for: .seconds(preferences.lockAnimation.lockDuration + 0.25))
             Self.capture(to: "/tmp/locky-after-lock-1.png")
             try? await Task.sleep(for: .seconds(0.75))
             Self.capture(to: "/tmp/locky-after-lock-2.png")
@@ -265,10 +274,10 @@ final class MacAppModel {
         Task {
             // screencapture takes a moment to start filming.
             try? await Task.sleep(for: .seconds(2))
-            transitions.lock(animated: true, title: preferences.effectiveLockAnimationTitle) {
+            transitions.lock(preferences.lockAnimation) {
                 SessionLocker.lock()
             }
-            try? await Task.sleep(for: .seconds(TransitionController.lockDuration + 2))
+            try? await Task.sleep(for: .seconds(preferences.lockAnimation.lockDuration + 2))
             SessionLocker.wakeDisplay()
             try? await Task.sleep(for: .seconds(1))
             showFilmPrompt()
@@ -283,7 +292,7 @@ final class MacAppModel {
             self.transitions.showPrompt(deviceName: self.phoneName, mode: .waitingForPhone) {}
             Task {
                 try? await Task.sleep(for: .seconds(1.2))
-                self.transitions.beginUnlock(animated: true, title: self.preferences.effectiveLockAnimationTitle)
+                self.transitions.beginUnlock(self.preferences.lockAnimation)
             }
         }
     }
@@ -337,12 +346,6 @@ final class MacAppModel {
         widgets.onCommand = { [weak self] command in self?.perform(command) }
         widgets.start()
         observeWidgetState()
-        if MacDemo.isLockAnimation {
-            Task {
-                try? await Task.sleep(for: .seconds(1.5))
-                previewLockAnimation()
-            }
-        }
     }
     #endif
 
@@ -379,7 +382,10 @@ final class MacAppModel {
             isAutoLockEnabled: preferences.isAutoLockEnabled,
             unlockCount: preferences.unlockCount,
             cameraAccess: cameraAccess,
-            deviceType: DeviceIcon.thisMacType
+            deviceType: DeviceIcon.thisMacType,
+            appVersion: Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String,
+            appBuild: (Bundle.main.infoDictionary?["CFBundleVersion"] as? String).flatMap { Int($0) },
+            features: LockyFeature.current
         )
     }
 
@@ -409,16 +415,26 @@ final class MacAppModel {
         isLaunchAtLoginEnabled = LaunchAtLogin.isEnabled
     }
 
-    func setLockAnimationEnabled(_ enabled: Bool) {
-        preferences.isLockAnimationEnabled = enabled
-        if enabled {
-            transitions.prepareWallpaper()
-        }
+    /// Changed in the animation window: the settings of the iPhone show it.
+    func lockAnimationDidChange() {
+        sendLockAnimation()
+    }
+
+    /// Sends the animation to an iPhone that can show it (an older one would not decode it).
+    private func sendLockAnimation() {
+        guard preferences.device?.supports(.lockAnimation) == true else { return }
+        session.send(.lockAnimation(preferences.lockAnimationSettings))
     }
 
     /// Plays the lock and unlock animations without locking the Mac.
     func previewLockAnimation() {
-        transitions.playPreview(title: preferences.effectiveLockAnimationTitle)
+        transitions.playPreview(preferences.lockAnimation)
+    }
+
+    /// The wallpaper of the main display, standing for the desktop in the preview of the animation
+    /// window.
+    func lockAnimationDesktop() async -> NSImage? {
+        await transitions.mainWallpaper()
     }
 
     func lockNow() {
@@ -628,6 +644,8 @@ final class MacAppModel {
                 refreshImages(force: true)
             }
             announceImagesIfNeeded()
+            // Its settings show the animation of the Mac.
+            sendLockAnimation()
         case let .preferences(phonePreferences):
             apply(phonePreferences)
         case .cameraAccessRequest:
@@ -652,6 +670,19 @@ final class MacAppModel {
             dashboard.setVisible(isVisible)
         case let .mediaCommand(command):
             dashboard.perform(command)
+        case let .autoLock(isEnabled):
+            // Turned on or off from the settings of the iPhone: confirmed with the same message.
+            setAutoLockEnabled(isEnabled)
+        case let .lockAnimation(settings):
+            // Chosen on the iPhone: applied, then sent back as the Mac keeps it.
+            preferences.apply(settings)
+            transitions.prepareWallpaper()
+            sendLockAnimation()
+        case .previewLockAnimation:
+            previewLockAnimation()
+        case .checkForUpdates:
+            NSApp.activate()
+            updater.checkForUpdates()
         default:
             break
         }
@@ -889,12 +920,13 @@ final class MacAppModel {
         lockingSince = started
         isProximityUnlockArmed = fromProximity
         hasHandledApproach = false
-        transitions.lock(animated: preferences.isLockAnimationEnabled, title: preferences.effectiveLockAnimationTitle) {
+        let animation: LockAnimation = preferences.lockAnimation
+        transitions.lock(animation) {
             SessionLocker.lock()
         }
         // Never stuck if the session did not lock (sessionDidLock clears it otherwise).
         Task { [weak self] in
-            try? await Task.sleep(for: .seconds(TransitionController.lockDuration + 5))
+            try? await Task.sleep(for: .seconds(animation.lockDuration + 5))
             if self?.lockingSince == started {
                 self?.lockingSince = nil
             }
@@ -925,7 +957,7 @@ final class MacAppModel {
             }
             try? await Task.sleep(for: .milliseconds(800))
         }
-        transitions.beginUnlock(animated: preferences.isLockAnimationEnabled, title: preferences.effectiveLockAnimationTitle)
+        transitions.beginUnlock(preferences.lockAnimation)
         try? await Task.sleep(for: .milliseconds(700))
         guard isLocked, await SessionLocker.typePassword(password) else {
             // Unlocked meanwhile (Apple Watch, Touch ID…): nothing was typed.
@@ -1100,7 +1132,7 @@ final class MacAppModel {
         let signature: String = MacImageRenderer.wallpaperSignature
         guard force || signature != wallpaperSignature else { return }
         wallpaperSignature = signature
-        if preferences.isLockAnimationEnabled {
+        if preferences.lockAnimationStyle != .none {
             transitions.prepareWallpaper()
         }
         let start: ContinuousClock.Instant = .now

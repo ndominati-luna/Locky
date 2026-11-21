@@ -2,18 +2,18 @@ import SwiftUI
 
 /// One wing of the Locky logo, cut from the vector wings, rotating around the curl that holds the
 /// padlock (or the user picture on the lock screen).
-struct LockyWing: View {
-    enum Side {
+public struct LockyWing: View {
+    public enum Side: Sendable {
         case left
         case right
     }
 
     /// Center of the circle drawn by the curls of the wings, in the square wings image.
-    static let curlCenter: UnitPoint = .init(x: 0.5, y: 0.455)
+    public static let curlCenter: UnitPoint = .init(x: 0.5, y: 0.455)
     /// Radius of that circle, as a fraction of the side of the image.
-    static let curlRadius: CGFloat = 0.095
+    public static let curlRadius: CGFloat = 0.095
     /// Lowest feather, from the top, as a fraction of the side of the image.
-    static let featherBottom: CGFloat = 0.59
+    public static let featherBottom: CGFloat = 0.59
 
     let side: Side
     /// Raises the wing (positive) around its curl.
@@ -21,8 +21,14 @@ struct LockyWing: View {
     /// Point the wing turns around; the inner point of its curl by default.
     var pivot: UnitPoint?
 
-    var body: some View {
-        Image(.lockyWings)
+    public init(side: Side, flap: Angle = .zero, pivot: UnitPoint? = nil) {
+        self.side = side
+        self.flap = flap
+        self.pivot = pivot
+    }
+
+    public var body: some View {
+        Image("LockyWings", bundle: .module)
             .resizable()
             .scaledToFit()
             // Keeps one half of the image: one wing.

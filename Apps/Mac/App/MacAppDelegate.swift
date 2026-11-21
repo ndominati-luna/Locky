@@ -12,9 +12,15 @@ final class MacAppDelegate: NSObject, NSApplicationDelegate {
         // Two Locky on one Mac fight for the iPhone: each one breaks the session of the other and
         // the link keeps dropping. The newest one wins (a build run from Xcode replaces the copy
         // started at login), once the other one has quit.
-        let others: [NSRunningApplication] = NSRunningApplication
+        var others: [NSRunningApplication] = NSRunningApplication
             .runningApplications(withBundleIdentifier: Bundle.main.bundleIdentifier ?? "")
             .filter { $0.processIdentifier != ProcessInfo.processInfo.processIdentifier }
+        #if DEBUG
+        if MacDemo.isAnimationOnly {
+            // Without Bluetooth: it competes with nobody.
+            others = []
+        }
+        #endif
         guard !others.isEmpty else {
             startEverything()
             return
@@ -36,12 +42,24 @@ final class MacAppDelegate: NSObject, NSApplicationDelegate {
         statusMenu = .init(model: model, windows: windows)
         model.onShowSetupWindow = { [weak windows] in windows?.show(.pairing) }
         model.onCloseSetupWindow = { [weak windows] in windows?.close(.pairing) }
-        if !model.isPaired || model.isSetupPending {
+        var showsPairing: Bool = !model.isPaired || model.isSetupPending
+        #if DEBUG
+        if MacDemo.isAnimationOnly {
+            showsPairing = false
+        }
+        #endif
+        if showsPairing {
             windows.show(.pairing)
         }
         #if DEBUG
         if MacDemo.isPairingTour || MacDemo.setupStep != nil {
             windows.show(.pairing)
+        }
+        if MacDemo.isAnimationWindow {
+            windows.show(.animation)
+        }
+        if MacDemo.isReleaseNotesWindow {
+            windows.show(.releaseNotes)
         }
         #endif
     }

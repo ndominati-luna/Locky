@@ -81,6 +81,26 @@
         }
       }
     },
+    "Preview of the lock animation" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aperçu de l’animation de verrouillage"
+          }
+        }
+      }
+    },
+    "The lock screen appears at once." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "L’écran de verrouillage apparaît aussitôt."
+          }
+        }
+      }
+    },
     "Unknown" : {
       "localizations" : {
         "fr" : {

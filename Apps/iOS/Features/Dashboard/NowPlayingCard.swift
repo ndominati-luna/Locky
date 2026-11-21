@@ -2,7 +2,8 @@ import LockyKit
 import SwiftUI
 
 /// What the Mac is playing (Music, Spotify, a browser…): artwork, progress, playback controls and
-/// the volume of the Mac. The glass takes the color of the artwork.
+/// the volume of the Mac. The glass takes the color of the artwork. Bright while a track is
+/// there, faded while nothing plays.
 struct NowPlayingCard: View {
     @Environment(AppModel.self) private var model
     @State private var artworkColor: Color?
@@ -11,7 +12,8 @@ struct NowPlayingCard: View {
         DashboardCard(
             title: titleKey,
             icon: Image(systemName: "music.note"),
-            tint: model.nowPlaying == nil ? nil : artworkColor
+            tint: model.nowPlaying == nil ? nil : artworkColor,
+            isTitleProminent: model.nowPlaying != nil
         ) {
             if let playing = model.nowPlaying {
                 TrackHeader(playing: playing, artwork: model.nowPlayingArtwork)
@@ -26,19 +28,19 @@ struct NowPlayingCard: View {
                     VStack(alignment: .leading, spacing: 2) {
                         Text("Nothing is playing")
                             .font(.headline)
-                            .foregroundStyle(Color.primary)
+                            .foregroundStyle(Color.secondary)
                         Text("Play music on your Mac to control it from here.")
                             .font(.caption)
-                            .foregroundStyle(Color.secondary)
+                            .foregroundStyle(.tertiary)
                     }
                 } icon: {
                     Image(systemName: "music.note.list")
                         .font(.title2)
-                        .foregroundStyle(.tint)
+                        .foregroundStyle(.secondary)
                 }
             }
             if let metrics = model.macMetrics, metrics.outputVolume != nil {
-                VolumeRow(metrics: metrics)
+                VolumeRow(metrics: metrics, isProminent: model.nowPlaying != nil)
             }
         }
         .animation(.smooth, value: model.nowPlaying?.title)
@@ -204,6 +206,8 @@ private struct PlaybackControls: View {
 private struct VolumeRow: View {
     @Environment(AppModel.self) private var model
     let metrics: MacMetrics
+    /// Primary while a track plays, secondary otherwise.
+    let isProminent: Bool
     @State private var volume: Double = 0
     @State private var isEditing: Bool = false
     @State private var lastSent: ContinuousClock.Instant?
@@ -217,7 +221,7 @@ private struct VolumeRow: View {
             .buttonStyle(.plain)
             .contentTransition(.symbolEffect(.replace))
             .frame(width: 24)
-            MediaScrubber(value: $volume, accessibilityLabel: Text("Volume of your Mac")) { editing in
+            MediaScrubber(value: $volume, accessibilityLabel: Text("Volume of your Mac"), isProminent: isProminent) { editing in
                 isEditing = editing
                 if !editing {
                     model.sendMediaCommand(.setVolume(volume))
@@ -227,7 +231,7 @@ private struct VolumeRow: View {
                 .accessibilityHidden(true)
         }
         .font(.subheadline)
-        .foregroundStyle(Color.secondary)
+        .foregroundStyle(isProminent ? Color.primary : Color.secondary)
         .disabled(!model.isConnected)
         .opacity(metrics.isMuted ? 0.6 : 1)
         .onAppear {

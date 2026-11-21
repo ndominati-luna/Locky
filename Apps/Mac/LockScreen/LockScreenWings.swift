@@ -1,3 +1,4 @@
+import LockyKit
 import SwiftUI
 
 /// The Locky wings on the lock screen, as in the original Locky: a white ring around the user

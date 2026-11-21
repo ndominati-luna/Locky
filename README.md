@@ -72,7 +72,7 @@ Le menu du Mac n'a plus d'élément « Essayer Locky ». Les images de démo son
 - **Tenu comme un livre** (écran interne en paysage, 951 × 669 pt, à plat ou à moitié ouvert) : deux pages de
   part et d'autre du pli, rien à cheval dessus. Accueil à gauche (le même écran que sur iPhone), tableau de bord
   du Mac à droite, un seul fond d'écran pour les deux et un trait fin sur le pli, au bord du tableau de bord.
-  Réglages et rapports d'intrusion s'ouvrent sur la page de droite (menu « ••• »). Onboarding, appairage et
+  Réglages et rapports d'intrusion s'ouvrent sur la page de droite (boutons de la barre). Onboarding, appairage et
   premier essai : l'illustration sur la première page, le texte et les boutons sur la seconde.
 - **Debout, à plat** (669 × 951 pt) : l'interface iPhone, le Mac en grand.
 - **Debout, à moitié ouvert comme un portable** (pli horizontal) : accueil en haut, tableau de bord en bas, titre
@@ -83,7 +83,9 @@ Le menu du Mac n'a plus d'élément « Essayer Locky ». Les images de démo son
   (verrouillage automatique, déverrouillages, rapports d'intrusion). Le Mac n'envoie ces données que pendant que
   la page est à l'écran (message `dashboard(isVisible:)`) : mesures toutes les 2 s, lecture en cours dès
   qu'elle change, pochette une seule fois par pochette. Barre de lecture et volume façon Now Playing d'iOS
-  (sans curseur, la barre s'épaissit sous le doigt) ; la barre de lecture déplace la lecture sur le Mac. Mac hors de portée : un seul message centré qui explique pourquoi
+  (sans curseur, la barre s'épaissit sous le doigt, blanc ou noir franc : sur le verre, les couleurs sémantiques
+  prennent la teinte du fond) ; la barre de lecture déplace la lecture sur le Mac. Carte estompée quand rien ne
+  joue. Mac hors de portée : un seul message centré qui explique pourquoi
   (Mac introuvable, Bluetooth éteint ou refusé, connexion en cours) et le bouton des rapports d'intrusion, qui
   passent par iCloud.
 - **Hors de portée** (iPhone comme Duo) : le fond d'écran se désature, l'état du Mac, son image et son nom
@@ -93,7 +95,10 @@ Le menu du Mac n'a plus d'élément « Essayer Locky ». Les images de démo son
   notifications distribuées de Musique (`com.apple.Music.playerInfo`) et de Spotify
   (`com.spotify.client.PlaybackStateChanged`), écoutées dès le lancement de Locky : titre, artiste, album, durée,
   état, sans autorisation ni interrogation périodique (position estimée d'après les lectures et pauses pour
-  Musique, fournie par Spotify). AppleScript sert aux pochettes, à déplacer la lecture, à relire la position
+  Musique, fournie par Spotify). AppleScript sert aux pochettes (relues tant que le lecteur répond encore avec
+  le morceau précédent ; Musique n'en a aucune pour un morceau en streaming absent de la bibliothèque, le Mac la
+  cherche alors dans le catalogue Apple Music avec l'API publique de recherche iTunes, qui reçoit titre, artiste
+  et album), à déplacer la lecture, à relire la position
   (après chaque commande et toutes les 10 s : Musique n'annonce ni un déplacement ni un retour au début du
   morceau) et à lire un lecteur qui jouait avant le lancement de Locky (macOS demande une fois l'autorisation de
   piloter le lecteur, jamais plus une fois refusée). Le Mac renvoie la lecture en cours dès qu'un lecteur annonce
@@ -136,6 +141,13 @@ Legacy/                Ancienne app, pour référence
   contrôle de flux respecté des deux côtés, battement de cœur toutes les 2 s, chiens de garde à 8 s
   (désactivés pendant l'appairage), restauration d'état iOS, reconnexion en attente côté Mac + scan de secours
   (l'adresse Bluetooth de l'iPhone tourne régulièrement).
+- **Compatibilité entre versions** : chaque côté annonce ce qu'il sait faire (`LockyFeature`, dans
+  `DeviceStatus.features` et `MacStatus.features`, Bluetooth seulement) et n'envoie un message ajouté depuis
+  qu'à un pair qui l'a annoncé. Un message authentique mais inconnu (pair plus récent) est ignoré sans relancer
+  la session (`LockyProtocolError.unknownMessage`) ; avant Locky 1.0.2, il relançait la session à chaque fois.
+  Depuis 1.0.2 : verrouillage automatique réglé depuis l'iPhone (`autoLock` dans les deux sens), animation de
+  verrouillage (`lockAnimation`, `previewLockAnimation`) et mise à jour du Mac (`checkForUpdates`, version de
+  Locky dans `MacStatus`).
 
 ### Sécurité
 - Appairage : clés éphémères P‑256 avec **engagement** (le Mac s'engage sur sa clé avant de voir celle de
@@ -194,7 +206,7 @@ le fait.
 | Réveil au retour (sans déverrouillage automatique) | `IOPMAssertionDeclareUserActivity` + quitter l'économiseur par AppleScript | même assertion + déplacement de souris sur place (sort de l'économiseur, sans autorisation supplémentaire) |
 | Activer le Bluetooth | `IOBluetoothPreferenceSetControllerPowerState` | idem, via `dlsym` |
 | Lancement à l'ouverture de session | app helper | `SMAppService.mainApp` |
-| Animation de verrouillage | capture de l'écran (`CGDisplayCreateImage`, abandonnée) puis cadenas | le bureau se fond dans le fond d'écran du Mac (aucune autorisation « Enregistrement de l'écran »), un iris se referme sur l'anneau du logo Locky, les ailes se déplient autour de la dernière bulle que le cadenas avale en tombant, puis le texte apparaît lettre par lettre ; le déverrouillage rejoue l'iris à l'envers : « Locky » par défaut, personnalisable (menu Options > Personnaliser l'animation…) |
+| Animation de verrouillage | capture de l'écran (`CGDisplayCreateImage`, abandonnée) puis cadenas | cinq choix (menu Options > Personnaliser l'animation…, ou réglages de l'iPhone) : **Iris** (le bureau se fond dans le fond d'écran, sans autorisation « Enregistrement de l'écran », un iris se referme sur l'anneau du logo, les ailes se déplient, le cadenas avale la dernière bulle), **Halo** (le fond d'écran se fond dans l'arrière-plan, le logo naît d'une lueur), **Envol** (le logo arrive en volant comme un oiseau et se pose, redécolle au déverrouillage), **Rideau** (deux panneaux se rejoignent derrière le logo), **Aucune** (verrouillage immédiat, les ailes restent sur l'écran de verrouillage). Texte (« Locky » par défaut) révélé, tapé, rapproché ou en reflet ; arrière-plan couleur, fond d'écran flouté ou image choisie sur le Mac. Les animations et leur aperçu en boucle (`LockAnimationPreview`) sont dans LockyKit : l'iPhone montre le même sur le fond d'écran du Mac |
 | Activité de l'utilisateur | moniteurs d'événements globaux | `CGEventSource.secondsSinceLastEventType` (sans autorisation) |
 | Image du Mac | illustrations maison, pas à jour | icône exacte du modèle fournie par macOS + fond d'écran incrusté dans l'écran (vérifié sur 26 modèles : tous les MacBook jusqu'à 2026, iMac 24" et Intel, iMac Pro ; mini/Studio/Pro n'ont pas d'écran) |
 
@@ -301,7 +313,10 @@ Le site `https://locky.lunabee.studio` sert :
 **À chaque version** :
 1. Monter `MARKETING_VERSION` et `CURRENT_PROJECT_VERSION` de la cible LockyMac (Sparkle compare le second).
 2. Notes de version (facultatives), **en français** et en Markdown, dans `Tools/Release/ReleaseNotes/<version>.md` :
-   Sparkle les affiche dans sa fenêtre de mise à jour, quelle que soit la langue du Mac.
+   Sparkle les affiche dans sa fenêtre de mise à jour, quelle que soit la langue du Mac. Elles alimentent aussi
+   l'historique des notes de version (menu « Notes de version… » du Mac, réglages et À propos de l'iPhone), lu
+   dans le flux par `MacReleaseFeed` : un titre `#`, puis une ligne `- ` par nouveauté. L'iPhone compare la
+   dernière version du flux à celle du Mac pour proposer la mise à jour, qu'il ouvre sur le Mac.
 3. `Tools/Release/release_mac.sh` : archive, signature Developer ID, notarisation de l'app puis du DMG, flux
    Sparkle signé. Le résultat est dans `build/site/`.
 4. Envoyer `build/site/locky-mac-install.dmg` et `build/site/mac/` (sans `old_updates`) à la racine du site.

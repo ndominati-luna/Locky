@@ -97,12 +97,42 @@
         }
       }
     },
+    "Animation" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Animation"
+          }
+        }
+      }
+    },
+    "Appearance" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apparition"
+          }
+        }
+      }
+    },
     "Appears under the Locky logo when your Mac locks. Leave empty to show “Locky”." : {
       "localizations" : {
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "S’affiche sous le logo Locky quand votre Mac se verrouille. Laissez vide pour afficher « Locky »."
+          }
+        }
+      }
+    },
+    "Background" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Arrière-plan"
           }
         }
       }
@@ -187,12 +217,42 @@
         }
       }
     },
+    "Check your internet connection." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vérifiez votre connexion à Internet."
+          }
+        }
+      }
+    },
+    "Choose an image…" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Choisir une image…"
+          }
+        }
+      }
+    },
     "Close" : {
       "localizations" : {
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Fermer"
+          }
+        }
+      }
+    },
+    "Color" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Couleur"
           }
         }
       }
@@ -287,6 +347,16 @@
         }
       }
     },
+    "Curtain" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rideau"
+          }
+        }
+      }
+    },
     "Customize the animation…" : {
       "localizations" : {
         "fr" : {
@@ -327,12 +397,42 @@
         }
       }
     },
+    "Flight" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Envol"
+          }
+        }
+      }
+    },
     "Full screen preview" : {
       "localizations" : {
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Aperçu plein écran"
+          }
+        }
+      }
+    },
+    "Gather" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rapprochement"
+          }
+        }
+      }
+    },
+    "Halo" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Halo"
           }
         }
       }
@@ -353,6 +453,26 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Si vous avez changé le mot de passe de votre session macOS, saisissez le nouveau : Locky le vérifie puis l’envoie dans le trousseau de %@."
+          }
+        }
+      }
+    },
+    "Image" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Image"
+          }
+        }
+      }
+    },
+    "Installed" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Installée"
           }
         }
       }
@@ -379,6 +499,16 @@
     },
     "iPhone" : {
       "shouldTranslate" : false
+    },
+    "Iris" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Iris"
+          }
+        }
+      }
     },
     "Is this your iPhone?" : {
       "localizations" : {
@@ -476,6 +606,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Locky activé"
+          }
+        }
+      }
+    },
+    "Locky can't read this image." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Locky ne peut pas lire cette image."
           }
         }
       }
@@ -600,6 +740,26 @@
         }
       }
     },
+    "No notes for this version." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pas de notes pour cette version."
+          }
+        }
+      }
+    },
+    "None" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aucune"
+          }
+        }
+      }
+    },
     "Not the same code" : {
       "localizations" : {
         "fr" : {
@@ -616,6 +776,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pas celui-ci"
+          }
+        }
+      }
+    },
+    "OK" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OK"
           }
         }
       }
@@ -666,6 +836,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Options"
+          }
+        }
+      }
+    },
+    "Other color" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Autre couleur"
           }
         }
       }
@@ -730,6 +910,36 @@
         }
       }
     },
+    "Release notes" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notes de version"
+          }
+        }
+      }
+    },
+    "Release notes unavailable" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notes de version indisponibles"
+          }
+        }
+      }
+    },
+    "Release notes…" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notes de version…"
+          }
+        }
+      }
+    },
     "Replay" : {
       "localizations" : {
         "fr" : {
@@ -750,6 +960,16 @@
         }
       }
     },
+    "Reveal" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Révélation"
+          }
+        }
+      }
+    },
     "Scan this code with your iPhone to install Locky, then open it." : {
       "localizations" : {
         "fr" : {
@@ -760,12 +980,32 @@
         }
       }
     },
+    "Shimmer" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reflet"
+          }
+        }
+      }
+    },
     "Take your iPhone with you. Beyond %@, Locky locks your Mac. Then come back: Locky unlocks it." : {
       "localizations" : {
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Prenez votre iPhone avec vous. Au-delà de %@, Locky verrouille votre Mac. Revenez ensuite : Locky le déverrouille."
+          }
+        }
+      }
+    },
+    "Text" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Texte"
           }
         }
       }
@@ -800,6 +1040,16 @@
         }
       }
     },
+    "The desktop fades into its wallpaper, then an iris closes on the Locky logo." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le bureau s’efface dans son fond d’écran, puis un iris se referme sur le logo Locky."
+          }
+        }
+      }
+    },
     "The key of the iPhone is invalid. Please try again." : {
       "localizations" : {
         "fr" : {
@@ -810,12 +1060,52 @@
         }
       }
     },
+    "The lock screen appears at once." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "L’écran de verrouillage apparaît aussitôt."
+          }
+        }
+      }
+    },
+    "The Locky logo flies in like a bird and lands in place, then takes off when you come back." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le logo Locky arrive en volant comme un oiseau et se pose, puis redécolle quand vous revenez."
+          }
+        }
+      }
+    },
     "The magic happened!" : {
       "localizations" : {
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "La magie a opéré !"
+          }
+        }
+      }
+    },
+    "The wallpaper melts into the background while the logo appears in a glow." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le fond d’écran se fond dans l’arrière-plan pendant que le logo apparaît dans un halo."
+          }
+        }
+      }
+    },
+    "The wallpaper of each display, blurred." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le fond d’écran de chaque écran, flouté."
           }
         }
       }
@@ -866,6 +1156,26 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Active ou désactive le verrouillage automatique."
+          }
+        }
+      }
+    },
+    "Two panels slide over the desktop and meet behind the logo." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Deux panneaux glissent sur le bureau et se rejoignent derrière le logo."
+          }
+        }
+      }
+    },
+    "Typewriter" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Machine à écrire"
           }
         }
       }
@@ -1046,6 +1356,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "La batterie de votre iPhone n’est chargée qu’à %lld %%. Rechargez-le pour que Locky continue de fonctionner."
+          }
+        }
+      }
+    },
+    "Your Mac locks at once. The wings still appear on the lock screen when your iPhone is near." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Votre Mac se verrouille aussitôt. Les ailes apparaissent quand même sur l’écran de verrouillage quand votre iPhone est proche."
           }
         }
       }

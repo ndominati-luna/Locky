@@ -78,9 +78,22 @@ enum DemoMode {
             unlockCount: 1_284,
             // `-LockyDemoCamera denied|notDetermined|unavailable` shows the camera warning.
             cameraAccess: UserDefaults.standard.string(forKey: "LockyDemoCamera").flatMap(CameraAccess.init(rawValue:)) ?? .authorized,
-            deviceType: "com.apple.macbookpro-14-2021-space-gray"
+            deviceType: "com.apple.macbookpro-14-2021-space-gray",
+            // `-LockyDemoMacBuild 1` shows an update for the Mac.
+            appVersion: "1.0.2",
+            appBuild: UserDefaults.standard.integer(forKey: "LockyDemoMacBuild") > 0 ? UserDefaults.standard.integer(forKey: "LockyDemoMacBuild") : 5,
+            features: LockyFeature.current
         )
     }
+
+    static let lockAnimation: LockAnimationSettings = .init(
+        style: .flight,
+        title: "Bonne nuit",
+        titleStyle: .typewriter,
+        backgroundKind: .color,
+        backgroundColor: "0B1E3F",
+        hasBackgroundImage: false
+    )
 
     static var visuals: MacVisuals {
         .init(

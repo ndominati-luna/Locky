@@ -14,6 +14,8 @@ public struct DeviceStatus: Codable, Sendable, Equatable {
     public var preferences: PhonePreferences
     /// ``MacImages/version`` the iPhone already has, so the Mac only announces new images.
     public var macImagesVersion: String?
+    /// See ``LockyFeature``; `nil` before Locky 1.0.2.
+    public var features: [String]?
 
     public init(
         name: String,
@@ -23,7 +25,8 @@ public struct DeviceStatus: Codable, Sendable, Equatable {
         appVersion: String,
         batteryLevel: Int?,
         preferences: PhonePreferences,
-        macImagesVersion: String?
+        macImagesVersion: String?,
+        features: [String]? = nil
     ) {
         self.name = name
         self.model = model
@@ -33,5 +36,6 @@ public struct DeviceStatus: Codable, Sendable, Equatable {
         self.batteryLevel = batteryLevel
         self.preferences = preferences
         self.macImagesVersion = macImagesVersion
+        self.features = features
     }
 }

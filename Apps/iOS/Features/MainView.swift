@@ -8,26 +8,36 @@ struct MainView: View {
 
     var body: some View {
         @Bindable var model = model
-        if let fold {
-            UnfoldedMainView(fold: fold)
-        } else {
-            NavigationStack(path: $model.path) {
-                HomeView()
-                    .navigationDestination(for: AppRoute.self) { route in
-                        AppRouteDestination(route: route)
-                    }
+        Group {
+            if let fold {
+                UnfoldedMainView(fold: fold)
+            } else {
+                NavigationStack(path: $model.path) {
+                    HomeView()
+                        .navigationDestination(for: AppRoute.self) { route in
+                            AppRouteDestination(route: route)
+                        }
+                }
             }
+        }
+        .sheet(isPresented: $model.isAboutPresented) {
+            AboutView()
         }
     }
 }
 
-/// The buttons of the main screen, side by side in one glass capsule: the break-in reports (a red
-/// dot while some are unseen) and the settings.
+/// The buttons of the main screen, each in its own glass: About on the leading side, the break-in
+/// reports (a red dot while some are unseen) and the settings on the trailing side.
 struct MainToolbar: ToolbarContent {
     @Environment(AppModel.self) private var model
 
     var body: some ToolbarContent {
-        ToolbarItemGroup(placement: .topBarTrailing) {
+        ToolbarItem(placement: .topBarLeading) {
+            Button("About Locky", systemImage: "info") {
+                model.isAboutPresented = true
+            }
+        }
+        ToolbarItem(placement: .topBarTrailing) {
             Button {
                 model.path.append(.intrusions)
             } label: {
@@ -41,6 +51,9 @@ struct MainToolbar: ToolbarContent {
                         }
                     }
             }
+        }
+        ToolbarSpacer(.fixed, placement: .topBarTrailing)
+        ToolbarItem(placement: .topBarTrailing) {
             Button("Settings", systemImage: "gearshape") {
                 model.path.append(.settings)
             }

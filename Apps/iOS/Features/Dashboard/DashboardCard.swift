@@ -6,6 +6,8 @@ struct DashboardCard<Content: View>: View {
     var icon: Image?
     /// Color of the glass (artwork of the music playing…).
     var tint: Color?
+    /// The title in the primary color, while the card shows something live (a track playing).
+    var isTitleProminent: Bool = false
     @ViewBuilder var content: Content
 
     var body: some View {
@@ -21,7 +23,7 @@ struct DashboardCard<Content: View>: View {
                     .lineLimit(1)
             }
             .font(.footnote.weight(.semibold))
-            .foregroundStyle(Color.secondary)
+            .foregroundStyle(isTitleProminent ? Color.primary : Color.secondary)
             content
         }
         .padding(16)

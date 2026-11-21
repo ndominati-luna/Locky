@@ -215,7 +215,7 @@ private struct HomeActions: View {
             return "Your Mac can only be unlocked from your Apple Watch."
         }
         if let status = model.macStatus, !status.isAutoLockEnabled, model.isConnected {
-            return "Automatic locking is paused from the Locky menu on your Mac."
+            return "Automatic locking is paused. Turn it back on in Settings or in the Locky menu on your Mac."
         }
         switch model.session.connection {
         case .searching: return "Make sure Locky is running on your Mac and Bluetooth is on."

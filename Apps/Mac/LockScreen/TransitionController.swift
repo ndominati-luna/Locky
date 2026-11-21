@@ -1,18 +1,11 @@
 import AppKit
+import LockyKit
 import OSLog
 import SwiftUI
 
 /// Shows the lock screen prompt and the lock / unlock animations.
 @MainActor
 final class TransitionController {
-    /// The desktop fades into the wallpaper.
-    static let fadeDuration: TimeInterval = 0.7
-    /// The iris closes on the ring of the logo.
-    static let irisDuration: TimeInterval = 1.0
-    /// Fade, iris, then the logo and its title, before the session locks.
-    static let lockDuration: TimeInterval = fadeDuration + 3.1
-    /// The logo flies away, revealing the desktop.
-    static let unlockDuration: TimeInterval = 1.4
 
     private let logger: Logger = .init(subsystem: "studio.lunabee.locky", category: "LockScreen")
     private var promptPanel: OverlayPanel?
@@ -189,18 +182,17 @@ final class TransitionController {
         }
     }
 
-    /// Plays the locking animation on every display, then calls `lock`.
-    /// - Parameter title: Shown under the Locky logo.
-    func lock(animated: Bool, title: String, lock: @escaping @MainActor () -> Void) {
-        guard animated, !NSScreen.screens.isEmpty else {
+    /// Plays the locking animation on every display, then calls `lock` (at once without animation).
+    func lock(_ animation: LockAnimation, lock: @escaping @MainActor () -> Void) {
+        guard animation.style != .none, !NSScreen.screens.isEmpty else {
             lock()
             return
         }
         lockTask = Task {
             // Above the lock screen: once the session is locked, the logo fades into it instead of
             // being cut off.
-            let panels: [OverlayPanel] = await showTransition(.locking, title: title, aboveLockScreen: true)
-            try? await Task.sleep(for: .seconds(Self.lockDuration))
+            let panels: [OverlayPanel] = await showTransition(.locking, animation: animation, aboveLockScreen: true)
+            try? await Task.sleep(for: .seconds(animation.lockDuration))
             lock()
             // The lock screen is put in front as it appears: bring the animation back above it until
             // it is shown, then fade into it.
@@ -215,16 +207,16 @@ final class TransitionController {
     }
 
     /// Covers the lock screen while Locky types the password; removed by ``finishUnlock()``.
-    func beginUnlock(animated: Bool, title: String) {
+    func beginUnlock(_ animation: LockAnimation) {
         hidePrompt()
-        guard animated else { return }
+        guard animation.style != .none else { return }
         Task {
             // Decode first: unlocked meanwhile, there is nothing to cover anymore.
             for screen in NSScreen.screens {
                 _ = await wallpaper(for: screen)
             }
             guard SessionLocker.isScreenLocked else { return }
-            let panels: [OverlayPanel] = await showTransition(.unlocking, title: title, aboveLockScreen: true)
+            let panels: [OverlayPanel] = await showTransition(.unlocking, animation: animation, aboveLockScreen: true)
             // Safety net: never leave the lock screen covered if the unlock fails.
             try? await Task.sleep(for: .seconds(6))
             closeTransition(panels)
@@ -252,30 +244,43 @@ final class TransitionController {
     }
 
     /// Preview: plays the locking then the unlocking animation without locking the Mac.
-    func playPreview(title: String) {
-        guard transitionPanels.isEmpty else { return }
+    func playPreview(_ animation: LockAnimation) {
+        guard animation.style != .none, transitionPanels.isEmpty else { return }
         Task {
-            let lockPanels: [OverlayPanel] = await showTransition(.locking, title: title, aboveLockScreen: false)
+            let lockPanels: [OverlayPanel] = await showTransition(.locking, animation: animation, aboveLockScreen: false)
             // Where the real lock screen would appear.
-            try? await Task.sleep(for: .seconds(Self.lockDuration + 0.8))
+            try? await Task.sleep(for: .seconds(animation.lockDuration + 0.8))
             closeTransition(lockPanels)
-            _ = await showTransition(.unlocking, title: title, aboveLockScreen: false)
-            try? await Task.sleep(for: .seconds(Self.unlockDuration))
+            _ = await showTransition(.unlocking, animation: animation, aboveLockScreen: false)
+            try? await Task.sleep(for: .seconds(animation.style.unlockDuration))
             finishUnlock()
         }
     }
 
+    /// The wallpaper of the main display, for the preview of the animation window.
+    func mainWallpaper() async -> NSImage? {
+        guard let screen = NSScreen.main ?? NSScreen.screens.first else { return nil }
+        return await wallpaper(for: screen)
+    }
+
     /// One overlay per display, each with its own wallpaper, all started together.
-    private func showTransition(_ kind: TransitionView.Kind, title: String, aboveLockScreen: Bool) async -> [OverlayPanel] {
+    private func showTransition(_ kind: TransitionView.Kind, animation: LockAnimation, aboveLockScreen: Bool) async -> [OverlayPanel] {
         var desktops: [(screen: NSScreen, image: NSImage?)] = []
         for screen in NSScreen.screens {
             desktops.append((screen, await wallpaper(for: screen)))
         }
         closeTransition()
+        let backdrop: LockBackdrop = animation.background.backdrop
         let panels: [OverlayPanel] = desktops.map { screen, image in
             let panel: OverlayPanel = .init(contentRect: screen.frame, interactive: false)
             panel.show(
-                TransitionView(kind: kind, desktop: image, title: title, logoSize: Self.logoSize(on: screen)),
+                TransitionView(
+                    kind: kind,
+                    animation: animation,
+                    backdrop: backdrop,
+                    desktop: image,
+                    logoSize: Self.logoSize(forHeight: screen.frame.height)
+                ),
                 aboveLockScreen: aboveLockScreen
             )
             return panel
@@ -285,8 +290,8 @@ final class TransitionController {
     }
 
     /// The logo takes about a quarter of the height of the screen.
-    private static func logoSize(on screen: NSScreen) -> CGFloat {
-        min(max(screen.frame.height * 0.24, 160), 320)
+    static func logoSize(forHeight height: CGFloat) -> CGFloat {
+        min(max(height * 0.24, 160), 320)
     }
 
     private func wallpaper(for screen: NSScreen) async -> NSImage? {

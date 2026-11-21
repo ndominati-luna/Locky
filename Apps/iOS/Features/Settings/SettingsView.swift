@@ -9,6 +9,8 @@ struct SettingsView: View {
     var body: some View {
         @Bindable var preferences = model.preferences
         Form {
+            AutoLockSection()
+
             LockDistanceSection()
 
             Section {
@@ -79,12 +81,9 @@ struct SettingsView: View {
 
             MacSection(isConfirmingUnpair: $isConfirmingUnpair)
 
+            MacAppSection()
+
             Section {
-                NavigationLink {
-                    AboutView()
-                } label: {
-                    Label("About Locky", systemImage: "info.circle")
-                }
                 Link(destination: SupportMail.url(macStatus: model.macStatus)) {
                     Label {
                         Text("Contact support")
@@ -98,6 +97,9 @@ struct SettingsView: View {
             }
         }
         .navigationTitle("Settings")
+        .task {
+            await model.loadMacReleases()
+        }
         .scrollContentBackground(.hidden)
         // Faded like the main screen while the Mac is out of reach.
         .immersivePageBackground(wallpaper: model.visuals.backgroundWallpaper, intensity: 0.55, isFaded: !model.isConnected)
@@ -117,6 +119,32 @@ struct SettingsView: View {
             }
         } message: {
             Text("Locky will stop locking and unlocking this Mac. You can pair it again at any time.")
+        }
+    }
+}
+
+/// "Locky activated" on the Mac: locking when the iPhone walks away. Set on the Mac, shown and
+/// changed here while it is in reach.
+private struct AutoLockSection: View {
+    @Environment(AppModel.self) private var model
+
+    var body: some View {
+        Section {
+            Toggle(
+                "Lock automatically",
+                systemImage: "figure.walk.departure",
+                isOn: .init(
+                    get: { model.macStatus?.isAutoLockEnabled ?? true },
+                    set: { model.setMacAutoLock($0) }
+                )
+            )
+            .disabled(!model.isConnected || model.macStatus == nil)
+        } footer: {
+            if model.isConnected {
+                Text("Locky locks your Mac when you walk away with your iPhone. Same as “Locky activated” in the Locky menu on your Mac.")
+            } else {
+                Text("Your Mac must be in reach to change it.")
+            }
         }
     }
 }
@@ -178,6 +206,77 @@ private struct LockDistanceSection: View {
 }
 
 /// Information about the paired Mac and unpairing.
+/// Locky on the Mac: its version and its updates, its release notes, its lock animation.
+private struct MacAppSection: View {
+    @Environment(AppModel.self) private var model
+
+    var body: some View {
+        let status: MacStatus? = model.macStatus
+        Section {
+            LabeledContent {
+                VStack(alignment: .trailing, spacing: 2) {
+                    Text(verbatim: status?.appVersion ?? String(localized: "1.0.1 or earlier"))
+                    if model.macReleases != nil, model.availableMacUpdate == nil, status != nil {
+                        Text("Up to date")
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                    }
+                }
+            } label: {
+                Label("Version", systemImage: "desktopcomputer")
+            }
+            if let update = model.availableMacUpdate {
+                if status?.supports(.macUpdates) == true {
+                    Button {
+                        model.updateMac()
+                    } label: {
+                        Label {
+                            VStack(alignment: .leading, spacing: 2) {
+                                Text("Update to Locky \(update.version)")
+                                Text("Opens the update window on your Mac.")
+                                    .font(.caption)
+                                    .foregroundStyle(.secondary)
+                            }
+                        } icon: {
+                            Image(systemName: "arrow.down.circle.fill")
+                        }
+                    }
+                    .disabled(!model.isConnected)
+                } else {
+                    Label {
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text("Locky \(update.version) is available for your Mac.")
+                            Text("Choose “Check for updates…” in the Locky menu on your Mac.")
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
+                        }
+                    } icon: {
+                        Image(systemName: "arrow.down.circle.fill")
+                            .foregroundStyle(.tint)
+                    }
+                }
+            }
+            NavigationLink {
+                ReleaseNotesView()
+            } label: {
+                Label("Release notes", systemImage: "doc.text")
+            }
+            NavigationLink {
+                MacAnimationSettingsView()
+            } label: {
+                Label("Lock animation", systemImage: "sparkles")
+            }
+            .disabled(status?.supports(.lockAnimation) != true)
+        } header: {
+            Text("Locky for Mac")
+        } footer: {
+            if status != nil, status?.supports(.lockAnimation) != true {
+                Text("Update Locky on your Mac to choose its lock animation from here.")
+            }
+        }
+    }
+}
+
 private struct MacSection: View {
     @Environment(AppModel.self) private var model
     @Binding var isConfirmingUnpair: Bool

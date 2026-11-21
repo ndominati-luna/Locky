@@ -49,7 +49,8 @@ public enum LockyMessage: Codable, Sendable, Equatable {
     case macImagesUpdated(version: String)
     /// Mac → iPhone.
     case lockState(LockState)
-    /// Mac → iPhone: automatic locking was paused or resumed from the menu bar.
+    /// Both ways: automatic locking paused or resumed from the menu bar of the Mac, or from the
+    /// settings of the iPhone (the Mac applies it and sends it back).
     case autoLock(isEnabled: Bool)
     /// Mac → iPhone: filtered signal and estimated distance, for the distance gauge.
     case proximity(ProximityReading)
@@ -89,6 +90,15 @@ public enum LockyMessage: Codable, Sendable, Equatable {
     /// iPhone → Mac: let Locky use the camera of the Mac (intruder detection). The Mac asks macOS
     /// if it never did, or opens the Camera pane of its Privacy settings.
     case cameraAccessRequest
+    /// Both ways, between peers announcing ``LockyFeature/lockAnimation``: the lock animation of
+    /// the Mac, sent by the Mac once it knows the iPhone and whenever it changes; changed on the
+    /// iPhone, the Mac applies it and sends it back.
+    case lockAnimation(LockAnimationSettings)
+    /// iPhone → Mac (``LockyFeature/lockAnimation``): play the lock animation without locking.
+    case previewLockAnimation
+    /// iPhone → Mac (``LockyFeature/macUpdates``): look for a new version of Locky for Mac and show
+    /// the update window of Sparkle on the Mac.
+    case checkForUpdates
 
     /// `true` for messages allowed without encryption.
     public var isHandshake: Bool {

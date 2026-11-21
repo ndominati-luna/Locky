@@ -430,6 +430,11 @@ final class MacSession {
                 // Only authenticated messages prove the iPhone is still there.
                 link.markAlive()
             }
+        } catch LockyProtocolError.unknownMessage {
+            // Sent by a newer Locky: authentic, the session goes on.
+            link.markAlive()
+            logger.notice("Unknown message ignored")
+            return
         } catch {
             logger.notice("Undecodable payload: \(String(describing: error))")
             if isPaired, pairingStep == .idle || pairingStep == .completed {
