@@ -57,6 +57,11 @@ enum DemoMode {
         UserDefaults.standard.bool(forKey: "LockyDemoLocked")
     }
 
+    /// The video of the first Locky (`-LockyDemoStory YES`).
+    static var showsStory: Bool {
+        isEnabled && UserDefaults.standard.bool(forKey: "LockyDemoStory")
+    }
+
     /// The page of the Mac open in its sheet (`-LockyDemoMacPanel YES`).
     static var showsMacPanel: Bool {
         isEnabled && UserDefaults.standard.bool(forKey: "LockyDemoMacPanel")

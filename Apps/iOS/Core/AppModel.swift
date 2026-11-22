@@ -29,6 +29,9 @@ final class AppModel {
     var path: [AppRoute] = []
     /// The About sheet, opened from the toolbar of the main screen.
     var isAboutPresented: Bool = false
+    /// The video of the first Locky, found in About (``LockyStoryView``). Presented from the main
+    /// screen, not over About: a cover over a sheet closes when an iPhone Duo unfolds.
+    var isStoryPresented: Bool = false
     /// Lock animation of the Mac, sent by Locky for Mac 1.0.2 and later.
     private(set) var macLockAnimation: LockAnimationSettings? {
         didSet { preferences.macLockAnimation = macLockAnimation }

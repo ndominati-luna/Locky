@@ -44,6 +44,16 @@
         }
       }
     },
+    "A wild ride with Tom and Nico" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Un super trip entre Tom et Nico"
+          }
+        }
+      }
+    },
     "An image can also be chosen on your Mac, in the animation window of the Locky menu." : {
       "localizations" : {
         "fr" : {
@@ -90,6 +100,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Le verrouillage automatique est en pause. Réactive-le dans les réglages ou dans le menu Locky de ton Mac."
+          }
+        }
+      }
+    },
+    "Back in %@, Tom and Nico dreamed of a Mac that locks itself when you walk away. Here is the video from back then." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "En %@, Tom et Nico rêvaient d’un Mac qui se verrouille tout seul quand tu t’éloignes. Voici la vidéo de l’époque."
           }
         }
       }
@@ -424,6 +444,16 @@
         }
       }
     },
+    "Thanks for being part of the trip." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Merci de faire partie du voyage."
+          }
+        }
+      }
+    },
     "The animation of your Mac shows up here once it is in reach." : {
       "localizations" : {
         "fr" : {
@@ -550,6 +580,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Fond d’écran"
+          }
+        }
+      }
+    },
+    "You found it! %lld taps, one for every year since the very first Locky." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bien vu ! %lld taps, un par année depuis le tout premier Locky."
           }
         }
       }

@@ -38,7 +38,7 @@ jusqu'au déverrouillage, pour les films de démo), `-LockyDemoPairing code|cali
 `tour` le joue en entier : l'iPhone s'éloigne, le Mac se verrouille, l'iPhone revient, il se déverrouille),
 `-LockyDemoMacName "…"` (nom du Mac, pour vérifier les noms longs dans les widgets et la Live Activity),
 `-LockyDemoOutOfReach YES` (Mac hors de portée : widgets estompés, île grise), `-LockyDemoMacPanel YES` (tableau
-de bord du Mac ouvert en feuille),
+de bord du Mac ouvert en feuille), `-LockyDemoStory YES` (la vidéo cachée d'À propos, voir plus bas),
 `-LockyDemoCamera denied|notDetermined|unavailable` (caméra du Mac non autorisée, avec
 `-locky.intrusionDetection YES` : avertissement dans les réglages et les rapports d'intrusion). Pour que
 les widgets et la Live Activity voient les images du groupe d'apps au simulateur, compiler signé localement
@@ -116,6 +116,21 @@ Le menu du Mac n'a plus d'élément « Essayer Locky ». Les images de démo son
 - iOS donne l'état de la charnière (`UIHingeInteraction`) mais pas la position du pli : elle est déduite de la
   fenêtre (milieu du grand côté de l'écran interne, dès que les deux côtés font au moins 600 pt), voir
   `Apps/iOS/Design/Fold`. La mise en page ne dépend donc pas de l'angle de la charnière.
+
+### Easter egg : la vidéo du premier Locky
+Dans À propos, taper le logo autant de fois que d'années depuis la première sortie de Locky (année calendaire
+moins 2014 : 12 en 2026, taps espacés de moins d'1,5 s) ferme À propos et ouvre `LockyStoryView` en plein écran
+depuis l'écran principal (une couverture posée sur la feuille d'À propos se fermait quand un Duo s'ouvre) : le bleu
+et les dessins du Locky d'origine, « Un super trip entre Tom et Nico », et le lecteur système au milieu (contrôles,
+plein écran, AirPlay). Empilé en portrait, côte à côte en paysage, sur deux pages d'un Duo déplié (la vidéo sur sa
+page, en haut à moitié ouvert comme un portable). La vidéo n'est pas dans l'app : flux HLS sur le site, dans un
+dossier au nom aléatoire que rien ne référence (Apache ne liste pas les dossiers), cinq qualités de 270p à 1080p
+pour passer sur tous les réseaux. Chaque segment est chiffré en AES‑128 ; les playlists nomment la clé
+`locky-story://key`, schéma auquel seule l'app répond (`StoryKeyLoader`, délégué du chargeur de ressources
+d'AVFoundation). L'adresse et la clé sont masquées dans `LockyStory.swift` (absentes de `strings`). Pour remplacer
+la vidéo : `Tools/Story/make_story_hls.sh <vidéo> <clé hex> <dossier>` (même clé que l'app), puis déposer le
+dossier tel quel, `.htaccess` compris (sans lui, Apache sert les `.ts` comme des fichiers Qt), dans le dossier
+caché du site, par SFTP comme les versions Mac.
 
 **Textes en français : on tutoie l'utilisateur, partout** (apps, widgets, autorisations, raccourcis, notes de
 version Sparkle), sur un ton simple et amical : « Ton Mac », « Éloigne‑toi avec ton iPhone ».

@@ -23,6 +23,16 @@ struct MainView: View {
         .sheet(isPresented: $model.isAboutPresented) {
             AboutView()
         }
+        .fullScreenCover(isPresented: $model.isStoryPresented) {
+            LockyStoryView()
+        }
+        #if DEBUG
+        .onAppear {
+            if DemoMode.showsStory {
+                model.isStoryPresented = true
+            }
+        }
+        #endif
     }
 }
 
