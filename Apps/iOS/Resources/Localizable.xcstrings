@@ -44,6 +44,16 @@
         }
       }
     },
+    "Your Mac also offers it in its Dock, thanks to Handoff." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ton Mac te le propose aussi dans son Dock, grâce à Handoff."
+          }
+        }
+      }
+    },
     "at Lunabee Studio" : {
       "localizations" : {
         "fr" : {

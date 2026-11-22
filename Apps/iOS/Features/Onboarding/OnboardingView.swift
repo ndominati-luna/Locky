@@ -102,12 +102,16 @@ private struct OnboardingPageView: View {
             .foregroundStyle(Color.primary)
 
             if page == .macApp {
-                ShareLink(item: MacAppLink.download) {
-                    Label("Get the link for Mac", systemImage: "square.and.arrow.up")
+                VStack(spacing: 12) {
+                    ShareLink(item: MacAppLink.download) {
+                        Label("Get the link for Mac", systemImage: "square.and.arrow.up")
+                    }
+                    .buttonStyle(.brandOutlineCapsule)
+                    MacAppHandoffHint()
                 }
-                .buttonStyle(.brandOutlineCapsule)
             }
         }
+        .handsOffMacAppLink(isActive: page == .macApp && isCurrent)
     }
 
     @ViewBuilder
@@ -149,9 +153,4 @@ private struct OnboardingPageView: View {
             "To work properly, Locky needs permissions to use Bluetooth and notifications. Your Mac password stays in the keychain of your iPhone and only travels end-to-end encrypted to your Mac."
         }
     }
-}
-
-/// Where to download the Mac app.
-enum MacAppLink {
-    static let download: URL = URL(string: "https://locky.lunabee.studio/locky-mac-install.dmg")!
 }

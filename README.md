@@ -356,7 +356,9 @@ symbole de sa famille.
 - **Mac** : distribué hors Mac App Store (pas de sandbox : impossible avec la saisie du mot de passe et les API
   privées), signé Developer ID et notarisé ; voir « Publier une version Mac ». Tant que `SUPublicEDKey` est vide,
   l'élément « Rechercher les mises à jour » est masqué.
-- **Liens** : l'iPhone envoie `https://locky.lunabee.studio/locky-mac-install.dmg` ; `https://locky.lunabee.studio/ios`
+- **Liens** : l'iPhone partage `https://locky.lunabee.studio/locky-mac-install.dmg` (feuille de partage) et le
+  propose aux Mac du même compte par Handoff (activité `studio.lunabee.locky.mac-download`, déclarée dans
+  `NSUserActivityTypes` ; aucun Mac ne la gère, il ouvre donc le lien dans son navigateur) ; `https://locky.lunabee.studio/ios`
   (QR code sur le Mac) est encore un placeholder.
 
 ## Publier une version Mac

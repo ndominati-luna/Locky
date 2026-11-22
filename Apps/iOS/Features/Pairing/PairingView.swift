@@ -50,11 +50,15 @@ private struct PairingStepContent: View {
                     title: "Setup",
                     message: "Open Locky on your Mac and choose “Connect to an iPhone”. Put your iPhone close to your Mac, and check that Bluetooth is activated on both devices."
                 )
-                ShareLink(item: MacAppLink.download) {
-                    Label("Get the link for Mac", systemImage: "square.and.arrow.up")
+                VStack(spacing: 12) {
+                    ShareLink(item: MacAppLink.download) {
+                        Label("Get the link for Mac", systemImage: "square.and.arrow.up")
+                    }
+                    .buttonStyle(.brandOutlineCapsule)
+                    MacAppHandoffHint()
                 }
-                .buttonStyle(.brandOutlineCapsule)
             }
+            .handsOffMacAppLink()
         case let .macFound(name, family):
             StepLayout {
                 Image(systemName: family.systemImage)
