@@ -81,7 +81,13 @@ spctl --assess --type open --context context:primary-signature --verbose "$dmg"
 # The feed of the site, when this Mac has not made the previous release.
 [ -e "$site/mac/appcast.xml" ] || curl -fsSL "$site_url/mac/appcast.xml" -o "$site/mac/appcast.xml" 2>/dev/null || rm -f "$site/mac/appcast.xml"
 cp "$dmg" "$site/mac/"
-[ -e "$here/ReleaseNotes/$version.md" ] && cp "$here/ReleaseNotes/$version.md" "$site/mac/Locky-$version.md"
+# The notes of every version, not only the new one: generate_appcast also rewrites the entry of
+# the previous version, whose disk image stays here for the delta, and drops its notes when their
+# file is missing.
+for notes in "$here"/ReleaseNotes/*.md; do
+    [ -e "$notes" ] || continue
+    cp "$notes" "$site/mac/Locky-$(basename "$notes")"
+done
 "$sparkle/generate_appcast" --download-url-prefix "$site_url/mac/" --link "$site_url" --embed-release-notes \
     --maximum-versions 0 "$site/mac"
 # Only the files of the new version stay (the feed keeps the former versions for their notes).
