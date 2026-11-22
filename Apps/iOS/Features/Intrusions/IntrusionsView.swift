@@ -45,7 +45,7 @@ struct IntrusionsView: View {
         }
         .navigationTitle("Break-in reports")
         .scrollContentBackground(.hidden)
-        .immersivePageBackground(intensity: 0.5)
+        .immersivePageBackground(wallpaper: model.visuals.backgroundWallpaper, intensity: 0.5, isFaded: !model.isConnected)
         .overlay {
             if store.isLoading, store.reports.isEmpty {
                 ProgressView()

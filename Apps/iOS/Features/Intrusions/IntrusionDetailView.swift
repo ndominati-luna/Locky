@@ -29,7 +29,7 @@ struct IntrusionDetailView: View {
         }
         .navigationTitle("Break-in attempt")
         .navigationBarTitleDisplayMode(.inline)
-        .immersivePageBackground(intensity: 0.5)
+        .immersivePageBackground(wallpaper: model.visuals.backgroundWallpaper, intensity: 0.5, isFaded: !model.isConnected)
         .onChange(of: report == nil) { _, isDeleted in
             if isDeleted { dismiss() }
         }
