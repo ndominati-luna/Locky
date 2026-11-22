@@ -2,17 +2,15 @@ import LockyKit
 import SwiftUI
 
 /// What the Mac is playing (Music, Spotify, a browser…): artwork, progress, playback controls and
-/// the volume of the Mac. The glass takes the color of the artwork. Bright while a track is
-/// there, faded while nothing plays.
+/// the volume of the Mac. The blurred artwork behind, like the wallpaper behind the screens; bright
+/// while a track is there, faded while nothing plays.
 struct NowPlayingCard: View {
     @Environment(AppModel.self) private var model
-    @State private var artworkColor: Color?
 
     var body: some View {
         DashboardCard(
             title: titleKey,
             icon: Image(systemName: "music.note"),
-            tint: model.nowPlaying == nil ? nil : artworkColor,
             isTitleProminent: model.nowPlaying != nil
         ) {
             if let playing = model.nowPlaying {
@@ -42,16 +40,14 @@ struct NowPlayingCard: View {
             if let metrics = model.macMetrics, metrics.outputVolume != nil {
                 VolumeRow(metrics: metrics, isProminent: model.nowPlaying != nil)
             }
+        } backdrop: {
+            ArtworkBackdrop(
+                artwork: model.nowPlaying == nil ? nil : model.nowPlayingArtwork,
+                artworkID: model.nowPlaying?.artworkID,
+                isFaded: !model.isConnected
+            )
         }
         .animation(.smooth, value: model.nowPlaying?.title)
-        .task(id: model.nowPlaying?.artworkID) {
-            guard let artwork = model.nowPlayingArtwork else {
-                artworkColor = nil
-                return
-            }
-            let color: Color? = await ArtworkColor.average(of: artwork)
-            withAnimation(.smooth(duration: 0.6)) { artworkColor = color }
-        }
     }
 
     private var titleKey: LocalizedStringKey {

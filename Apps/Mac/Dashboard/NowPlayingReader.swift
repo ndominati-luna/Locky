@@ -33,6 +33,9 @@ final class NowPlayingReader {
     private let announcements: PlayerAnnouncements = .init()
     /// Last track read: the one to move in, whose position to read again.
     private var lastTrack: PlayerTrack?
+    /// Last move in the track asked from the iPhone, until the player confirms it (see
+    /// ``acceptsPosition(_:readAt:player:trackKey:)``).
+    private var pendingSeek: (trackKey: String, date: Date)?
     /// A player announced a change, or the artwork of the track is ready: read again now.
     var onChange: (() -> Void)?
 
@@ -84,15 +87,56 @@ final class NowPlayingReader {
         guard let track = lastTrack, let player = track.scriptablePlayer, player.isRunning, !player.isAutomationDenied else { return }
         let date: Date = .now
         guard let output = await Self.runAppleScript(player.positionScript), let milliseconds = Double(output) else { return }
-        announcements.correct(player, trackKey: track.key, elapsed: milliseconds / 1_000, at: date)
+        correctPosition(of: player, trackKey: track.key, elapsed: milliseconds / 1_000, readAt: date)
     }
 
     /// Moves in the track with AppleScript (Music, Spotify): no media key does it.
     private func seek(to position: TimeInterval) async {
         guard let track = lastTrack, let player = track.scriptablePlayer, player.isRunning, !player.isAutomationDenied else { return }
         guard await Self.runAppleScript(player.seekScript(to: position)) != nil else { return }
-        announcements.correct(player, trackKey: track.key, elapsed: position, at: .now)
+        let date: Date = .now
+        pendingSeek = (track.key, date)
+        announcements.correct(player, trackKey: track.key, elapsed: position, at: date)
     }
+
+    /// Takes a position read with AppleScript, unless it would undo the last move in the track.
+    private func correctPosition(of player: ScriptablePlayer, trackKey: String, elapsed: TimeInterval, readAt date: Date) {
+        guard acceptsPosition(elapsed, readAt: date, player: player, trackKey: trackKey) else {
+            Self.logger.info("Position read before the player applied the move in the track: ignored")
+            return
+        }
+        announcements.correct(player, trackKey: trackKey, elapsed: elapsed, at: date)
+    }
+
+    /// Whether a position read at `date` may replace the one of the last move asked from the
+    /// iPhone. Paused, Music keeps reporting the former position for a moment after the move
+    /// although it plays from the new one, and a reading started before the move ends after it:
+    /// either would bring the bar of the iPhone back where it was (at the next play). The move
+    /// holds until a reading agrees with it, or until the track has played a few seconds (then the
+    /// user moved in it on the Mac).
+    private func acceptsPosition(_ elapsed: TimeInterval, readAt date: Date, player: ScriptablePlayer, trackKey: String) -> Bool {
+        guard let pendingSeek else { return true }
+        guard pendingSeek.trackKey == trackKey else {
+            // Another track: the move no longer matters.
+            self.pendingSeek = nil
+            return true
+        }
+        guard date >= pendingSeek.date else { return false }
+        guard let track = announcements.track(of: player), track.key == trackKey, let expected = track.elapsed(at: date) else {
+            self.pendingSeek = nil
+            return true
+        }
+        let isConfirmed: Bool = abs(elapsed - expected) < Self.seekTolerance
+        let hasPlayedSince: Bool = track.isPlaying && date.timeIntervalSince(max(pendingSeek.date, track.elapsedDate)) >= Self.seekConfirmationDelay
+        guard isConfirmed || hasPlayedSince else { return false }
+        self.pendingSeek = nil
+        return true
+    }
+
+    /// Gap between a reading and the expected position under which the player applied the move.
+    private static let seekTolerance: TimeInterval = 1.5
+    /// Playing time after which a reading that disagrees with the move wins.
+    private static let seekConfirmationDelay: TimeInterval = 3
 
     private func press(_ key: MediaKeys.Key, mediaRemoteCommand: UInt32) {
         if AccessibilityPermission.isGranted {
@@ -201,7 +245,7 @@ final class NowPlayingReader {
                 guard let reading = await Self.scriptedArtwork(of: player, title: track.title) else { continue }
                 guard !Task.isCancelled else { return nil }
                 if let position = reading.position {
-                    announcements.correct(player, trackKey: track.key, elapsed: position, at: reading.date)
+                    correctPosition(of: player, trackKey: track.key, elapsed: position, readAt: reading.date)
                 }
                 if let image = reading.image {
                     return image

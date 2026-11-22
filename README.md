@@ -91,8 +91,9 @@ Le menu du Mac n'a plus d'élément « Essayer Locky ». Les images de démo son
   la page est à l'écran (message `dashboard(isVisible:)`) : mesures toutes les 2 s, lecture en cours dès
   qu'elle change, pochette une seule fois par pochette. Barre de lecture et volume façon Now Playing d'iOS
   (sans curseur, la barre s'épaissit sous le doigt, blanc ou noir franc : sur le verre, les couleurs sémantiques
-  prennent la teinte du fond) ; la barre de lecture déplace la lecture sur le Mac. Carte estompée quand rien ne
-  joue. Mac hors de portée : un seul message centré qui explique pourquoi
+  prennent la teinte du fond) ; la barre de lecture déplace la lecture sur le Mac. La carte de lecture a pour fond
+  la pochette floutée et saturée, comme le fond d'écran derrière les écrans (voile clair ou sombre, presque grise
+  hors de portée) ; carte estompée quand rien ne joue. Mac hors de portée : un seul message centré qui explique pourquoi
   (Mac introuvable, Bluetooth éteint ou refusé, connexion en cours) et le bouton des rapports d'intrusion, qui
   passent par iCloud.
 - **Hors de portée** (iPhone comme Duo) : le fond d'écran se désature, l'état du Mac, son image et son nom
@@ -107,9 +108,12 @@ Le menu du Mac n'a plus d'élément « Essayer Locky ». Les images de démo son
   cherche alors dans le catalogue Apple Music avec l'API publique de recherche iTunes, qui reçoit titre, artiste
   et album), à déplacer la lecture, à relire la position
   (après chaque commande et toutes les 10 s : Musique n'annonce ni un déplacement ni un retour au début du
-  morceau) et à lire un lecteur qui jouait avant le lancement de Locky (macOS demande une fois l'autorisation de
+  morceau ; après un déplacement demandé par l'iPhone, une position relue qui le contredit est ignorée tant que
+  le lecteur ne l'a pas confirmé ou n'a pas joué 3 s, car Musique en pause renvoie un moment l'ancienne position)
+  et à lire un lecteur qui jouait avant le lancement de Locky (macOS demande une fois l'autorisation de
   piloter le lecteur, jamais plus une fois refusée). Le Mac renvoie la lecture en cours dès qu'un lecteur annonce
-  un changement ou qu'une pochette est prête. Les
+  un changement ou qu'une pochette est prête ; un arrêt n'est pris en compte qu'après 1,5 s, car Musique en
+  annonce un pendant qu'il charge le morceau suivant. Les
   notifications Darwin ne servent à rien ici : sans contenu, et MediaRemote passe par XPC. Commandes : touches
   multimédia (tous les lecteurs, via l'autorisation Accessibilité déjà accordée). En DEBUG, `-LockyDemoDashboardLog YES` affiche dans la console ce que l'iPhone
   recevrait.

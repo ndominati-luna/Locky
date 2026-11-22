@@ -1,14 +1,14 @@
 import SwiftUI
 
-/// A glass card of the dashboard, in the style of a widget: a small title, then its content.
-struct DashboardCard<Content: View>: View {
+/// A glass card of the dashboard, in the style of a widget: a small title, then its content, over
+/// an optional backdrop (the blurred artwork of the music playing).
+struct DashboardCard<Content: View, Backdrop: View>: View {
     let title: LocalizedStringKey
     var icon: Image?
-    /// Color of the glass (artwork of the music playing…).
-    var tint: Color?
     /// The title in the primary color, while the card shows something live (a track playing).
     var isTitleProminent: Bool = false
     @ViewBuilder var content: Content
+    @ViewBuilder var backdrop: Backdrop
 
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
@@ -28,6 +28,23 @@ struct DashboardCard<Content: View>: View {
         }
         .padding(16)
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-        .glassEffect(.regular.tint(tint?.opacity(0.35)), in: .rect(cornerRadius: 26))
+        .background {
+            backdrop
+                .clipShape(.rect(cornerRadius: 26))
+        }
+        .glassEffect(.regular, in: .rect(cornerRadius: 26))
+    }
+}
+
+extension DashboardCard where Backdrop == EmptyView {
+    init(
+        title: LocalizedStringKey,
+        icon: Image? = nil,
+        isTitleProminent: Bool = false,
+        @ViewBuilder content: () -> Content
+    ) {
+        self.init(title: title, icon: icon, isTitleProminent: isTitleProminent, content: content) {
+            EmptyView()
+        }
     }
 }

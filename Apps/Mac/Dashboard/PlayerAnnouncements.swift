@@ -14,6 +14,11 @@ final class PlayerAnnouncements {
     private var announced: [ScriptablePlayer: Announced] = [:]
     /// Players that announced something since Locky started (a stop included).
     private var heard: Set<ScriptablePlayer> = []
+    /// Stops announced, applied after ``stopDelay`` unless the player announces a track meanwhile.
+    private var pendingStops: [ScriptablePlayer: Task<Void, Never>] = [:]
+    /// Music announces a stop while it loads the next track, right before announcing it: the track
+    /// stays this long, so that the iPhone does not show "nothing playing" between two tracks.
+    private static let stopDelay: Duration = .milliseconds(1_500)
     private var observers: [any NSObjectProtocol] = []
     /// A player announced a change.
     var onChange: (() -> Void)?
@@ -44,6 +49,11 @@ final class PlayerAnnouncements {
         return tracks.first { $0.isPlaying } ?? tracks.first
     }
 
+    /// The track `player` announced last, while it runs.
+    func track(of player: ScriptablePlayer) -> PlayerTrack? {
+        player.isRunning ? announced[player]?.track : nil
+    }
+
     /// The actual position of the track, read with AppleScript.
     func correct(_ player: ScriptablePlayer, trackKey: String, elapsed: TimeInterval, at date: Date) {
         guard var current = announced[player], current.track.key == trackKey else { return }
@@ -59,9 +69,10 @@ final class PlayerAnnouncements {
             onChange?()
         }
         guard announcement.state != .stopped else {
-            announced[player] = nil
+            scheduleStop(of: player)
             return
         }
+        pendingStops.removeValue(forKey: player)?.cancel()
         let now: Date = .now
         let isPlaying: Bool = announcement.state == .playing
         let elapsed: TimeInterval? = if let position = announcement.position {
@@ -91,5 +102,16 @@ final class PlayerAnnouncements {
                 artwork: .script(player)
             )
         )
+    }
+
+    private func scheduleStop(of player: ScriptablePlayer) {
+        pendingStops[player]?.cancel()
+        pendingStops[player] = Task { [weak self] in
+            try? await Task.sleep(for: Self.stopDelay)
+            guard !Task.isCancelled, let self else { return }
+            self.pendingStops[player] = nil
+            self.announced[player] = nil
+            self.onChange?()
+        }
     }
 }
