@@ -68,3 +68,6 @@ DerivedData/
 .swiftpm/
 Packages/*/.build/
 build/
+
+# Destination of the site (Tools/Release/upload_mac.sh), kept out of the public repository
+Tools/Release/site.local

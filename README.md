@@ -353,8 +353,11 @@ symbole de sa famille.
 
 Le site `https://locky.lunabee.studio` sert :
 - `locky-mac-install.dmg` : le téléchargement pour les nouveaux utilisateurs, toujours la dernière version ;
-- `mac/appcast.xml` : le flux Sparkle (`SUFeedURL`), que l'app consulte une fois par jour ;
-- `mac/Locky-<version>.dmg` : les mises à jour que Sparkle télécharge, et leurs deltas.
+- `mac/appcast.xml` : le flux Sparkle (`SUFeedURL`), que l'app consulte une fois par jour. Il garde toutes les
+  versions, car les apps y lisent l'historique des notes de version (`generate_appcast --maximum-versions 0`) ;
+- `mac/Locky-<version>.dmg` et ses deltas : seulement la dernière version, la seule que Sparkle télécharge (la
+  plus récente pour chaque macOS minimum, si une version en exige un plus récent). Les anciennes restent citées
+  par le flux pour leurs notes, sans leurs fichiers.
 
 **Une fois pour toutes**, sur le Mac qui publie :
 1. Certificat **Developer ID Application** de LUNABEE STUDIO (`VH79XGK7M2`) dans le trousseau. Seul le titulaire du
@@ -382,10 +385,16 @@ Le site `https://locky.lunabee.studio` sert :
    dernière version du flux à celle du Mac pour proposer la mise à jour, qu'il ouvre sur le Mac.
 3. `Tools/Release/release_mac.sh` : archive, signature Developer ID, notarisation de l'app puis du DMG, flux
    Sparkle signé. Le résultat est dans `build/site/`.
-4. Envoyer `build/site/locky-mac-install.dmg` et `build/site/mac/` (sans `old_updates`) à la racine du site.
+4. `Tools/Release/upload_mac.sh` (`--dry-run` pour voir ce qu'il ferait) : envoie par SFTP les fichiers de la
+   dernière version s'ils manquent, puis le flux, puis `locky-mac-install.dmg`, et supprime du dossier `mac` du
+   site tout le reste ; le reste du site n'est pas touché. La destination n'est pas dans le dépôt (public) :
+   `LOCKY_SITE_SFTP=<compte>@<hôte>` et `LOCKY_SITE_ROOT` (racine web du compte, `locky` par défaut), dans
+   l'environnement ou dans `Tools/Release/site.local`, ignoré par git.
 
-`build/site/mac` est le miroir du dossier `mac` du site : le garder entre deux versions (les deltas se calculent à
-partir des versions qu'il contient ; sans lui, le script reprend l'`appcast.xml` en ligne). Le DMG est fabriqué
+Garder `build/site/mac` entre deux versions : comme le site, il ne contient que le flux complet et les fichiers de
+la dernière version (`Tools/Release/feed_files.py` les liste). La version suivante calcule son delta depuis ce
+DMG ; un Mac plus en retard télécharge le DMG complet. Sans ce dossier, le script reprend l'`appcast.xml` en
+ligne, sans delta. Le DMG est fabriqué
 par `Tools/Release/make_dmg.sh` (fond et icône de volume dans `Tools/Release/DMG`, redessinés par
 `make_assets.sh`) ; Finder met la fenêtre en page, d'où une demande d'autorisation d'automatisation au premier
 lancement. Un build Developer ID utilise l'environnement **Production** de CloudKit : déployer le schéma avant, et

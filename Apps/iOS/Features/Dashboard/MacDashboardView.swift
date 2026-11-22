@@ -39,7 +39,7 @@ struct MacDashboardView: View {
                 MainToolbar()
             }
         }
-        .immersivePageBackground(wallpaper: model.visuals.backgroundWallpaper, intensity: 0.45)
+        .immersivePageBackground(wallpaper: model.visuals.backgroundWallpaper, intensity: 0.45, isFaded: !model.isConnected)
         .onAppear {
             isOnScreen = true
             updateStreaming()

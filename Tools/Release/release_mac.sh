@@ -6,9 +6,10 @@
 #   build/site/mac/Locky-<version>.dmg the update Sparkle downloads, and its deltas
 #
 # Archive, Developer ID signature, notarization of the app and of the disk image, then the Sparkle
-# feed signed with the EdDSA key of the keychain. Upload build/site to the root of the site
-# afterwards (mac/old_updates excepted). build/site/mac mirrors the mac folder of the site: keep it
-# between releases, the deltas are made from the previous versions it holds.
+# feed signed with the EdDSA key of the keychain. Put build/site on the site afterwards with
+# upload_mac.sh. Keep build/site/mac between releases: the feed, which keeps every version (the
+# apps read the history of the release notes in it), and only the files of the latest version, from
+# which the next one makes its delta (a Mac further behind downloads the whole disk image).
 #
 # Before the first release (see README):
 #   - a "Developer ID Application" certificate of LUNABEE STUDIO (VH79XGK7M2) in the keychain;
@@ -81,8 +82,16 @@ spctl --assess --type open --context context:primary-signature --verbose "$dmg"
 [ -e "$site/mac/appcast.xml" ] || curl -fsSL "$site_url/mac/appcast.xml" -o "$site/mac/appcast.xml" 2>/dev/null || rm -f "$site/mac/appcast.xml"
 cp "$dmg" "$site/mac/"
 [ -e "$here/ReleaseNotes/$version.md" ] && cp "$here/ReleaseNotes/$version.md" "$site/mac/Locky-$version.md"
-"$sparkle/generate_appcast" --download-url-prefix "$site_url/mac/" --link "$site_url" --embed-release-notes "$site/mac"
+"$sparkle/generate_appcast" --download-url-prefix "$site_url/mac/" --link "$site_url" --embed-release-notes \
+    --maximum-versions 0 "$site/mac"
+# Only the files of the new version stay (the feed keeps the former versions for their notes).
+latest=$(python3 -I "$here/feed_files.py" "$site/mac/appcast.xml")
+for file in "$site/mac"/*; do
+    name=$(basename "$file")
+    [ "$name" = "appcast.xml" ] && continue
+    echo "$latest" | grep -qxF "$name" || rm -rf "$file"
+done
 cp "$dmg" "$site/locky-mac-install.dmg"
 
 echo
-echo "Ready in $site: upload locky-mac-install.dmg and mac/ (without mac/old_updates) to the root of $site_url."
+echo "Ready in $site: put it on $site_url with Tools/Release/upload_mac.sh."
