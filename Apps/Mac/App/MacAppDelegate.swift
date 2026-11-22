@@ -63,6 +63,12 @@ final class MacAppDelegate: NSObject, NSApplicationDelegate {
         if MacDemo.isReleaseNotesWindow {
             windows.show(.releaseNotes)
         }
+        if MacDemo.isAboutWindow {
+            windows.show(.about)
+        }
+        if MacDemo.isStoryWindow {
+            windows.show(.story)
+        }
         #endif
     }
 

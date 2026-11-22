@@ -1,0 +1,59 @@
+import SwiftUI
+
+/// What follows the film: Locky then and now, its timeline and a thank-you.
+struct StoryChapters: View {
+    var body: some View {
+        VStack(spacing: 20) {
+            ThenAndNowCard()
+            StoryTimeline()
+            StoryFooter()
+                .padding(.top, 8)
+        }
+    }
+}
+
+/// Footprints walking off, as in the first Locky, and a thank-you.
+struct StoryFooter: View {
+    var body: some View {
+        VStack(spacing: 14) {
+            HStack(spacing: 10) {
+                ForEach(0..<5, id: \.self) { index in
+                    Image(index.isMultiple(of: 2) ? .stepLeft : .stepRight)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 22)
+                        .offset(y: index.isMultiple(of: 2) ? -6 : 6)
+                        .opacity(0.35 + Double(index) * 0.15)
+                }
+            }
+            Text("Thanks for being part of the trip.")
+                .font(.footnote)
+                .foregroundStyle(.secondary)
+        }
+        .foregroundStyle(.white)
+        .accessibilityElement(children: .combine)
+    }
+}
+
+/// The blue of the original Locky, from cyan to deep blue, under twinkling stars.
+struct StoryBackground: View {
+    var body: some View {
+        ZStack {
+            LinearGradient(
+                colors: [
+                    Color(red: 0.22, green: 0.78, blue: 0.98),
+                    Color.lockyBlue,
+                    Color(red: 0.04, green: 0.24, blue: 0.62)
+                ],
+                startPoint: .top,
+                endPoint: .bottom
+            )
+            SparklesView()
+                .foregroundStyle(.white)
+                .opacity(0.5)
+                .padding(24)
+        }
+        .ignoresSafeArea()
+        .accessibilityHidden(true)
+    }
+}

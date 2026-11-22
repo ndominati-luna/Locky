@@ -82,9 +82,8 @@ final class StatusMenuController: NSObject {
             guard let self else { return }
             NSWorkspace.shared.open(MacSupportMail.url(model: self.model))
         })
-        menu.addItem(ClosureMenuItem(String(localized: "About Locky"), image: "info.circle") {
-            NSApp.activate()
-            NSApp.orderFrontStandardAboutPanel(nil)
+        menu.addItem(ClosureMenuItem(String(localized: "About Locky"), image: "info.circle") { [weak self] in
+            self?.windows.show(.about)
         })
         menu.addItem(.separator())
         menu.addItem(ClosureMenuItem(String(localized: "Quit Locky"), keyEquivalent: "q") {

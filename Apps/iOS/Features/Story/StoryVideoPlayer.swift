@@ -10,7 +10,9 @@ struct StoryVideoPlayer: UIViewControllerRepresentable {
         controller.player = player
         controller.videoGravity = .resizeAspect
         controller.entersFullScreenWhenPlaybackBegins = false
-        controller.exitsFullScreenWhenPlaybackEnds = true
+        // Leaving full screen at the end also dismissed the screen of the story, inline: the end
+        // credits wait for the viewer to leave full screen instead.
+        controller.exitsFullScreenWhenPlaybackEnds = false
         // Picture in picture would need audio in background: a 30 s film does not.
         controller.allowsPictureInPicturePlayback = false
         controller.view.backgroundColor = .black

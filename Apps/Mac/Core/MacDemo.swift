@@ -7,6 +7,7 @@ import Foundation
 /// - `-LockyDemoPairingTour YES`: the pairing window walks through every step in a loop.
 /// - `-LockyDemoLockAnimation YES`: plays the lock and unlock animations without locking.
 /// - `-LockyDemoAnimationWindow YES`: opens the animation window.
+/// - `-LockyDemoAbout YES`, `-LockyDemoStory YES`: opens About, or the video hidden behind its logo.
 ///
 /// The animation demos start neither Bluetooth nor the widgets, and leave a running Locky alone.
 /// Launch arguments such as `-locky.lockAnimationStyle flight` try a choice without saving it.
@@ -71,9 +72,19 @@ enum MacDemo {
         UserDefaults.standard.bool(forKey: "LockyDemoReleaseNotes")
     }
 
+    /// `-LockyDemoAbout YES`: opens About (its logo hides the video of the first Locky).
+    static var isAboutWindow: Bool {
+        UserDefaults.standard.bool(forKey: "LockyDemoAbout")
+    }
+
+    /// `-LockyDemoStory YES`: opens the video of the first Locky, as if found in About.
+    static var isStoryWindow: Bool {
+        UserDefaults.standard.bool(forKey: "LockyDemoStory")
+    }
+
     /// Demos of windows and animations only: no Bluetooth, no widgets, the running Locky stays.
     static var isAnimationOnly: Bool {
-        isLockAnimation || isAnimationWindow || isReleaseNotesWindow
+        isLockAnimation || isAnimationWindow || isReleaseNotesWindow || isAboutWindow || isStoryWindow
     }
 
     static var isPairingTour: Bool {

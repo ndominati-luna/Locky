@@ -4,6 +4,76 @@
     "-%@" : {
       "shouldTranslate" : false
     },
+    "A brand new welcome, with the logo that builds itself, and the Today widget." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Un tout nouvel accueil, avec le logo qui s’assemble tout seul, et le widget Aujourd’hui."
+          }
+        }
+      }
+    },
+    "Locky leaves the App Store: iOS 11 and macOS High Sierra broke its Bluetooth. RIP ☠️" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Locky quitte l’App Store : iOS 11 et macOS High Sierra ont cassé son Bluetooth. RIP ☠️"
+          }
+        }
+      }
+    },
+    "The film promised “soon on the App Store”. Locky lived there from 2015 to 2017; this time, it stays between us." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le film promettait « bientôt sur l’App Store ». Locky y a vécu de 2015 à 2017 ; cette fois, il reste entre nous."
+          }
+        }
+      }
+    },
+    "The first film of Locky goes online." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le premier film de Locky est mis en ligne."
+          }
+        }
+      }
+    },
+    "at Lunabee Studio" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "chez Lunabee Studio"
+          }
+        }
+      }
+    },
+    "Dreamed up and made by" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Imaginé et fabriqué par"
+          }
+        }
+      }
+    },
+    "Embedded libraries" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bibliothèques embarquées"
+          }
+        }
+      }
+    },
     "%@ found your iPhone" : {
       "localizations" : {
         "fr" : {
@@ -14,12 +84,52 @@
         }
       }
     },
+    "From 2014 to today" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "De 2014 à aujourd’hui"
+          }
+        }
+      }
+    },
+    "Language" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Langage"
+          }
+        }
+      }
+    },
     "%@ left" : {
       "localizations" : {
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "%@ restantes"
+          }
+        }
+      }
+    },
+    "Lines of code" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lignes de code"
+          }
+        }
+      }
+    },
+    "Lines written by the team, libraries not included." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lignes écrites par l’équipe, bibliothèques non comprises."
           }
         }
       }
@@ -284,6 +394,26 @@
         }
       }
     },
+    "Locky arrives on the Apple Watch." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Locky arrive sur l’Apple Watch."
+          }
+        }
+      }
+    },
+    "Locky comes out: walk away, and your Mac locks itself." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Locky sort : tu t’éloignes, et ton Mac se verrouille tout seul."
+          }
+        }
+      }
+    },
     "Locky for Mac" : {
       "localizations" : {
         "fr" : {
@@ -300,6 +430,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Locky est conçue et développée par Lunabee Studio."
+          }
+        }
+      }
+    },
+    "Locky is reborn in Swift, from the iPhone to the Mac and the Apple Watch." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Locky renaît en Swift, de l’iPhone au Mac en passant par l’Apple Watch."
           }
         }
       }
@@ -404,6 +544,16 @@
         }
       }
     },
+    "Server" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Serveur"
+          }
+        }
+      }
+    },
     "Shimmer" : {
       "localizations" : {
         "fr" : {
@@ -454,12 +604,32 @@
         }
       }
     },
+    "Thanks to everyone who has walked away from their Mac since %@." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Merci à tous ceux qui s’éloignent de leur Mac depuis %@."
+          }
+        }
+      }
+    },
     "The animation of your Mac shows up here once it is in reach." : {
       "localizations" : {
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "L’animation de ton Mac s’affichera ici dès qu’il sera à portée."
+          }
+        }
+      }
+    },
+    "The code comes out of the boxes and compiles again." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le code ressort des cartons et recompile."
           }
         }
       }
@@ -474,6 +644,26 @@
         }
       }
     },
+    "The first lines of Locky, for the iPhone and the Mac." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Les premières lignes de Locky, pour l’iPhone et le Mac."
+          }
+        }
+      }
+    },
+    "The iPhone and the Mac now talk in encrypted messages, and Locky starts by itself when you log in." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "L’iPhone et le Mac se parlent désormais en messages chiffrés, et Locky démarre tout seul quand tu ouvres ta session."
+          }
+        }
+      }
+    },
     "The Locky logo flies in like a bird and lands in place, then takes off when you come back." : {
       "localizations" : {
         "fr" : {
@@ -484,12 +674,42 @@
         }
       }
     },
+    "The logo hasn’t aged a day: only the Mac icon lost its round shape." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le logo n’a pas pris une ride : seule l’icône du Mac a perdu ses rondeurs."
+          }
+        }
+      }
+    },
     "The wallpaper melts into the background while the logo appears in a glow." : {
       "localizations" : {
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Le fond d’écran se fond dans l’arrière-plan pendant que le logo apparaît dans un halo."
+          }
+        }
+      }
+    },
+    "Then and now" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hier et aujourd’hui"
+          }
+        }
+      }
+    },
+    "Tom and Nico" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tom et Nico"
           }
         }
       }
@@ -580,6 +800,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Fond d’écran"
+          }
+        }
+      }
+    },
+    "Watch again" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Revoir le film"
           }
         }
       }

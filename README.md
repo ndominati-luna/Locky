@@ -123,11 +123,21 @@ Le menu du Mac n'a plus d'élément « Essayer Locky ». Les images de démo son
 
 ### Easter egg : la vidéo du premier Locky
 Dans À propos, taper le logo autant de fois que d'années depuis la première sortie de Locky (année calendaire
-moins 2014 : 12 en 2026, taps espacés de moins d'1,5 s) ferme À propos et ouvre `LockyStoryView` en plein écran
+moins 2015, l'année de la version 1.0 sur l'App Store : 11 en 2026, taps espacés de moins d'1,5 s) ferme À propos et ouvre `LockyStoryView` en plein écran
 depuis l'écran principal (une couverture posée sur la feuille d'À propos se fermait quand un Duo s'ouvre) : le bleu
-et les dessins du Locky d'origine, « Un super trip entre Tom et Nico », et le lecteur système au milieu (contrôles,
-plein écran, AirPlay). Empilé en portrait, côte à côte en paysage, sur deux pages d'un Duo déplié (la vidéo sur sa
-page, en haut à moitié ouvert comme un portable). La vidéo n'est pas dans l'app : flux HLS sur le site, dans un
+et les dessins du Locky d'origine, le logo de 2015 qui s'assemble pièce par pièce (les 7 calques de son accueil, puis
+la lumière qui le parcourt toutes les 4 s, aux durées du storyboard de 2015), « Un super trip entre Tom et Nico », le
+lecteur système au milieu (contrôles, plein écran, AirPlay ; sans sortie automatique du plein écran, qui fermait
+l'écran), un générique de fin qui défile sur la vidéo terminée puis « Revoir le film », un comparatif 2015 / 2026
+(icônes, langage, lignes écrites par l'équipe hors bibliothèques, bibliothèques embarquées, serveur) et une frise de
+2014 à aujourd'hui (dates tirées des en-têtes des fichiers de `Legacy/`, du Vimeo de Lunabee pour le film de
+2014, de l'historique de l'ancienne app dans App Store Connect pour la sortie, l'Apple Watch et le retrait de
+2017, et de l'historique du dépôt). Le générique finit sur un clin d'œil au « bientôt sur l'App Store » du film. Ces vues et le
+modèle sont communs à l'iPhone et au Mac (`Apps/SharedBrand/Story`, images dans `StoryAssets.xcassets`). Empilé en
+portrait, côte à côte en paysage, sur deux pages d'un Duo déplié (la vidéo sur sa page, en haut à moitié ouvert
+comme un portable). Sur le Mac, « À propos de Locky » ouvre une fenêtre à Locky (`AboutWindowView`, à la place du
+panneau standard qui ne capte pas les clics) : autant de clics sur le logo ouvrent la même vidéo dans
+`StoryWindowView`. La vidéo n'est pas dans l'app : flux HLS sur le site, dans un
 dossier au nom aléatoire que rien ne référence (Apache ne liste pas les dossiers), cinq qualités de 270p à 1080p
 pour passer sur tous les réseaux. Chaque segment est chiffré en AES‑128 ; les playlists nomment la clé
 `locky-story://key`, schéma auquel seule l'app répond (`StoryKeyLoader`, délégué du chargeur de ressources

@@ -1,8 +1,8 @@
 import AVFoundation
 import Foundation
 
-/// The easter egg of the About screen: the video of the very first Locky, opened by tapping the
-/// logo once per year since 2014.
+/// The easter egg of the About screen: the video of the very first Locky, opened by tapping (or
+/// clicking, on the Mac) the logo once per year since 2015.
 ///
 /// The video is not in the app. It is streamed from a folder of the site that nothing links to
 /// (HLS, five qualities from 270p to 1080p, so that it plays smoothly on any network), and every
@@ -10,13 +10,16 @@ import Foundation
 /// ``StoryKeyLoader`` answers, with the key kept in the app. The address and the key are masked,
 /// so that they do not show up among the strings of the binary.
 enum LockyStory {
-    /// The year the first Locky came out.
-    static let firstReleaseYear: Int = 2014
+    /// The year the first Locky came out on the App Store (version 1.0, 15 May 2015).
+    static let releaseYear: Int = 2015
+
+    /// The year of the film, made while Locky was still "soon on the App Store".
+    static let filmYear: Int = 2014
 
     /// Taps on the logo of About that open the video: the difference between this calendar year
-    /// and the first one (12 in 2026).
+    /// and the year of the release (11 in 2026).
     static var tapCount: Int {
-        Calendar(identifier: .gregorian).component(.year, from: .now) - firstReleaseYear
+        Calendar(identifier: .gregorian).component(.year, from: .now) - releaseYear
     }
 
     /// The master playlist on the site.
@@ -78,11 +81,15 @@ final class StoryKeyLoader: NSObject, AVAssetResourceLoaderDelegate, Sendable {
 }
 
 /// The player of the video, with the delegate that gives it the key (an asset only holds its
-/// delegate weakly).
+/// delegate weakly). Says when the film is over, for the end credits.
 @MainActor
+@Observable
 final class StoryPlayback {
     let player: AVPlayer
-    private let keyLoader: StoryKeyLoader = .init(key: LockyStory.key)
+    /// The film reached its end: time for the credits, until it is played again.
+    private(set) var hasEnded: Bool = false
+    @ObservationIgnored private let keyLoader: StoryKeyLoader = .init(key: LockyStory.key)
+    @ObservationIgnored private var endWatch: Task<Void, Never>?
 
     init() {
         guard let url = LockyStory.videoURL else {
@@ -91,6 +98,23 @@ final class StoryPlayback {
         }
         let asset: AVURLAsset = .init(url: url)
         asset.resourceLoader.setDelegate(keyLoader, queue: keyLoader.queue)
-        player = .init(playerItem: .init(asset: asset))
+        let item: AVPlayerItem = .init(asset: asset)
+        player = .init(playerItem: item)
+        endWatch = Task { [weak self] in
+            for await _ in NotificationCenter.default.notifications(named: AVPlayerItem.didPlayToEndTimeNotification, object: item) {
+                self?.hasEnded = true
+            }
+        }
+    }
+
+    isolated deinit {
+        endWatch?.cancel()
+    }
+
+    /// From the start again, credits gone.
+    func replay() {
+        hasEnded = false
+        player.seek(to: .zero)
+        player.play()
     }
 }

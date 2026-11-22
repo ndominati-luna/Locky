@@ -1,7 +1,8 @@
 import AppKit
 import SwiftUI
 
-/// The windows of Locky for Mac (pairing assistant, password update), created on demand.
+/// The windows of Locky for Mac (pairing assistant, password update, About and its hidden video),
+/// created on demand.
 ///
 /// Locky is a menu bar app with a native status menu (AppKit), so its windows are AppKit windows
 /// hosting SwiftUI views.
@@ -12,6 +13,9 @@ final class WindowManager: NSObject {
         case password
         case animation
         case releaseNotes
+        case about
+        /// The video of the first Locky, opened from About.
+        case story
     }
 
     private let model: MacAppModel
@@ -70,13 +74,42 @@ final class WindowManager: NSObject {
             window = .init(contentViewController: controller)
             window.styleMask = [.titled, .closable]
             window.title = String(localized: "Release notes")
+        case .about:
+            controller = NSHostingController(
+                rootView: AboutWindowView(
+                    openReleaseNotes: { [weak self] in self?.show(.releaseNotes) },
+                    openStory: { [weak self] in
+                        self?.close(.about)
+                        self?.show(.story)
+                    }
+                )
+            )
+            window = .init(contentViewController: controller)
+            window.styleMask = [.titled, .closable, .fullSizeContentView]
+            window.titlebarAppearsTransparent = true
+            window.titleVisibility = .hidden
+            window.isMovableByWindowBackground = true
+            window.title = String(localized: "About Locky")
+        case .story:
+            controller = NSHostingController(rootView: StoryWindowView())
+            window = .init(contentViewController: controller)
+            window.styleMask = [.titled, .closable, .miniaturizable, .resizable, .fullSizeContentView]
+            window.titlebarAppearsTransparent = true
+            window.titleVisibility = .hidden
+            window.title = "Locky"
         }
         window.isReleasedWhenClosed = false
         window.delegate = self
-        // Always in front, on every Space, even while System Settings is open for a permission:
-        // the setup must stay in sight until it is done.
-        window.level = .floating
-        window.collectionBehavior = [.canJoinAllSpaces, .fullScreenAuxiliary]
+        switch kind {
+        case .about, .story:
+            // Ordinary windows: nothing to keep in sight.
+            window.level = .normal
+        case .pairing, .password, .animation, .releaseNotes:
+            // Always in front, on every Space, even while System Settings is open for a
+            // permission: the setup must stay in sight until it is done.
+            window.level = .floating
+            window.collectionBehavior = [.canJoinAllSpaces, .fullScreenAuxiliary]
+        }
         window.hidesOnDeactivate = false
         window.center()
         windows[kind] = window
