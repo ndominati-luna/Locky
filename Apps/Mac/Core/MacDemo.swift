@@ -7,7 +7,8 @@ import Foundation
 /// - `-LockyDemoPairingTour YES`: the pairing window walks through every step in a loop.
 /// - `-LockyDemoLockAnimation YES`: plays the lock and unlock animations without locking.
 /// - `-LockyDemoAnimationWindow YES`: opens the animation window.
-/// - `-LockyDemoAbout YES`, `-LockyDemoStory YES`: opens About, or the video hidden behind its logo.
+/// - `-LockyDemoAbout YES`, `-LockyDemoStory YES`: opens About, or the video hidden behind its logo
+///   (`-LockyDemoMuted YES` plays it without sound).
 ///
 /// The animation demos start neither Bluetooth nor the widgets, and leave a running Locky alone.
 /// Launch arguments such as `-locky.lockAnimationStyle flight` try a choice without saving it.

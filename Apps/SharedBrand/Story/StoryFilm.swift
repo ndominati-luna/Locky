@@ -1,30 +1,27 @@
 import SwiftUI
 
-/// The player in the middle, framed like a picture of the time. When the film is over, the end
-/// credits roll over it, then it can be watched again.
+/// The film on a Pro Display XDR, handled with the hands like the real one (see
+/// ``ProDisplayXDR``), over the picture too. When the film is over, the end credits roll on the
+/// display, then it can be watched again.
 struct StoryFilm: View {
     let playback: StoryPlayback?
+    @State private var pose: ProDisplayXDRPose = .init()
 
     var body: some View {
-        ZStack {
-            if let playback {
-                StoryVideoPlayer(player: playback.player)
-                if playback.hasEnded {
-                    StoryCreditsRoll(replay: playback.replay)
-                        .transition(.opacity)
+        ProDisplayXDR(pose: $pose) {
+            ZStack {
+                if let playback {
+                    StoryVideoPlayer(player: playback.player)
+                    if playback.hasEnded {
+                        StoryCreditsRoll(replay: playback.replay)
+                            .transition(.opacity)
+                    }
+                } else {
+                    Color.black
                 }
-            } else {
-                Color.black
             }
+            .animation(.easeInOut(duration: 0.6), value: playback?.hasEnded)
         }
-        .animation(.easeInOut(duration: 0.6), value: playback?.hasEnded)
-        .aspectRatio(16 / 9, contentMode: .fit)
-        .clipShape(.rect(cornerRadius: 18))
-        .overlay {
-            RoundedRectangle(cornerRadius: 18)
-                .strokeBorder(.white.opacity(0.85), lineWidth: 3)
-        }
-        .shadow(color: .black.opacity(0.35), radius: 22, y: 14)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 }

@@ -18,7 +18,7 @@ struct StoryWindowView: View {
             .scrollIndicators(.never)
             .scrollBounceBehavior(.basedOnSize)
             .frame(width: 380)
-            StoryFilm(playback: playback)
+            StoryFilmStage(playback: playback)
                 .padding(.vertical, 36)
         }
         .padding(.horizontal, 36)
@@ -29,14 +29,14 @@ struct StoryWindowView: View {
         // White drawings and text on the Locky blue, whatever the appearance of the Mac.
         .environment(\.colorScheme, .dark)
         .task {
+            // The full screen of the player can take this view away and bring it back, which runs
+            // this task again: one film only. It stops when the window closes and lets it go.
+            guard playback == nil else { return }
             let playback: StoryPlayback = .init()
             self.playback = playback
             // Once the window is on screen.
             try? await Task.sleep(for: .milliseconds(500))
-            playback.player.play()
-        }
-        .onDisappear {
-            playback?.player.pause()
+            playback.start()
         }
     }
 }

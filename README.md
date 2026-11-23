@@ -123,7 +123,7 @@ Le menu du Mac n'a plus d'élément « Essayer Locky ». Les images de démo son
 
 ### Easter egg : la vidéo du premier Locky
 Dans À propos, taper le logo autant de fois que d'années depuis la première sortie de Locky (année calendaire
-moins 2015, l'année de la version 1.0 sur l'App Store : 11 en 2026, taps espacés de moins d'1,5 s) ferme À propos et ouvre `LockyStoryView` en plein écran
+moins 2014, le vrai début du projet : 12 en 2026, taps espacés de moins d'1,5 s) ferme À propos et ouvre `LockyStoryView` en plein écran
 depuis l'écran principal (une couverture posée sur la feuille d'À propos se fermait quand un Duo s'ouvre) : le bleu
 et les dessins du Locky d'origine, le logo de 2015 qui s'assemble pièce par pièce (les 7 calques de son accueil, puis
 la lumière qui le parcourt toutes les 4 s, aux durées du storyboard de 2015), « Un super trip entre Tom et Nico », le
@@ -132,7 +132,10 @@ l'écran), un générique de fin qui défile sur la vidéo terminée puis « Rev
 (icônes, langage, lignes écrites par l'équipe hors bibliothèques, bibliothèques embarquées, serveur) et une frise de
 2014 à aujourd'hui (dates tirées des en-têtes des fichiers de `Legacy/`, du Vimeo de Lunabee pour le film de
 2014, de l'historique de l'ancienne app dans App Store Connect pour la sortie, l'Apple Watch et le retrait de
-2017, et de l'historique du dépôt). Le générique finit sur un clin d'œil au « bientôt sur l'App Store » du film. Ces vues et le
+2017, et de l'historique du dépôt). Le générique finit sur un clin d'œil au « bientôt sur l'App Store » du film. Le film passe sur un Pro Display
+XDR qu'on manipule comme le vrai, jusque sur l'image (voir plus bas) ; une seule lecture par ouverture, que le plein écran du lecteur ne coupe ni ne relance. Sur le Duo
+déplié en paysage et sur le Mac, le film a sa page (`StoryFilmStage`) : titre au-dessus, pas qui s'éloignent
+dessous, jusqu'au bord de l'écran sous l'heure. Ces vues et le
 modèle sont communs à l'iPhone et au Mac (`Apps/SharedBrand/Story`, images dans `StoryAssets.xcassets`). Empilé en
 portrait, côte à côte en paysage, sur deux pages d'un Duo déplié (la vidéo sur sa page, en haut à moitié ouvert
 comme un portable). Sur le Mac, « À propos de Locky » ouvre une fenêtre à Locky (`AboutWindowView`, à la place du
@@ -337,6 +340,21 @@ Apple silicon (écran rendu transparent, 1 024 px pour l'iPhone dans `Apps/iOS/R
 (`MacCatalog+Data.swift`, à ne pas modifier à la main). Les couleurs identiques partagent une image : 131 types,
 43 images. À relancer sur le dernier macOS quand Apple sort de nouveaux Mac ; un Mac inconnu s'affiche avec le
 symbole de sa famille.
+
+Les Mac sans écran (Mac mini, Mac Studio, Mac Pro) s'affichent sur l'écran principal de l'iPhone posés sur le
+bureau sous un Pro Display XDR (`ProDisplayXDR`, dans `Apps/SharedBrand`) qui montre leur fond d'écran et leur
+écran verrouillé. L'écran et le bras sont dessinés ; le pied alu vient de l'icône de macOS
+(`Tools/MacCatalog/make_xdr.py`, depuis `com.apple.pro-display-xdr.icns`, l'icône que macOS donne au type « Pro
+Display XDR » : le bras du Pro Stand qui se courbe en pied, pas la plaque percée du Studio Display). Aucun bouton,
+tout est implicite (`ProDisplayXDRGestures`) : deux doigts qui tournent font pivoter la dalle avec eux, et
+relâchée elle finit en paysage ou en portrait, le plus proche (en se rehaussant pour dégager le bureau, puis
+noir un instant et image remise droite) ; deux doigts qui montent ou descendent la font glisser le long du
+bras ; un doigt l'incline (−5° à 25°, comme le Pro Stand) et la fait pivoter sur son pied, qui ne bouge pas
+(relâchée près de la position droite, elle s'y recale). Sur iPhone ce
+sont des reconnaisseurs UIKit, qui voient aussi les gestes faits sur le lecteur du film et empêchent la page
+de défiler sous l'écran ; sur Mac, rotation au trackpad, défilement à deux doigts pour la hauteur, glisser à
+la souris (le lecteur garde les clics sur l'image). La pose (`ProDisplayXDRPose`) est gardée sur l'accueil.
+Démo : `-LockyDemo YES -LockyDemoMacModel studio|mini|pro`.
 
 ## À configurer avant une release
 

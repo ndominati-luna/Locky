@@ -28,7 +28,13 @@ struct MacDeviceImage: View {
                     .background {
                         if !frame.hasWallpaper, let screen = frame.screen {
                             ScreenRectLayout(rect: screen) {
-                                screenContent
+                                MacScreen(
+                                    wallpaper: wallpaper,
+                                    lockState: lockState,
+                                    userPicture: userPicture,
+                                    userName: userName,
+                                    isUnlocking: isUnlocking
+                                )
                             }
                         }
                     }
@@ -36,7 +42,12 @@ struct MacDeviceImage: View {
                     .overlay {
                         if frame.hasWallpaper, let screen = frame.screen {
                             ScreenRectLayout(rect: screen) {
-                                lockScreen
+                                MacLockScreenLayer(
+                                    lockState: lockState,
+                                    userPicture: userPicture,
+                                    userName: userName,
+                                    isUnlocking: isUnlocking
+                                )
                             }
                         }
                     }
@@ -60,32 +71,6 @@ struct MacDeviceImage: View {
         .saturation(isConnected ? 1 : 0.3)
         .animation(.easeInOut(duration: 0.45), value: lockState)
         .accessibilityHidden(true)
-    }
-
-    /// The display of the Mac: its wallpaper (black without one), then the lock screen. The black
-    /// fill sets the size: a wallpaper scaled to fill would otherwise widen the screen past the bezel.
-    private var screenContent: some View {
-        Color.black
-            .overlay {
-                if let wallpaper {
-                    Image(uiImage: wallpaper)
-                        .resizable()
-                        .scaledToFill()
-                }
-            }
-            .overlay {
-                lockScreen
-            }
-            .clipped()
-    }
-
-    @ViewBuilder
-    private var lockScreen: some View {
-        if lockState == .locked {
-            MacLockScreenView(userPicture: userPicture, userName: userName, isUnlocking: isUnlocking)
-                // Fades in when locking; zooms out of the way when unlocking, like macOS.
-                .transition(.asymmetric(insertion: .opacity, removal: .opacity.combined(with: .scale(scale: 1.06))))
-        }
     }
 }
 

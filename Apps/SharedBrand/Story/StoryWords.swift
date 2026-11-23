@@ -9,7 +9,7 @@ struct StoryWords: View {
         VStack(spacing: isCompact ? 14 : 20) {
             LegacyLogoAssembly()
                 .frame(height: isCompact ? 100 : 140)
-            Text("Since \(String(LockyStory.releaseYear))")
+            Text("Since \(String(LockyStory.firstYear))")
                 .font(.footnote.weight(.semibold).monospaced())
                 .padding(.horizontal, 12)
                 .padding(.vertical, 5)
@@ -23,7 +23,7 @@ struct StoryWords: View {
             Text("You found it! \(LockyStory.tapCount) taps, one for every year since the very first Locky.")
                 .font(.headline)
             #endif
-            Text("Back in \(String(LockyStory.filmYear)), Tom and Nico dreamed of a Mac that locks itself when you walk away. Here is the video from back then.")
+            Text("Back in \(String(LockyStory.firstYear)), Tom and Nico dreamed of a Mac that locks itself when you walk away. Here is the video from back then.")
                 .font(.body)
                 .foregroundStyle(.secondary)
         }

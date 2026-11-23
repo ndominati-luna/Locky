@@ -134,23 +134,43 @@ private struct ConnectionChip: View {
 }
 
 /// The Mac floating over its wallpaper. It can be pulled around and always springs back to the
-/// center.
+/// center; a Mac without a display stands under a Pro Display XDR, handled with its own gestures.
 private struct MacShowcase: View {
     @Environment(AppModel.self) private var model
     @State private var drag: CGSize = .zero
 
+    private var isDisplayless: Bool {
+        model.macFrame.map { $0.screen == nil } ?? false
+    }
+
     var body: some View {
         VStack(spacing: 14) {
-            MacDeviceImage(
-                frame: model.macFrame,
-                family: model.macStatus?.family ?? .unknown,
-                wallpaper: model.visuals.wallpaperImage,
-                lockState: model.lockState,
-                isConnected: model.isConnected,
-                userPicture: model.visuals.userPicture,
-                userName: model.macStatus?.userName,
-                isUnlocking: model.isUnlocking
-            )
+            Group {
+                if let frame = model.macFrame, frame.screen == nil {
+                    // No display of its own: under a Pro Display XDR.
+                    DisplaylessMacShowcase(
+                        frame: frame,
+                        family: model.macStatus?.family ?? .unknown,
+                        wallpaper: model.visuals.wallpaperImage,
+                        lockState: model.lockState,
+                        isConnected: model.isConnected,
+                        userPicture: model.visuals.userPicture,
+                        userName: model.macStatus?.userName,
+                        isUnlocking: model.isUnlocking
+                    )
+                } else {
+                    MacDeviceImage(
+                        frame: model.macFrame,
+                        family: model.macStatus?.family ?? .unknown,
+                        wallpaper: model.visuals.wallpaperImage,
+                        lockState: model.lockState,
+                        isConnected: model.isConnected,
+                        userPicture: model.visuals.userPicture,
+                        userName: model.macStatus?.userName,
+                        isUnlocking: model.isUnlocking
+                    )
+                }
+            }
             .foregroundStyle(.primary)
             // Grows with the large screen of an unfolded iPhone Duo held upright.
             .frame(maxWidth: 560, maxHeight: 380)
@@ -158,7 +178,8 @@ private struct MacShowcase: View {
             .offset(drag)
             .rotation3DEffect(.degrees(Double(drag.width) * 0.08), axis: (x: 0, y: 1, z: 0))
             .rotation3DEffect(.degrees(Double(-drag.height) * 0.08), axis: (x: 1, y: 0, z: 0))
-            .gesture(rubberBand)
+            // The fingers belong to the display, not to the rubber band.
+            .gesture(rubberBand, including: isDisplayless ? .subviews : .all)
 
             VStack(spacing: 4) {
                 Text(model.macName)

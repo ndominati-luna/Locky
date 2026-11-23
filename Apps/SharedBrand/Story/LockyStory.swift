@@ -2,7 +2,7 @@ import AVFoundation
 import Foundation
 
 /// The easter egg of the About screen: the video of the very first Locky, opened by tapping (or
-/// clicking, on the Mac) the logo once per year since 2015.
+/// clicking, on the Mac) the logo once per year since 2014.
 ///
 /// The video is not in the app. It is streamed from a folder of the site that nothing links to
 /// (HLS, five qualities from 270p to 1080p, so that it plays smoothly on any network), and every
@@ -10,16 +10,14 @@ import Foundation
 /// ``StoryKeyLoader`` answers, with the key kept in the app. The address and the key are masked,
 /// so that they do not show up among the strings of the binary.
 enum LockyStory {
-    /// The year the first Locky came out on the App Store (version 1.0, 15 May 2015).
-    static let releaseYear: Int = 2015
-
-    /// The year of the film, made while Locky was still "soon on the App Store".
-    static let filmYear: Int = 2014
+    /// The true start of the project: the first lines and the film, a year before the App Store
+    /// (version 1.0, 15 May 2015).
+    static let firstYear: Int = 2014
 
     /// Taps on the logo of About that open the video: the difference between this calendar year
-    /// and the year of the release (11 in 2026).
+    /// and the first one (12 in 2026).
     static var tapCount: Int {
-        Calendar(identifier: .gregorian).component(.year, from: .now) - releaseYear
+        Calendar(identifier: .gregorian).component(.year, from: .now) - firstYear
     }
 
     /// The master playlist on the site.
@@ -81,7 +79,9 @@ final class StoryKeyLoader: NSObject, AVAssetResourceLoaderDelegate, Sendable {
 }
 
 /// The player of the video, with the delegate that gives it the key (an asset only holds its
-/// delegate weakly). Says when the film is over, for the end credits.
+/// delegate weakly). Says when the film is over, for the end credits. One per opening of the
+/// story: the full screen of the player takes the story off screen for a while, it must neither
+/// stop the film nor start another one. The film stops when the story closes and lets it go.
 @MainActor
 @Observable
 final class StoryPlayback {
@@ -109,6 +109,13 @@ final class StoryPlayback {
 
     isolated deinit {
         endWatch?.cancel()
+        player.pause()
+    }
+
+    /// Plays the film, with its sound (a demo can keep it silent, see ``isSilentForDemo``).
+    func start() {
+        player.isMuted = Self.isSilentForDemo
+        player.play()
     }
 
     /// From the start again, credits gone.
@@ -117,4 +124,13 @@ final class StoryPlayback {
         player.seek(to: .zero)
         player.play()
     }
+
+    #if DEBUG
+    /// `-LockyDemoMuted YES`: the film plays without sound, to test the story quietly.
+    private static var isSilentForDemo: Bool {
+        UserDefaults.standard.bool(forKey: "LockyDemoMuted")
+    }
+    #else
+    private static let isSilentForDemo: Bool = false
+    #endif
 }

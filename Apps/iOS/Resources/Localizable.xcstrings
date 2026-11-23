@@ -14,12 +14,42 @@
         }
       }
     },
+    "In July %@, Locky was still “soon on the App Store”." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "En juillet %@, Locky était encore « bientôt sur l’App Store »."
+          }
+        }
+      }
+    },
     "Locky leaves the App Store: iOS 11 and macOS High Sierra broke its Bluetooth. RIP ☠️" : {
       "localizations" : {
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Locky quitte l’App Store : iOS 11 et macOS High Sierra ont cassé son Bluetooth. RIP ☠️"
+          }
+        }
+      }
+    },
+    "Rotate the display" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Faire pivoter l’écran"
+          }
+        }
+      }
+    },
+    "The %@ film" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le film de %@"
           }
         }
       }

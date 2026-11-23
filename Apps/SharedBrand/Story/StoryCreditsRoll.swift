@@ -64,7 +64,7 @@ private struct StoryCredits: View {
                     .font(.subheadline)
                     .foregroundStyle(.white.opacity(0.75))
             }
-            Text("Thanks to everyone who has walked away from their Mac since \(String(LockyStory.releaseYear)).")
+            Text("Thanks to everyone who has walked away from their Mac since \(String(LockyStory.firstYear)).")
                 .font(.footnote)
                 .foregroundStyle(.white.opacity(0.75))
             // The film ends on a promise the App Store no longer keeps: the iPhone app now goes
@@ -86,7 +86,7 @@ private struct StoryEndCard: View {
 
     var body: some View {
         VStack(spacing: 14) {
-            Text("Since \(String(LockyStory.releaseYear))")
+            Text("Since \(String(LockyStory.firstYear))")
                 .font(.footnote.weight(.semibold).monospaced())
                 .foregroundStyle(.white.opacity(0.75))
             Button("Watch again", systemImage: "arrow.counterclockwise", action: replay)

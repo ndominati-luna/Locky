@@ -16,22 +16,34 @@ struct StoryChapters: View {
 struct StoryFooter: View {
     var body: some View {
         VStack(spacing: 14) {
-            HStack(spacing: 10) {
-                ForEach(0..<5, id: \.self) { index in
-                    Image(index.isMultiple(of: 2) ? .stepLeft : .stepRight)
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 22)
-                        .offset(y: index.isMultiple(of: 2) ? -6 : 6)
-                        .opacity(0.35 + Double(index) * 0.15)
-                }
-            }
+            StoryFootsteps()
             Text("Thanks for being part of the trip.")
                 .font(.footnote)
                 .foregroundStyle(.secondary)
         }
         .foregroundStyle(.white)
         .accessibilityElement(children: .combine)
+    }
+}
+
+/// Footprints of the first Locky, walking off to the right: the very idea of Locky.
+struct StoryFootsteps: View {
+    var count: Int = 5
+    var width: CGFloat = 22
+
+    var body: some View {
+        HStack(spacing: width * 0.45) {
+            ForEach(0..<count, id: \.self) { index in
+                Image(index.isMultiple(of: 2) ? .stepLeft : .stepRight)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: width)
+                    .offset(y: index.isMultiple(of: 2) ? -width * 0.27 : width * 0.27)
+                    .opacity(0.35 + 0.6 * Double(index) / Double(max(count - 1, 1)))
+            }
+        }
+        .foregroundStyle(.white)
+        .accessibilityHidden(true)
     }
 }
 

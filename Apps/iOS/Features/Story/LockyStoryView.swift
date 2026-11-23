@@ -52,9 +52,7 @@ struct LockyStoryView: View {
             .onGeometryChange(for: Bool.self) { $0.size.width > $0.size.height * 1.1 } action: { isWide = $0 }
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
-                    Button(role: .close) {
-                        dismiss()
-                    }
+                    Button(role: .close, action: close)
                 }
             }
             .toolbarBackground(.hidden, for: .navigationBar)
@@ -65,19 +63,24 @@ struct LockyStoryView: View {
         // White drawings and text on the Locky blue, whatever the appearance of the iPhone.
         .environment(\.colorScheme, .dark)
         .task {
+            // The full screen of the player takes this screen away and brings it back, which runs
+            // this task again: one film only, and it keeps its sound.
+            guard playback == nil else { return }
             let playback: StoryPlayback = .init()
             self.playback = playback
             // Plays even with the ring switch on silent, like any video.
             try? AVAudioSession.sharedInstance().setCategory(.playback, mode: .moviePlayback)
             // Once the screen has slid in.
             try? await Task.sleep(for: .milliseconds(700))
-            playback.player.isMuted = false
-            playback.player.play()
+            playback.start()
         }
-        .onDisappear {
-            playback?.player.pause()
-            try? AVAudioSession.sharedInstance().setCategory(.ambient)
-        }
+    }
+
+    /// The only way out of the story: the film stops and the sound goes back to the app's.
+    private func close() {
+        playback?.player.pause()
+        try? AVAudioSession.sharedInstance().setCategory(.ambient)
+        dismiss()
     }
 }
 
@@ -116,8 +119,13 @@ private struct UnfoldedStory: View {
                         .padding(.vertical, 16)
                     }
                     .scrollBounceBehavior(.basedOnSize)
-                    StoryFilm(playback: playback)
-                        .padding(.horizontal, 32)
+                    // A whole page for the film: the display as large as it fits, decorated, up to
+                    // the edge of the screen (under the clock and the close button, the column
+                    // of the status bar is empty).
+                    StoryFilmStage(playback: playback)
+                        .padding(.horizontal, 24)
+                        .padding(.vertical, 20)
+                        .ignoresSafeArea(.container, edges: .trailing)
                 }
             }
         }

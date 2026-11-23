@@ -72,14 +72,24 @@ enum DemoMode {
         UserDefaults.standard.bool(forKey: "LockyDemoOutOfReach")
     }
 
+    /// `-LockyDemoMacModel studio|mini|pro`: a Mac without a display, under the Pro Display XDR.
+    private static var mac: (model: String, productName: String, family: MacFamily, deviceType: String) {
+        switch UserDefaults.standard.string(forKey: "LockyDemoMacModel") {
+        case "studio": ("Mac16,9", "Mac Studio (2025)", .macStudio, "com.apple.macstudio-2025")
+        case "mini": ("Mac16,10", "Mac mini (2024)", .macMini, "com.apple.macmini-2024")
+        case "pro": ("Mac14,8", "Mac Pro (2023)", .macPro, "com.apple.macpro-2023")
+        default: ("MacBookPro18,4", "MacBook Pro (14-inch, 2021)", .macBook, "com.apple.macbookpro-14-2021-space-gray")
+        }
+    }
+
     static func macStatus(macID: UUID) -> MacStatus {
         .init(
             macID: macID,
             // `-LockyDemoMacName "…"` checks long names in widgets and the Live Activity.
-            name: UserDefaults.standard.string(forKey: "LockyDemoMacName") ?? "MacBook Pro",
-            model: "MacBookPro18,4",
-            productName: "MacBook Pro (14-inch, 2021)",
-            family: .macBook,
+            name: UserDefaults.standard.string(forKey: "LockyDemoMacName") ?? mac.productName.components(separatedBy: " (").first ?? "Mac",
+            model: mac.model,
+            productName: mac.productName,
+            family: mac.family,
             systemVersion: "27.2",
             userName: "Alex Martin",
             lockState: isLocked ? .locked : .unlocked,
@@ -88,7 +98,7 @@ enum DemoMode {
             unlockCount: 1_284,
             // `-LockyDemoCamera denied|notDetermined|unavailable` shows the camera warning.
             cameraAccess: UserDefaults.standard.string(forKey: "LockyDemoCamera").flatMap(CameraAccess.init(rawValue:)) ?? .authorized,
-            deviceType: "com.apple.macbookpro-14-2021-space-gray",
+            deviceType: mac.deviceType,
             // `-LockyDemoMacBuild 1` shows an update for the Mac.
             appVersion: "1.0.2",
             appBuild: UserDefaults.standard.integer(forKey: "LockyDemoMacBuild") > 0 ? UserDefaults.standard.integer(forKey: "LockyDemoMacBuild") : 5,
