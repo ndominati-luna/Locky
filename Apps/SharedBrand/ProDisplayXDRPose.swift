@@ -19,6 +19,8 @@ struct ProDisplayXDRPose: Equatable, RawRepresentable {
         abs(rotation) > 45
     }
 
+    /// As it comes out of the box, and as a double tap puts it back: landscape, upright, a third of
+    /// the way up its stand.
     init() {}
 
     init?(rawValue: String) {

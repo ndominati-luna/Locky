@@ -349,11 +349,15 @@ Display XDR » : le bras du Pro Stand qui se courbe en pied, pas la plaque perc�
 tout est implicite (`ProDisplayXDRGestures`) : deux doigts qui tournent font pivoter la dalle avec eux, et
 relâchée elle finit en paysage ou en portrait, le plus proche (en se rehaussant pour dégager le bureau, puis
 noir un instant et image remise droite) ; deux doigts qui montent ou descendent la font glisser le long du
-bras ; un doigt l'incline (−5° à 25°, comme le Pro Stand) et la fait pivoter sur son pied, qui ne bouge pas
-(relâchée près de la position droite, elle s'y recale). Sur iPhone ce
-sont des reconnaisseurs UIKit, qui voient aussi les gestes faits sur le lecteur du film et empêchent la page
-de défiler sous l'écran ; sur Mac, rotation au trackpad, défilement à deux doigts pour la hauteur, glisser à
-la souris (le lecteur garde les clics sur l'image). La pose (`ProDisplayXDRPose`) est gardée sur l'accueil.
+bras ; un doigt l'incline (−5° à 25°, comme le Pro Stand) et la fait pivoter sur son pied, qui ne bouge pas ;
+un double tap (double clic sur Mac) remet tout l'écran comme au déballage : paysage, droit, à sa hauteur de
+départ. Sur iPhone ce sont des reconnaisseurs UIKit, qui voient aussi les gestes faits sur le lecteur du film
+et empêchent la page de défiler sous l'écran ; les taps du lecteur (commandes, lecture ou pause au centre)
+attendent 0,35 s de savoir si un second tap suit, et le second tap ne va jamais au bouton touché : un double
+tap ne met pas le film en pause. Sur Mac, rotation au trackpad, défilement à deux doigts pour la hauteur,
+glisser à la souris (le lecteur garde les clics sur l'image), double clic partout, film compris (le lecteur
+ne déplace plus la fenêtre, sinon le double clic l'agrandissait). La pose (`ProDisplayXDRPose`) est gardée
+sur l'accueil.
 Démo : `-LockyDemo YES -LockyDemoMacModel studio|mini|pro`.
 
 ## À configurer avant une release

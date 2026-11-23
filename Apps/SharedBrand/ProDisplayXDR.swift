@@ -7,11 +7,12 @@ import SwiftUI
 /// It is handled like the real one, without any button (see ``ProDisplayXDRGestureHandlers``): two
 /// fingers twist it, it follows them and settles, once released, in landscape or portrait, the
 /// closer; they also slide it up and down its stand. One finger tilts and swivels the panel on its
-/// stand, which does not move; let go near the upright position, the panel snaps back to it.
-/// Turned toward portrait, it rises to clear the desk, as the real stand requires. Settled in another
-/// orientation, its picture goes black for an instant and comes back upright, as macOS does with a
-/// rotated display. The panel and the arm are drawn, sharp at any size; the aluminium foot comes
-/// from the artwork of macOS (`Tools/MacCatalog/make_xdr.py`). Measures in widths of the panel.
+/// stand, which does not move. A double tap puts it all back as it came: landscape, upright, at
+/// its first height. Turned toward portrait, it rises to clear the desk, as the real stand
+/// requires. Settled in another orientation, its picture goes black for an instant and comes back
+/// upright, as macOS does with a rotated display. The panel and the arm are drawn, sharp at any
+/// size; the aluminium foot comes from the artwork of macOS (`Tools/MacCatalog/make_xdr.py`).
+/// Measures in widths of the panel.
 struct ProDisplayXDR<Screen: View, Accessory: View>: View {
     @Binding var pose: ProDisplayXDRPose
     /// Width of the accessory on the desk, in widths of the panel.
@@ -86,6 +87,9 @@ struct ProDisplayXDR<Screen: View, Accessory: View>: View {
         .accessibilityAction(named: Text("Rotate the display")) {
             withAnimation(settling) { pose.rotation = pose.isPortrait ? 0 : -90 }
         }
+        .accessibilityAction(named: Text("Put the display back")) {
+            withAnimation(settling) { pose = .init() }
+        }
         // Settled by the hands or turned from outside (an accessibility action of the caller).
         .onChange(of: pose.rotation) {
             showUpright()
@@ -155,6 +159,15 @@ struct ProDisplayXDR<Screen: View, Accessory: View>: View {
                     return
                 }
                 withAnimation(settling) { commitLean() }
+            },
+            reset: {
+                isLeanSuspended = false
+                withAnimation(settling) {
+                    pose = .init()
+                    turning = 0
+                    lifting = 0
+                    leaning = .zero
+                }
             }
         )
     }
@@ -162,24 +175,14 @@ struct ProDisplayXDR<Screen: View, Accessory: View>: View {
     /// Two fingers on the display: a lean in progress stays where it is and waits for its end.
     private func twoFingersDown() {
         guard !isTurning, !isLifting, leaning != .zero else { return }
-        commitLean(snapsUpright: false)
+        commitLean()
         isLeanSuspended = true
     }
 
-    /// Keeps the lean within the stand; let go near the upright position, the panel snaps back to it.
-    private func commitLean(snapsUpright: Bool = true) {
-        var tilt: Double = min(max(pose.tilt + leaning.height, ProDisplayXDRPose.tiltRange.lowerBound), ProDisplayXDRPose.tiltRange.upperBound)
-        var swivel: Double = min(max(pose.swivel + leaning.width, ProDisplayXDRPose.swivelRange.lowerBound), ProDisplayXDRPose.swivelRange.upperBound)
-        if snapsUpright {
-            if abs(tilt) < 5 {
-                tilt = 0
-            }
-            if abs(swivel) < 6 {
-                swivel = 0
-            }
-        }
-        pose.tilt = tilt
-        pose.swivel = swivel
+    /// Keeps the lean where it was let go, within the stand.
+    private func commitLean() {
+        pose.tilt = min(max(pose.tilt + leaning.height, ProDisplayXDRPose.tiltRange.lowerBound), ProDisplayXDRPose.tiltRange.upperBound)
+        pose.swivel = min(max(pose.swivel + leaning.width, ProDisplayXDRPose.swivelRange.lowerBound), ProDisplayXDRPose.swivelRange.upperBound)
         leaning = .zero
     }
 

@@ -39,6 +39,11 @@ struct DisplaylessMacShowcase: View {
                 pose.rotation = pose.isPortrait ? 0 : -90
             }
         }
+        .accessibilityAction(named: Text("Put the display back")) {
+            withAnimation(.spring(duration: 0.55, bounce: 0.18)) {
+                pose = .init()
+            }
+        }
     }
 }
 

@@ -44,6 +44,16 @@
         }
       }
     },
+    "Put the display back" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Remettre l’écran en place"
+          }
+        }
+      }
+    },
     "Rotate the display" : {
       "localizations" : {
         "fr" : {
