@@ -7,9 +7,9 @@ L'ancien code est conservé dans [`Legacy/`](Legacy) pour référence ; il n'est
 
 | Plateforme | Minimum | Cible |
 | --- | --- | --- |
-| iPhone, iPhone Duo (pas d'iPad) | iOS 27 | `Locky` + extension `LockyWidgets` |
-| Apple Watch | watchOS 27 | `LockyWatch` + extension `LockyWatchWidgets` |
-| Mac | macOS 27 | `LockyMac` (menu natif dans la barre d'état, Developer ID) + extension `LockyMacWidgets` (widget de bureau, contrôles « Locky activé » et « Verrouiller le Mac » pour le Centre de contrôle et la barre des menus) |
+| iPhone, iPhone Duo (pas d'iPad) | iOS 26 | `Locky` + extension `LockyWidgets` |
+| Apple Watch | watchOS 26 | `LockyWatch` + extension `LockyWatchWidgets` |
+| Mac | macOS 26 | `LockyMac` (menu natif dans la barre d'état, Developer ID) + extension `LockyMacWidgets` (widget de bureau, contrôles « Locky activé » et « Verrouiller le Mac » pour le Centre de contrôle et la barre des menus) |
 
 ## Démarrer
 

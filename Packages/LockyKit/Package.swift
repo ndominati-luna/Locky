@@ -5,9 +5,9 @@ let package: Package = .init(
     name: "LockyKit",
     defaultLocalization: "en",
     platforms: [
-        .iOS("27.0"),
-        .macOS("27.0"),
-        .watchOS("27.0")
+        .iOS("26.0"),
+        .macOS("26.0"),
+        .watchOS("26.0")
     ],
     products: [
         .library(name: "LockyKit", targets: ["LockyKit"])
