@@ -10,7 +10,7 @@ import UIKit
 
 /// Lets the recognizers of a device work together, makes a scroll view under them wait, and the
 /// single taps of a player wait for the double tap.
-final class HandRecognizerDelegate: NSObject, UIGestureRecognizerDelegate {
+class HandRecognizerDelegate: NSObject, UIGestureRecognizerDelegate {
     static let name: String = "LockyHands"
 
     func gestureRecognizer(
@@ -35,9 +35,11 @@ final class HandRecognizerDelegate: NSObject, UIGestureRecognizerDelegate {
     }
 }
 
-/// Two fingers twisting: the angle since they came down, then the end.
+/// Two fingers twisting: where they were when they began to, the angle since they came down, then
+/// the end.
 struct HandRotationRecognizer: UIGestureRecognizerRepresentable {
     var isEnabled: Bool = true
+    var began: (CGPoint) -> Void = { _ in }
     let changed: (Angle) -> Void
     let ended: (Angle) -> Void
 
@@ -59,7 +61,10 @@ struct HandRotationRecognizer: UIGestureRecognizerRepresentable {
     func handleUIGestureRecognizerAction(_ recognizer: UIRotationGestureRecognizer, context: Context) {
         let angle: Angle = .radians(Double(recognizer.rotation))
         switch recognizer.state {
-        case .began, .changed:
+        case .began:
+            began(context.converter.location(in: .local))
+            changed(angle)
+        case .changed:
             changed(angle)
         case .ended, .cancelled, .failed:
             ended(angle)
@@ -69,11 +74,12 @@ struct HandRotationRecognizer: UIGestureRecognizerRepresentable {
     }
 }
 
-/// Exactly `touches` fingers moving together: their translation since they began to move, then
-/// the end.
+/// Exactly `touches` fingers moving together: where they were when they began to move (between
+/// them), their translation since, then the end.
 struct HandPanRecognizer: UIGestureRecognizerRepresentable {
     let touches: Int
     var isEnabled: Bool = true
+    var began: (CGPoint) -> Void = { _ in }
     let changed: (CGSize) -> Void
     let ended: (CGSize) -> Void
 
@@ -98,10 +104,70 @@ struct HandPanRecognizer: UIGestureRecognizerRepresentable {
         let point: CGPoint = recognizer.translation(in: recognizer.view)
         let translation: CGSize = .init(width: point.x, height: point.y)
         switch recognizer.state {
-        case .began, .changed:
+        case .began:
+            began(context.converter.location(in: .local))
+            changed(translation)
+        case .changed:
             changed(translation)
         case .ended, .cancelled, .failed:
             ended(translation)
+        default:
+            break
+        }
+    }
+}
+
+/// Two fingers spreading or closing side to side: where they were when they began to, how many
+/// times wider apart across they are since (above 1 spread, below closed), then the end. Only the
+/// horizontal gap between them counts.
+struct HandPinchRecognizer: UIGestureRecognizerRepresentable {
+    var isEnabled: Bool = true
+    var began: (CGPoint) -> Void = { _ in }
+    let changed: (CGFloat) -> Void
+    let ended: (CGFloat) -> Void
+
+    /// The gap the fingers began with, and the last ratio, kept for the end (one finger may
+    /// already be gone).
+    final class Coordinator: HandRecognizerDelegate {
+        var start: CGFloat = 1
+        var ratio: CGFloat = 1
+    }
+
+    func makeCoordinator(converter: CoordinateSpaceConverter) -> Coordinator {
+        .init()
+    }
+
+    func makeUIGestureRecognizer(context: Context) -> UIPinchGestureRecognizer {
+        let recognizer: UIPinchGestureRecognizer = .init()
+        recognizer.name = HandRecognizerDelegate.name
+        recognizer.delegate = context.coordinator
+        return recognizer
+    }
+
+    func updateUIGestureRecognizer(_ recognizer: UIPinchGestureRecognizer, context: Context) {
+        recognizer.isEnabled = isEnabled
+    }
+
+    func handleUIGestureRecognizerAction(_ recognizer: UIPinchGestureRecognizer, context: Context) {
+        /// The horizontal gap between the two fingers, while both are down.
+        func gap() -> CGFloat? {
+            guard recognizer.numberOfTouches >= 2 else { return nil }
+            return abs(recognizer.location(ofTouch: 0, in: recognizer.view).x - recognizer.location(ofTouch: 1, in: recognizer.view).x)
+        }
+        switch recognizer.state {
+        case .began:
+            // Recognized once the fingers have moved a little: the gap they began with, about.
+            context.coordinator.start = max((gap() ?? 0) / max(recognizer.scale, 0.01), 24)
+            context.coordinator.ratio = (gap() ?? context.coordinator.start) / context.coordinator.start
+            began(context.converter.location(in: .local))
+            changed(context.coordinator.ratio)
+        case .changed:
+            if let gap = gap() {
+                context.coordinator.ratio = gap / context.coordinator.start
+            }
+            changed(context.coordinator.ratio)
+        case .ended, .cancelled, .failed:
+            ended(context.coordinator.ratio)
         default:
             break
         }

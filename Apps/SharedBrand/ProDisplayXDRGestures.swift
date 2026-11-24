@@ -6,11 +6,21 @@ import SwiftUI
 /// double tap, or a double click). Each gesture reports its progress from where it began, then its
 /// end.
 struct ProDisplayXDRGestureHandlers {
+    /// Where two fingers came down, before they twist or move (on the iPhone).
+    var twoFingersBegan: (CGPoint) -> Void
     var turnChanged: (Angle) -> Void
     var turnEnded: (Angle) -> Void
-    /// Points, positive up.
+    /// Two fingers moving on the iPhone, points as they go.
+    var panChanged: (CGSize) -> Void
+    var panEnded: (CGSize) -> Void
+    /// Two fingers spreading (above 1) or closing side to side on the iPhone.
+    var pinchChanged: (CGFloat) -> Void
+    var pinchEnded: (CGFloat) -> Void
+    /// A two-finger scroll on the Mac, points, positive up.
     var liftChanged: (CGFloat) -> Void
     var liftEnded: (CGFloat) -> Void
+    /// Where one finger came down, before it moves (on the iPhone).
+    var oneFingerBegan: (CGPoint) -> Void
     /// Points, as the finger or the mouse moves.
     var leanChanged: (CGSize) -> Void
     var leanEnded: (CGSize) -> Void
@@ -36,11 +46,16 @@ private struct ProDisplayXDRGesturesModifier: ViewModifier {
 
     func body(content: Content) -> some View {
         content
-            .gesture(HandRotationRecognizer(isEnabled: isEnabled, changed: handlers.turnChanged, ended: handlers.turnEnded))
             .gesture(
-                HandPanRecognizer(touches: 2, isEnabled: isEnabled) { handlers.liftChanged(-$0.height) } ended: { handlers.liftEnded(-$0.height) }
+                HandRotationRecognizer(isEnabled: isEnabled, began: handlers.twoFingersBegan, changed: handlers.turnChanged, ended: handlers.turnEnded)
             )
-            .gesture(HandPanRecognizer(touches: 1, isEnabled: isEnabled, changed: handlers.leanChanged, ended: handlers.leanEnded))
+            .gesture(
+                HandPanRecognizer(touches: 2, isEnabled: isEnabled, began: handlers.twoFingersBegan, changed: handlers.panChanged, ended: handlers.panEnded)
+            )
+            .gesture(
+                HandPinchRecognizer(isEnabled: isEnabled, began: handlers.twoFingersBegan, changed: handlers.pinchChanged, ended: handlers.pinchEnded)
+            )
+            .gesture(HandPanRecognizer(touches: 1, isEnabled: isEnabled, began: handlers.oneFingerBegan, changed: handlers.leanChanged, ended: handlers.leanEnded))
             .gesture(HandDoubleTapRecognizer(isEnabled: isEnabled, tapped: handlers.reset))
     }
 }

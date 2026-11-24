@@ -54,6 +54,16 @@
         }
       }
     },
+    "Tilt the display back" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Incliner l’écran vers l’arrière"
+          }
+        }
+      }
+    },
     "The %@ film" : {
       "localizations" : {
         "fr" : {

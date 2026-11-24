@@ -138,8 +138,8 @@ private struct ConnectionChip: View {
 }
 
 /// The Mac floating over its wallpaper. It can be pulled around and always springs back to the
-/// center; a Mac without a display stands under a Pro Display XDR, and a MacBook folds its lid, both
-/// handled with their own gestures. Out of reach, the Mac is left alone.
+/// center; a Mac without a display stands under a Pro Display XDR, a MacBook folds its lid and an
+/// iMac tilts its display, all handled with their own gestures. Out of reach, the Mac is left alone.
 private struct MacShowcase: View {
     @Environment(AppModel.self) private var model
     @State private var drag: CGSize = .zero
@@ -148,7 +148,8 @@ private struct MacShowcase: View {
         let frame: MacFrame? = model.macFrame
         let isLaptop: Bool = model.macStatus?.family.isLaptop ?? false
         let macBook: MacBookOutline? = isLaptop ? frame.flatMap { MacBookOutline.of($0) } : nil
-        let hasOwnGestures: Bool = (frame != nil && frame?.screen == nil) || macBook != nil
+        let iMac: IMacOutline? = model.macStatus?.family == .iMac ? frame.flatMap { IMacOutline.of($0) } : nil
+        let hasOwnGestures: Bool = (frame != nil && frame?.screen == nil) || macBook != nil || iMac != nil
         VStack(spacing: 14) {
             Group {
                 if let frame, let macBook {
@@ -169,6 +170,23 @@ private struct MacShowcase: View {
                             springBack()
                         }
                     }
+                } else if let frame, let iMac {
+                    IMacShowcase(
+                        frame: frame,
+                        outline: iMac,
+                        wallpaper: model.visuals.wallpaperImage,
+                        lockState: model.lockState,
+                        isConnected: model.isConnected,
+                        userPicture: model.visuals.userPicture,
+                        userName: model.macStatus?.userName,
+                        isUnlocking: model.isUnlocking
+                    ) { translation in
+                        if let translation {
+                            drag = resisted(translation)
+                        } else {
+                            springBack()
+                        }
+                    }
                 } else if let frame, frame.screen == nil {
                     // No display of its own: under a Pro Display XDR.
                     DisplaylessMacShowcase(
@@ -180,7 +198,14 @@ private struct MacShowcase: View {
                         userPicture: model.visuals.userPicture,
                         userName: model.macStatus?.userName,
                         isUnlocking: model.isUnlocking
-                    )
+                    ) { translation in
+                        // One finger off the display pulls the whole desk like anywhere else.
+                        if let translation {
+                            drag = resisted(translation)
+                        } else {
+                            springBack()
+                        }
+                    }
                 } else {
                     MacDeviceImage(
                         frame: model.macFrame,

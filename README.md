@@ -359,20 +359,40 @@ tap ne met pas le film en pause. Sur Mac, rotation au trackpad, défilement à d
 glisser à la souris (le lecteur garde les clics sur l'image), double clic partout, film compris (le lecteur
 ne déplace plus la fenêtre, sinon le double clic l'agrandissait). La pose (`ProDisplayXDRPose`) est gardée
 sur l'accueil.
+Le Mac est relié à l'écran par son câble Thunderbolt, qui pend du dos de la dalle juste à côté du bras, du côté
+du Mac (il glisse derrière le bras quand le Mac change de côté), passe sur le bord avant de la plaque du pied,
+retombe sur le bureau devant elle et file derrière le Mac ; si le Mac est posé devant l'endroit où il tombe, il
+passe directement derrière lui :
+deux doigts posés sur le Mac lui-même le font glisser sur le bureau, l'écran ne bouge pas et le câble suit (position gardée dans `macDeskOffset`, remise à zéro par le double tap). C'est
+l'endroit où les doigts se posent qui décide. Hauteur, inclinaison et orientation de l'écran ne se règlent qu'en
+partant de la dalle ; deux doigts sur le Mac le font glisser, sur le clavier ils le pincent, ailleurs ils ne font
+rien ; un doigt sur le trackpad fait le curseur, et partout ailleurs hors de la dalle il tire tout le bureau comme
+un élastique (`pulled`, comme les autres Mac). Sur Mac (film de l'easter egg), sans position des doigts, c'est la
+dalle.
 Démo : `-LockyDemo YES -LockyDemoMacModel studio|mini|pro`, ou n'importe quel Mac du catalogue avec
 `-LockyDemoMacType com.apple.imac-2024-blue -LockyDemoMacProduct "iMac (24-inch, 2024)"` (sa famille se lit dans
 son nom).
 
 Les MacBook se manipulent aussi sur l'accueil (`MacBookShowcase`). Leur image du catalogue est coupée à la
 charnière, mesurée une fois dans l'image elle-même (`MacBookOutline`) : l'écran est un rectangle jusqu'à la
-charnière, le dessous s'élargit vers le bord avant, et la couleur de l'alu se lit sur ce bord. Deux doigts
-replient l'écran ou l'ouvrent davantage (jusqu'à 130° environ), et il reste là où on le lâche ; il tourne sur sa
+charnière, le dessous s'élargit vers le bord avant, et la couleur de l'alu se lit sur ce bord. Deux doigts posés
+sur l'écran (sur tout le Mac une fois l'écran à moitié rabattu, pour le rouvrir aussi facilement) le replient ou
+l'ouvrent davantage (jusqu'à 130° environ), et il reste là où on le lâche ; il tourne sur sa
 charnière vu par la caméra de l'image, dont la distance et la hauteur se déduisent de la perspective du clavier,
 que l'écran fermé couvre exactement. En se refermant, la lumière de l'écran tombe sur le clavier aux couleurs du
 fond d'écran, puis l'écran s'éteint quand il est presque fermé (sous 18° d'ouverture, rallumé passé 26°) ; fermé,
-on voit le dos de l'écran, dans l'alu du Mac. Sous les doigts, la charnière donne un grain léger tous les 2°
+on voit le dos de l'écran, dans l'alu du Mac, posé sur sa tranche avant. Cette tranche est taillée dans l'image
+elle-même (`MacBookOutline.lidEdge`) : le bas de la face avant du dessous, sous l'encoche et au-dessus de son
+ombre, retourné pour que ses bouts s'arrondissent vers le dos de l'écran. C'est la tranche du haut du couvercle,
+une face comme les autres, calculée en 3D (`LidProjection.edge`) et couchée en perspective par la même caméra
+que le couvercle (`LidProjection.camera`, une `DeskCamera`) : elle tourne avec lui, cachée derrière l'écran
+ouvert, de plus en plus visible en le refermant. Derrière l'écran est dessinée la coque du couvercle
+(`LidShell`) : son contour à coins arrondis, décalé de son épaisseur (`LidProjection.backTransform`) ; ce
+qui en dépasse est la tranche qui fait le tour des coins, et presque fermé, c'est le dos de l'écran. Près de la
+fermeture, la tranche montre toute sa largeur et ses bouts arrondis ; entre 80° et 70°, elle se raccourcit
+jusqu'aux coins et ses bouts se fondent dans la coque. Sous les doigts, la charnière donne un grain à peine suggéré tous les 2°
 et, aux butées (fermé ou ouvert au maximum), un seul choc net à pleine force, sans grain autour pour qu'il reste
-franc (`LidHaptics`, Core Haptics, plus fort que les vibrations du système). Trois doigts
+franc (`HingeHaptics`, Core Haptics, plus fort que les vibrations du système). Trois doigts
 règlent la luminosité de l'écran dessiné, avec un indicateur en haut à droite comme sur macOS ; un double tap
 remet tout comme sur l'image, à pleine luminosité, en animant le retour (l'angle vit dans un état SwiftUI, gardé
 ensuite dans les réglages : un changement d'`@AppStorage` ne s'anime pas). Un doigt tire toujours le Mac comme un
@@ -380,6 +400,29 @@ ensuite dans les réglages : un changement d'`@AppStorage` ne s'anime pas). Un d
 Mac est hors de portée, ces gestes, ceux du XDR et l'élastique sont coupés. Angle et luminosité sont gardés
 (`macBookFold`, `macBookBrightness`). Démo : `-LockyDemo YES` (MacBook Pro 14 pouces), `-macBookFold 60` pour un
 angle donné (90 fermé, `<real>-40</real>` ouvert au maximum).
+
+Les iMac aussi (`IMacShowcase`, mesurés dans leur image par `IMacOutline` : le bas du menton, le pied, le bureau
+et la couleur du menton). Leur pied ne fait que s'incliner : deux doigts posés sur l'écran le penchent en arrière ou en avant
+sur sa charnière, en haut du pied derrière le menton, de −5° à +15° (Apple ne publie pas la plage de l'iMac
+24 pouces : c'est une estimation), et il reste là où on le lâche ; le haut du pied caché par le menton apparaît
+quand l'écran recule. Même grain et même choc aux butées que le MacBook (`HingeHaptics`), même luminosité à trois
+doigts, même double tap, même élastique ; réglages gardés dans `iMacTilt` et `iMacBrightness`. Démo :
+`-iMacTilt 15` (ou `<real>-5</real>`).
+
+Devant l'iMac et devant le XDR, le Magic Keyboard avec Touch ID et le Magic Trackpad sont posés sur le bureau,
+côte à côte. `DeskCamera` (dans `Apps/SharedBrand`) est la caméra de l'image : de face, un peu au-dessus, assez
+loin pour que le Mac paraisse plat ; elle couche sur le bureau ce qui est dessiné vu de dessus, et incline l'écran
+de l'iMac sur sa charnière. Elle voit le bureau d'environ 13° au-dessus, assez pour lire le dessus des claviers sans
+les redresser. Les claviers sont les images d'Apple, vus de dessus dans les couleurs de l'iMac (argent devant
+le XDR), tirées du framework Bluetooth de macOS (`CoreBluetoothUI`) par `Tools/MacCatalog/make_keyboards.py` dans
+`Apps/iOS/Resources/DeskAccessories.xcassets` : A282 sans pavé numérique, A284 avec. macOS n'a du trackpad
+qu'une icône de 64 px : il est dessiné (`MagicTrackpad`). Deux doigts qui s'écartent sur le clavier amènent celui
+avec pavé numérique, qui se resserrent ramènent le compact (`HandPinchRecognizer`, seul compte l'écart horizontal ;
+choix gardé dans `deskKeyboard`, partagé par l'iMac et le XDR). Démo : `-deskKeyboard numpad`. Un doigt posé sur
+le trackpad, et seulement là, fait apparaître le curseur de macOS (`MacCursor`) sur l'écran du Mac : il suit le
+doigt comme un trackpad (traverser le trackpad lui fait traverser un peu plus que l'écran), repart de là où on
+l'a laissé, et disparaît quand le doigt se lève. Ailleurs, un doigt garde son geste (élastique de l'iMac,
+inclinaison de la dalle du XDR).
 
 ## À configurer avant une release
 
