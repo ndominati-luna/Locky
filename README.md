@@ -359,7 +359,9 @@ tap ne met pas le film en pause. Sur Mac, rotation au trackpad, défilement à d
 glisser à la souris (le lecteur garde les clics sur l'image), double clic partout, film compris (le lecteur
 ne déplace plus la fenêtre, sinon le double clic l'agrandissait). La pose (`ProDisplayXDRPose`) est gardée
 sur l'accueil.
-Démo : `-LockyDemo YES -LockyDemoMacModel studio|mini|pro`.
+Démo : `-LockyDemo YES -LockyDemoMacModel studio|mini|pro`, ou n'importe quel Mac du catalogue avec
+`-LockyDemoMacType com.apple.imac-2024-blue -LockyDemoMacProduct "iMac (24-inch, 2024)"` (sa famille se lit dans
+son nom).
 
 Les MacBook se manipulent aussi sur l'accueil (`MacBookShowcase`). Leur image du catalogue est coupée à la
 charnière, mesurée une fois dans l'image elle-même (`MacBookOutline`) : l'écran est un rectangle jusqu'à la

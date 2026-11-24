@@ -73,8 +73,14 @@ enum DemoMode {
     }
 
     /// `-LockyDemoMacModel studio|mini|pro`: a Mac without a display, under the Pro Display XDR.
+    /// `-LockyDemoMacType com.apple.imac-2024-blue -LockyDemoMacProduct "iMac (24-inch, 2024)"`: any
+    /// Mac of the catalog, its family read from its name (screenshots of every Mac).
     private static var mac: (model: String, productName: String, family: MacFamily, deviceType: String) {
-        switch UserDefaults.standard.string(forKey: "LockyDemoMacModel") {
+        if let deviceType = UserDefaults.standard.string(forKey: "LockyDemoMacType") {
+            let productName: String = UserDefaults.standard.string(forKey: "LockyDemoMacProduct") ?? "Mac"
+            return ("Mac", productName, MacFamily(productName: productName), deviceType)
+        }
+        return switch UserDefaults.standard.string(forKey: "LockyDemoMacModel") {
         case "studio": ("Mac16,9", "Mac Studio (2025)", .macStudio, "com.apple.macstudio-2025")
         case "mini": ("Mac16,10", "Mac mini (2024)", .macMini, "com.apple.macmini-2024")
         case "pro": ("Mac14,8", "Mac Pro (2023)", .macPro, "com.apple.macpro-2023")
