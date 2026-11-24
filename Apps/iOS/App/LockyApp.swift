@@ -12,8 +12,13 @@ struct LockyApp: App {
                 .readScreenFold()
         }
         .onChange(of: scenePhase) { _, phase in
-            if phase == .active {
+            switch phase {
+            case .active:
                 appDelegate.model.sceneBecameActive()
+            case .background:
+                appDelegate.model.sceneEnteredBackground()
+            default:
+                break
             }
         }
     }

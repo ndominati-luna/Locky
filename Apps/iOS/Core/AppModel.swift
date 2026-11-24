@@ -113,9 +113,7 @@ final class AppModel {
         if preferences.onboardingCompleted {
             session.start(dormant: isDormant)
         }
-        if session.isPaired, !isDormant {
-            motion.start()
-        }
+        // The motion of the iPhone is followed once the Mac is connected (``sessionOpened()``).
         // Images stored by an earlier version: the copies the extensions display are missing.
         if visuals.needsRenditions {
             visuals.storeRenditions(frame: macFrame)
@@ -169,6 +167,40 @@ final class AppModel {
         Task { await refreshFromCloud() }
     }
 
+    /// Locky left the screen: the Mac stops sending the distance nothing shows.
+    func sceneEnteredBackground() {
+        isOnScreen = false
+        updateProximityInterest()
+    }
+
+    // MARK: - Distance from the Mac
+
+    /// Locky is on screen (between becoming active and going to the background).
+    @ObservationIgnored private var isOnScreen: Bool = false
+    /// What the Mac was last told, `nil` since the session opened.
+    @ObservationIgnored private var sentProximityInterest: ProximityInterest?
+
+    /// Tells the Mac how often the distance is shown: live on screen, every few seconds in the
+    /// Live Activity, never otherwise; each reading it sends wakes the iPhone.
+    private func updateProximityInterest() {
+        #if DEBUG
+        if DemoMode.isEnabled {
+            return
+        }
+        #endif
+        guard isConnected, macStatus?.supports(.proximityOnDemand) == true else { return }
+        let interest: ProximityInterest = if isOnScreen {
+            .live
+        } else if preferences.liveActivityEnabled, liveActivity.isRunning {
+            .glance
+        } else {
+            .none
+        }
+        guard interest != sentProximityInterest else { return }
+        sentProximityInterest = interest
+        session.send(.proximityInterest(interest))
+    }
+
     // MARK: - Live Activity
 
     /// Live Activities are allowed for Locky in the Settings app.
@@ -183,6 +215,7 @@ final class AppModel {
         } else {
             liveActivity.end()
         }
+        updateProximityInterest()
     }
 
     /// Starts (or takes over) the Live Activity. iOS only allows it from the foreground.
@@ -819,6 +852,10 @@ final class AppModel {
     private func sessionClosed() {
         proximity = nil
         macMetrics = nil
+        sentProximityInterest = nil
+        // Out of reach, the Mac does not need to know whether the iPhone moves; the pedometer
+        // tells it once Locky wakes up again (``heartbeat()``).
+        motion.stop()
         // Only true while the Mac is there (it forgets it in iCloud when Locky quits).
         nowPlayingFetch?.cancel()
         fetchingArtworkID = nil
@@ -855,6 +892,8 @@ final class AppModel {
         switch message {
         case let .macStatus(status):
             updateStatus(status)
+            // Its features are known: it can be told how often to send the distance.
+            updateProximityInterest()
         case let .macImagesUpdated(version):
             fetchMacImages(version: version)
         case let .lockState(state):

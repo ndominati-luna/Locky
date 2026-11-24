@@ -7,7 +7,9 @@ import OSLog
 ///
 /// iOS only lets an app start a Live Activity from the foreground, and ends it after 8 hours: it is
 /// started (or started again) each time Locky is opened, then updated from the background, where
-/// the Bluetooth link keeps the app awake. Distance updates are rounded and spaced out.
+/// the Bluetooth link keeps the app awake. Distance updates are rounded and spaced out, and left
+/// out while the distance only wavers (the signal always does): every update redraws the lock
+/// screen.
 @MainActor
 final class LiveActivityManager {
     private let logger: Logger = .init(subsystem: "studio.lunabee.locky", category: "LiveActivity")
@@ -17,8 +19,9 @@ final class LiveActivityManager {
     private var lastUpdate: ContinuousClock.Instant?
     private var pendingUpdate: Task<Void, Never>?
 
-    /// Shortest delay between two updates that only move the distance.
-    private static let distanceUpdateInterval: Duration = .seconds(2)
+    /// Shortest delay between two updates that only move the distance, and the least change shown.
+    private static let distanceUpdateInterval: Duration = .seconds(5)
+    private static let distanceStep: Double = 0.3
 
     /// Live Activities are allowed for Locky (Settings > Locky).
     var isAllowed: Bool {
@@ -67,7 +70,7 @@ final class LiveActivityManager {
         }
     }
 
-    /// Updates the activity: right away for a new state, at most every 2 seconds for the distance.
+    /// Updates the activity: right away for a new state, at most every 5 seconds for the distance.
     func update(_ state: LockyActivityAttributes.ContentState) {
         guard adoptRunningActivity() else { return }
         let rounded: LockyActivityAttributes.ContentState = Self.rounded(state)
@@ -78,6 +81,11 @@ final class LiveActivityManager {
         var withoutDistance: LockyActivityAttributes.ContentState = rounded
         withoutDistance.distance = sentState?.distance
         let onlyDistance: Bool = withoutDistance == sentState
+        // The distance wavers by a few tens of centimetres: shown again once it really moved.
+        if onlyDistance, let sent = sentState?.distance, let distance = rounded.distance, abs(distance - sent) < Self.distanceStep {
+            pendingState = nil
+            return
+        }
         if onlyDistance, let lastUpdate, ContinuousClock.now - lastUpdate < Self.distanceUpdateInterval {
             pendingState = rounded
             guard pendingUpdate == nil else { return }

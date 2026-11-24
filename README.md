@@ -213,7 +213,16 @@ Legacy/                Ancienne app, pour référence
   Locky dans `MacStatus`). Dans les réglages de l'iPhone, « Mettre à jour vers Locky x » quand le flux Sparkle
   annonce une version plus récente, sinon « Rechercher les mises à jour » : le même message, comme l'élément du
   menu du Mac (Sparkle répond sur le Mac : nouvelle version ou « à jour »), et l'iPhone relit le flux. Depuis 1.0.3 : réglages du Mac changés hors de portée (`cloudSettings`, message
-  `macSettings`, voir « Réglages changés hors de portée »).
+  `macSettings`, voir « Réglages changés hors de portée »). Depuis 1.0.14 : distance à la demande
+  (`proximityOnDemand`, message `proximityInterest`, voir ci-dessous).
+- **Batterie de l'iPhone.** À portée du Mac, Locky ne s'endort jamais : chaque message du Mac le réveille, et
+  les réglages Batterie le comptent en arrière-plan. Pour que ces réveils restent rares et légers :
+  - la distance n'est envoyée qu'aussi souvent qu'elle s'affiche (`ProximityInterest`) : deux fois par seconde
+    quand Locky est à l'écran, toutes les 5 s pour la Live Activity, jamais sinon. L'iPhone le dit au Mac à
+    chaque passage au premier plan ou en arrière-plan ; un iPhone qui ne le dit pas la reçoit comme avant. Il ne
+    reste alors que le battement de cœur toutes les 2 s ;
+  - le mouvement de l'iPhone n'est suivi que pendant que le Mac est connecté, à 2,5 Hz (`MotionMonitor`) ;
+  - la Live Activity ne se redessine que quand la distance bouge d'au moins 30 cm, au plus toutes les 5 s.
 
 ### Sécurité
 - Appairage : clés éphémères P‑256 avec **engagement** (le Mac s'engage sur sa clé avant de voir celle de

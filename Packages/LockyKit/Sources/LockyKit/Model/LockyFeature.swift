@@ -13,6 +13,9 @@ public enum LockyFeature: String, Sendable, CaseIterable {
     /// The settings of the Mac changed on the iPhone out of reach: through iCloud, then
     /// ``LockyMessage/macSettings(_:)`` (see ``MacSettingsEnvelope``).
     case cloudSettings
+    /// ``LockyMessage/proximityInterest(_:)`` from the iPhone: the Mac sends the distance only as
+    /// often as the iPhone shows it, instead of twice a second whatever it does.
+    case proximityOnDemand
 
     /// What this version announces.
     public static var current: [String] {

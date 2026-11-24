@@ -54,6 +54,9 @@ public enum LockyMessage: Codable, Sendable, Equatable {
     case autoLock(isEnabled: Bool)
     /// Mac → iPhone: filtered signal and estimated distance, for the distance gauge.
     case proximity(ProximityReading)
+    /// iPhone → Mac: how often the distance is shown, so that ``proximity(_:)`` is sent no more
+    /// often (to a Mac that announced ``LockyFeature/proximityOnDemand``).
+    case proximityInterest(ProximityInterest)
 
     // MARK: - Dashboard (encrypted)
     /// iPhone → Mac: the dashboard is on screen (unfolded iPhone Duo), stream the Mac state.

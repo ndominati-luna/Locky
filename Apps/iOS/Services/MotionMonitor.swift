@@ -6,8 +6,9 @@ import OSLog
 /// Tells whether the iPhone is moving.
 ///
 /// Two complementary sources:
-/// - live device motion (5 Hz), compared to the baseline measured during the pairing, reacts within
-///   a fraction of a second while the app runs;
+/// - live device motion (2.5 Hz), compared to the baseline measured during the pairing, reacts
+///   within half a second while the app runs; only while the Mac is connected, the only time it
+///   needs to know (``AppModel`` starts and stops it with the session);
 /// - the pedometer, queried retrospectively each time the app wakes up for a Bluetooth event: it
 ///   still knows the user walked away even if iOS suspended the app in between.
 @MainActor
@@ -29,7 +30,9 @@ final class MotionMonitor {
     func start() {
         guard !isRunning, motionManager.isDeviceMotionAvailable else { return }
         isRunning = true
-        motionManager.deviceMotionUpdateInterval = 0.2
+        // Walking away shakes the iPhone for seconds: a few samples a second are enough, and keep
+        // the sensors light, since the Mac keeps Locky awake all day long within its reach.
+        motionManager.deviceMotionUpdateInterval = 0.4
         motionManager.startDeviceMotionUpdates(to: .main) { [weak self] motion, _ in
             guard let motion else { return }
             let sample: MotionSample = .init(

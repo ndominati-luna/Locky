@@ -34,6 +34,24 @@ struct CompatibilityTests {
         _ = mac
     }
 
+    /// The iPhone tells the Mac how often it shows the distance, only once the Mac announced it can
+    /// hear it.
+    @Test
+    func proximityInterestRoundTrips() throws {
+        var (mac, phone): (SecureChannel, SecureChannel) = Self.channels()
+        var received: SecureChannel? = mac
+        for interest: ProximityInterest in [.live, .glance, .none] {
+            let message: LockyMessage = .proximityInterest(interest)
+            let payload: Data = try WireCodec.encodeEncrypted(message, channel: &phone)
+            #expect(try WireCodec.decode(payload, channel: &received) == message)
+        }
+        #expect(ProximityInterest.live.interval == .milliseconds(500))
+        #expect(ProximityInterest.glance.interval == .seconds(5))
+        #expect(ProximityInterest.none.interval == nil)
+        #expect(LockyFeature.current.contains(LockyFeature.proximityOnDemand.rawValue))
+        _ = mac
+    }
+
     /// A message of a newer Locky is authentic but unknown: ignored, the session stays.
     @Test
     func unknownMessageKeepsTheSession() throws {

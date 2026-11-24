@@ -45,6 +45,9 @@ final class MacAppModel {
     @ObservationIgnored private var unlockRequestedAt: ContinuousClock.Instant?
     @ObservationIgnored private var lastPasswordRequest: ContinuousClock.Instant?
     @ObservationIgnored private var lastProximitySent: ContinuousClock.Instant?
+    /// How often the iPhone shows the distance (``ProximityInterest``): every reading sent wakes it.
+    /// An iPhone that does not say follows it live, as before.
+    @ObservationIgnored private var proximityInterest: ProximityInterest = .live
     @ObservationIgnored private var images: MacImages?
     /// Version of the images already in iCloud: the iPhone is only told about those.
     @ObservationIgnored private var cloudImagesVersion: String?
@@ -616,6 +619,8 @@ final class MacAppModel {
     private func sessionClosed() {
         dashboard.stop()
         proximity = nil
+        // The next iPhone says again how it follows the distance.
+        proximityInterest = .live
         isPhoneMoving = false
         sessionClosedAt = .now
         hasHandledApproach = false
@@ -686,6 +691,14 @@ final class MacAppModel {
             phoneSentSetupProgress(progress)
         case let .dashboard(isVisible):
             dashboard.setVisible(isVisible)
+        case let .proximityInterest(interest):
+            let wasSilent: Bool = proximityInterest.interval == nil
+            proximityInterest = interest
+            // Shown again: the gauge gets the distance at once.
+            if wasSilent, interest.interval != nil, let proximity {
+                lastProximitySent = .now
+                session.send(.proximity(proximity))
+            }
         case let .mediaCommand(command):
             dashboard.perform(command)
         case let .autoLock(isEnabled):
@@ -960,8 +973,9 @@ final class MacAppModel {
         self.engine = engine
         guard let reading = result.reading else { return }
         proximity = reading
-        // Twice a second: the gauge of the iPhone follows the track of the Mac closely (a few bytes).
-        if lastProximitySent.map({ ContinuousClock.now - $0 > .milliseconds(500) }) ?? true {
+        // As often as the iPhone shows it: twice a second for its gauge, every few seconds for its
+        // Live Activity, never while nothing shows it (each reading wakes the iPhone).
+        if let interval = proximityInterest.interval, lastProximitySent.map({ ContinuousClock.now - $0 > interval }) ?? true {
             lastProximitySent = .now
             session.send(.proximity(reading))
         }
