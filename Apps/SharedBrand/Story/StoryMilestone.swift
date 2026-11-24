@@ -21,7 +21,7 @@ struct StoryMilestone: Identifiable {
         .init(id: 3, year: 2015, month: 4, text: "A brand new welcome, with the logo that builds itself, and the Today widget."),
         .init(id: 4, year: 2015, month: 5, text: "Locky comes out: walk away, and your Mac locks itself."),
         .init(id: 5, year: 2015, month: 9, text: "Locky arrives on the Apple Watch."),
-        .init(id: 6, year: 2017, month: 10, text: "Locky leaves the App Store: iOS 11 and macOS High Sierra broke its Bluetooth. RIP ☠️"),
+        .init(id: 6, year: 2017, month: 10, text: "Locky leaves the App Store: its overlay on the login screen of the Mac, and much else it did on the Mac, no longer worked. RIP ☠️"),
         .init(id: 7, year: 2025, month: 5, text: "The code comes out of the boxes and compiles again."),
         .init(id: 8, year: 2026, month: 11, text: "Locky is reborn in Swift, from the iPhone to the Mac and the Apple Watch.")
     ]

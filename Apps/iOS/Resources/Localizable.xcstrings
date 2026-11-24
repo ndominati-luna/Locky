@@ -24,12 +24,12 @@
         }
       }
     },
-    "Locky leaves the App Store: iOS 11 and macOS High Sierra broke its Bluetooth. RIP ☠️" : {
+    "Locky leaves the App Store: its overlay on the login screen of the Mac, and much else it did on the Mac, no longer worked. RIP ☠️" : {
       "localizations" : {
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Locky quitte l’App Store : iOS 11 et macOS High Sierra ont cassé son Bluetooth. RIP ☠️"
+            "value" : "Locky quitte l’App Store : son incrustation dans l’écran de connexion du Mac et bien d’autres choses qu’il faisait sur le Mac ne fonctionnaient plus. RIP ☠️"
           }
         }
       }
