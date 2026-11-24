@@ -386,11 +386,11 @@ elle-même (`MacBookOutline.lidEdge`) : le bas de la face avant du dessous, sous
 ombre, retourné pour que ses bouts s'arrondissent vers le dos de l'écran. C'est la tranche du haut du couvercle,
 une face comme les autres, calculée en 3D (`LidProjection.edge`) et couchée en perspective par la même caméra
 que le couvercle (`LidProjection.camera`, une `DeskCamera`) : elle tourne avec lui, cachée derrière l'écran
-ouvert, de plus en plus visible en le refermant. Derrière l'écran est dessinée la coque du couvercle
-(`LidShell`) : son contour à coins arrondis, décalé de son épaisseur (`LidProjection.backTransform`) ; ce
-qui en dépasse est la tranche qui fait le tour des coins, et presque fermé, c'est le dos de l'écran. Près de la
-fermeture, la tranche montre toute sa largeur et ses bouts arrondis ; entre 80° et 70°, elle se raccourcit
-jusqu'aux coins et ses bouts se fondent dans la coque. Sous les doigts, la charnière donne un grain à peine suggéré tous les 2°
+ouvert, de plus en plus visible en le refermant. Autour des coins arrondis, la tranche est construite morceau
+par morceau en 3D (`LidRim`) : chaque morceau est vu par la caméra, ombré selon qu'il fait face ou se détourne,
+dessiné sous l'écran qui le recouvre, et les morceaux détournés passent dessous. Presque fermé (au-delà de 84°),
+son profil arrondi se voit à ses bouts, comme ceux du dessous ; ouvert, ses bouts tournent derrière l'écran.
+Presque fermé, le dos de l'écran (`LidShell`) est dessiné derrière elle, décalé de l'épaisseur du couvercle. Sous les doigts, la charnière donne un grain à peine suggéré tous les 2°
 et, aux butées (fermé ou ouvert au maximum), un seul choc net à pleine force, sans grain autour pour qu'il reste
 franc (`HingeHaptics`, Core Haptics, plus fort que les vibrations du système). Trois doigts
 règlent la luminosité de l'écran dessiné, avec un indicateur en haut à droite comme sur macOS ; un double tap

@@ -388,12 +388,14 @@ private struct MacBookFold<Screen: View>: View, Animatable {
                     // Closer and closer to the keys, the screen lights them more and more.
                     light: Self.smoothstep(fold, from: 5, to: 70) * screenLight
                 )
-                // The shell of the lid: its outline, rounded corners and all, as far behind the
-                // inner face as the lid is thick. Behind the screen while it shows, all that
-                // passes it is the edge of the lid, along its top and around its corners; once the
-                // lid is nearly shut, its back.
-                LidShell(outline: outline, size: proxy.size, hinge: lid.hinge, isBackHidden: lid.showsScreen(fold))
-                    .projectionEffect(lid.backTransform(fold: fold, thickness: thickness(size: proxy.size)))
+                // Nearly shut, the back of the lid, as far behind its inner face as the lid is thick.
+                if !lid.showsScreen(fold) {
+                    LidShell(outline: outline, size: proxy.size, hinge: lid.hinge)
+                        .projectionEffect(lid.backTransform(fold: fold, thickness: thickness(size: proxy.size)))
+                }
+                // The edge of the lid all along its top and around its rounded corners, as the
+                // camera sees it, under the screen that overlaps it.
+                LidRim(lid: lid, fold: fold, thickness: thickness(size: proxy.size), outline: outline, size: proxy.size)
                 if lid.showsScreen(fold) {
                     ZStack {
                         ScreenRectLayout(rect: screenRect, outset: 1) {
@@ -409,15 +411,14 @@ private struct MacBookFold<Screen: View>: View, Animatable {
                     .projectionEffect(lid.transform(fold: fold))
                 }
                 if rise > 0.3, let lidEdge {
-                    // A face of the lid like the others, turned and seen in perspective with it:
-                    // from the top of its back (the top of the picture, rounded) to the top of its
-                    // inner face; the picture of the whole width of the Mac, its aluminium between
-                    // the rounded corners of the lid.
-                    let span: CGFloat = proxy.size.width * edgeWidth / max(outline.spread, 1)
+                    // The aluminium of the straight part of the edge, from the picture: a face of
+                    // the lid like the others, turned and seen in perspective with it, from the top
+                    // of its back (the top of the picture, rounded) to the top of its inner face.
+                    // Its ends melt into the rim, which turns around the corners.
+                    let span: CGFloat = proxy.size.width / max(outline.spread, 1)
                     let size: CGSize = .init(width: max(span * edge.magnification, 1), height: max(rise, 1))
-                    // Once the lid stands up enough for the shell to turn around its corners, the
-                    // edge runs only between them and its ends melt into the shell.
-                    let fade: CGFloat = max(0.0001, 0.1 * corners)
+                    let straight: ClosedRange<CGFloat> = straightPart(span: span, width: proxy.size.width)
+                    let fade: CGFloat = 0.025
                     Image(uiImage: lidEdge)
                         .resizable()
                         .interpolation(.high)
@@ -425,10 +426,10 @@ private struct MacBookFold<Screen: View>: View, Animatable {
                         .mask {
                             LinearGradient(
                                 stops: [
-                                    .init(color: .clear, location: 0),
-                                    .init(color: .black, location: fade),
-                                    .init(color: .black, location: 1 - fade),
-                                    .init(color: .clear, location: 1)
+                                    .init(color: .clear, location: straight.lowerBound),
+                                    .init(color: .black, location: straight.lowerBound + fade),
+                                    .init(color: .black, location: straight.upperBound - fade),
+                                    .init(color: .clear, location: straight.upperBound)
                                 ],
                                 startPoint: .leading,
                                 endPoint: .trailing
@@ -451,23 +452,14 @@ private struct MacBookFold<Screen: View>: View, Animatable {
         }
     }
 
-    /// How far the lid stands up from the deck: 0 shut, 1 upright.
-    private var raised: CGFloat {
-        CGFloat(max(0, cos(fold * .pi / 180)))
-    }
-
-    /// How much the edge turns around the corners of the lid rather than ending on them: not at all
-    /// while the lid is nearly shut (seen so low, its front edge shows whole, rounded ends and all,
-    /// the corners flattened), fully once it stands up.
-    private var corners: CGFloat {
-        CGFloat(1 - Self.smoothstep(fold, from: 70, to: 80))
-    }
-
-    /// The edge runs along the top of the lid, between its rounded corners: shut, they curve away
-    /// from the camera and the edge shows as wide as the lid; raised, they curve down its sides and
-    /// it shows only between them.
-    private var edgeWidth: CGFloat {
-        1 - 2 * outline.lidTopInset / max(outline.lidRight - outline.lidLeft, 0.01) * corners
+    /// The straight part of the top of the lid, between its rounded corners, in fractions of the
+    /// picture of the edge, `span` points wide face on.
+    private func straightPart(span: CGFloat, width: CGFloat) -> ClosedRange<CGFloat> {
+        let start: CGFloat = width / 2 - span / 2
+        let corner: CGFloat = outline.lidTopInset * width
+        let lower: CGFloat = (outline.lidLeft * width + corner - start) / max(span, 1)
+        let upper: CGFloat = (outline.lidRight * width - corner - start) / max(span, 1)
+        return max(0, lower)...min(1, max(upper, lower + 0.1))
     }
 
     /// How thick the lid is, face on: as its front edge shows once shut, on the front of the deck,
@@ -476,7 +468,7 @@ private struct MacBookFold<Screen: View>: View, Animatable {
         (outline.deckBottom - outline.deckFront) * MacBookOutline.edgeThickness * size.height / max(outline.spread, 1)
     }
 
-    private static func smoothstep(_ value: Double, from start: Double, to end: Double) -> Double {
+    static func smoothstep(_ value: Double, from start: Double, to end: Double) -> Double {
         let t: Double = min(max((value - start) / (end - start), 0), 1)
         return t * t * (3 - 2 * t)
     }
@@ -647,9 +639,6 @@ private struct LidShell: View {
     let outline: MacBookOutline
     let size: CGSize
     let hinge: CGFloat
-    /// The back faces away while the screen shows: only the edge along the top and around the
-    /// corners can be seen, not the sides, which face away too.
-    let isBackHidden: Bool
 
     var body: some View {
         let left: CGFloat = outline.lidLeft * size.width
@@ -666,21 +655,129 @@ private struct LidShell: View {
             .frame(width: right - left, height: hinge)
             .offset(x: left)
             .frame(width: size.width, height: max(hinge, 1), alignment: .topLeading)
-            .mask {
-                if isBackHidden {
-                    let reach: CGFloat = min(corner * 2.5 / max(hinge, 1), 0.5)
-                    LinearGradient(
-                        stops: [
-                            .init(color: .black, location: 0),
-                            .init(color: .black, location: reach),
-                            .init(color: .clear, location: min(reach * 2, 1))
-                        ],
-                        startPoint: .top,
-                        endPoint: .bottom
-                    )
-                } else {
-                    Rectangle()
-                }
+    }
+}
+
+/// The edge of the lid all along its top and around its rounded corners: the band between its
+/// inner face and its back, built piece by piece in space and seen by the camera of the picture,
+/// each piece shaded by how much it faces the camera, those that face away left out. Shut, its
+/// corners are the rounded ends of the front edge; raised, they run down the sides of the screen.
+private struct LidRim: View {
+    let lid: LidProjection
+    let fold: Double
+    let thickness: CGFloat
+    let outline: MacBookOutline
+    let size: CGSize
+
+    /// Pieces in each rounded corner.
+    private static let steps: Int = 12
+
+    var body: some View {
+        Canvas { context, _ in
+            for piece in pieces() {
+                context.fill(piece.path, with: .color(piece.colour))
+                // Over the seams between the pieces; round joins, for the mitres of the thinnest
+                // pieces would stick out past the edge.
+                context.stroke(piece.path, with: .color(piece.colour), style: StrokeStyle(lineWidth: 0.6, lineJoin: .round))
             }
+        }
+        .frame(width: size.width, height: size.height)
+        .allowsHitTesting(false)
+    }
+
+    private struct Piece {
+        let path: Path
+        let colour: Color
+        /// How much it faces the camera: the pieces turned away are drawn first, under the others,
+        /// whichever corner they belong to.
+        let facing: CGFloat
+    }
+
+    private func pieces() -> [Piece] {
+        let radians: Double = fold * .pi / 180
+        let sine: CGFloat = CGFloat(sin(radians))
+        let cosine: CGFloat = CGFloat(cos(radians))
+        let camera: DeskCamera = lid.camera
+        let left: CGFloat = outline.lidLeft * size.width
+        let right: CGFloat = outline.lidRight * size.width
+        let radius: CGFloat = max(outline.lidTopInset * size.width, 0.5)
+
+        // The outline of the top of the lid, drawn face on, with its outward direction (across,
+        // toward the top of the lid): up the left corner from the side, along the top, down the
+        // right corner, a little inside the screen, which covers it.
+        var outline: [(point: CGPoint, normal: CGVector)] = []
+        for step in 0...Self.steps {
+            let angle: CGFloat = (1 - CGFloat(step) / CGFloat(Self.steps)) * .pi / 2
+            let normal: CGVector = .init(dx: -sin(angle), dy: cos(angle))
+            outline.append((CGPoint(x: left + radius - radius * sin(angle), y: radius - radius * cos(angle)), normal))
+        }
+        for step in 0...Self.steps {
+            let angle: CGFloat = CGFloat(step) / CGFloat(Self.steps) * .pi / 2
+            let normal: CGVector = .init(dx: sin(angle), dy: cos(angle))
+            outline.append((CGPoint(x: right - radius + radius * sin(angle), y: radius - radius * cos(angle)), normal))
+        }
+
+        /// Where a point of the lid face on is in space: across from the middle, above the hinge,
+        /// toward the camera; `behind` along the lid, toward its back.
+        func place(_ point: CGPoint, behind: CGFloat) -> (x: CGFloat, height: CGFloat, depth: CGFloat) {
+            let above: CGFloat = lid.hinge - point.y
+            return (point.x - size.width / 2, above * cosine + behind * sine, above * sine - behind * cosine)
+        }
+        func shown(_ place: (x: CGFloat, height: CGFloat, depth: CGFloat)) -> CGPoint {
+            camera.point(x: place.x, height: place.height, depth: place.depth)
+        }
+
+        /// How much a point of the outline faces the camera: 1 straight at it, 0 edge on.
+        func toward(_ entry: (point: CGPoint, normal: CGVector)) -> CGFloat {
+            let middle = place(entry.point, behind: thickness / 2)
+            let facing: (x: CGFloat, height: CGFloat, depth: CGFloat) = (entry.normal.dx, entry.normal.dy * cosine, entry.normal.dy * sine)
+            let view: (x: CGFloat, height: CGFloat, depth: CGFloat) = (-middle.x, lid.eyeHeight - middle.height, lid.distance - middle.depth)
+            let length: CGFloat = sqrt(view.x * view.x + view.height * view.height + view.depth * view.depth)
+                * sqrt(facing.x * facing.x + facing.height * facing.height + facing.depth * facing.depth)
+            return (facing.x * view.x + facing.height * view.height + facing.depth * view.depth) / max(length, 0.0001)
+        }
+        /// The edge is rounded where it meets the back and the inner face. Nearly shut, right over
+        /// the front of the deck, that shows at its ends: as it turns away around a corner, it
+        /// shows less and less of its height, its end rounded like those of the deck. Open, its
+        /// ends turn behind the screen, which covers them.
+        let rounding: CGFloat = CGFloat(MacBookFold<EmptyView>.smoothstep(fold, from: 84, to: 88))
+        func profile(_ toward: CGFloat) -> CGFloat {
+            let turn: CGFloat = 0.35
+            guard toward < turn, rounding > 0 else { return 1 }
+            let away: CGFloat = 1 - max(toward, 0) / turn
+            return 1 - rounding * (1 - sqrt(max(0, 1 - away * away)))
+        }
+        // While the screen shows, a little inside it at the bottom, so that no thread shows.
+        let inset: CGFloat = lid.showsScreen(fold) ? 0.6 : 0
+        func band(_ entry: (point: CGPoint, normal: CGVector), toward: CGFloat) -> (top: CGPoint, bottom: CGPoint) {
+            let half: CGFloat = thickness / 2 * profile(toward)
+            let tucked: CGFloat = inset
+            let inner: CGPoint = .init(x: entry.point.x - entry.normal.dx * tucked, y: entry.point.y + entry.normal.dy * tucked)
+            return (
+                shown(place(entry.point, behind: thickness / 2 + half)),
+                shown(place(inner, behind: thickness / 2 - half))
+            )
+        }
+
+        var pieces: [Piece] = []
+        let towards: [CGFloat] = outline.map(toward)
+        for index in 0..<(outline.count - 1) {
+            let first = outline[index]
+            let second = outline[index + 1]
+            guard towards[index] > 0 || towards[index + 1] > 0 else { continue }
+            let a = band(first, toward: towards[index])
+            let b = band(second, toward: towards[index + 1])
+            var path: Path = .init()
+            path.move(to: a.bottom)
+            path.addLine(to: b.bottom)
+            path.addLine(to: b.top)
+            path.addLine(to: a.top)
+            path.closeSubpath()
+            // The aluminium of the top of the edge, darker as it turns away.
+            let facing: CGFloat = max(0, (towards[index] + towards[index + 1]) / 2)
+            pieces.append(.init(path: path, colour: self.outline.edgeTop.mix(with: .black, by: Double(0.25 * (1 - facing))), facing: facing))
+        }
+        pieces.sort { $0.facing < $1.facing }
+        return pieces
     }
 }
