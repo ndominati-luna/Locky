@@ -358,7 +358,10 @@ attendent 0,35 s de savoir si un second tap suit, et le second tap ne va jamais 
 tap ne met pas le film en pause. Sur Mac, rotation au trackpad, défilement à deux doigts pour la hauteur,
 glisser à la souris (le lecteur garde les clics sur l'image), double clic partout, film compris (le lecteur
 ne déplace plus la fenêtre, sinon le double clic l'agrandissait). La pose (`ProDisplayXDRPose`) est gardée
-sur l'accueil.
+sur l'accueil. Sous les doigts (iPhone), le Pro Stand donne le grain et les coups de la charnière du MacBook
+(`HingeHaptics`, partagé) : grain en tournant, en montant, en inclinant, en pivotant la dalle et en glissant le
+Mac ; un coup à chaque butée (hauteur, inclinaison −5°/25°, pivot ±35°, bords du bureau), et un coup sourd quand la
+dalle se pose dans une autre orientation.
 Le Mac est relié à l'écran par son câble Thunderbolt, qui pend du dos de la dalle juste à côté du bras, du côté
 du Mac (il glisse derrière le bras quand le Mac change de côté), passe sur le bord avant de la plaque du pied,
 retombe sur le bureau devant elle et file derrière le Mac ; si le Mac est posé devant l'endroit où il tombe, il

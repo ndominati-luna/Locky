@@ -1,8 +1,9 @@
 import CoreHaptics
 
-/// A hinge in the hand (the lid of a MacBook, the stand of an iMac): a fine grain as it turns, which
-/// gives the fingers a light continuous texture while they move, and one clean knock at its stops.
-/// Core Haptics rather than the system impacts, for a knock stronger than their heaviest.
+/// A hinge in the hand (the lid of a MacBook, the stand of an iMac or of a Pro Display XDR): a fine
+/// grain as it turns, which gives the fingers a light continuous texture while they move, and one
+/// clean knock at its stops. Core Haptics rather than the system impacts, for a knock stronger than
+/// their heaviest; silent where there is no Taptic Engine (the Mac).
 @MainActor
 final class HingeHaptics {
     private let isSupported: Bool = CHHapticEngine.capabilitiesForHardware().supportsHaptics

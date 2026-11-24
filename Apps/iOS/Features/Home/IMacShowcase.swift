@@ -3,13 +3,13 @@ import SwiftUI
 
 /// An iMac on the home screen, handled like the real one, without any button, with the Magic
 /// Keyboard and the Magic Trackpad that come with it on the desk in front, in its colour. Its
-/// stand only tilts: two fingers set down on the display lean it back or forward on its hinge, the foot staying
-/// put, and it stays where it is let go; at either end of the hinge, a little knock. Two fingers
-/// spreading on the keyboard bring the one with the numeric keypad, closing on it the compact one.
-/// One finger on the trackpad shows the cursor on the screen, which follows it until it lifts.
-/// Three fingers set the brightness of its screen. A double tap puts it back as it came: upright,
-/// at full brightness. One finger pulls the whole Mac, the rubber band of the home screen.
-/// Disabled (the Mac out of reach), it is left alone.
+/// stand only tilts: one or two fingers set down on the display lean it back or forward on its
+/// hinge, the foot staying put, and it stays where it is let go; at either end of the hinge, a
+/// little knock. Two fingers spreading on the keyboard bring the one with the numeric keypad,
+/// closing on it the compact one. One finger on the trackpad shows the cursor on the screen, which
+/// follows it until it lifts. Three fingers set the brightness of its screen. A double tap puts it
+/// back as it came: upright, at full brightness. One finger anywhere else pulls the whole Mac, the
+/// rubber band of the home screen. Disabled (the Mac out of reach), it is left alone.
 struct IMacShowcase: View {
     let frame: MacFrame
     let outline: IMacOutline
@@ -43,6 +43,8 @@ struct IMacShowcase: View {
     @State private var canvasWidth: CGFloat = 1
     /// One finger on the trackpad: the cursor shows and follows it, from where it was left.
     @State private var isOnTrackpad: Bool = false
+    /// One finger came down on the display: it tilts it, like the panel of the Pro Display XDR.
+    @State private var isOneFingerOnDisplay: Bool = false
     @State private var showsCursor: Bool = false
     @State private var cursor: CGPoint = .init(x: 0.5, y: 0.5)
     @State private var cursorStart: CGPoint = .init(x: 0.5, y: 0.5)
@@ -178,6 +180,9 @@ struct IMacShowcase: View {
         let trackpad: CGRect = DeskAccessories.trackpadFrame(camera: deskCamera, back: IMacMeasures.accessoriesBack, keyboardWidth: keyboard.width)
         let margin: CGFloat = deskCamera.scale * 1.5
         isOnTrackpad = trackpad.insetBy(dx: -margin, dy: -margin).contains(point)
+        // The display and its chin, down to the foot.
+        let chin: CGFloat = canvasWidth * frame.image.size.height / max(frame.image.size.width, 1) * outline.chinBottom
+        isOneFingerOnDisplay = !isOnTrackpad && CGRect(x: 0, y: 0, width: canvasWidth, height: chin).contains(point)
         guard isOnTrackpad else { return }
         cursorStart = cursor
         withAnimation(.easeOut(duration: 0.12)) { showsCursor = true }
@@ -200,6 +205,11 @@ struct IMacShowcase: View {
             moveCursor(translation)
             return
         }
+        if isOneFingerOnDisplay {
+            guard !isBrightening else { return }
+            tilt(by: translation)
+            return
+        }
         guard !isPullSuspended, !isTilting, !isBrightening else { return }
         isPulling = true
         pulled(translation)
@@ -209,6 +219,12 @@ struct IMacShowcase: View {
         if isOnTrackpad {
             isOnTrackpad = false
             withAnimation(.easeIn(duration: 0.2)) { showsCursor = false }
+            return
+        }
+        if isOneFingerOnDisplay {
+            isOneFingerOnDisplay = false
+            isPullSuspended = false
+            settleTilt()
             return
         }
         isPullSuspended = false
@@ -275,7 +291,12 @@ struct IMacShowcase: View {
     private func tiltChanged(_ translation: CGSize) {
         isTwoFingerPanning = true
         moreFingersDown()
-        guard isOnDisplay, !isTiltSuspended, !isBrightening else { return }
+        guard isOnDisplay, !isTiltSuspended, !isBrightening, !isOneFingerOnDisplay else { return }
+        tilt(by: translation)
+    }
+
+    /// The display follows the fingers on it: up pushes its top back, down pulls it forward.
+    private func tilt(by translation: CGSize) {
         if !isTilting {
             isTilting = true
             lastGrain = shownTilt
@@ -301,6 +322,12 @@ struct IMacShowcase: View {
         isTwoFingerPanning = false
         isTiltSuspended = false
         defer { twoFingersUp() }
+        guard !isOneFingerOnDisplay else { return }
+        settleTilt()
+    }
+
+    /// Leaves the display where the fingers let it go.
+    private func settleTilt() {
         guard isTilting else { return }
         rest(tilt: shownTilt)
         tilting = 0

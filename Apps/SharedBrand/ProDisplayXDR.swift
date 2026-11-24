@@ -73,6 +73,12 @@ struct ProDisplayXDR<Screen: View, Accessory: View, Front: View>: View {
     /// end.
     @State private var isPulling: Bool = false
     @State private var isPullSuspended: Bool = false
+    /// The Pro Stand under the fingers: a fine grain as the panel turns, rises, tilts or swivels,
+    /// and the Mac slides on the desk; a knock at every stop, and as the panel settles in another
+    /// orientation (``HingeHaptics``).
+    @State private var haptics: HingeHaptics = .init()
+    @State private var grains: XDRGrains = .init()
+    @State private var stops: XDRStops = .init()
 
     init(
         pose: Binding<ProDisplayXDRPose>,
@@ -273,8 +279,12 @@ struct ProDisplayXDR<Screen: View, Accessory: View, Front: View>: View {
             turnChanged: { angle in
                 guard twoFingers == .panel else { return }
                 twoFingersDown()
+                if !isTurning {
+                    grains.turn = pose.rotation
+                }
                 isTurning = true
                 turning = angle.degrees
+                grain(pose.rotation + turning, last: \.turn, step: 8)
             },
             turnEnded: { _ in
                 guard isTurning else {
@@ -284,6 +294,10 @@ struct ProDisplayXDR<Screen: View, Accessory: View, Front: View>: View {
                 // The closer of landscape and portrait, from where the panel was let go.
                 let settled: Double = [-90, 0, 90].min { abs($0 - shownRotation) < abs($1 - shownRotation) } ?? 0
                 isTurning = false
+                // It settles in another orientation with a deep knock.
+                if settled != pose.rotation {
+                    haptics.knock(isDeep: true)
+                }
                 withAnimation(settling) {
                     pose.rotation = settled
                     turning = 0
@@ -294,7 +308,16 @@ struct ProDisplayXDR<Screen: View, Accessory: View, Front: View>: View {
                 switch twoFingers {
                 case .accessory:
                     twoFingersDown()
+                    if sliding == 0 {
+                        grains.slide = accessoryOffset
+                    }
                     sliding = Double(translation.width / unit)
+                    // On the desk, the Mac goes from one edge of the panel to the other.
+                    let slid: Double = accessoryOffset + sliding
+                    knock(slid, in: accessoryRange, stop: \.slide, margin: 0.01, isDeep: false)
+                    if stops.slide == 0 {
+                        grain(slid, last: \.slide, step: 0.04)
+                    }
                 case .panel:
                     lift(-translation.height)
                 case .front, .elsewhere:
@@ -356,8 +379,22 @@ struct ProDisplayXDR<Screen: View, Accessory: View, Front: View>: View {
                     pulled?(translation)
                 case .panel:
                     guard !isLeanSuspended, !isTurning, !isLifting else { return }
+                    if leaning == .zero {
+                        grains.tilt = pose.tilt
+                        grains.swivel = pose.swivel
+                    }
                     // A quarter of a degree per point: right turns it right, up leans it back.
                     leaning = .init(width: translation.width * 0.25, height: -translation.height * 0.25)
+                    let tilt: Double = pose.tilt + leaning.height
+                    let swivel: Double = pose.swivel + leaning.width
+                    knock(tilt, in: ProDisplayXDRPose.tiltRange, stop: \.tilt, margin: 1, isDeep: tilt < 0)
+                    knock(swivel, in: ProDisplayXDRPose.swivelRange, stop: \.swivel, margin: 1, isDeep: false)
+                    if stops.tilt == 0 {
+                        grain(tilt, last: \.tilt, step: 2)
+                    }
+                    if stops.swivel == 0 {
+                        grain(swivel, last: \.swivel, step: 2.5)
+                    }
                 }
             },
             leanEnded: { _ in
@@ -405,8 +442,39 @@ struct ProDisplayXDR<Screen: View, Accessory: View, Front: View>: View {
     /// The panel along its stand, `points` up since the fingers began.
     private func lift(_ points: CGFloat) {
         twoFingersDown()
+        if !isLifting {
+            grains.lift = pose.height
+        }
         isLifting = true
         lifting = Double(points / (unit * XDRMeasures.travel))
+        let height: Double = pose.height + lifting
+        knock(height, in: 0...1, stop: \.lift, margin: 0.03, isDeep: height < 0.5)
+        if stops.lift == 0 {
+            grain(height, last: \.lift, step: 0.07)
+        }
+    }
+
+    /// A grain each `step` the value moves from where the last one was given.
+    private func grain(_ value: Double, last: WritableKeyPath<XDRGrains, Double>, step: Double) {
+        guard abs(value - grains[keyPath: last]) >= step else { return }
+        grains[keyPath: last] = value
+        haptics.grain()
+    }
+
+    /// A knock as the value reaches an end of its range, not again until it has left it by
+    /// `margin`.
+    private func knock(_ value: Double, in range: ClosedRange<Double>, stop: WritableKeyPath<XDRStops, Int>, margin: Double, isDeep: Bool) {
+        let previous: Int = stops[keyPath: stop]
+        if value >= range.upperBound {
+            stops[keyPath: stop] = 1
+        } else if value <= range.lowerBound {
+            stops[keyPath: stop] = -1
+        } else if value < range.upperBound - margin, value > range.lowerBound + margin {
+            stops[keyPath: stop] = 0
+        }
+        let current: Int = stops[keyPath: stop]
+        guard current != previous, current != 0 else { return }
+        haptics.knock(isDeep: isDeep)
     }
 
     private func endLift() {
@@ -465,6 +533,23 @@ struct ProDisplayXDR<Screen: View, Accessory: View, Front: View>: View {
         }
         return value
     }
+}
+
+/// Where the hands last gave a grain, for each movement of the display and of the Mac.
+private struct XDRGrains {
+    var turn: Double = 0
+    var lift: Double = 0
+    var tilt: Double = 0
+    var swivel: Double = 0
+    var slide: Double = 0
+}
+
+/// At which end of its range each movement is: -1, 1, or 0 between them.
+private struct XDRStops {
+    var lift: Int = 0
+    var tilt: Int = 0
+    var swivel: Int = 0
+    var slide: Int = 0
 }
 
 /// What the fingers came down on.
