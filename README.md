@@ -368,9 +368,13 @@ replient l'écran ou l'ouvrent davantage (jusqu'à 130° environ), et il reste l
 charnière vu par la caméra de l'image, dont la distance et la hauteur se déduisent de la perspective du clavier,
 que l'écran fermé couvre exactement. En se refermant, la lumière de l'écran tombe sur le clavier aux couleurs du
 fond d'écran, puis l'écran s'éteint quand il est presque fermé (sous 18° d'ouverture, rallumé passé 26°) ; fermé,
-on voit le dos de l'écran, dans l'alu du Mac. Fermé ou ouvert au maximum, une petite vibration. Trois doigts
+on voit le dos de l'écran, dans l'alu du Mac. Sous les doigts, la charnière donne un grain léger tous les 2,5°
+et un choc net aux butées, fermé ou ouvert au maximum (`LidHaptics`, Core Haptics, plus fort que les vibrations
+du système). Trois doigts
 règlent la luminosité de l'écran dessiné, avec un indicateur en haut à droite comme sur macOS ; un double tap
-remet tout comme sur l'image, à pleine luminosité. Un doigt tire toujours le Mac comme un élastique. Tant que le
+remet tout comme sur l'image, à pleine luminosité, en animant le retour (l'angle vit dans un état SwiftUI, gardé
+ensuite dans les réglages : un changement d'`@AppStorage` ne s'anime pas). Un doigt tire toujours le Mac comme un
+élastique, et il passe alors au-dessus de tous les textes de l'écran. Tant que le
 Mac est hors de portée, ces gestes, ceux du XDR et l'élastique sont coupés. Angle et luminosité sont gardés
 (`macBookFold`, `macBookBrightness`). Démo : `-LockyDemo YES` (MacBook Pro 14 pouces), `-macBookFold 60` pour un
 angle donné (90 fermé, `<real>-40</real>` ouvert au maximum).

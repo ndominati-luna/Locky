@@ -15,7 +15,9 @@ struct HomeView: View {
         Group {
             if isWide {
                 HStack(spacing: 24) {
+                    // Pulled around, the Mac passes over everything else.
                     MacShowcase()
+                        .zIndex(1)
                     VStack(spacing: 24) {
                         LockStateHeader()
                         Spacer()
@@ -30,7 +32,9 @@ struct HomeView: View {
                 VStack(spacing: 20) {
                     LockStateHeader()
                     Spacer(minLength: 0)
+                    // Pulled around, the Mac passes over everything else.
                     MacShowcase()
+                        .zIndex(1)
                     Spacer(minLength: 0)
                     HomeActions()
                 }
@@ -200,6 +204,8 @@ private struct MacShowcase: View {
             // The fingers belong to the display or the lid, which pull the Mac themselves.
             .gesture(rubberBand, including: hasOwnGestures ? .subviews : .all)
             .disabled(!model.isConnected)
+            // Over its name too.
+            .zIndex(1)
             // Out of reach in the middle of a pull: the gesture is cancelled, the Mac comes back.
             .onChange(of: model.isConnected) {
                 springBack()

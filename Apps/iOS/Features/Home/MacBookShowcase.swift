@@ -21,8 +21,12 @@ struct MacBookShowcase: View {
     let pulled: (CGSize?) -> Void
 
     /// Degrees the lid is folded from its picture: 0 as drawn, 90 shut, below 0 opened further.
-    @AppStorage("macBookFold") private var fold: Double = 0
-    @AppStorage("macBookBrightness") private var brightness: Double = 1
+    @AppStorage("macBookFold") private var storedFold: Double = 0
+    @AppStorage("macBookBrightness") private var storedBrightness: Double = 1
+    /// Where the lid and the brightness rest once handled: state, which animates, unlike the stored
+    /// values (a double tap puts the lid back smoothly).
+    @State private var restingFold: Double?
+    @State private var restingBrightness: Double?
 
     @Environment(\.isEnabled) private var isEnabled
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
@@ -40,6 +44,9 @@ struct MacBookShowcase: View {
     @State private var showsBrightness: Bool = false
     @State private var brightnessFade: Task<Void, Never>?
     @State private var stop: LidStop = .between
+    @State private var haptics: LidHaptics = .init()
+    /// Where the lid last gave a grain under the fingers.
+    @State private var lastGrain: Double = 0
     /// The height of the lid on screen, which the fingers travel to fold it.
     @State private var lidHeight: CGFloat = 1
 
@@ -48,6 +55,8 @@ struct MacBookShowcase: View {
     /// The screen goes dark when the lid is nearly shut, and lights up again once it is clearly open.
     private static let screenOffFold: Double = 72
     private static let screenOnFold: Double = 64
+    /// Degrees between two grains of the hinge under the fingers.
+    private static let grainStep: Double = 2.5
 
     var body: some View {
         MacBookFold(
@@ -90,13 +99,6 @@ struct MacBookShowcase: View {
         .gesture(HandPanRecognizer(touches: 2, isEnabled: isEnabled, changed: foldChanged) { _ in endFold() })
         .gesture(HandPanRecognizer(touches: 3, isEnabled: isEnabled, changed: brightnessChanged) { _ in endBrightness() })
         .gesture(HandDoubleTapRecognizer(isEnabled: isEnabled, tapped: reset))
-        .sensoryFeedback(trigger: stop) { _, stop in
-            switch stop {
-            case .shut: .impact(weight: .heavy, intensity: 0.9)
-            case .wideOpen: .impact(weight: .medium, intensity: 0.7)
-            case .between: nil
-            }
-        }
         .onAppear {
             isScreenOn = fold < Self.screenOffFold
         }
@@ -108,7 +110,7 @@ struct MacBookShowcase: View {
         .accessibilityActions {
             if isEnabled {
                 Button(fold >= 45 ? "Open the lid" : "Close the lid") {
-                    withAnimation(settling) { fold = fold >= 45 ? 0 : 90 }
+                    rest(fold: fold >= 45 ? 0 : 90, animation: settling)
                 }
                 Button("Put the display back") {
                     reset()
@@ -117,7 +119,15 @@ struct MacBookShowcase: View {
         }
     }
 
-    // MARK: What is shown: the stored lid and brightness, plus the hands
+    // MARK: What is shown: the resting lid and brightness, plus the hands
+
+    private var fold: Double {
+        restingFold ?? storedFold
+    }
+
+    private var brightness: Double {
+        restingBrightness ?? storedBrightness
+    }
 
     private var shownFold: Double {
         min(max(fold + folding, Self.foldRange.lowerBound), Self.foldRange.upperBound)
@@ -157,18 +167,26 @@ struct MacBookShowcase: View {
     private func foldChanged(_ translation: CGSize) {
         moreFingersDown()
         guard !isFoldSuspended, !isBrightening else { return }
-        isFolding = true
+        if !isFolding {
+            isFolding = true
+            lastGrain = shownFold
+        }
         // The top of the lid follows the fingers: down folds it, a little more than its height
         // shuts it.
         let wanted: Double = fold + Double(translation.height / lidHeight) * 95
         folding = min(max(wanted, Self.foldRange.lowerBound), Self.foldRange.upperBound) - fold
+        // The hinge under the fingers: a fine grain as it turns, a knock at its stops.
+        if abs(shownFold - lastGrain) >= Self.grainStep {
+            lastGrain = shownFold
+            haptics.grain()
+        }
         updateStop()
     }
 
     private func endFold() {
         isFoldSuspended = false
         guard isFolding else { return }
-        fold = shownFold
+        rest(fold: shownFold)
         folding = 0
         isFolding = false
     }
@@ -193,7 +211,7 @@ struct MacBookShowcase: View {
 
     private func endBrightness() {
         guard isBrightening else { return }
-        brightness = shownBrightness
+        rest(brightness: shownBrightness)
         brightening = 0
         isBrightening = false
         brightnessFade = Task {
@@ -203,21 +221,39 @@ struct MacBookShowcase: View {
         }
     }
 
+    /// Back as it came, from wherever the lid is, smoothly.
     private func reset() {
+        rest(fold: shownFold, brightness: shownBrightness)
         folding = 0
         brightening = 0
         isFolding = false
         isBrightening = false
         stop = .between
-        withAnimation(settling) {
-            fold = 0
-            brightness = 1
+        rest(fold: 0, brightness: 1, animation: settling)
+    }
+
+    /// Leaves the lid or the brightness there, and keeps it for the next time.
+    private func rest(fold: Double? = nil, brightness: Double? = nil, animation: Animation? = nil) {
+        withAnimation(animation) {
+            if let fold {
+                restingFold = fold
+            }
+            if let brightness {
+                restingBrightness = brightness
+            }
+        }
+        if let fold {
+            storedFold = fold
+        }
+        if let brightness {
+            storedBrightness = brightness
         }
     }
 
     /// A knock once the lid reaches a stop, not again until it has left it.
     private func updateStop() {
         let shown: Double = shownFold
+        let previous: LidStop = stop
         if shown >= Self.foldRange.upperBound {
             stop = .shut
         } else if shown <= Self.foldRange.lowerBound {
@@ -225,6 +261,8 @@ struct MacBookShowcase: View {
         } else if shown < Self.foldRange.upperBound - 2, shown > Self.foldRange.lowerBound + 2 {
             stop = .between
         }
+        guard stop != previous, stop != .between else { return }
+        haptics.knock(isShut: stop == .shut)
     }
 
     /// Dark at once when the lid is nearly shut; lit again a moment after it opens, as macOS does.
