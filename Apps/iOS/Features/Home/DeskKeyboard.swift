@@ -11,6 +11,8 @@ enum DeskKeyboard: String {
     /// It slopes down toward the hands.
     static let backHeight: CGFloat = 1.09
     static let frontHeight: CGFloat = 0.41
+    /// The radius of its corners in plan, as Apple's pictures show them.
+    static let cornerRadius: CGFloat = 0.75
     /// The colours of the iMac; the keyboards sold on their own are silver.
     static let colours: Set<String> = ["Blue", "Green", "Orange", "Pink", "Purple", "Yellow"]
 

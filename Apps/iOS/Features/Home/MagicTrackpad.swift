@@ -10,19 +10,22 @@ struct MagicTrackpad: View {
     static let depth: CGFloat = 11.49
     static let backHeight: CGFloat = 1.09
     static let frontHeight: CGFloat = 0.49
+    /// The radius of its corners in plan.
+    static let cornerRadius: CGFloat = 0.95
 
     var body: some View {
         Canvas { context, size in
             let across: CGFloat = size.width / Self.width
             let down: CGFloat = size.height / Self.depth
             let rim: CGFloat = 0.12
-            context.fill(
-                Path(roundedRect: CGRect(origin: .zero, size: size), cornerSize: CGSize(width: 0.95 * across, height: 0.95 * down)),
-                with: .color(aluminium)
-            )
+            let corner: CGSize = .init(width: Self.cornerRadius * across, height: Self.cornerRadius * down)
+            context.fill(Path(roundedRect: CGRect(origin: .zero, size: size), cornerSize: corner), with: .color(aluminium))
             let glass: CGRect = CGRect(origin: .zero, size: size).insetBy(dx: rim * across, dy: rim * down)
             context.fill(
-                Path(roundedRect: glass, cornerSize: CGSize(width: (0.95 - rim) * across, height: (0.95 - rim) * down)),
+                Path(
+                    roundedRect: glass,
+                    cornerSize: CGSize(width: (Self.cornerRadius - rim) * across, height: (Self.cornerRadius - rim) * down)
+                ),
                 with: .linearGradient(
                     Gradient(colors: [Color(white: 0.985), Color(white: 0.93)]),
                     startPoint: CGPoint(x: glass.minX, y: glass.minY),
