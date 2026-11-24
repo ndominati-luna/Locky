@@ -54,6 +54,19 @@ final class MotionMonitor {
         setMoving(false)
     }
 
+    /// Asks for Motion & Fitness, which the pedometer needs, at the end of the onboarding that
+    /// announces it: iOS asks on the first query, which would otherwise come unannounced during the
+    /// pairing. Without it, Locky still follows the live motion (no permission needed).
+    func requestAuthorization() async {
+        guard CMPedometer.isStepCountingAvailable(), CMPedometer.authorizationStatus() == .notDetermined else { return }
+        let end: Date = .now
+        await withCheckedContinuation { (continuation: CheckedContinuation<Void, Never>) in
+            pedometer.queryPedometerData(from: end.addingTimeInterval(-1), to: end) { @Sendable _, _ in
+                continuation.resume()
+            }
+        }
+    }
+
     /// Checks the pedometer for steps during the last seconds (works after a suspension).
     func refreshFromPedometer() {
         guard CMPedometer.isStepCountingAvailable(), CMPedometer.authorizationStatus() != .denied else { return }

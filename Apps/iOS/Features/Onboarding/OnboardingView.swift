@@ -150,7 +150,7 @@ private struct OnboardingPageView: View {
         case .macApp:
             "Now, download Locky for your Mac."
         case .permissions:
-            "To work properly, Locky needs permissions to use Bluetooth and notifications. Your Mac password stays in the keychain of your iPhone and only travels end-to-end encrypted to your Mac."
+            "To work properly, Locky needs Bluetooth, notifications and Motion & Fitness, which tells whether you walk away. Your Mac password stays on your iPhone and only travels end-to-end encrypted."
         }
     }
 }

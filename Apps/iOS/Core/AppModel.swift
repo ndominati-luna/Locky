@@ -147,19 +147,20 @@ final class AppModel {
         if preferences.onboardingCompleted {
             session.start()
         }
-        if session.isPaired {
-            motion.start()
-        }
     }
 
-    /// Called at the end of the onboarding: triggers the Bluetooth and notification prompts.
+    /// Called at the end of the onboarding: triggers the Bluetooth, notification and Motion &
+    /// Fitness prompts, the three it announces.
     func completeOnboarding() async {
         preferences.onboardingCompleted = true
         session.start()
         await notifications.requestAuthorization()
+        await motion.requestAuthorization()
     }
 
     func sceneBecameActive() {
+        isOnScreen = true
+        updateProximityInterest()
         wakeIfDormant()
         notifications.clearBadge()
         widgets.drainCommands()

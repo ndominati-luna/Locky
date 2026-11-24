@@ -434,6 +434,16 @@
         }
       }
     },
+    "To work properly, Locky needs Bluetooth, notifications and Motion & Fitness, which tells whether you walk away. Your Mac password stays on your iPhone and only travels end-to-end encrypted." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pour bien fonctionner, Locky a besoin du Bluetooth, des notifications et de « Mouvements et forme », qui lui dit si tu t’éloignes. Le mot de passe de ton Mac reste dans ton iPhone et ne voyage que chiffré de bout en bout."
+          }
+        }
+      }
+    },
     "Wallpaper of my Mac" : {
       "localizations" : {
         "fr" : {
@@ -2546,16 +2556,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "État thermique de ton Mac"
-          }
-        }
-      }
-    },
-    "To work properly, Locky needs permissions to use Bluetooth and notifications. Your Mac password stays in the keychain of your iPhone and only travels end-to-end encrypted to your Mac." : {
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pour bien fonctionner, Locky doit pouvoir utiliser le Bluetooth et t’envoyer des notifications. Le mot de passe de ton Mac reste dans le trousseau de ton iPhone et ne voyage que chiffré de bout en bout vers ton Mac."
           }
         }
       }

@@ -251,7 +251,10 @@ calibrages des premières versions, faits contre le Mac en un seul point, resten
 choisie (curseur « cadenas », 1,5 m par défaut = ancien seuil ; les réglages enregistrés avant ce changement sont
 divisés par deux une fois pour verrouiller au même endroit), déverrouillage avec hystérésis (70 % de la distance),
 temps de maintien de 1,5 s. On ne verrouille que si l'iPhone bouge (accéléromètre + podomètre interrogé à chaque
-réveil BLE) et que le Mac n'est pas utilisé ; distance doublée pendant un appel.
+réveil BLE) et que le Mac n'est pas utilisé ; distance doublée pendant un appel. Le podomètre demande
+« Mouvements et forme » : l'autorisation est demandée à la fin de l'onboarding, qui l'annonce avec le Bluetooth et
+les notifications (sinon iOS la posait sans prévenir pendant l'appairage) ; refusée, Locky suit seulement le
+mouvement en direct, qui n'en a pas besoin.
 Perdre le lien Bluetooth ne verrouille jamais le Mac (app fermée, Bluetooth coupé…) : seule la distance mesurée
 le fait.
 
