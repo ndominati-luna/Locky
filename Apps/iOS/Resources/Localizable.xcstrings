@@ -1802,6 +1802,16 @@
         }
       }
     },
+    "Open the lid" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ouvrir l’écran"
+          }
+        }
+      }
+    },
     "Page %lld of %lld" : {
       "localizations" : {
         "en" : {
@@ -2616,6 +2626,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Fermer"
+          }
+        }
+      }
+    },
+    "Close the lid" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Refermer l’écran"
           }
         }
       }

@@ -21,6 +21,8 @@ struct ProDisplayXDR<Screen: View, Accessory: View>: View {
     let accessory: Accessory
 
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    /// Disabled, it cannot be handled: the gestures let the touches go by.
+    @Environment(\.isEnabled) private var isEnabled
     /// The rotation the picture is laid out upright for: 0 landscape, -90 or 90 portrait.
     @State private var pictureRotation: Double
     @State private var isBlank: Bool = false
@@ -84,11 +86,16 @@ struct ProDisplayXDR<Screen: View, Accessory: View>: View {
         .aspectRatio(1 / XDRMeasures.canvasHeight(isPortrait: pose.isPortrait), contentMode: .fit)
         .contentShape(.rect)
         .proDisplayXDRGestures(handlers)
-        .accessibilityAction(named: Text("Rotate the display")) {
-            withAnimation(settling) { pose.rotation = pose.isPortrait ? 0 : -90 }
-        }
-        .accessibilityAction(named: Text("Put the display back")) {
-            withAnimation(settling) { pose = .init() }
+        .accessibilityActions {
+            // Disabled (the Mac out of reach), the display stays as it is.
+            if isEnabled {
+                Button("Rotate the display") {
+                    withAnimation(settling) { pose.rotation = pose.isPortrait ? 0 : -90 }
+                }
+                Button("Put the display back") {
+                    withAnimation(settling) { pose = .init() }
+                }
+            }
         }
         // Settled by the hands or turned from outside (an accessibility action of the caller).
         .onChange(of: pose.rotation) {

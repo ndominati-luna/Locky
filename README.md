@@ -351,7 +351,8 @@ relâchée elle finit en paysage ou en portrait, le plus proche (en se rehaussan
 noir un instant et image remise droite) ; deux doigts qui montent ou descendent la font glisser le long du
 bras ; un doigt l'incline (−5° à 25°, comme le Pro Stand) et la fait pivoter sur son pied, qui ne bouge pas ;
 un double tap (double clic sur Mac) remet tout l'écran comme au déballage : paysage, droit, à sa hauteur de
-départ. Sur iPhone ce sont des reconnaisseurs UIKit, qui voient aussi les gestes faits sur le lecteur du film
+départ. Sur iPhone ce sont des reconnaisseurs UIKit (`HandGestureRecognizers.swift`, partagés avec le MacBook),
+qui voient aussi les gestes faits sur le lecteur du film
 et empêchent la page de défiler sous l'écran ; les taps du lecteur (commandes, lecture ou pause au centre)
 attendent 0,35 s de savoir si un second tap suit, et le second tap ne va jamais au bouton touché : un double
 tap ne met pas le film en pause. Sur Mac, rotation au trackpad, défilement à deux doigts pour la hauteur,
@@ -359,6 +360,20 @@ glisser à la souris (le lecteur garde les clics sur l'image), double clic parto
 ne déplace plus la fenêtre, sinon le double clic l'agrandissait). La pose (`ProDisplayXDRPose`) est gardée
 sur l'accueil.
 Démo : `-LockyDemo YES -LockyDemoMacModel studio|mini|pro`.
+
+Les MacBook se manipulent aussi sur l'accueil (`MacBookShowcase`). Leur image du catalogue est coupée à la
+charnière, mesurée une fois dans l'image elle-même (`MacBookOutline`) : l'écran est un rectangle jusqu'à la
+charnière, le dessous s'élargit vers le bord avant, et la couleur de l'alu se lit sur ce bord. Deux doigts
+replient l'écran ou l'ouvrent davantage (jusqu'à 130° environ), et il reste là où on le lâche ; il tourne sur sa
+charnière vu par la caméra de l'image, dont la distance et la hauteur se déduisent de la perspective du clavier,
+que l'écran fermé couvre exactement. En se refermant, la lumière de l'écran tombe sur le clavier aux couleurs du
+fond d'écran, puis l'écran s'éteint quand il est presque fermé (sous 18° d'ouverture, rallumé passé 26°) ; fermé,
+on voit le dos de l'écran, dans l'alu du Mac. Fermé ou ouvert au maximum, une petite vibration. Trois doigts
+règlent la luminosité de l'écran dessiné, avec un indicateur en haut à droite comme sur macOS ; un double tap
+remet tout comme sur l'image, à pleine luminosité. Un doigt tire toujours le Mac comme un élastique. Tant que le
+Mac est hors de portée, ces gestes, ceux du XDR et l'élastique sont coupés. Angle et luminosité sont gardés
+(`macBookFold`, `macBookBrightness`). Démo : `-LockyDemo YES` (MacBook Pro 14 pouces), `-macBookFold 60` pour un
+angle donné (90 fermé, `<real>-40</real>` ouvert au maximum).
 
 ## À configurer avant une release
 

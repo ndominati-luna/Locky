@@ -9,6 +9,8 @@ struct MacFrame {
     /// The wallpaper is already drawn on screen (renditions made by the app for its widgets and
     /// its Live Activity, which do not embed the catalog).
     var hasWallpaper: Bool = false
+    /// Its name in the catalog of the app, `nil` for a rendition.
+    var asset: String?
 
     /// The Mac from the catalog embedded in the app (``MacCatalog``), its screen transparent.
     /// `nil` for a Mac newer than this version of Locky, or in an extension (no catalog there).
@@ -17,6 +19,6 @@ struct MacFrame {
             let entry = MacCatalog.entry(deviceType: deviceType, model: model),
             let image = UIImage(named: entry.asset)
         else { return nil }
-        return .init(image: image, screen: entry.screen)
+        return .init(image: image, screen: entry.screen, asset: entry.asset)
     }
 }

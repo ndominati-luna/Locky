@@ -134,19 +134,38 @@ private struct ConnectionChip: View {
 }
 
 /// The Mac floating over its wallpaper. It can be pulled around and always springs back to the
-/// center; a Mac without a display stands under a Pro Display XDR, handled with its own gestures.
+/// center; a Mac without a display stands under a Pro Display XDR, and a MacBook folds its lid, both
+/// handled with their own gestures. Out of reach, the Mac is left alone.
 private struct MacShowcase: View {
     @Environment(AppModel.self) private var model
     @State private var drag: CGSize = .zero
 
-    private var isDisplayless: Bool {
-        model.macFrame.map { $0.screen == nil } ?? false
-    }
-
     var body: some View {
+        let frame: MacFrame? = model.macFrame
+        let isLaptop: Bool = model.macStatus?.family.isLaptop ?? false
+        let macBook: MacBookOutline? = isLaptop ? frame.flatMap { MacBookOutline.of($0) } : nil
+        let hasOwnGestures: Bool = (frame != nil && frame?.screen == nil) || macBook != nil
         VStack(spacing: 14) {
             Group {
-                if let frame = model.macFrame, frame.screen == nil {
+                if let frame, let macBook {
+                    MacBookShowcase(
+                        frame: frame,
+                        outline: macBook,
+                        wallpaper: model.visuals.wallpaperImage,
+                        lockState: model.lockState,
+                        isConnected: model.isConnected,
+                        userPicture: model.visuals.userPicture,
+                        userName: model.macStatus?.userName,
+                        isUnlocking: model.isUnlocking
+                    ) { translation in
+                        // Its one finger pulls the Mac like anywhere else.
+                        if let translation {
+                            drag = resisted(translation)
+                        } else {
+                            springBack()
+                        }
+                    }
+                } else if let frame, frame.screen == nil {
                     // No display of its own: under a Pro Display XDR.
                     DisplaylessMacShowcase(
                         frame: frame,
@@ -178,8 +197,13 @@ private struct MacShowcase: View {
             .offset(drag)
             .rotation3DEffect(.degrees(Double(drag.width) * 0.08), axis: (x: 0, y: 1, z: 0))
             .rotation3DEffect(.degrees(Double(-drag.height) * 0.08), axis: (x: 1, y: 0, z: 0))
-            // The fingers belong to the display, not to the rubber band.
-            .gesture(rubberBand, including: isDisplayless ? .subviews : .all)
+            // The fingers belong to the display or the lid, which pull the Mac themselves.
+            .gesture(rubberBand, including: hasOwnGestures ? .subviews : .all)
+            .disabled(!model.isConnected)
+            // Out of reach in the middle of a pull: the gesture is cancelled, the Mac comes back.
+            .onChange(of: model.isConnected) {
+                springBack()
+            }
 
             VStack(spacing: 4) {
                 Text(model.macName)
@@ -201,16 +225,24 @@ private struct MacShowcase: View {
     private var rubberBand: some Gesture {
         DragGesture(minimumDistance: 0)
             .onChanged { value in
-                drag = .init(width: resist(value.translation.width), height: resist(value.translation.height))
+                drag = resisted(value.translation)
             }
             .onEnded { _ in
-                withAnimation(.spring(duration: 0.6, bounce: 0.55)) { drag = .zero }
+                springBack()
             }
+    }
+
+    private func resisted(_ translation: CGSize) -> CGSize {
+        .init(width: resist(translation.width), height: resist(translation.height))
     }
 
     private func resist(_ translation: CGFloat) -> CGFloat {
         let limit: CGFloat = 90
         return limit * translation / (abs(translation) + limit)
+    }
+
+    private func springBack() {
+        withAnimation(.spring(duration: 0.6, bounce: 0.55)) { drag = .zero }
     }
 }
 

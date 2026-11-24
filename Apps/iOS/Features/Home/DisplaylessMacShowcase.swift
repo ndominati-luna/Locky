@@ -32,16 +32,22 @@ struct DisplaylessMacShowcase: View {
         }
         .saturation(isConnected ? 1 : 0.3)
         .animation(.easeInOut(duration: 0.45), value: lockState)
+        // Out of reach, like the rest of the Mac, it is left alone.
+        .disabled(!isConnected)
         .accessibilityElement(children: .ignore)
         .accessibilityLabel(Text(verbatim: "Pro Display XDR"))
-        .accessibilityAction(named: Text("Rotate the display")) {
-            withAnimation(.spring(duration: 0.55, bounce: 0.18)) {
-                pose.rotation = pose.isPortrait ? 0 : -90
-            }
-        }
-        .accessibilityAction(named: Text("Put the display back")) {
-            withAnimation(.spring(duration: 0.55, bounce: 0.18)) {
-                pose = .init()
+        .accessibilityActions {
+            if isConnected {
+                Button("Rotate the display") {
+                    withAnimation(.spring(duration: 0.55, bounce: 0.18)) {
+                        pose.rotation = pose.isPortrait ? 0 : -90
+                    }
+                }
+                Button("Put the display back") {
+                    withAnimation(.spring(duration: 0.55, bounce: 0.18)) {
+                        pose = .init()
+                    }
+                }
             }
         }
     }
