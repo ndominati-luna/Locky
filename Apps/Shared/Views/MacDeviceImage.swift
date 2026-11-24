@@ -27,7 +27,7 @@ struct MacDeviceImage: View {
                     // screen, the bezel, notch and rounded corners stay drawn over them.
                     .background {
                         if !frame.hasWallpaper, let screen = frame.screen {
-                            ScreenRectLayout(rect: screen) {
+                            ScreenRectLayout(rect: screen, outset: 1) {
                                 MacScreen(
                                     wallpaper: wallpaper,
                                     lockState: lockState,

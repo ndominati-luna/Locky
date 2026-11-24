@@ -313,12 +313,14 @@ private struct MacBookFold<Screen: View>: View, Animatable {
         GeometryReader { proxy in
             let lid: LidProjection = .init(outline: outline, size: proxy.size)
             ZStack(alignment: .topLeading) {
-                // The deck and the front edge, under the hinge.
+                // The deck and the front edge, under the hinge, and a point of the lid above it while
+                // the screen shows: the edges of the two halves overlap, no thread of what lies
+                // behind shows between them.
                 Image(uiImage: image)
                     .resizable()
                     .mask(alignment: .bottom) {
                         Rectangle()
-                            .frame(height: max(0, proxy.size.height - lid.hinge))
+                            .frame(height: max(0, proxy.size.height - lid.hinge + (lid.showsScreen(fold) ? 1 : 0)))
                     }
                 DeckShade(
                     image: image,
@@ -332,7 +334,7 @@ private struct MacBookFold<Screen: View>: View, Animatable {
                 Group {
                     if lid.showsScreen(fold) {
                         ZStack {
-                            ScreenRectLayout(rect: screenRect) {
+                            ScreenRectLayout(rect: screenRect, outset: 1) {
                                 screen
                             }
                             Image(uiImage: image)
