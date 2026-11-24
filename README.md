@@ -370,9 +370,9 @@ replient l'écran ou l'ouvrent davantage (jusqu'à 130° environ), et il reste l
 charnière vu par la caméra de l'image, dont la distance et la hauteur se déduisent de la perspective du clavier,
 que l'écran fermé couvre exactement. En se refermant, la lumière de l'écran tombe sur le clavier aux couleurs du
 fond d'écran, puis l'écran s'éteint quand il est presque fermé (sous 18° d'ouverture, rallumé passé 26°) ; fermé,
-on voit le dos de l'écran, dans l'alu du Mac. Sous les doigts, la charnière donne un grain léger tous les 2,5°
-et un choc net aux butées, fermé ou ouvert au maximum (`LidHaptics`, Core Haptics, plus fort que les vibrations
-du système). Trois doigts
+on voit le dos de l'écran, dans l'alu du Mac. Sous les doigts, la charnière donne un grain léger tous les 2°
+et, aux butées (fermé ou ouvert au maximum), un seul choc net à pleine force, sans grain autour pour qu'il reste
+franc (`LidHaptics`, Core Haptics, plus fort que les vibrations du système). Trois doigts
 règlent la luminosité de l'écran dessiné, avec un indicateur en haut à droite comme sur macOS ; un double tap
 remet tout comme sur l'image, à pleine luminosité, en animant le retour (l'angle vit dans un état SwiftUI, gardé
 ensuite dans les réglages : un changement d'`@AppStorage` ne s'anime pas). Un doigt tire toujours le Mac comme un

@@ -56,7 +56,7 @@ struct MacBookShowcase: View {
     private static let screenOffFold: Double = 72
     private static let screenOnFold: Double = 64
     /// Degrees between two grains of the hinge under the fingers.
-    private static let grainStep: Double = 2.5
+    private static let grainStep: Double = 2
 
     var body: some View {
         MacBookFold(
@@ -175,12 +175,18 @@ struct MacBookShowcase: View {
         // shuts it.
         let wanted: Double = fold + Double(translation.height / lidHeight) * 95
         folding = min(max(wanted, Self.foldRange.lowerBound), Self.foldRange.upperBound) - fold
-        // The hinge under the fingers: a fine grain as it turns, a knock at its stops.
-        if abs(shownFold - lastGrain) >= Self.grainStep {
+        // The hinge under the fingers: a knock at its stops, and a fine grain as it turns, which
+        // keeps clear of the stops so that the knock comes alone.
+        updateStop()
+        if stop == .between, isClearOfStops, abs(shownFold - lastGrain) >= Self.grainStep {
             lastGrain = shownFold
             haptics.grain()
         }
-        updateStop()
+    }
+
+    /// Away from both stops by more than a degree.
+    private var isClearOfStops: Bool {
+        shownFold > Self.foldRange.lowerBound + 1 && shownFold < Self.foldRange.upperBound - 1
     }
 
     private func endFold() {

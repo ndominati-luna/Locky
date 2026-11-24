@@ -1,7 +1,7 @@
 import CoreHaptics
 
 /// The lid of the MacBook in the hand: a fine grain as it turns on its hinge, which gives the
-/// fingers a light continuous texture while they move, and a firm knock when it comes to a stop.
+/// fingers a light continuous texture while they move, and one clean knock when it comes to a stop.
 /// Core Haptics rather than the system impacts, for a knock stronger than their heaviest.
 @MainActor
 final class LidHaptics {
@@ -10,24 +10,14 @@ final class LidHaptics {
 
     /// One grain of the hinge, every few degrees the lid turns: the faster, the closer they come.
     func grain() {
-        play([Self.transient(intensity: 0.3, sharpness: 0.15)])
+        play([Self.transient(intensity: 0.4, sharpness: 0.25)])
     }
 
-    /// The lid stops: shut on the keyboard, a deep thud; opened as far as it goes, a drier one.
+    /// The lid stops: a single sharp tap at full strength, with nothing held under it, which would
+    /// blur it into a rumble. Shut on the keyboard it sounds a little deeper than opened as far as
+    /// it goes.
     func knock(isShut: Bool) {
-        play([
-            Self.transient(intensity: 1, sharpness: isShut ? 0.4 : 0.65),
-            // A short body under the click, which makes it land.
-            .init(
-                eventType: .hapticContinuous,
-                parameters: [
-                    .init(parameterID: .hapticIntensity, value: isShut ? 1 : 0.75),
-                    .init(parameterID: .hapticSharpness, value: 0.1)
-                ],
-                relativeTime: 0,
-                duration: isShut ? 0.14 : 0.08
-            )
-        ])
+        play([Self.transient(intensity: 1, sharpness: isShut ? 0.6 : 0.8)])
     }
 
     private func play(_ events: [CHHapticEvent]) {
