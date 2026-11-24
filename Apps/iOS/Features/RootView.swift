@@ -19,6 +19,17 @@ struct RootView: View {
         }
         .animation(.smooth, value: model.session.isPaired)
         .animation(.smooth, value: model.setup == nil)
+        // A few shakes open the Mac lab, wherever the app is.
+        .opensMacLabOnShake(model: model)
+        #if DEBUG
+        .task {
+            // `-LockyDemoShakes 3`: shakes the simulator, which cannot be shaken from a script.
+            for _ in 0..<DemoMode.shakes {
+                try? await Task.sleep(for: .milliseconds(700))
+                NotificationCenter.default.post(name: .lockyDeviceDidShake, object: nil)
+            }
+        }
+        #endif
         .alert(
             "Locky",
             isPresented: Binding(

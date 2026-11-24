@@ -149,6 +149,27 @@ la vidéo : `Tools/Story/make_story_hls.sh <vidéo> <clé hex> <dossier>` (même
 dossier tel quel, `.htaccess` compris (sans lui, Apache sert les `.ts` comme des fichiers Qt), dans le dossier
 caché du site, par SFTP comme les versions Mac.
 
+### Easter egg : le Mac Lab (iPhone)
+
+Un écran caché (`Apps/iOS/Features/MacLab`) pour essayer tous les Mac du catalogue, un par image (43, nommés par
+famille, taille, couleur et années à partir de leurs types : macOS ne donne que la famille), sur la même scène que
+l'accueil (`MacStage`), avec tous leurs gestes, jamais grisés : on joue même sans le Mac à portée. Fond d'écran :
+celui du Mac appairé, ou une image choisie pour le labo seul (photothèque, appareil photo, Fichiers ou lien
+téléchargé par l'app, `MacLabWallpaper`, gardée dans son propre dossier). Les Mac du labo ont leurs réglages à
+part (`.defaultAppStorage(MacLab.defaults)`, suite `studio.lunabee.locky.maclab`) : rien n'y touche l'accueil.
+On l'ouvre en secouant l'iPhone, app au premier plan (`ShakeDetector`, `MacLabPresenter`) : la première fois,
+trois secousses d'affilée (2 s au plus entre deux) le débloquent, avec un feu d'artifice de 5 s aux couleurs de
+Locky (ses ailes et son cadenas au centre, des gerbes d'étoiles, `LockyFireworks`) et son haptic synchrone
+(`FireworksHaptics`, même programme `FireworksShow`, les 5 premières secondes), puis les félicitations et le
+bouton « Entrer dans le Mac Lab » : le feu d'artifice continue, en boucle et en miroir, tant qu'on ne l'a pas
+touché. Ensuite (`macLabOpened`), une secousse suffit et il s'ouvre directement. Pour revoir le feu d'artifice,
+trois doigts posés et tenus 3 s en haut du labo, au-dessus du Mac, le reverrouillent discrètement, validés par
+une vibration (`MacLab.relock()`, `HandLongPressRecognizer`) ; sur l'écran du Mac, trois doigts restent la
+luminosité. Il apparaît par une onde circulaire partie du centre, en fondu
+enchaîné, et repart de même. Il vit dans sa propre fenêtre, au-dessus de tout, feuilles comprises. Comme la
+vidéo, il ne figure jamais dans les notes de version. Démo : `-LockyDemo YES -LockyDemoShakes 3` (le simulateur
+ne se secoue pas par script), `-macLabOpened NO` pour revoir le feu d'artifice.
+
 **Textes en français : on tutoie l'utilisateur, partout** (apps, widgets, autorisations, raccourcis, notes de
 version Sparkle), sur un ton simple et amical : « Ton Mac », « Éloigne‑toi avec ton iPhone ».
 

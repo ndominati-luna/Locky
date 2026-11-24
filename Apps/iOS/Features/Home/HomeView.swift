@@ -137,143 +137,23 @@ private struct ConnectionChip: View {
     }
 }
 
-/// The Mac floating over its wallpaper. It can be pulled around and always springs back to the
-/// center; a Mac without a display stands under a Pro Display XDR, a MacBook folds its lid and an
-/// iMac tilts its display, all handled with their own gestures. Out of reach, the Mac is left alone.
+/// The paired Mac on its stage (``MacStage``), with its name.
 private struct MacShowcase: View {
     @Environment(AppModel.self) private var model
-    @State private var drag: CGSize = .zero
 
     var body: some View {
-        let frame: MacFrame? = model.macFrame
-        let isLaptop: Bool = model.macStatus?.family.isLaptop ?? false
-        let macBook: MacBookOutline? = isLaptop ? frame.flatMap { MacBookOutline.of($0) } : nil
-        let iMac: IMacOutline? = model.macStatus?.family == .iMac ? frame.flatMap { IMacOutline.of($0) } : nil
-        let hasOwnGestures: Bool = (frame != nil && frame?.screen == nil) || macBook != nil || iMac != nil
-        VStack(spacing: 14) {
-            Group {
-                if let frame, let macBook {
-                    MacBookShowcase(
-                        frame: frame,
-                        outline: macBook,
-                        wallpaper: model.visuals.wallpaperImage,
-                        lockState: model.lockState,
-                        isConnected: model.isConnected,
-                        userPicture: model.visuals.userPicture,
-                        userName: model.macStatus?.userName,
-                        isUnlocking: model.isUnlocking
-                    ) { translation in
-                        // Its one finger pulls the Mac like anywhere else.
-                        if let translation {
-                            drag = resisted(translation)
-                        } else {
-                            springBack()
-                        }
-                    }
-                } else if let frame, let iMac {
-                    IMacShowcase(
-                        frame: frame,
-                        outline: iMac,
-                        wallpaper: model.visuals.wallpaperImage,
-                        lockState: model.lockState,
-                        isConnected: model.isConnected,
-                        userPicture: model.visuals.userPicture,
-                        userName: model.macStatus?.userName,
-                        isUnlocking: model.isUnlocking
-                    ) { translation in
-                        if let translation {
-                            drag = resisted(translation)
-                        } else {
-                            springBack()
-                        }
-                    }
-                } else if let frame, frame.screen == nil {
-                    // No display of its own: under a Pro Display XDR.
-                    DisplaylessMacShowcase(
-                        frame: frame,
-                        family: model.macStatus?.family ?? .unknown,
-                        wallpaper: model.visuals.wallpaperImage,
-                        lockState: model.lockState,
-                        isConnected: model.isConnected,
-                        userPicture: model.visuals.userPicture,
-                        userName: model.macStatus?.userName,
-                        isUnlocking: model.isUnlocking
-                    ) { translation in
-                        // One finger off the display pulls the whole desk like anywhere else.
-                        if let translation {
-                            drag = resisted(translation)
-                        } else {
-                            springBack()
-                        }
-                    }
-                } else {
-                    MacDeviceImage(
-                        frame: model.macFrame,
-                        family: model.macStatus?.family ?? .unknown,
-                        wallpaper: model.visuals.wallpaperImage,
-                        lockState: model.lockState,
-                        isConnected: model.isConnected,
-                        userPicture: model.visuals.userPicture,
-                        userName: model.macStatus?.userName,
-                        isUnlocking: model.isUnlocking
-                    )
-                }
-            }
-            .foregroundStyle(.primary)
-            // Grows with the large screen of an unfolded iPhone Duo held upright.
-            .frame(maxWidth: 560, maxHeight: 380)
-            .shadow(color: .black.opacity(0.45), radius: 24, y: 14 + drag.height * 0.1)
-            .offset(drag)
-            .rotation3DEffect(.degrees(Double(drag.width) * 0.08), axis: (x: 0, y: 1, z: 0))
-            .rotation3DEffect(.degrees(Double(-drag.height) * 0.08), axis: (x: 1, y: 0, z: 0))
-            // The fingers belong to the display or the lid, which pull the Mac themselves.
-            .gesture(rubberBand, including: hasOwnGestures ? .subviews : .all)
-            .disabled(!model.isConnected)
-            // Over its name too.
-            .zIndex(1)
-            // Out of reach in the middle of a pull: the gesture is cancelled, the Mac comes back.
-            .onChange(of: model.isConnected) {
-                springBack()
-            }
-
-            VStack(spacing: 4) {
-                Text(model.macName)
-                    .font(.title2.bold())
-                if let productName = model.macStatus?.productName, productName != model.macName {
-                    Text(productName)
-                        .font(.subheadline)
-                        .foregroundStyle(.secondary)
-                }
-            }
-            .foregroundStyle(.primary)
-            .multilineTextAlignment(.center)
-        }
-        .frame(maxWidth: .infinity)
-        .fadedWhileOutOfReach(!model.isConnected)
-    }
-
-    /// The further you pull, the harder it resists; released, it bounces back to the center.
-    private var rubberBand: some Gesture {
-        DragGesture(minimumDistance: 0)
-            .onChanged { value in
-                drag = resisted(value.translation)
-            }
-            .onEnded { _ in
-                springBack()
-            }
-    }
-
-    private func resisted(_ translation: CGSize) -> CGSize {
-        .init(width: resist(translation.width), height: resist(translation.height))
-    }
-
-    private func resist(_ translation: CGFloat) -> CGFloat {
-        let limit: CGFloat = 90
-        return limit * translation / (abs(translation) + limit)
-    }
-
-    private func springBack() {
-        withAnimation(.spring(duration: 0.6, bounce: 0.55)) { drag = .zero }
+        MacStage(
+            frame: model.macFrame,
+            family: model.macStatus?.family ?? .unknown,
+            wallpaper: model.visuals.wallpaperImage,
+            lockState: model.lockState,
+            isConnected: model.isConnected,
+            userPicture: model.visuals.userPicture,
+            userName: model.macStatus?.userName,
+            isUnlocking: model.isUnlocking,
+            name: model.macName,
+            detail: model.macStatus?.productName
+        )
     }
 }
 

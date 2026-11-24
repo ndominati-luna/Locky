@@ -15,6 +15,11 @@ public enum MacCatalog {
         public let screen: NormalizedRect?
     }
 
+    /// Every type of Mac the catalog knows (model and color), for the Mac lab of the iPhone.
+    public static var typeIdentifiers: [String] {
+        types.keys.sorted()
+    }
+
     /// The image of a Mac, from its exact type (model and color) or, failing that, its model
     /// identifier.
     public static func entry(deviceType: String?, model: String?) -> Entry? {

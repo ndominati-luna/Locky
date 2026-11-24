@@ -14,6 +14,116 @@
         }
       }
     },
+    "Blue" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bleu"
+          }
+        }
+      }
+    },
+    "Blush" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rose poudré"
+          }
+        }
+      }
+    },
+    "Choose a Mac" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Choisis un Mac"
+          }
+        }
+      }
+    },
+    "Citrus" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Citron"
+          }
+        }
+      }
+    },
+    "Congratulations!" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bravo !"
+          }
+        }
+      }
+    },
+    "Enter the Mac Lab" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Entrer dans le Mac Lab"
+          }
+        }
+      }
+    },
+    "Files" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fichiers"
+          }
+        }
+      }
+    },
+    "From a link" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Depuis un lien"
+          }
+        }
+      }
+    },
+    "From now on, a single shake of your iPhone brings you back." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Désormais, une seule secousse de ton iPhone suffit pour y revenir."
+          }
+        }
+      }
+    },
+    "Gold" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Or"
+          }
+        }
+      }
+    },
+    "Green" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vert"
+          }
+        }
+      }
+    },
     "In July %@, Locky was still “soon on the App Store”." : {
       "localizations" : {
         "fr" : {
@@ -24,12 +134,162 @@
         }
       }
     },
+    "Indigo" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Indigo"
+          }
+        }
+      }
+    },
+    "Load" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Charger"
+          }
+        }
+      }
+    },
     "Locky leaves the App Store: its overlay on the login screen of the Mac, and much else it did on the Mac, no longer worked. RIP ☠️" : {
       "localizations" : {
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Locky quitte l’App Store : son incrustation dans l’écran de connexion du Mac et bien d’autres choses qu’il faisait sur le Mac ne fonctionnaient plus. RIP ☠️"
+          }
+        }
+      }
+    },
+    "Mac Pro, rack" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mac Pro, en rack"
+          }
+        }
+      }
+    },
+    "MacBook" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "MacBook"
+          }
+        }
+      }
+    },
+    "MacBook Air 13-inch" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "MacBook Air 13 pouces"
+          }
+        }
+      }
+    },
+    "MacBook Air 15-inch" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "MacBook Air 15 pouces"
+          }
+        }
+      }
+    },
+    "MacBook Pro 13-inch" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "MacBook Pro 13 pouces"
+          }
+        }
+      }
+    },
+    "MacBook Pro 14-inch" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "MacBook Pro 14 pouces"
+          }
+        }
+      }
+    },
+    "MacBook Pro 16-inch" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "MacBook Pro 16 pouces"
+          }
+        }
+      }
+    },
+    "Midnight" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Minuit"
+          }
+        }
+      }
+    },
+    "Orange" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Orange"
+          }
+        }
+      }
+    },
+    "Photo library" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Photothèque"
+          }
+        }
+      }
+    },
+    "Picture from a link" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Image depuis un lien"
+          }
+        }
+      }
+    },
+    "Pink" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rose"
+          }
+        }
+      }
+    },
+    "Purple" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mauve"
           }
         }
       }
@@ -50,6 +310,86 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Faire pivoter l’écran"
+          }
+        }
+      }
+    },
+    "Silver" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Argent"
+          }
+        }
+      }
+    },
+    "Sky Blue" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bleu ciel"
+          }
+        }
+      }
+    },
+    "Space Black" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Noir sidéral"
+          }
+        }
+      }
+    },
+    "Space Gray" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gris sidéral"
+          }
+        }
+      }
+    },
+    "Starlight" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lumière stellaire"
+          }
+        }
+      }
+    },
+    "Take a photo" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Prendre une photo"
+          }
+        }
+      }
+    },
+    "The address of a picture on the web." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "L’adresse d’une image sur le Web."
+          }
+        }
+      }
+    },
+    "This is not a picture Locky can show." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ce n’est pas une image que Locky peut afficher."
           }
         }
       }
@@ -90,6 +430,36 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Le premier film de Locky est mis en ligne."
+          }
+        }
+      }
+    },
+    "Wallpaper of my Mac" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fond d’écran de mon Mac"
+          }
+        }
+      }
+    },
+    "Yellow" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jaune"
+          }
+        }
+      }
+    },
+    "You unlocked the Mac Lab: every Mac of Locky, with the wallpaper of your choice." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tu as débloqué le Mac Lab : tous les Mac de Locky, avec le fond d’écran de ton choix."
           }
         }
       }
@@ -940,6 +1310,26 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ton Mac recevra le changement dès qu’il sera de nouveau à portée."
+          }
+        }
+      }
+    },
+    "https://…" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "https://…"
+          }
+        }
+      }
+    },
+    "iMac 24-inch" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "iMac 24 pouces"
           }
         }
       }

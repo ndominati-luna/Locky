@@ -174,6 +174,40 @@ struct HandPinchRecognizer: UIGestureRecognizerRepresentable {
     }
 }
 
+/// `touches` fingers held still for `duration` seconds: `pressed` once, as the time is up, with
+/// where they are (between them).
+struct HandLongPressRecognizer: UIGestureRecognizerRepresentable {
+    let touches: Int
+    let duration: TimeInterval
+    var isEnabled: Bool = true
+    let pressed: (CGPoint) -> Void
+
+    func makeCoordinator(converter: CoordinateSpaceConverter) -> HandRecognizerDelegate {
+        .init()
+    }
+
+    func makeUIGestureRecognizer(context: Context) -> UILongPressGestureRecognizer {
+        let recognizer: UILongPressGestureRecognizer = .init()
+        recognizer.numberOfTouchesRequired = touches
+        recognizer.minimumPressDuration = duration
+        // Fingers resting on the glass, not moving it (that would be another gesture).
+        recognizer.allowableMovement = 24
+        recognizer.name = HandRecognizerDelegate.name
+        recognizer.delegate = context.coordinator
+        return recognizer
+    }
+
+    func updateUIGestureRecognizer(_ recognizer: UILongPressGestureRecognizer, context: Context) {
+        recognizer.isEnabled = isEnabled
+    }
+
+    func handleUIGestureRecognizerAction(_ recognizer: UILongPressGestureRecognizer, context: Context) {
+        if recognizer.state == .began {
+            pressed(context.converter.location(in: .local))
+        }
+    }
+}
+
 /// Two quick taps of one finger.
 struct HandDoubleTapRecognizer: UIGestureRecognizerRepresentable {
     var isEnabled: Bool = true

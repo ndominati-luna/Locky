@@ -26,6 +26,8 @@
 	<true/>
 	<key>NSBluetoothAlwaysUsageDescription</key>
 	<string>Locky uses Bluetooth to stay connected to your Mac and to measure the distance between your iPhone and your Mac.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Locky only uses the camera when you take a picture for the wallpaper of a Mac.</string>
 	<key>NSFaceIDUsageDescription</key>
 	<string>Locky can ask for Face ID before unlocking your Mac.</string>
 	<key>NSMotionUsageDescription</key>

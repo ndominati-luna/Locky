@@ -67,6 +67,11 @@ enum DemoMode {
         isEnabled && UserDefaults.standard.bool(forKey: "LockyDemoMacPanel")
     }
 
+    /// Shakes of the iPhone after launch (`-LockyDemoShakes 3`), to open the Mac lab in the simulator.
+    static var shakes: Int {
+        isEnabled ? UserDefaults.standard.integer(forKey: "LockyDemoShakes") : 0
+    }
+
     /// The Mac out of reach (`-LockyDemoOutOfReach YES`).
     static var isOutOfReach: Bool {
         UserDefaults.standard.bool(forKey: "LockyDemoOutOfReach")
