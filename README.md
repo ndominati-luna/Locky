@@ -221,7 +221,8 @@ Legacy/                Ancienne app, pour référence
     quand Locky est à l'écran, toutes les 5 s pour la Live Activity, jamais sinon. L'iPhone le dit au Mac à
     chaque passage au premier plan ou en arrière-plan ; un iPhone qui ne le dit pas la reçoit comme avant. Il ne
     reste alors que le battement de cœur toutes les 2 s ;
-  - le mouvement de l'iPhone n'est suivi que pendant que le Mac est connecté, à 2,5 Hz (`MotionMonitor`) ;
+  - le mouvement de l'iPhone n'est suivi que pendant que le Mac est connecté (`MotionMonitor`, à 5 Hz : à 2,5 Hz un
+    iPhone tenu en main passait trop souvent pour immobile, et le Mac gardait une distance trop proche) ;
   - la Live Activity ne se redessine que quand la distance bouge d'au moins 30 cm, au plus toutes les 5 s.
 
 ### Sécurité

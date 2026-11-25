@@ -197,9 +197,10 @@ final class AppModel {
         } else {
             .none
         }
-        guard interest != sentProximityInterest else { return }
+        // Remembered only once sent: an interest lost on the way would leave the Mac silent, and
+        // the gauge on a distance of the past.
+        guard interest != sentProximityInterest, session.send(.proximityInterest(interest)) else { return }
         sentProximityInterest = interest
-        session.send(.proximityInterest(interest))
     }
 
     // MARK: - Live Activity
