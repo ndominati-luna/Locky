@@ -1062,11 +1062,13 @@ final class MacAppModel {
     }
 
     /// The wings, with the Unlock button when it is shown (``LockScreenPromptView/Mode/button`` and
-    /// ``LockScreenPromptView/Mode/wings`` both follow the setting).
+    /// ``LockScreenPromptView/Mode/wings`` both follow the setting). Until the guided first try
+    /// succeeded, the button always shows: the try needs Locky to unlock, and without automatic
+    /// unlocking the button is the only way (Touch ID would start the try over, endlessly).
     private func showPrompt(mode: LockScreenPromptView.Mode) {
         var mode: LockScreenPromptView.Mode = mode
         if mode == .button || mode == .wings {
-            mode = preferences.showsUnlockButton ? .button : .wings
+            mode = preferences.showsUnlockButton || isSetupPending ? .button : .wings
         }
         transitions.showPrompt(deviceName: phoneName, mode: mode) { [weak self] in
             guard let self else { return }
