@@ -135,10 +135,10 @@ final class StatusMenuController: NSObject {
         options.autoenablesItems = false
         let preferences: MacPreferences = model.preferences
         options.addItem(ClosureMenuItem(
-            String(localized: "“Unlock with Locky” on the lock screen"),
-            state: preferences.isLockScreenOverlayEnabled ? .on : .off
-        ) {
-            preferences.isLockScreenOverlayEnabled.toggle()
+            String(localized: "Unlock button on the lock screen"),
+            state: preferences.showsUnlockButton ? .on : .off
+        ) { [weak self] in
+            self?.model.setUnlockButtonShown(!preferences.showsUnlockButton)
         })
         options.addItem(ClosureMenuItem(
             String(localized: "Open at login"),

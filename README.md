@@ -285,7 +285,7 @@ le fait.
 | Taper le mot de passe | `osascript keystroke` (cassait selon le clavier) | `CGEvent` Unicode par paquets de 20, indépendant de la disposition |
 | Accessibilité | écriture SQL dans TCC.db via sudo | autorisation système (`AXIsProcessTrustedWithOptions`) |
 | Vérifier le mot de passe | `echo pwd \| sudo -S ls` | OpenDirectory `verifyPassword` |
-| Fenêtre par‑dessus l'écran verrouillé | `CGShieldingWindowLevel()+1` (ne marche plus) | espace SkyLight au niveau absolu des notifications d'écran verrouillé : ailes Locky autour de la photo de l'utilisateur (repérée par l'API d'accessibilité sur `loginwindow`, sinon Locky affiche la sienne) et bouton « Déverrouiller » dessous, qui fait exactement ce que fait le bouton de l'iPhone |
+| Fenêtre par‑dessus l'écran verrouillé | `CGShieldingWindowLevel()+1` (ne marche plus) | espace SkyLight au niveau absolu des notifications d'écran verrouillé : ailes Locky autour de la photo de l'utilisateur (repérée par l'API d'accessibilité sur `loginwindow`, sinon Locky affiche la sienne) et bouton « Déverrouiller » dessous, qui fait exactement ce que fait le bouton de l'iPhone. Le bouton se masque (menu Options du Mac ou réglages de l'iPhone, même hors de portée via iCloud : `LockyFeature.unlockButton`) ; les ailes restent. Un nouvel appairage le masque, et coupe le déverrouillage automatique après le premier essai, quand le Mac a Touch ID (un doigt enregistré) |
 | Réveil au retour (sans déverrouillage automatique) | `IOPMAssertionDeclareUserActivity` + quitter l'économiseur par AppleScript | même assertion + déplacement de souris sur place (sort de l'économiseur, sans autorisation supplémentaire) |
 | Activer le Bluetooth | `IOBluetoothPreferenceSetControllerPowerState` | idem, via `dlsym` |
 | Lancement à l'ouverture de session | app helper | `SMAppService.mainApp` |
@@ -545,8 +545,10 @@ Le simulateur ne fait pas de Bluetooth et le verrouillage de session ne peut pas
 
 1. Appairage complet (code, mot de passe, calibrage), puis reconnexion après redémarrage de l'iPhone et du Mac.
 2. Verrouillage en s'éloignant iPhone en poche, app iPhone en arrière-plan et iPhone verrouillé.
-3. Déverrouillage automatique au retour, puis manuel via « Déverrouiller avec Locky » **affiché par-dessus l'écran
-   de verrouillage** (niveau d'espace SkyLight `400`, à ajuster si besoin dans `LockScreenSpace.swift`).
+3. Déverrouillage automatique au retour, puis manuel via le bouton « Déverrouiller » **affiché par-dessus l'écran
+   de verrouillage** (niveau d'espace SkyLight `400`, à ajuster si besoin dans `LockScreenSpace.swift`) ; bouton
+   masqué, les ailes seules, sans bloquer les clics sur l'écran de verrouillage. Sur un Mac avec Touch ID, après un
+   nouvel appairage : premier essai réussi, puis déverrouillage automatique coupé et bouton masqué.
 4. Saisie du mot de passe avec une disposition AZERTY et des caractères spéciaux.
 5. Widgets, Live Activity, contrôle du Centre de contrôle, Siri (« Verrouille mon Mac avec Locky ») et Apple Watch
    (images et état reçus d'iCloud sans l'iPhone).

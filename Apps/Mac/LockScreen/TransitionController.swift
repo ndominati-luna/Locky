@@ -46,6 +46,7 @@ final class TransitionController {
         promptContent = content
         if let promptPanel {
             // Already on screen: update the button, keep the wings.
+            promptPanel.ignoresMouseEvents = mode == .wings
             promptPanel.show(content, aboveLockScreen: true)
             return
         }
@@ -154,7 +155,8 @@ final class TransitionController {
             min(block.minY, wingsBottom) - buttonSize.height
         }
         let buttonFrame: CGRect = .init(x: avatar.midX - buttonSize.width / 2, y: buttonOrigin, width: buttonSize.width, height: buttonSize.height)
-        let panel: OverlayPanel = .init(contentRect: buttonFrame, interactive: true)
+        // Without its button, clicks go to the lock screen under it.
+        let panel: OverlayPanel = .init(contentRect: buttonFrame, interactive: content.mode != .wings)
         panel.show(content, aboveLockScreen: true)
         promptPanel = panel
     }

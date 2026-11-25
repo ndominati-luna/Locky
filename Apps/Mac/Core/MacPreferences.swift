@@ -17,7 +17,8 @@ final class MacPreferences {
         static let lockBackgroundKind: String = "locky.lockBackgroundKind"
         static let lockBackgroundColor: String = "locky.lockBackgroundColor"
         static let lockBackgroundImageVersion: String = "locky.lockBackgroundImageVersion"
-        static let lockScreenOverlay: String = "locky.lockScreenOverlay"
+        /// Before the wings showed whatever it is: `false` hid them with the button.
+        static let unlockButton: String = "locky.lockScreenOverlay"
         static let lockAnimationTitle: String = "locky.lockAnimationTitle"
         static let phonePreferences: String = "locky.phonePreferences"
         static let device: String = "locky.pairedDevice"
@@ -106,9 +107,12 @@ final class MacPreferences {
         return trimmed.isEmpty ? "Locky" : trimmed
     }
 
-    /// "Unlock with Locky" panel displayed above the lock screen.
-    var isLockScreenOverlayEnabled: Bool {
-        didSet { defaults.set(isLockScreenOverlayEnabled, forKey: Key.lockScreenOverlay) }
+    /// The Unlock button under the user picture of the lock screen, which asks the iPhone for the
+    /// password. Hidden, the wings still frame the picture when the iPhone is near: Touch ID or the
+    /// password unlock. Chosen on the Mac or on the iPhone; a new pairing hides it when the Mac has
+    /// Touch ID.
+    var showsUnlockButton: Bool {
+        didSet { defaults.set(showsUnlockButton, forKey: Key.unlockButton) }
     }
 
     /// Preferences chosen on the iPhone.
@@ -146,7 +150,7 @@ final class MacPreferences {
         lockBackgroundKind = defaults.string(forKey: Key.lockBackgroundKind).flatMap(LockBackgroundKind.init) ?? .color
         lockBackgroundColor = defaults.string(forKey: Key.lockBackgroundColor) ?? "000000"
         lockBackgroundImageVersion = defaults.integer(forKey: Key.lockBackgroundImageVersion)
-        isLockScreenOverlayEnabled = defaults.object(forKey: Key.lockScreenOverlay) as? Bool ?? true
+        showsUnlockButton = defaults.object(forKey: Key.unlockButton) as? Bool ?? true
         lockAnimationTitle = defaults.string(forKey: Key.lockAnimationTitle) ?? ""
         phonePreferences = defaults.data(forKey: Key.phonePreferences)
             .flatMap { try? JSONDecoder().decode(PhonePreferences.self, from: $0) } ?? .init()
@@ -168,6 +172,6 @@ final class MacPreferences {
         device = nil
         unlockCount = 0
         isAutoLockEnabled = true
-        settingsClock = .init(preferences: .now, autoLock: .now, lockAnimation: .now)
+        settingsClock = .init(preferences: .now, autoLock: .now, lockAnimation: .now, unlockButton: .now)
     }
 }

@@ -1762,12 +1762,12 @@
         }
       }
     },
-    "“Unlock with Locky” on the lock screen" : {
+    "Unlock button on the lock screen" : {
       "localizations" : {
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "« Déverrouiller avec Locky » sur l’écran de verrouillage"
+            "value" : "Bouton Déverrouiller sur l’écran de verrouillage"
           }
         }
       }

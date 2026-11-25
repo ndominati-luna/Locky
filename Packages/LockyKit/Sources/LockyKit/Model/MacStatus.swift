@@ -27,6 +27,13 @@ public struct MacStatus: Codable, Sendable, Equatable {
     public var appBuild: Int?
     /// See ``LockyFeature``; `nil` before Locky 1.0.2 for Mac. Sent over Bluetooth only.
     public var features: [String]?
+    /// Touch ID is set up on the Mac (a finger enrolled, built in or on a Magic Keyboard): a new
+    /// pairing leaves automatic unlocking off and the Unlock button hidden. `nil` before Locky
+    /// 1.0.15 for Mac. Sent over Bluetooth only.
+    public var hasTouchID: Bool?
+    /// The Unlock button shows on the lock screen of the Mac (``LockyFeature/unlockButton``). `nil`
+    /// before Locky 1.0.15 for Mac. Sent over Bluetooth only.
+    public var showsUnlockButton: Bool?
 
     public init(
         macID: UUID,
@@ -44,7 +51,9 @@ public struct MacStatus: Codable, Sendable, Equatable {
         deviceType: String? = nil,
         appVersion: String? = nil,
         appBuild: Int? = nil,
-        features: [String]? = nil
+        features: [String]? = nil,
+        hasTouchID: Bool? = nil,
+        showsUnlockButton: Bool? = nil
     ) {
         self.macID = macID
         self.name = name
@@ -62,5 +71,7 @@ public struct MacStatus: Codable, Sendable, Equatable {
         self.appVersion = appVersion
         self.appBuild = appBuild
         self.features = features
+        self.hasTouchID = hasTouchID
+        self.showsUnlockButton = showsUnlockButton
     }
 }

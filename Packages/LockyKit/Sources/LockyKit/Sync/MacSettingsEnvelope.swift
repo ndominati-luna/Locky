@@ -26,20 +26,24 @@ public struct MacSettingsEnvelope: Codable, Sendable, Equatable {
     /// "Locky activated" on the Mac.
     public var autoLock: Dated<Bool>?
     public var lockAnimation: Dated<LockAnimationSettings>?
+    /// The Unlock button of the lock screen of the Mac (``LockyFeature/unlockButton``).
+    public var unlockButton: Dated<Bool>?
 
     public init(
         preferences: Dated<PhonePreferences>? = nil,
         autoLock: Dated<Bool>? = nil,
-        lockAnimation: Dated<LockAnimationSettings>? = nil
+        lockAnimation: Dated<LockAnimationSettings>? = nil,
+        unlockButton: Dated<Bool>? = nil
     ) {
         self.preferences = preferences
         self.autoLock = autoLock
         self.lockAnimation = lockAnimation
+        self.unlockButton = unlockButton
     }
 
     /// `true` when it holds no setting.
     public var isEmpty: Bool {
-        preferences == nil && autoLock == nil && lockAnimation == nil
+        preferences == nil && autoLock == nil && lockAnimation == nil && unlockButton == nil
     }
 
     /// The settings chosen after those the Mac holds: the ones to apply.
@@ -51,7 +55,8 @@ public struct MacSettingsEnvelope: Codable, Sendable, Equatable {
         return .init(
             preferences: isNewer(preferences, than: clock.preferences),
             autoLock: isNewer(autoLock, than: clock.autoLock),
-            lockAnimation: isNewer(lockAnimation, than: clock.lockAnimation)
+            lockAnimation: isNewer(lockAnimation, than: clock.lockAnimation),
+            unlockButton: isNewer(unlockButton, than: clock.unlockButton)
         )
     }
 }
@@ -62,11 +67,13 @@ public struct MacSettingsClock: Codable, Sendable, Equatable {
     public var preferences: Date?
     public var autoLock: Date?
     public var lockAnimation: Date?
+    public var unlockButton: Date?
 
-    public init(preferences: Date? = nil, autoLock: Date? = nil, lockAnimation: Date? = nil) {
+    public init(preferences: Date? = nil, autoLock: Date? = nil, lockAnimation: Date? = nil, unlockButton: Date? = nil) {
         self.preferences = preferences
         self.autoLock = autoLock
         self.lockAnimation = lockAnimation
+        self.unlockButton = unlockButton
     }
 
     /// Takes the dates of the settings just applied.
@@ -79,6 +86,9 @@ public struct MacSettingsClock: Codable, Sendable, Equatable {
         }
         if let date = envelope.lockAnimation?.date {
             lockAnimation = date
+        }
+        if let date = envelope.unlockButton?.date {
+            unlockButton = date
         }
     }
 }

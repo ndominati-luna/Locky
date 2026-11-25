@@ -2650,6 +2650,36 @@
         }
       }
     },
+    "Under your picture on the lock screen of your Mac, it asks your iPhone for the password. Hidden, the wings still show when your iPhone is near: unlock with Touch ID or your password." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sous ta photo, sur l’écran de verrouillage de ton Mac, il demande le mot de passe à ton iPhone. Masqué, les ailes apparaissent toujours quand ton iPhone est proche : déverrouille avec Touch ID ou ton mot de passe."
+          }
+        }
+      }
+    },
+    "Under your picture on the lock screen of your Mac, it asks your iPhone for the password. Hidden, the wings still show when your iPhone is near: unlock with your password." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sous ta photo, sur l’écran de verrouillage de ton Mac, il demande le mot de passe à ton iPhone. Masqué, les ailes apparaissent toujours quand ton iPhone est proche : déverrouille avec ton mot de passe."
+          }
+        }
+      }
+    },
+    "Unlock button on the Mac" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bouton Déverrouiller sur le Mac"
+          }
+        }
+      }
+    },
     "Unlock only from Apple Watch" : {
       "localizations" : {
         "fr" : {

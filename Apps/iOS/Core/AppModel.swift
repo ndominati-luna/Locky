@@ -39,7 +39,9 @@ final class AppModel {
     /// Versions of Locky for Mac, newest first; `nil` until read from the Sparkle feed.
     private(set) var macReleases: [MacRelease]?
     /// Guided first try after the pairing; `nil` once done or skipped.
-    private(set) var setup: SetupPhase?
+    private(set) var setup: SetupPhase? {
+        didSet { applyTouchIDDefaultIfNeeded() }
+    }
     /// Live state of the Mac, streamed while the dashboard is on screen (unfolded iPhone Duo).
     private(set) var macMetrics: MacMetrics?
     /// What the Mac is playing; `nil` when nothing.
@@ -571,6 +573,8 @@ final class AppModel {
             cloudStatus.appVersion = macStatus?.appVersion
             cloudStatus.appBuild = macStatus?.appBuild
             cloudStatus.features = macStatus?.features
+            cloudStatus.hasTouchID = macStatus?.hasTouchID
+            cloudStatus.showsUnlockButton = macStatus?.showsUnlockButton
             // Changed here out of reach after the Mac published: the Mac has not read it yet.
             if let autoLock = preferences.macSettings.autoLock, autoLock.date > cloudRecord.modifiedAt ?? .distantPast {
                 cloudStatus.isAutoLockEnabled = autoLock.value
@@ -880,6 +884,8 @@ final class AppModel {
             preferences.motionBaseline = baseline
             motion.baseline = baseline
             session.completePairing(preferences: preferences.phonePreferences)
+            // A new pairing: automatic unlocking turns off after the first try if the Mac has Touch ID.
+            preferences.isTouchIDDefaultPending = session.isPaired
             if session.isPaired {
                 // The guided first try continues on the Mac (permissions, then "Try it now").
                 setup = .waitingForMac
@@ -903,6 +909,10 @@ final class AppModel {
         case let .autoLock(isEnabled):
             guard var status = macStatus else { return }
             status.isAutoLockEnabled = isEnabled
+            updateStatus(status)
+        case let .unlockButton(isShown):
+            guard var status = macStatus else { return }
+            status.showsUnlockButton = isShown
             updateStatus(status)
         case let .proximity(reading):
             proximity = reading
@@ -992,6 +1002,34 @@ final class AppModel {
         status.isAutoLockEnabled = isEnabled
         updateStatus(status)
         macSettingDidChange(.autoLock(isEnabled: isEnabled)) { $0.autoLock = .init(isEnabled, date: $1) }
+    }
+
+    /// Shows or hides the Unlock button of the lock screen of a Mac that has the setting
+    /// (``LockyFeature/unlockButton``); the wings stay.
+    func setMacUnlockButton(_ isShown: Bool) {
+        guard var status = macStatus, status.supports(.unlockButton), status.showsUnlockButton != isShown else { return }
+        status.showsUnlockButton = isShown
+        updateStatus(status)
+        macSettingDidChange(.unlockButton(isShown: isShown)) { $0.unlockButton = .init(isShown, date: $1) }
+    }
+
+    /// After a new pairing, once the guided first try is over (or skipped) and the Mac has told
+    /// whether it has Touch ID: with Touch ID the finger unlocks, automatic unlocking turns off (the
+    /// Mac hides its Unlock button itself). A Mac too old to tell keeps it on.
+    private func applyTouchIDDefaultIfNeeded() {
+        guard preferences.isTouchIDDefaultPending, setup == nil || setup == .magic, let status = macStatus else { return }
+        guard let hasTouchID = status.hasTouchID else {
+            // An older Mac: it says nothing of Touch ID.
+            if status.features != nil {
+                preferences.isTouchIDDefaultPending = false
+            }
+            return
+        }
+        preferences.isTouchIDDefaultPending = false
+        guard hasTouchID, preferences.unlockAutomatically else { return }
+        logger.notice("Touch ID on the new Mac: automatic unlocking off")
+        preferences.unlockAutomatically = false
+        preferencesDidChange()
     }
 
     func sendMediaCommand(_ command: MediaCommand) {
@@ -1148,6 +1186,7 @@ final class AppModel {
         let isNewMac: Bool = status.deviceType != macStatus?.deviceType || status.model != macStatus?.model
         macStatus = status
         MacStatusCache.save(status)
+        applyTouchIDDefaultIfNeeded()
         if isNewMac {
             // Another image of the catalog: the widgets and the Live Activity need theirs.
             visuals.storeRenditions(frame: macFrame)

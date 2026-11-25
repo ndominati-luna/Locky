@@ -16,6 +16,10 @@ public enum LockyFeature: String, Sendable, CaseIterable {
     /// ``LockyMessage/proximityInterest(_:)`` from the iPhone: the Mac sends the distance only as
     /// often as the iPhone shows it, instead of twice a second whatever it does.
     case proximityOnDemand
+    /// The Unlock button of the lock screen of the Mac, shown or hidden on the Mac or on the iPhone:
+    /// ``LockyMessage/unlockButton(isShown:)`` both ways, ``MacSettingsEnvelope/unlockButton`` out
+    /// of reach, and ``MacStatus/showsUnlockButton`` and ``MacStatus/hasTouchID``.
+    case unlockButton
 
     /// What this version announces.
     public static var current: [String] {

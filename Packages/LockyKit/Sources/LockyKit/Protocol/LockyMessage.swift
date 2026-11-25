@@ -57,6 +57,11 @@ public enum LockyMessage: Codable, Sendable, Equatable {
     /// iPhone → Mac: how often the distance is shown, so that ``proximity(_:)`` is sent no more
     /// often (to a Mac that announced ``LockyFeature/proximityOnDemand``).
     case proximityInterest(ProximityInterest)
+    /// Both ways, between peers announcing ``LockyFeature/unlockButton``: the Unlock button of the
+    /// lock screen of the Mac shown or hidden, from the menu of the Mac or from the settings of the
+    /// iPhone (the Mac applies it and sends it back). The wings around the user picture do not
+    /// depend on it.
+    case unlockButton(isShown: Bool)
 
     // MARK: - Dashboard (encrypted)
     /// iPhone → Mac: the dashboard is on screen (unfolded iPhone Duo), stream the Mac state.

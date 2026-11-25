@@ -19,7 +19,8 @@ struct MacSettingsEnvelopeTests {
         .init(
             preferences: .init(.init(intrusionDetection: true, lockDistance: 3), date: date),
             autoLock: .init(false, date: date),
-            lockAnimation: .init(animation, date: date)
+            lockAnimation: .init(animation, date: date),
+            unlockButton: .init(false, date: date)
         )
     }
 
@@ -79,6 +80,22 @@ struct MacSettingsEnvelopeTests {
         #expect(newer.autoLock == nil)
         // The same date is the same choice, already applied.
         #expect(newer.lockAnimation == nil)
+        // Never chosen on the Mac since it knows the setting: the choice of the iPhone applies.
+        #expect(newer.unlockButton == envelope.unlockButton)
+    }
+
+    /// An envelope of an iPhone that does not know the Unlock button setting leaves it alone.
+    @Test
+    func olderEnvelopeHasNoUnlockButton() throws {
+        let json: Data = .init(#"{"autoLock":{"value":false,"date":800000000}}"#.utf8)
+        let envelope: MacSettingsEnvelope = try JSONDecoder().decode(MacSettingsEnvelope.self, from: json)
+        #expect(envelope.unlockButton == nil)
+        #expect(envelope.newer(than: .init()).unlockButton == nil)
+        let clock: MacSettingsClock = try JSONDecoder().decode(
+            MacSettingsClock.self,
+            from: Data(#"{"preferences":800000000,"autoLock":800000000,"lockAnimation":800000000}"#.utf8)
+        )
+        #expect(clock.unlockButton == nil)
     }
 
     @Test

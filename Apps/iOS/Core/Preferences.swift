@@ -22,6 +22,7 @@ final class Preferences {
         static let macSettings: String = "locky.macSettings"
         static let macSettingsUploadPending: String = "locky.macSettingsUploadPending"
         static let macLockAnimation: String = "locky.macLockAnimation"
+        static let touchIDDefaultPending: String = "locky.touchIDDefaultPending"
     }
 
     @ObservationIgnored private let defaults: UserDefaults
@@ -91,6 +92,12 @@ final class Preferences {
         didSet { defaults.set(isMacSettingsUploadPending, forKey: Key.macSettingsUploadPending) }
     }
 
+    /// Paired with a new Mac whose Touch ID is not known yet: once the guided first try is over (it
+    /// unlocks by coming back), automatic unlocking turns off if the Mac has Touch ID.
+    @ObservationIgnored var isTouchIDDefaultPending: Bool {
+        didSet { defaults.set(isTouchIDDefaultPending, forKey: Key.touchIDDefaultPending) }
+    }
+
     /// The lock animation of the Mac as it last told it, shown while it is out of reach.
     @ObservationIgnored var macLockAnimation: LockAnimationSettings? {
         didSet { defaults.set(macLockAnimation.flatMap { try? JSONEncoder().encode($0) }, forKey: Key.macLockAnimation) }
@@ -121,6 +128,7 @@ final class Preferences {
         macSettings = defaults.data(forKey: Key.macSettings)
             .flatMap { try? JSONDecoder().decode(MacSettingsEnvelope.self, from: $0) } ?? .init()
         isMacSettingsUploadPending = defaults.bool(forKey: Key.macSettingsUploadPending)
+        isTouchIDDefaultPending = defaults.bool(forKey: Key.touchIDDefaultPending)
         macLockAnimation = defaults.data(forKey: Key.macLockAnimation)
             .flatMap { try? JSONDecoder().decode(LockAnimationSettings.self, from: $0) }
     }
@@ -144,6 +152,7 @@ final class Preferences {
         macImagesVersion = nil
         macSettings = .init()
         isMacSettingsUploadPending = false
+        isTouchIDDefaultPending = false
         macLockAnimation = nil
     }
 }

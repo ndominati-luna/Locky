@@ -399,7 +399,9 @@ final class MacAppModel {
             deviceType: DeviceIcon.thisMacType,
             appVersion: Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String,
             appBuild: (Bundle.main.infoDictionary?["CFBundleVersion"] as? String).flatMap { Int($0) },
-            features: LockyFeature.current
+            features: LockyFeature.current,
+            hasTouchID: MacDeviceInfo.hasTouchID,
+            showsUnlockButton: preferences.showsUnlockButton
         )
     }
 
@@ -425,6 +427,21 @@ final class MacAppModel {
         preferences.settingsClock.autoLock = date
         session.send(.autoLock(isEnabled: enabled))
         publishToCloud()
+    }
+
+    /// Shows or hides the Unlock button of the lock screen, from the menu or from the iPhone; the
+    /// prompt on screen follows at once.
+    /// - Parameter date: When it was chosen: now on the Mac or over Bluetooth, earlier when the
+    ///   iPhone chose it out of reach.
+    func setUnlockButtonShown(_ isShown: Bool, chosenAt date: Date = .now) {
+        preferences.showsUnlockButton = isShown
+        preferences.settingsClock.unlockButton = date
+        if preferences.device?.supports(.unlockButton) == true {
+            session.send(.unlockButton(isShown: isShown))
+        }
+        if let mode = transitions.promptMode, mode == .button || mode == .wings {
+            showPrompt(mode: .button)
+        }
     }
 
     func setLaunchAtLogin(_ enabled: Bool) {
@@ -588,6 +605,12 @@ final class MacAppModel {
         session.onPairingCompleted = { [weak self] preferences in
             guard let self else { return }
             self.preferences.phonePreferences = preferences
+            // A new pairing: with Touch ID, the finger unlocks, the button would only crowd the
+            // lock screen (the iPhone turns automatic unlocking off after the first try).
+            self.preferences.showsUnlockButton = !MacDeviceInfo.hasTouchID
+            self.preferences.settingsClock.unlockButton = .now
+            // The iPhone had the status before: it learns the button, and Touch ID, now.
+            self.session.send(.macStatus(self.macStatus))
             self.rebuildEngine()
             self.publishToCloud()
             self.preferences.isSetupCompleted = false
@@ -704,6 +727,9 @@ final class MacAppModel {
         case let .autoLock(isEnabled):
             // Turned on or off from the settings of the iPhone: confirmed with the same message.
             setAutoLockEnabled(isEnabled)
+        case let .unlockButton(isShown):
+            // Shown or hidden from the settings of the iPhone: confirmed with the same message.
+            setUnlockButtonShown(isShown)
         case let .lockAnimation(settings):
             // Chosen on the iPhone: applied, then sent back as the Mac keeps it.
             preferences.apply(settings)
@@ -753,9 +779,11 @@ final class MacAppModel {
         let newer: MacSettingsEnvelope = envelope.newer(than: preferences.settingsClock)
         guard !newer.isEmpty else { return }
         let autoLock: String = newer.autoLock.map { String($0.value) } ?? "-"
+        let unlockButton: String = newer.unlockButton.map { String($0.value) } ?? "-"
         logger.notice("""
             Settings chosen on the iPhone (\(source, privacy: .public)): preferences \(newer.preferences != nil), \
-            auto lock \(autoLock, privacy: .public), animation \(newer.lockAnimation != nil)
+            auto lock \(autoLock, privacy: .public), animation \(newer.lockAnimation != nil), \
+            unlock button \(unlockButton, privacy: .public)
             """)
         if let preferences = newer.preferences {
             apply(preferences.value)
@@ -767,6 +795,9 @@ final class MacAppModel {
             preferences.apply(lockAnimation.value)
             transitions.prepareWallpaper()
             sendLockAnimation()
+        }
+        if let unlockButton = newer.unlockButton, unlockButton.value != preferences.showsUnlockButton {
+            setUnlockButtonShown(unlockButton.value, chosenAt: unlockButton.date)
         }
         preferences.settingsClock.advance(to: newer)
     }
@@ -1030,8 +1061,13 @@ final class MacAppModel {
         showPrompt(mode: preferences.phonePreferences.unlockOnlyFromWatch ? .watchOnly : .button)
     }
 
+    /// The wings, with the Unlock button when it is shown (``LockScreenPromptView/Mode/button`` and
+    /// ``LockScreenPromptView/Mode/wings`` both follow the setting).
     private func showPrompt(mode: LockScreenPromptView.Mode) {
-        guard preferences.isLockScreenOverlayEnabled else { return }
+        var mode: LockScreenPromptView.Mode = mode
+        if mode == .button || mode == .wings {
+            mode = preferences.showsUnlockButton ? .button : .wings
+        }
         transitions.showPrompt(deviceName: phoneName, mode: mode) { [weak self] in
             guard let self else { return }
             self.session.send(.passwordRequest(.lockScreenButton))

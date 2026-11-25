@@ -2,6 +2,7 @@ import AppKit
 import Foundation
 import IOKit
 import IOKit.ps
+import LocalAuthentication
 import LockyKit
 import SystemConfiguration
 
@@ -32,6 +33,13 @@ enum MacDeviceInfo {
                 .takeRetainedValue() as? Data
         else { return modelIdentifier }
         return String(decoding: value.prefix { $0 != 0 }, as: UTF8.self)
+    }
+
+    /// Touch ID can unlock this Mac: a sensor (built in, or on a Magic Keyboard connected now) and
+    /// a finger enrolled. A Mac without it keeps the Unlock button of Locky on its lock screen.
+    static var hasTouchID: Bool {
+        let context: LAContext = .init()
+        return context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil) && context.biometryType == .touchID
     }
 
     static var family: MacFamily {

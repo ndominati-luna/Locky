@@ -26,6 +26,8 @@ struct SettingsView: View {
                 Text("Locky will automatically enter your password to unlock your Mac when you're close to it with your iPhone.")
             }
 
+            UnlockButtonSection()
+
             Section {
                 Toggle(
                     String(localized: "Require \(BiometricGate.biometryName)"),
@@ -141,6 +143,42 @@ private struct AutoLockSection: View {
                 }
             } else {
                 Text("Your Mac must be in reach to change it.")
+            }
+        }
+    }
+}
+
+/// The Unlock button of the lock screen of the Mac, under the user picture; the wings stay without
+/// it. Set on the Mac too; changed here in reach, or out of reach with a Mac that reads its
+/// settings in iCloud. Absent with a Mac that does not have the setting.
+private struct UnlockButtonSection: View {
+    @Environment(AppModel.self) private var model
+
+    var body: some View {
+        if let status = model.macStatus, status.supports(.unlockButton) {
+            Section {
+                Toggle(
+                    "Unlock button on the Mac",
+                    systemImage: "lock.open",
+                    isOn: .init(
+                        get: { model.macStatus?.showsUnlockButton ?? true },
+                        set: { model.setMacUnlockButton($0) }
+                    )
+                )
+                .disabled(!model.canChangeMacSettings)
+            } footer: {
+                VStack(alignment: .leading, spacing: 6) {
+                    if status.hasTouchID == true {
+                        Text("Under your picture on the lock screen of your Mac, it asks your iPhone for the password. Hidden, the wings still show when your iPhone is near: unlock with Touch ID or your password.")
+                    } else {
+                        Text("Under your picture on the lock screen of your Mac, it asks your iPhone for the password. Hidden, the wings still show when your iPhone is near: unlock with your password.")
+                    }
+                    if model.canChangeMacSettings {
+                        OutOfReachNote()
+                    } else {
+                        Text("Your Mac must be in reach to change it.")
+                    }
+                }
             }
         }
     }

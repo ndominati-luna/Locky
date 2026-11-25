@@ -113,7 +113,12 @@ enum DemoMode {
             // `-LockyDemoMacBuild 1` shows an update for the Mac.
             appVersion: "1.0.2",
             appBuild: UserDefaults.standard.integer(forKey: "LockyDemoMacBuild") > 0 ? UserDefaults.standard.integer(forKey: "LockyDemoMacBuild") : 5,
-            features: LockyFeature.current
+            features: LockyFeature.current,
+            // A MacBook has Touch ID; `-LockyDemoUnlockButton YES|NO` shows or hides its Unlock button.
+            hasTouchID: mac.family == .macBook,
+            showsUnlockButton: UserDefaults.standard.object(forKey: "LockyDemoUnlockButton") == nil
+                ? mac.family != .macBook
+                : UserDefaults.standard.bool(forKey: "LockyDemoUnlockButton")
         )
     }
 

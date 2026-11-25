@@ -52,6 +52,46 @@ struct CompatibilityTests {
         _ = mac
     }
 
+    /// The Unlock button of the Mac, shown or hidden from either side, and what the Mac tells of
+    /// it and of Touch ID; a status of an older Mac tells neither.
+    @Test
+    func unlockButtonRoundTrips() throws {
+        var (mac, phone): (SecureChannel, SecureChannel) = Self.channels()
+        var received: SecureChannel? = mac
+        for isShown in [true, false] {
+            let message: LockyMessage = .unlockButton(isShown: isShown)
+            let payload: Data = try WireCodec.encodeEncrypted(message, channel: &phone)
+            #expect(try WireCodec.decode(payload, channel: &received) == message)
+        }
+        #expect(LockyFeature.current.contains(LockyFeature.unlockButton.rawValue))
+        let status: MacStatus = .init(
+            macID: .init(),
+            name: "Mac",
+            model: "Mac16,1",
+            productName: "MacBook Pro",
+            family: .macBook,
+            systemVersion: "27.2",
+            userName: "Nico",
+            lockState: .unlocked,
+            lockStateDate: .now,
+            isAutoLockEnabled: true,
+            unlockCount: 0,
+            features: LockyFeature.current,
+            hasTouchID: true,
+            showsUnlockButton: false
+        )
+        var json: [String: Any] = try #require(JSONSerialization.jsonObject(with: JSONEncoder().encode(status)) as? [String: Any])
+        #expect(try JSONDecoder().decode(MacStatus.self, from: JSONSerialization.data(withJSONObject: json)) == status)
+        json["hasTouchID"] = nil
+        json["showsUnlockButton"] = nil
+        json["features"] = nil
+        let older: MacStatus = try JSONDecoder().decode(MacStatus.self, from: JSONSerialization.data(withJSONObject: json))
+        #expect(older.hasTouchID == nil)
+        #expect(older.showsUnlockButton == nil)
+        #expect(!older.supports(.unlockButton))
+        _ = mac
+    }
+
     /// A message of a newer Locky is authentic but unknown: ignored, the session stays.
     @Test
     func unknownMessageKeepsTheSession() throws {

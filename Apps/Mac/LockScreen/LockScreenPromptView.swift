@@ -2,12 +2,14 @@ import LockyKit
 import SwiftUI
 
 /// Under the name of the lock screen when the iPhone is nearby and automatic unlocking is off: the
-/// Unlock button, which does exactly what the button of the iPhone does. The states are written
-/// in the capsule itself, readable on any wallpaper.
+/// Unlock button, which does exactly what the button of the iPhone does, unless it is hidden (the
+/// wings show alone). The states are written in the capsule itself, readable on any wallpaper.
 struct LockScreenPromptView: View {
     enum Mode: Equatable {
         /// Offer the Unlock button.
         case button
+        /// The wings alone, the button hidden: Touch ID or the password unlock.
+        case wings
         /// Waiting for the iPhone (Face ID, notification).
         case waitingForPhone
         /// Only the Apple Watch can unlock.
@@ -57,6 +59,8 @@ struct LockScreenPromptView: View {
                         .controlSize(.small)
                     Text("Confirm on \(deviceName)")
                 }
+            case .wings:
+                EmptyView()
             case .watchOnly:
                 StatusCapsule {
                     Image(systemName: "applewatch")
