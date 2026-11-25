@@ -15,12 +15,15 @@ struct MacBookOutline: Equatable {
     /// The front edge of the deck, where the picture is widest, and the bottom of its face.
     let deckFront: CGFloat
     let deckBottom: CGFloat
-    /// The top of the front edge of the shut lid (see ``lidEdge(of:outline:)``): its width, narrower
-    /// for its rounded ends, and its colour, which the back of the lid carries on from.
-    let edgeTopWidth: CGFloat
+    /// The colour of the front edge of the shut lid (see ``lidEdge(of:outline:)``) under its top,
+    /// which the back of the lid carries on from.
     let edgeTopRed: Double
     let edgeTopGreen: Double
     let edgeTopBlue: Double
+    /// The same toward its ends, darker as the light falls off: the colour of its rounded ends.
+    let edgeEndRed: Double
+    let edgeEndGreen: Double
+    let edgeEndBlue: Double
     /// How much wider the front of the deck looks than the lid.
     let spread: CGFloat
     /// The colour of the aluminium, in sRGB.
@@ -36,14 +39,15 @@ struct MacBookOutline: Equatable {
         Color(.sRGB, red: edgeTopRed, green: edgeTopGreen, blue: edgeTopBlue)
     }
 
+    var edgeEnd: Color {
+        Color(.sRGB, red: edgeEndRed, green: edgeEndGreen, blue: edgeEndBlue)
+    }
+
     /// Measured once per picture.
     @MainActor private static var cache: [String: MacBookOutline?] = [:]
     @MainActor private static var edges: [String: UIImage?] = [:]
-    /// Where the front edge of the lid is taken from on the face of the deck: under its notch, and
-    /// above its last rows, dark with the shadow on the desk. Shown a little taller, about as thick
-    /// as the lid is next to the deck (4.5 mm over 10 mm on a MacBook Pro).
-    static let edgeStart: CGFloat = 0.5
-    static let edgeEnd: CGFloat = 0.86
+    /// How thick the lid is next to the deck, as a fraction of the face of the deck (4.5 mm over
+    /// 10 mm on a MacBook Pro): its front edge is the top of that face, as tall.
     static let edgeThickness: CGFloat = 0.45
 
     /// The outline of a MacBook of the catalog, `nil` for another Mac or a picture it cannot read.
@@ -59,8 +63,10 @@ struct MacBookOutline: Equatable {
     }
 
     /// The front edge of the lid once it is shut, from the picture itself, so that it is of the
-    /// same aluminium: the lower part of the face of the deck, under its notch, upside down, for its
-    /// ends to round toward the back of the lid as those of the deck round toward the desk.
+    /// same aluminium in the same light: the top of the face of the deck, its bright top edge and
+    /// its brushed face, as the light from above falls on both faces alike, the notch of the deck
+    /// filled with the face on either side of it. (The lower part of the face, where it turns
+    /// toward the desk, is in its shadow: on the lid it made a dark band the deck does not have.)
     @MainActor
     static func lidEdge(of frame: MacFrame, outline: MacBookOutline) -> UIImage? {
         guard let asset = frame.asset else { return nil }
@@ -75,25 +81,68 @@ struct MacBookOutline: Equatable {
     private static func cutLidEdge(_ image: UIImage, outline: MacBookOutline) -> UIImage? {
         guard let cgImage = image.cgImage, let space = CGColorSpace(name: CGColorSpace.sRGB) else { return nil }
         let height: CGFloat = CGFloat(cgImage.height)
-        let top: Int = Int(((outline.deckFront + (outline.deckBottom - outline.deckFront) * edgeStart) * height).rounded())
-        let bottom: Int = Int(((outline.deckFront + (outline.deckBottom - outline.deckFront) * edgeEnd) * height).rounded())
-        guard
-            bottom > top,
-            let slice = cgImage.cropping(to: CGRect(x: 0, y: top, width: cgImage.width, height: bottom - top)),
-            let context = CGContext(
-                data: nil,
-                width: slice.width,
-                height: slice.height,
+        let top: Int = Int((outline.deckFront * height).rounded())
+        let bottom: Int = Int(((outline.deckFront + (outline.deckBottom - outline.deckFront) * edgeThickness) * height).rounded())
+        guard bottom > top, let slice = cgImage.cropping(to: CGRect(x: 0, y: top, width: cgImage.width, height: bottom - top)) else {
+            return nil
+        }
+        let width: Int = slice.width
+        let rows: Int = slice.height
+        var pixels: [UInt8] = .init(repeating: 0, count: width * rows * 4)
+        let edge: CGImage? = pixels.withUnsafeMutableBytes { buffer -> CGImage? in
+            guard let context = CGContext(
+                data: buffer.baseAddress,
+                width: width,
+                height: rows,
                 bitsPerComponent: 8,
-                bytesPerRow: 0,
+                bytesPerRow: width * 4,
                 space: space,
                 bitmapInfo: CGImageAlphaInfo.premultipliedLast.rawValue
-            )
-        else { return nil }
-        context.translateBy(x: 0, y: CGFloat(slice.height))
-        context.scaleBy(x: 1, y: -1)
-        context.draw(slice, in: CGRect(x: 0, y: 0, width: slice.width, height: slice.height))
-        return context.makeImage().map { UIImage(cgImage: $0) }
+            ) else { return nil }
+            context.draw(slice, in: CGRect(x: 0, y: 0, width: width, height: rows))
+            for row in 0..<rows {
+                fillNotch(in: buffer, row: row, width: width)
+            }
+            return context.makeImage()
+        }
+        return edge.map { UIImage(cgImage: $0) }
+    }
+
+    /// The notch in the middle of the face of the deck, on one row of it: brighter or darker than
+    /// the face around, which the light shades evenly from its middle to its ends. Filled with the
+    /// face on either side of it, mirrored, its grain and its light carrying on.
+    private static func fillNotch(in buffer: UnsafeMutableRawBufferPointer, row: Int, width: Int) {
+        guard let base = buffer.baseAddress else { return }
+        let bytes: UnsafeMutablePointer<UInt8> = base.assumingMemoryBound(to: UInt8.self)
+        func brightness(_ x: Int) -> Double {
+            let index: Int = (row * width + x) * 4
+            return (Double(bytes[index]) + Double(bytes[index + 1]) + Double(bytes[index + 2])) / 3
+        }
+        /// Around a column, clear of the grain.
+        func around(_ x: Int) -> Double {
+            (max(0, x - 2)...min(width - 1, x + 2)).map(brightness).reduce(0, +) / 5
+        }
+        let start: Int = width * 35 / 100
+        let end: Int = width * 65 / 100
+        guard end - start > 10 else { return }
+        let left: Double = around(start)
+        let right: Double = around(end)
+        let odd: [Int] = (start...end).filter { x in
+            let even: Double = left + (right - left) * Double(x - start) / Double(end - start)
+            return abs(brightness(x) - even) > 12
+        }
+        guard odd.count > 3, let first = odd.first, let last = odd.last else { return }
+        let from: Int = max(width * 30 / 100, first - 2)
+        let to: Int = min(width * 70 / 100, last + 2)
+        let middle: Int = (from + to) / 2
+        for x in from...to {
+            let source: Int = x <= middle ? from - 1 - (x - from) : to + 1 + (to - x)
+            let target: Int = (row * width + x) * 4
+            let origin: Int = (row * width + source) * 4
+            for channel in 0..<4 {
+                bytes[target + channel] = bytes[origin + channel]
+            }
+        }
     }
 
     /// Reads the outline from the transparency of the picture: the rows of the lid are all as wide,
@@ -162,22 +211,30 @@ struct MacBookOutline: Equatable {
         guard sum.count > 0 else { return nil }
         let count: Double = Double(sum.count) * 255
 
-        // The row the top of the edge of the lid comes from, upside down: its width and its colour,
-        // clear of its rounded ends.
-        let edgeTopRow: Int = min(bottom, max(front, Int((CGFloat(front) + CGFloat(bottom + 1 - front) * edgeEnd).rounded()) - 1))
-        var top: (red: Int, green: Int, blue: Int, count: Int) = (0, 0, 0, 0)
-        for y in max(front, edgeTopRow - 2)...edgeTopRow {
-            for x in width * 20 / 100..<width * 80 / 100 {
-                let index: Int = (y * width + x) * 4
-                guard pixels[index + 3] > 250 else { continue }
-                top.red += Int(pixels[index])
-                top.green += Int(pixels[index + 1])
-                top.blue += Int(pixels[index + 2])
-                top.count += 1
+        // The colour of the edge of the lid, the top of the face of the deck: its brushed face under
+        // its bright top edge, clear of the notch in its middle; and close to its rounded ends.
+        let faceTop: Int = front + (bottom + 1 - front) / 8
+        let faceRows: ClosedRange<Int> = faceTop...max(faceTop, front + (bottom + 1 - front) / 4)
+        func average(_ columns: [Int]) -> (red: Double, green: Double, blue: Double)? {
+            var total: (red: Int, green: Int, blue: Int, count: Int) = (0, 0, 0, 0)
+            for y in faceRows {
+                for x in columns {
+                    let index: Int = (y * width + x) * 4
+                    guard pixels[index + 3] > 250 else { continue }
+                    total.red += Int(pixels[index])
+                    total.green += Int(pixels[index + 1])
+                    total.blue += Int(pixels[index + 2])
+                    total.count += 1
+                }
             }
+            guard total.count > 0 else { return nil }
+            let scale: Double = Double(total.count) * 255
+            return (Double(total.red) / scale, Double(total.green) / scale, Double(total.blue) / scale)
         }
-        guard top.count > 0 else { return nil }
-        let topCount: Double = Double(top.count) * 255
+        guard
+            let top = average(Array(width * 20 / 100..<width * 35 / 100) + Array(width * 65 / 100..<width * 80 / 100)),
+            let ends = average(Array(width * 3 / 100..<width * 7 / 100) + Array(width * 93 / 100..<width * 97 / 100))
+        else { return nil }
 
         return .init(
             lidLeft: CGFloat(lid.left) / CGFloat(width),
@@ -186,10 +243,12 @@ struct MacBookOutline: Equatable {
             hinge: CGFloat(hinge) / CGFloat(height),
             deckFront: CGFloat(front) / CGFloat(height),
             deckBottom: CGFloat(bottom + 1) / CGFloat(height),
-            edgeTopWidth: CGFloat(extent(edgeTopRow)?.width ?? widest) / CGFloat(width),
-            edgeTopRed: Double(top.red) / topCount,
-            edgeTopGreen: Double(top.green) / topCount,
-            edgeTopBlue: Double(top.blue) / topCount,
+            edgeTopRed: top.red,
+            edgeTopGreen: top.green,
+            edgeTopBlue: top.blue,
+            edgeEndRed: ends.red,
+            edgeEndGreen: ends.green,
+            edgeEndBlue: ends.blue,
             spread: CGFloat(widest) / CGFloat(lid.width),
             red: Double(sum.red) / count,
             green: Double(sum.green) / count,

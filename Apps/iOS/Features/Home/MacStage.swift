@@ -81,6 +81,10 @@ struct MacStage: View {
             .foregroundStyle(.primary)
             // Grows with the large screen of an unfolded iPhone Duo held upright.
             .frame(maxWidth: 560, maxHeight: 380)
+            // One shadow for the whole Mac, on what lies behind it: without the group, each of its
+            // layers casts its own on those under it, and its parts darken one another (the edge of
+            // a shut lid over its back and the front of the deck).
+            .compositingGroup()
             .shadow(color: .black.opacity(0.45), radius: 24, y: 14 + drag.height * 0.1)
             .offset(drag)
             .rotation3DEffect(.degrees(Double(drag.width) * 0.08), axis: (x: 0, y: 1, z: 0))

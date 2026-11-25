@@ -390,7 +390,7 @@ private struct MacBookFold<Screen: View>: View, Animatable {
                 )
                 // Nearly shut, the back of the lid, as far behind its inner face as the lid is thick.
                 if !lid.showsScreen(fold) {
-                    LidShell(outline: outline, size: proxy.size, hinge: lid.hinge)
+                    LidShell(outline: outline, size: proxy.size, hinge: lid.hinge, cornerDepth: Self.cornerDepth(fold: fold))
                         .projectionEffect(lid.backTransform(fold: fold, thickness: thickness(size: proxy.size)))
                 }
                 // The edge of the lid all along its top and around its rounded corners, as the
@@ -466,6 +466,15 @@ private struct MacBookFold<Screen: View>: View, Animatable {
     /// which the camera sees `spread` times larger.
     private func thickness(size: CGSize) -> CGFloat {
         (outline.deckBottom - outline.deckFront) * MacBookOutline.edgeThickness * size.height / max(outline.spread, 1)
+    }
+
+    /// How deep the rounded corners of the top of the lid reach, as a fraction of their width: as
+    /// in the picture while the lid stands, none once it lies shut. The deck of the picture is as
+    /// wide as its front all along that front, its corners square to the camera: the lid shut on it
+    /// lies on that front with them, its ends as far out, instead of curving back where the camera
+    /// sees them narrower, as if the lid were set back.
+    static func cornerDepth(fold: Double) -> CGFloat {
+        CGFloat(1 - smoothstep(fold, from: 78, to: 90))
     }
 
     static func smoothstep(_ value: Double, from start: Double, to end: Double) -> Double {
@@ -639,12 +648,14 @@ private struct LidShell: View {
     let outline: MacBookOutline
     let size: CGSize
     let hinge: CGFloat
+    /// How deep its rounded corners reach, as in ``MacBookFold/cornerDepth(fold:)``.
+    let cornerDepth: CGFloat
 
     var body: some View {
         let left: CGFloat = outline.lidLeft * size.width
         let right: CGFloat = outline.lidRight * size.width
         let corner: CGFloat = outline.lidTopInset * size.width
-        UnevenRoundedRectangle(topLeadingRadius: corner, topTrailingRadius: corner)
+        LidShellShape(corner: corner, depth: corner * cornerDepth)
             .fill(
                 LinearGradient(
                     colors: [outline.edgeTop, outline.edgeTop.mix(with: .white, by: 0.14)],
@@ -655,6 +666,36 @@ private struct LidShell: View {
             .frame(width: right - left, height: hinge)
             .offset(x: left)
             .frame(width: size.width, height: max(hinge, 1), alignment: .topLeading)
+    }
+}
+
+/// The outline of the lid face on, its top corners rounded `corner` wide and `depth` deep.
+private struct LidShellShape: Shape {
+    let corner: CGFloat
+    let depth: CGFloat
+
+    func path(in rect: CGRect) -> Path {
+        // A quarter of an ellipse: the control points of a circle, scaled along each axis.
+        let control: CGFloat = 0.5523
+        let across: CGFloat = min(corner, rect.width / 2)
+        let down: CGFloat = min(depth, rect.height)
+        var path: Path = .init()
+        path.move(to: CGPoint(x: rect.minX, y: rect.maxY))
+        path.addLine(to: CGPoint(x: rect.minX, y: rect.minY + down))
+        path.addCurve(
+            to: CGPoint(x: rect.minX + across, y: rect.minY),
+            control1: CGPoint(x: rect.minX, y: rect.minY + down * (1 - control)),
+            control2: CGPoint(x: rect.minX + across * (1 - control), y: rect.minY)
+        )
+        path.addLine(to: CGPoint(x: rect.maxX - across, y: rect.minY))
+        path.addCurve(
+            to: CGPoint(x: rect.maxX, y: rect.minY + down),
+            control1: CGPoint(x: rect.maxX - across * (1 - control), y: rect.minY),
+            control2: CGPoint(x: rect.maxX, y: rect.minY + down * (1 - control))
+        )
+        path.addLine(to: CGPoint(x: rect.maxX, y: rect.maxY))
+        path.closeSubpath()
+        return path
     }
 }
 
@@ -701,6 +742,9 @@ private struct LidRim: View {
         let left: CGFloat = outline.lidLeft * size.width
         let right: CGFloat = outline.lidRight * size.width
         let radius: CGFloat = max(outline.lidTopInset * size.width, 0.5)
+        // Shut, the corners lie on the front of the deck (``MacBookFold/cornerDepth(fold:)``); they
+        // still turn, for the shade and the rounded profile of the ends.
+        let deep: CGFloat = radius * MacBookFold<EmptyView>.cornerDepth(fold: fold)
 
         // The outline of the top of the lid, drawn face on, with its outward direction (across,
         // toward the top of the lid): up the left corner from the side, along the top, down the
@@ -709,12 +753,12 @@ private struct LidRim: View {
         for step in 0...Self.steps {
             let angle: CGFloat = (1 - CGFloat(step) / CGFloat(Self.steps)) * .pi / 2
             let normal: CGVector = .init(dx: -sin(angle), dy: cos(angle))
-            outline.append((CGPoint(x: left + radius - radius * sin(angle), y: radius - radius * cos(angle)), normal))
+            outline.append((CGPoint(x: left + radius - radius * sin(angle), y: deep - deep * cos(angle)), normal))
         }
         for step in 0...Self.steps {
             let angle: CGFloat = CGFloat(step) / CGFloat(Self.steps) * .pi / 2
             let normal: CGVector = .init(dx: sin(angle), dy: cos(angle))
-            outline.append((CGPoint(x: right - radius + radius * sin(angle), y: radius - radius * cos(angle)), normal))
+            outline.append((CGPoint(x: right - radius + radius * sin(angle), y: deep - deep * cos(angle)), normal))
         }
 
         /// Where a point of the lid face on is in space: across from the middle, above the hinge,
@@ -773,9 +817,9 @@ private struct LidRim: View {
             path.addLine(to: b.top)
             path.addLine(to: a.top)
             path.closeSubpath()
-            // The aluminium of the top of the edge, darker as it turns away.
+            // The aluminium of the edge toward its ends, darker as it turns away.
             let facing: CGFloat = max(0, (towards[index] + towards[index + 1]) / 2)
-            pieces.append(.init(path: path, colour: self.outline.edgeTop.mix(with: .black, by: Double(0.25 * (1 - facing))), facing: facing))
+            pieces.append(.init(path: path, colour: self.outline.edgeEnd.mix(with: .black, by: Double(0.25 * (1 - facing))), facing: facing))
         }
         pieces.sort { $0.facing < $1.facing }
         return pieces
