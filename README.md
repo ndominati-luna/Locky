@@ -353,7 +353,10 @@ posent eux‑mêmes le fond d'écran dans l'écran. Le Mac publie seulement son 
 couleur, déduit de l'icône que macOS lui donne) ; à défaut, le modèle (`hw.model`) donne la couleur par défaut.
 L'iPhone prépare ensuite pour les widgets et la Live Activity de petites copies en PNG/JPEG dans l'App Group (Mac
 avec son fond à 690 et 280 px, fonds réduits, photo) : les extensions n'embarquent pas le catalogue, et iOS refuse
-d'afficher une Live Activity dont les images dépassent leur place. Puis il recharge ses widgets. Le morceau en cours (tableau de bord de l'iPhone Duo) passe en Bluetooth (message
+d'afficher une Live Activity dont les images dépassent leur place. Le Mac et son fond y sont dessinés avec Core
+Graphics (`MacVisuals`), pas par SwiftUI : ces copies se refont surtout en arrière‑plan (push du Mac, lien
+Bluetooth), où iOS interdit le processeur graphique, et le moteur de SwiftUI y rendait une image vide (un trou dans
+la Live Activity). Puis il recharge ses widgets. Le morceau en cours (tableau de bord de l'iPhone Duo) passe en Bluetooth (message
 `nowPlaying`, quelques centaines d'octets : titre, artiste, lecture, position), comme les mesures du Mac ; seule
 sa pochette suit le chemin des images : le Mac la dépose dans iCloud, puis la nomme dans le message, et l'iPhone
 ne la télécharge que si elle a changé (l'iPhone comprend encore `nowPlayingChanged` de Locky 1.0.0 pour Mac).
