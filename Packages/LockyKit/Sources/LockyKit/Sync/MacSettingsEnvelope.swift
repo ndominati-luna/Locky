@@ -96,43 +96,18 @@ public struct MacSettingsClock: Codable, Sendable, Equatable {
 // MARK: - Sealing
 
 extension MacSettingsEnvelope {
-    private static let version: UInt8 = 1
     private static let label: String = "Locky Mac settings v1"
 
-    /// Encrypted and authenticated with a key derived from the pairing key, bound to the Mac: iCloud
-    /// only carries it. Nobody without the pairing key can read it or forge one, even with access to
-    /// the iCloud account, and an older envelope replayed there is older than what the Mac holds.
+    /// Encrypted and authenticated with a key derived from the pairing key, bound to the Mac
+    /// (``CloudSeal``): iCloud only carries it. An older envelope replayed there is older than what
+    /// the Mac holds.
     public func sealed(key pairingKey: SymmetricKey, macID: UUID) throws -> Data {
-        let box: ChaChaPoly.SealedBox = try ChaChaPoly.seal(
-            try JSONEncoder().encode(self),
-            using: Self.sealingKey(pairingKey),
-            authenticating: Self.associatedData(macID: macID)
-        )
-        var data: Data = .init([Self.version])
-        data.append(box.combined)
-        return data
+        try CloudSeal.seal(JSONEncoder().encode(self), label: Self.label, key: pairingKey, macID: macID)
     }
 
     /// Opens what ``sealed(key:macID:)`` produced for this Mac with this pairing key.
     public init(sealed data: Data, key pairingKey: SymmetricKey, macID: UUID) throws {
-        guard data.first == Self.version, data.count > 1 + 12 + 16 else { throw LockyProtocolError.malformedPayload }
-        let plaintext: Data
-        do {
-            let box: ChaChaPoly.SealedBox = try .init(combined: data.dropFirst())
-            plaintext = try ChaChaPoly.open(box, using: Self.sealingKey(pairingKey), authenticating: Self.associatedData(macID: macID))
-        } catch {
-            throw LockyProtocolError.authenticationFailed
-        }
+        let plaintext: Data = try CloudSeal.open(data, label: Self.label, key: pairingKey, macID: macID)
         self = try JSONDecoder().decode(Self.self, from: plaintext)
-    }
-
-    private static func sealingKey(_ pairingKey: SymmetricKey) -> SymmetricKey {
-        HKDF<SHA256>.deriveKey(inputKeyMaterial: pairingKey, info: Data(label.utf8), outputByteCount: 32)
-    }
-
-    private static func associatedData(macID: UUID) -> Data {
-        var data: Data = .init(label.utf8)
-        data.append(contentsOf: macID.uuidString.utf8)
-        return data
     }
 }

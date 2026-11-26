@@ -96,6 +96,24 @@
           }
         }
       }
+    },
+    "NSMicrophoneUsageDescription" : {
+      "comment" : "Privacy - Microphone Usage Description",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "When you measure the waves around your Mac, Locky listens to the sound around for 20 seconds to show its spectrum. Nothing is recorded."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quand tu mesures les ondes autour de ton Mac, Locky écoute le son ambiant pendant 20 secondes pour en montrer le spectre. Rien n’est enregistré."
+          }
+        }
+      }
     }
   },
   "version" : "1.0"

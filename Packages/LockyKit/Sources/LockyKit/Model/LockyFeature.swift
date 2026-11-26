@@ -20,6 +20,8 @@ public enum LockyFeature: String, Sendable, CaseIterable {
     /// ``LockyMessage/unlockButton(isShown:)`` both ways, ``MacSettingsEnvelope/unlockButton`` out
     /// of reach, and ``MacStatus/showsUnlockButton`` and ``MacStatus/hasTouchID``.
     case unlockButton
+    /// Measurements of the waves around, made together (``LockyMessage/waveScan(_:)``, ``WaveScan``).
+    case waveScan
 
     /// What this version announces.
     public static var current: [String] {

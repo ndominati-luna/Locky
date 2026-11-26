@@ -12,12 +12,14 @@ enum DemoMode {
         UserDefaults.standard.bool(forKey: "LockyDemo")
     }
 
-    /// Screen to open (`-LockyDemoTab settings|intrusions|intrusion`).
+    /// Screen to open (`-LockyDemoTab settings|intrusions|intrusion|waves|wave`).
     static var initialPath: [AppRoute] {
         switch UserDefaults.standard.string(forKey: "LockyDemoTab") {
         case "settings": [.settings]
         case "intrusions": [.intrusions]
         case "intrusion": [.intrusions, .intrusion(id: "demo-1")]
+        case "waves": [.waves]
+        case "wave": [.waves, .wave(id: waveScans[0].id)]
         default: []
         }
     }

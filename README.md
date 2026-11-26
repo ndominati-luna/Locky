@@ -40,7 +40,9 @@ jusqu'au déverrouillage, pour les films de démo), `-LockyDemoPairing code|cali
 `-LockyDemoOutOfReach YES` (Mac hors de portée : widgets estompés, île grise), `-LockyDemoMacPanel YES` (tableau
 de bord du Mac ouvert en feuille), `-LockyDemoStory YES` (la vidéo cachée d'À propos, voir plus bas),
 `-LockyDemoCamera denied|notDetermined|unavailable` (caméra du Mac non autorisée, avec
-`-locky.intrusionDetection YES` : avertissement dans les réglages et les rapports d'intrusion). Pour que
+`-locky.intrusionDetection YES` : avertissement dans les réglages et les rapports d'intrusion),
+`-LockyDemoTab waves|wave` (les ondes alentour : la liste, ou la mesure « Maison »), `-LockyDemoWaves
+measuring|saving|empty` (une mesure en cours, ou aucune mesure). Pour que
 les widgets et la Live Activity voient les images du groupe d'apps au simulateur, compiler signé localement
 (`CODE_SIGN_IDENTITY=- CODE_SIGN_STYLE=Manual DEVELOPMENT_TEAM=`) plutôt qu'avec `CODE_SIGNING_ALLOWED=NO`.
 
@@ -82,6 +84,10 @@ Le menu du Mac n'a plus d'élément « Essayer Locky ». Les images de démo son
   Réglages et rapports d'intrusion s'ouvrent sur la page de droite (boutons de la barre). Onboarding, appairage et
   premier essai : l'illustration sur la première page, le texte et les boutons sur la seconde.
 - **Debout, à plat** (669 × 951 pt) : l'interface iPhone, le Mac en grand.
+- **Ondes alentour, Duo ouvert** (toute posture, et sur iPad) : pas une page de plus mais une vue à elles sur tout
+  l'écran (`WavesFullScreenView`, présentée par `isWavesPresented`). Les mesures en cartes en haut, la mesure
+  choisie dessous sur toute la largeur, ses cartes en deux colonnes ou plus. Ouvert alors qu'elles étaient
+  poussées sur le petit écran, le Duo les y fait passer (`largeScreenChanged`).
 - **Debout, à moitié ouvert comme un portable** (pli horizontal) : accueil en haut, tableau de bord en bas, titre
   en ligne. La posture vient de la charnière (`onHingeChange`, iOS 27.1) ; sans elle, l'écran est traité à plat.
 - **Tableau de bord** : cartes en verre façon widgets. Lecture en cours sur le Mac (pochette, progression,
@@ -370,6 +376,48 @@ changement de fond d'écran dans la seconde en surveillant
 `~/Library/Application Support/com.apple.wallpaper/Store/Index.plist`, comme l'ancienne version (vérification toutes
 les 30 s si ce fichier n'existe pas).
 
+### Ondes alentour
+
+Une mesure des ondes autour du Mac (`WaveScan`), lancée à la main depuis l'iPhone (bouton « Ondes alentour » de la
+barre de l'écran principal ; sur le grand écran du Duo ouvert, une vue plein écran, voir « iPhone Duo ») ou depuis
+le Mac (« Ondes alentour… » dans le menu), nommée avant de partir (maison, bureau…). Les cartes d'une mesure se
+rangent en autant de colonnes que la largeur le permet (une sur iPhone, deux ou trois sur le Duo ou une large
+fenêtre du Mac). Les deux appareils écoutent ensemble pendant 20 s, l'iPhone posé à côté du Mac, chacun ce que lui seul
+entend :
+
+| Mac (`MacWaveCapturer`) | iPhone (`PhoneWaveCapturer`) |
+|---|---|
+| Réseaux Wi-Fi (CoreWLAN, deux scans : au début et à mi-parcours), connexion du Mac (bande, canal, bruit, débit) | Bluetooth basse consommation (son propre scan, Locky à l'écran) |
+| Bluetooth basse consommation (`BluetoothNeighborScanner`, partagé) | Son : spectre par tiers d'octave (`SoundAnalyzer`, micro en mode mesure, les autres apps continuent de jouer) |
+| Bluetooth classique (recherche IOBluetooth de 8 s, appareils jumelés et connectés) | Champ magnétique (Core Motion, calibré par iOS) |
+| Lien avec l'iPhone : chaque lecture du signal (3/s), stabilité et coupures | Réseau mobile (5G, 4G…) |
+
+**Coordination.** Entre pairs qui annoncent `waveScan`, le message `waveScan` (quelques dizaines d'octets) lance la
+mesure des deux côtés (`start`, avec le nom), puis dit que la part de l'émetteur est dans iCloud (`saved`), qu'il
+ne peut pas participer (`declined` : l'autre mesure seul) ou que la mesure est annulée (`cancelled` : les deux
+s'arrêtent, rien n'est gardé). Le Mac ne peut lancer que si Locky est à l'écran de l'iPhone (intérêt `live` pour
+la distance) : iOS ne laisse écouter le Bluetooth alentour et le micro qu'au premier plan ; un iPhone qui n'est pas à
+l'écran répond `declined` et la mesure garde la seule part du Mac. **Pendant la mesure et 5 s après, le Mac ne
+décide rien** (ni verrouillage ni déverrouillage) : les scans Wi-Fi sortent un instant la carte de son canal et la
+recherche Bluetooth classique occupe la radio, de quoi faire hoqueter des écouteurs et brouiller le signal de
+l'iPhone ; la feuille « Nouvelle mesure » prévient de ces micro-coupures.
+
+**iCloud.** Chaque appareil dépose sa part (`WaveScanPart`), jamais en Bluetooth : enregistrement `WaveScan` de la
+zone `Waves` (à part de la zone `Locky`, que `fetchAll()` relit en entier à chaque rafraîchissement), nommé
+`waves-<id>-mac|phone`, avec `macID` (String) en clair et `sealed` (Bytes) : le nom de la mesure et tout ce qui a été
+entendu, scellés comme les réglages (`CloudSeal`, ChaCha20-Poly1305, clé dérivée de la clé d'appairage avec
+l'étiquette « Locky waves v1 », liée au Mac). Les deux appareils relisent la liste en ouvrant l'écran ; une part
+d'un ancien appairage ne s'ouvre plus et reste de côté. Supprimer une mesure efface les deux parts. Listes
+plafonnées (250 appareils Bluetooth) pour rester loin du mégaoctet d'un enregistrement.
+
+**Impact sur Locky** (`WaveImpact`, de 0 à 1 par facteur, puis moyenne pondérée jamais à plus de 0,3 sous le pire
+facteur) : stabilité du lien iPhone posé immobile (écart type du signal, coupures ; poids 0,4), appareils Bluetooth
+alentour (le plus attentif des deux : 80 en tout, ou 15 à -70 dBm et plus, saturent ; 0,25), Wi-Fi en 2,4 GHz (réseaux à
+-75 dBm et plus, et surtout le Mac lui-même sur cette bande : son Wi-Fi et son Bluetooth se relaient sur la même
+antenne ; 0,25), appareils audio connectés au Mac (0,1). Verdict : Calme, Animé, Chargé. Le son et le champ
+magnétique sont montrés sans être jugés. Autorisations : micro sur l'iPhone (demandé au premier lancement d'une
+mesure), localisation sur le Mac (sans elle macOS cache le nom des réseaux Wi-Fi ; Locky ne lit jamais la position).
+
 ### Catalogue des Mac
 `Tools/MacCatalog/generate.sh` regénère, depuis les types de CoreTypes du macOS qui l'exécute, les images des Mac
 Apple silicon (écran rendu transparent, 1 024 px pour l'iPhone dans `Apps/iOS/Resources/MacCatalog.xcassets`,
@@ -478,7 +526,9 @@ inclinaison de la dalle du XDR).
 - **CloudKit** : déployer le schéma de développement en production depuis la console CloudKit (types `MacStatus`,
   `NowPlaying`, `Intrusion`, `MacSettings` ; le champ `cameraAccess` de `MacStatus` apparaît quand un Mac l'a publié
   une fois, le type `MacSettings` et son champ `sealed` (Bytes) quand un iPhone de développement a changé un réglage
-  hors de portée, ou à créer à la main dans la console).
+  hors de portée, ou à créer à la main dans la console ; le type `WaveScan` avec `macID` (String) et `sealed` (Bytes)
+  quand une mesure des ondes a été faite avec des builds de développement). Sans lui en production, l'enregistrement
+  des mesures échoue (« Mesure non enregistrée »).
 - **Mac** : distribué hors Mac App Store (pas de sandbox : impossible avec la saisie du mot de passe et les API
   privées), signé Developer ID et notarisé ; voir « Publier une version Mac ». Tant que `SUPublicEDKey` est vide,
   l'élément « Rechercher les mises à jour » est masqué.
@@ -554,6 +604,9 @@ Le simulateur ne fait pas de Bluetooth et le verrouillage de session ne peut pas
    (images et état reçus d'iCloud sans l'iPhone).
 6. Photo d'intrus et notification sur l'iPhone (iCloud identique sur les deux appareils).
 7. iPhone Duo plié / déplié.
+8. Ondes alentour : une mesure lancée de chaque côté, iPhone posé à côté du Mac (noms des réseaux après
+   l'autorisation de localisation, micro, recherche Bluetooth classique avec des écouteurs connectés), Locky qui ne
+   verrouille pas pendant la mesure, puis la même mesure lue et supprimée de l'autre appareil.
 
 ## Ancien code et secrets
 

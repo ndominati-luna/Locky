@@ -32,6 +32,10 @@
 	<string>Locky uses Bluetooth to talk to your iPhone and measure how far it is from your Mac.</string>
 	<key>NSCameraUsageDescription</key>
 	<string>When intruder detection is on, Locky takes a photo of people trying to use your Mac while you are away.</string>
+	<key>NSLocationUsageDescription</key>
+	<string>When you measure the waves around your Mac, macOS shows Locky the names of the Wi-Fi networks only if it may use Location Services. Locky never reads where you are.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>When you measure the waves around your Mac, macOS shows Locky the names of the Wi-Fi networks only if it may use Location Services. Locky never reads where you are.</string>
 	<key>NSHumanReadableCopyright</key>
 	<string>© Lunabee Studio</string>
 	<key>SUEnableAutomaticChecks</key>

@@ -12,6 +12,8 @@ final class AppModel {
     let preferences: Preferences
     let session: PhoneSession
     let intrusions: IntrusionStore
+    /// Measurements of the waves around, made with the Mac.
+    let waves: WaveScanCenter
 
     private(set) var macStatus: MacStatus?
     private(set) var visuals: MacVisuals
@@ -32,6 +34,9 @@ final class AppModel {
     /// The video of the first Locky, found in About (``LockyStoryView``). Presented from the main
     /// screen, not over About: a cover over a sheet closes when an iPhone Duo unfolds.
     var isStoryPresented: Bool = false
+    /// The waves around in a view of their own over the whole large screen of an open iPhone Duo
+    /// (``WavesFullScreenView``); on a regular iPhone they are pushed (``AppRoute/waves``).
+    var isWavesPresented: Bool = false
     /// Lock animation of the Mac, sent by Locky for Mac 1.0.2 and later.
     private(set) var macLockAnimation: LockAnimationSettings? {
         didSet { preferences.macLockAnimation = macLockAnimation }
@@ -61,6 +66,7 @@ final class AppModel {
     @ObservationIgnored private let widgets: WidgetBridge = .init()
     @ObservationIgnored private let liveActivity: LiveActivityManager = .init()
     @ObservationIgnored private let passwords: PasswordVault = .init()
+    @ObservationIgnored private let waveCapturer: PhoneWaveCapturer = .init()
     @ObservationIgnored private var isStarted: Bool = false
     @ObservationIgnored private var lastPedometerRefresh: ContinuousClock.Instant?
     @ObservationIgnored private var unlockingTimeout: Task<Void, Never>?
@@ -83,6 +89,7 @@ final class AppModel {
         preferences = .init()
         session = .init()
         intrusions = .init()
+        waves = .init(side: .phone)
         macStatus = MacStatusCache.load()
         macLockAnimation = preferences.macLockAnimation
         visuals = .stored()
@@ -536,6 +543,7 @@ final class AppModel {
         nowPlaying = nil
         nowPlayingArtwork = nil
         intrusions.clear()
+        waves.clear()
         motion.stop()
         SharedStore.reset()
         liveActivity.end()
@@ -655,6 +663,7 @@ final class AppModel {
         proximity = .init(rssi: -58, distance: 1.3)
         isMoving = false
         intrusions.injectDemoReports(DemoMode.intrusions(macID: macID))
+        waves.showDemo(DemoMode.waveScans, phase: DemoMode.wavePhase)
         path = DemoMode.initialPath
         startDashboardDemo()
         publishState()
@@ -824,6 +833,7 @@ final class AppModel {
         watch.onCommand = { [weak self] command in
             await self?.perform(command, origin: .watch) ?? false
         }
+        wireWaves()
     }
 
     private func sessionOpened() {
@@ -932,6 +942,8 @@ final class AppModel {
             fetchNowPlaying(revision: revision)
         case let .nowPlaying(playing):
             receiveNowPlaying(playing)
+        case let .waveScan(signal):
+            waves.receive(signal)
         case let .lockAnimation(settings):
             // The echo of a change made here is skipped; a change made on the Mac shows up.
             if let lockAnimationEditedAt, ContinuousClock.now - lockAnimationEditedAt < .seconds(1.5) {
@@ -940,6 +952,80 @@ final class AppModel {
             macLockAnimation = settings
         default:
             break
+        }
+    }
+
+    // MARK: - Waves
+
+    /// Why a measurement of the waves cannot start from the iPhone, `nil` when it can.
+    var waveScanBlocker: WaveScanBlocker? {
+        guard session.isPaired else { return .notPaired }
+        guard isConnected else { return .peerOutOfReach }
+        guard macStatus?.supports(.waveScan) == true else { return .peerTooOld }
+        return nil
+    }
+
+    /// Starts a measurement here and on the Mac (the microphone is asked first).
+    func startWaveScan(name: String) {
+        Task {
+            await waveCapturer.prepare()
+            guard waveScanBlocker == nil, waves.start(name: name) else {
+                alertMessage = String(localized: "The measurement could not start: stay next to your Mac and try again.")
+                return
+            }
+        }
+    }
+
+    private func wireWaves() {
+        waves.sendSignal = { [weak self] signal in
+            guard let self, self.isConnected, self.macStatus?.supports(.waveScan) == true else { return false }
+            return self.session.send(.waveScan(signal))
+        }
+        waves.credentials = { [weak self] in
+            guard let self, let pairing = self.session.pairing, let key = self.session.pairingKey else { return nil }
+            return .init(key: key, macID: pairing.peerID)
+        }
+        waves.captureHandler = { [weak self] run in
+            guard let self else { return .phone(.init()) }
+            return .phone(await self.waveCapturer.capture(run))
+        }
+        // iOS lets Locky listen only while it is on screen.
+        waves.canTakePart = { [weak self] in self?.isOnScreen ?? false }
+        waves.onRemoteStart = { [weak self] _ in
+            guard let self else { return }
+            if self.isLargeScreen {
+                self.openWaves()
+            } else if self.path.last != .waves {
+                self.path = [.waves]
+            }
+        }
+    }
+
+    /// The large screen of an open iPhone Duo is on (or an iPad): the waves take it whole.
+    @ObservationIgnored private var isLargeScreen: Bool = false
+
+    /// Shows the waves around: over the whole large screen of an open iPhone Duo, pushed on a
+    /// regular iPhone.
+    func openWaves() {
+        if isLargeScreen {
+            isAboutPresented = false
+            isWavesPresented = true
+        } else if path.last != .waves {
+            path.append(.waves)
+        }
+    }
+
+    /// The iPhone Duo opened or closed. Opened on the waves (pushed on the small screen), they move
+    /// to their view over the whole large screen; closed on that view, they are pushed again, laid
+    /// out for the small screen.
+    func largeScreenChanged(_ isLarge: Bool) {
+        isLargeScreen = isLarge
+        if isLarge, let index = path.firstIndex(where: \.isWaves) {
+            path.removeSubrange(index...)
+            isWavesPresented = true
+        } else if !isLarge, isWavesPresented {
+            isWavesPresented = false
+            path = [.waves]
         }
     }
 

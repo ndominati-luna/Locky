@@ -111,6 +111,11 @@ public enum LockyMessage: Codable, Sendable, Equatable {
     /// as last chosen on the iPhone, dated. The Mac applies those chosen after its own.
     case macSettings(MacSettingsEnvelope)
 
+    // MARK: - Waves (encrypted)
+    /// Both ways (``LockyFeature/waveScan``): a measurement of the waves around, started on either
+    /// side; each side then leaves its part in iCloud (``WaveScanPart``), never over Bluetooth.
+    case waveScan(WaveScanSignal)
+
     /// `true` for messages allowed without encryption.
     public var isHandshake: Bool {
         switch self {

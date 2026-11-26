@@ -51,6 +51,9 @@ final class StatusMenuController: NSObject {
             menu.addItem(ClosureMenuItem(String(localized: "Lock now"), image: "lock.fill") { [weak self] in
                 self?.model.lockNow()
             })
+            menu.addItem(ClosureMenuItem(String(localized: "Waves around…"), image: "dot.radiowaves.left.and.right") { [weak self] in
+                self?.windows.show(.waves)
+            })
             menu.addItem(.separator())
             menu.addItem(optionsItem())
         } else {

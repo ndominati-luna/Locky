@@ -13,6 +13,10 @@ struct AppRouteDestination: View {
             IntrusionDetailView(reportID: id)
         case .settings:
             SettingsView()
+        case .waves:
+            WavesView()
+        case .wave(let id):
+            WaveScanScreen(scanID: id)
         }
     }
 }

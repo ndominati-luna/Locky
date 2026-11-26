@@ -12,6 +12,8 @@ final class MacAppModel {
     let preferences: MacPreferences = .init()
     let session: MacSession = .init()
     let updater: UpdaterController = .init()
+    /// Measurements of the waves around, made with the iPhone lying next to the Mac.
+    let waves: WaveScanCenter = .init(side: .mac)
 
     private(set) var isLocked: Bool = SessionLocker.isScreenLocked
     private(set) var proximity: ProximityReading?
@@ -25,6 +27,9 @@ final class MacAppModel {
     private(set) var isLaunchAtLoginEnabled: Bool = LaunchAtLogin.isEnabled
     /// Step of the setup shown in the pairing window once paired.
     private(set) var setupStep: MacSetupStep = .permissions
+    /// Locky is on the screen of the iPhone (it follows the distance live): it can take part in a
+    /// measurement of the waves.
+    private(set) var isPhoneShowingLocky: Bool = false
 
     /// Brings the pairing window to the front (the first try succeeded behind the lock screen).
     @ObservationIgnored var onShowSetupWindow: (() -> Void)?
@@ -38,6 +43,7 @@ final class MacAppModel {
     @ObservationIgnored private let intrusions: IntrusionDetector = .init()
     @ObservationIgnored private let widgets: MacWidgetBridge = .init()
     @ObservationIgnored private let dashboard: DashboardStreamer = .init()
+    @ObservationIgnored private let waveCapturer: MacWaveCapturer = .init()
     @ObservationIgnored private var engine: ProximityEngine?
     @ObservationIgnored private var isSleeping: Bool = false
     @ObservationIgnored private var disconnectionTask: Task<Void, Never>?
@@ -101,6 +107,7 @@ final class MacAppModel {
         notifier.onOpenCameraSettings = { [weak self] in self?.allowCamera() }
         wireSession()
         wireEvents()
+        wireWaves()
         intrusions.isOwnerNearby = { [weak self] in
             guard let self, self.session.connection.isConnected, let proximity = self.proximity else { return false }
             return proximity.distance <= self.preferences.phonePreferences.lockDistance
@@ -644,6 +651,7 @@ final class MacAppModel {
         proximity = nil
         // The next iPhone says again how it follows the distance.
         proximityInterest = .live
+        isPhoneShowingLocky = false
         isPhoneMoving = false
         sessionClosedAt = .now
         hasHandledApproach = false
@@ -717,6 +725,7 @@ final class MacAppModel {
         case let .proximityInterest(interest):
             let wasSilent: Bool = proximityInterest.interval == nil
             proximityInterest = interest
+            isPhoneShowingLocky = interest == .live
             // Shown again: the gauge gets the distance at once.
             if wasSilent, interest.interval != nil, let proximity {
                 lastProximitySent = .now
@@ -743,6 +752,8 @@ final class MacAppModel {
         case .checkForUpdates:
             NSApp.activate()
             updater.checkForUpdates()
+        case let .waveScan(signal):
+            waves.receive(signal)
         default:
             break
         }
@@ -978,6 +989,50 @@ final class MacAppModel {
         }
     }
 
+    // MARK: - Waves
+
+    /// Why a measurement of the waves cannot start from the Mac, `nil` when it can.
+    var waveScanBlocker: WaveScanBlocker? {
+        guard isPaired else { return .notPaired }
+        guard session.connection.isConnected else { return .peerOutOfReach }
+        guard preferences.device?.supports(.waveScan) == true else { return .peerTooOld }
+        guard isPhoneShowingLocky else { return .phoneNotOnScreen }
+        return nil
+    }
+
+    /// Lock decisions wait while the waves are measured, and a few seconds after.
+    private var isWaveScanQuiet: Bool {
+        waves.isMeasuring || waves.lastMeasurementEnd.map { ContinuousClock.now - $0 < .seconds(5) } == true
+    }
+
+    /// A measurement is being named: Location Services are asked now (macOS shows the names of the
+    /// Wi-Fi networks only then), so that the measurement starts right away.
+    func prepareWaveScan() {
+        guard !waveCapturer.location.isGranted, !waveCapturer.location.isDenied else { return }
+        Task { await waveCapturer.location.request() }
+    }
+
+    /// Starts a measurement on both devices; `false` when the iPhone could not be told.
+    func startWaveScan(name: String) -> Bool {
+        guard waveScanBlocker == nil else { return false }
+        return waves.start(name: name)
+    }
+
+    private func wireWaves() {
+        waves.sendSignal = { [weak self] signal in
+            guard let self, self.session.connection.isConnected, self.preferences.device?.supports(.waveScan) == true else { return false }
+            return self.session.send(.waveScan(signal))
+        }
+        waves.credentials = { [weak self] in
+            guard let self, self.isPaired, let key = self.session.pairingKey else { return nil }
+            return .init(key: key, macID: self.session.macID)
+        }
+        waves.captureHandler = { [weak self] run in
+            guard let self else { return .mac(.init()) }
+            return .mac(await self.waveCapturer.capture(run))
+        }
+    }
+
     // MARK: - Proximity
 
     private func rebuildEngine() {
@@ -990,6 +1045,9 @@ final class MacAppModel {
 
     private func received(rssi: Double) {
         guard session.connection.isConnected, isPaired else { return }
+        if waves.isMeasuring {
+            waveCapturer.recordLink(rssi: rssi)
+        }
         if engine == nil {
             rebuildEngine()
         }
@@ -1010,6 +1068,9 @@ final class MacAppModel {
             lastProximitySent = .now
             session.send(.proximity(reading))
         }
+        // Measuring the waves: the iPhone lies next to the Mac, and the scans may blur its signal
+        // for a moment. Nothing is decided until it settles.
+        guard !isWaveScanQuiet else { return }
         let lockDistance: Double = preferences.phonePreferences.lockDistance
         if isLocked, reading.distance > lockDistance {
             // The iPhone is away: the next approach may unlock.
@@ -1396,6 +1457,8 @@ final class MacAppModel {
 
     private func resetAfterUnpairing() {
         preferences.resetPairingRelatedValues()
+        waves.clear()
+        isPhoneShowingLocky = false
         engine = nil
         proximity = nil
         cancelNotConnectedNotification()

@@ -90,6 +90,42 @@
           }
         }
       }
+    },
+    "NSLocationUsageDescription" : {
+      "comment" : "Privacy - Location Usage Description",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "When you measure the waves around your Mac, macOS shows Locky the names of the Wi-Fi networks only if it may use Location Services. Locky never reads where you are."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quand tu mesures les ondes autour de ton Mac, macOS ne montre le nom des réseaux Wi-Fi à Locky que s’il peut utiliser le Service de localisation. Locky ne lit jamais où tu te trouves."
+          }
+        }
+      }
+    },
+    "NSLocationWhenInUseUsageDescription" : {
+      "comment" : "Privacy - Location When In Use Usage Description",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "When you measure the waves around your Mac, macOS shows Locky the names of the Wi-Fi networks only if it may use Location Services. Locky never reads where you are."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quand tu mesures les ondes autour de ton Mac, macOS ne montre le nom des réseaux Wi-Fi à Locky que s’il peut utiliser le Service de localisation. Locky ne lit jamais où tu te trouves."
+          }
+        }
+      }
     }
   },
   "version" : "1.0"

@@ -10,6 +10,7 @@ struct ScreenFoldReader: ViewModifier {
     func body(content: Content) -> some View {
         content
             .environment(\.screenFold, fold)
+            .environment(\.isLargeScreen, isLargeScreen)
             .onGeometryChange(for: WindowGeometry.self) { proxy in
                 // The root view covers the safe area; its insets give back the whole window.
                 let insets: EdgeInsets = proxy.safeAreaInsets
@@ -26,6 +27,10 @@ struct ScreenFoldReader: ViewModifier {
             .modifier(HingeReader(isHalfOpen: $isHalfOpen))
             // Folding or unfolding switches between one screen and two pages: cross-fade.
             .animation(.smooth(duration: 0.35), value: isHalfOpen)
+    }
+
+    private var isLargeScreen: Bool {
+        window.map { min($0.size.width, $0.size.height) >= ScreenFold.minimumShortSide } ?? false
     }
 
     private var fold: ScreenFold? {

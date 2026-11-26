@@ -40,4 +40,7 @@ struct ScreenFold: Equatable {
 extension EnvironmentValues {
     /// The fold of the screen when the app runs on the large screen of a foldable iPhone.
     @Entry var screenFold: ScreenFold?
+    /// The app runs on a large screen (``ScreenFold/minimumShortSide``): the open iPhone Duo in
+    /// any posture, upright and flat included (no fold then), or an iPad.
+    @Entry var isLargeScreen: Bool = false
 }

@@ -1,10 +1,12 @@
 import SwiftUI
 
 /// Main interface once paired: the Mac in full screen, the other screens behind two buttons. On
-/// the large screen of an unfolded iPhone Duo, two pages instead (see ``UnfoldedMainView``).
+/// the large screen of an unfolded iPhone Duo, two pages instead (see ``UnfoldedMainView``), and
+/// the waves around over the whole screen (``WavesFullScreenView``).
 struct MainView: View {
     @Environment(AppModel.self) private var model
     @Environment(\.screenFold) private var fold
+    @Environment(\.isLargeScreen) private var isLargeScreen
 
     var body: some View {
         @Bindable var model = model
@@ -26,6 +28,12 @@ struct MainView: View {
         .fullScreenCover(isPresented: $model.isStoryPresented) {
             LockyStoryView()
         }
+        .fullScreenCover(isPresented: $model.isWavesPresented) {
+            WavesFullScreenView()
+        }
+        .onChange(of: isLargeScreen, initial: true) {
+            model.largeScreenChanged(isLargeScreen)
+        }
         #if DEBUG
         .onAppear {
             if DemoMode.showsStory {
@@ -36,9 +44,9 @@ struct MainView: View {
     }
 }
 
-/// The buttons of the main screen, each in its own glass: About on the leading side; on the
-/// trailing side the page of the Mac where it has no page of its own, the break-in reports (a red
-/// dot while some are unseen) and the settings.
+/// The buttons of the main screen: About on the leading side; on the trailing side the page of the
+/// Mac where it has no page of its own, then the waves around and the break-in reports (a red dot
+/// while some are unseen) sharing a glass, then the settings, each other one in its own glass.
 struct MainToolbar: ToolbarContent {
     @Environment(AppModel.self) private var model
     @Environment(\.displayScale) private var displayScale
@@ -63,6 +71,11 @@ struct MainToolbar: ToolbarContent {
                 .accessibilityHint(Text("Shows what is happening on your Mac."))
             }
             ToolbarSpacer(.fixed, placement: .topBarTrailing)
+        }
+        ToolbarItem(placement: .topBarTrailing) {
+            Button("Waves around", systemImage: "dot.radiowaves.left.and.right") {
+                model.openWaves()
+            }
         }
         ToolbarItem(placement: .topBarTrailing) {
             Button {

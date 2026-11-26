@@ -1851,6 +1851,1726 @@
           }
         }
       }
+    },
+    "Radar of the Bluetooth devices around" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Radar des appareils Bluetooth alentour"
+          }
+        }
+      }
+    },
+    "Apple" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple"
+          }
+        }
+      }
+    },
+    "Other brands" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Autres marques"
+          }
+        }
+      }
+    },
+    "Heard by your Mac" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Entendu par ton Mac"
+          }
+        }
+      }
+    },
+    "Heard by your iPhone" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Entendu par ton iPhone"
+          }
+        }
+      }
+    },
+    "Waves around…" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ondes alentour…"
+          }
+        }
+      }
+    },
+    "Wi-Fi networks by channel" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Réseaux Wi-Fi par canal"
+          }
+        }
+      }
+    },
+    "Frequency" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fréquence"
+          }
+        }
+      }
+    },
+    "Floor" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Plancher"
+          }
+        }
+      }
+    },
+    "Signal" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Signal"
+          }
+        }
+      }
+    },
+    "Network" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Réseau"
+          }
+        }
+      }
+    },
+    "Sound spectrum" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Spectre du son"
+          }
+        }
+      }
+    },
+    "Band" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bande"
+          }
+        }
+      }
+    },
+    "Level" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Niveau"
+          }
+        }
+      }
+    },
+    "Magnetic field over the measurement" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Champ magnétique pendant la mesure"
+          }
+        }
+      }
+    },
+    "Start" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lancer"
+          }
+        }
+      }
+    },
+    "End" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fin"
+          }
+        }
+      }
+    },
+    "Earth low" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Terre, minimum"
+          }
+        }
+      }
+    },
+    "Earth high" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Terre, maximum"
+          }
+        }
+      }
+    },
+    "Time" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Temps"
+          }
+        }
+      }
+    },
+    "Field" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Champ"
+          }
+        }
+      }
+    },
+    "Signal of your iPhone over the measurement" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Signal de ton iPhone pendant la mesure"
+          }
+        }
+      }
+    },
+    "Average" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Moyenne"
+          }
+        }
+      }
+    },
+    "Impact on Locky" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impact sur Locky"
+          }
+        }
+      }
+    },
+    "Bluetooth around" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bluetooth alentour"
+          }
+        }
+      }
+    },
+    "Wi-Fi" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wi-Fi"
+          }
+        }
+      }
+    },
+    "Link with your iPhone" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lien avec ton iPhone"
+          }
+        }
+      }
+    },
+    "Sound" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Son"
+          }
+        }
+      }
+    },
+    "Magnetic field" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Champ magnétique"
+          }
+        }
+      }
+    },
+    "Locky estimates the distance from the strength of the Bluetooth signal of your iPhone. Here is what blurs it where you measured." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Locky estime la distance d’après la force du signal Bluetooth de ton iPhone. Voici ce qui le brouille là où tu as mesuré."
+          }
+        }
+      }
+    },
+    "Heard by" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Entendus par"
+          }
+        }
+      }
+    },
+    "Mac" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mac"
+          }
+        }
+      }
+    },
+    "Classic" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Classique"
+          }
+        }
+      }
+    },
+    "Bluetooth Low Energy: watches, headphones, trackers, phones… Many change their address every few minutes, so one device may show up twice." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bluetooth basse consommation : montres, écouteurs, balises, téléphones… Beaucoup changent d’adresse toutes les quelques minutes : un même appareil peut apparaître deux fois."
+          }
+        }
+      }
+    },
+    "Classic Bluetooth: speakers, headphones, cars, keyboards… Connected ones share the Bluetooth radio of your Mac with Locky." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bluetooth classique : enceintes, casques, voitures, claviers… Ceux qui sont connectés partagent la radio Bluetooth de ton Mac avec Locky."
+          }
+        }
+      }
+    },
+    "No device heard." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aucun appareil entendu."
+          }
+        }
+      }
+    },
+    "close by" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "tout près"
+          }
+        }
+      }
+    },
+    "heard %lld times" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "entendu %lld fois"
+          }
+        }
+      }
+    },
+    "Devices: %lld" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Appareils : %lld"
+          }
+        }
+      }
+    },
+    "No device found." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aucun appareil trouvé."
+          }
+        }
+      }
+    },
+    "connected to your Mac" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "connecté à ton Mac"
+          }
+        }
+      }
+    },
+    "paired" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "jumelé"
+          }
+        }
+      }
+    },
+    "Your Mac" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ton Mac"
+          }
+        }
+      }
+    },
+    "Channel" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Canal"
+          }
+        }
+      }
+    },
+    "Noise" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bruit"
+          }
+        }
+      }
+    },
+    "Signal above the noise" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Signal au-dessus du bruit"
+          }
+        }
+      }
+    },
+    "Rate" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Débit"
+          }
+        }
+      }
+    },
+    "Standard" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Norme"
+          }
+        }
+      }
+    },
+    "macOS hides the names of the networks: allow Locky in System Settings › Privacy & Security › Location Services." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "macOS cache le nom des réseaux : autorise Locky dans Réglages Système › Confidentialité et sécurité › Service de localisation."
+          }
+        }
+      }
+    },
+    "Bluetooth shares this band: the strong networks here weigh on the link of Locky." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le Bluetooth partage cette bande : les réseaux forts ici pèsent sur le lien de Locky."
+          }
+        }
+      }
+    },
+    "channel %lld" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "canal %lld"
+          }
+        }
+      }
+    },
+    "Your iPhone was not connected to your Mac during this measurement." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ton iPhone n’était pas connecté à ton Mac pendant cette mesure."
+          }
+        }
+      }
+    },
+    "Average signal" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Signal moyen"
+          }
+        }
+      }
+    },
+    "Steadiness" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stabilité"
+          }
+        }
+      }
+    },
+    "Weakest" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le plus faible"
+          }
+        }
+      }
+    },
+    "Strongest" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le plus fort"
+          }
+        }
+      }
+    },
+    "Readings" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Relevés"
+          }
+        }
+      }
+    },
+    "Dropouts" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Coupures"
+          }
+        }
+      }
+    },
+    "Your Mac read the signal of your iPhone lying next to it, about three times a second. The steadier it is, the more precise the distance; a dropout is more than 1.5 seconds without a reading." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ton Mac a lu le signal de ton iPhone posé à côté de lui, environ trois fois par seconde. Plus il est stable, plus la distance est précise ; une coupure, c’est plus d’1,5 seconde sans relevé."
+          }
+        }
+      }
+    },
+    "Locky could not use the microphone of your iPhone." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Locky n’a pas pu utiliser le micro de ton iPhone."
+          }
+        }
+      }
+    },
+    "Average level" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Niveau moyen"
+          }
+        }
+      }
+    },
+    "Loudest moment" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Moment le plus fort"
+          }
+        }
+      }
+    },
+    "Dominant pitch" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fréquence dominante"
+          }
+        }
+      }
+    },
+    "Levels in decibels below the loudest sound the microphone of your iPhone can take: the closer to 0, the louder. A quiet room reads around -70 dB, a conversation around -40 dB." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Niveaux en décibels sous le son le plus fort que le micro de ton iPhone peut capter : plus on approche de 0, plus c’est fort. Une pièce calme tourne autour de -70 dB, une conversation autour de -40 dB."
+          }
+        }
+      }
+    },
+    "Your iPhone could not measure the magnetic field." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ton iPhone n’a pas pu mesurer le champ magnétique."
+          }
+        }
+      }
+    },
+    "The Earth alone gives 25 to 65 µT (green band). Magnets add a lot right next to them: speakers, and the lid and MagSafe of a MacBook." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La Terre seule donne de 25 à 65 µT (bande verte). Les aimants en ajoutent beaucoup juste à côté d’eux : haut-parleurs, écran et MagSafe d’un MacBook."
+          }
+        }
+      }
+    },
+    "Raw readings of the magnetometer: iOS had not calibrated it yet, the iPhone’s own field is included. The Earth alone gives 25 to 65 µT (green band)." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Relevés bruts du magnétomètre : iOS ne l’avait pas encore calibré, le champ propre de l’iPhone est inclus. La Terre seule donne de 25 à 65 µT (bande verte)."
+          }
+        }
+      }
+    },
+    "Nothing to judge: your Mac did not take part in this measurement." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rien à juger : ton Mac n’a pas participé à cette mesure."
+          }
+        }
+      }
+    },
+    "Signal %@, steady within %@" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Signal %1$@, stable à %2$@ près"
+          }
+        }
+      }
+    },
+    "Devices heard: %lld, close by: %lld" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Appareils entendus : %1$lld, tout près : %2$lld"
+          }
+        }
+      }
+    },
+    "Strong 2.4 GHz networks: %lld, your Mac: %@" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Réseaux forts en 2,4 GHz : %1$lld, ton Mac : %2$@"
+          }
+        }
+      }
+    },
+    "Connected: %lld, of which audio: %lld" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Connectés : %1$lld, dont audio : %2$lld"
+          }
+        }
+      }
+    },
+    "Lying next to your Mac, your iPhone kept a steady signal: the distance Locky measures will be precise here." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Posé à côté de ton Mac, ton iPhone a gardé un signal stable : la distance que mesure Locky sera précise ici."
+          }
+        }
+      }
+    },
+    "Lying still, your iPhone still saw its signal move a little: the distance may waver by a few tens of centimeters." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pourtant immobile, ton iPhone a vu son signal bouger un peu : la distance peut hésiter de quelques dizaines de centimètres."
+          }
+        }
+      }
+    },
+    "Lying still, your iPhone saw its signal jump around: Locky may lock or unlock late. Keep your iPhone uncovered, and away from metal." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pourtant immobile, ton iPhone a vu son signal sauter : Locky peut verrouiller ou déverrouiller en retard. Garde ton iPhone à découvert, loin du métal."
+          }
+        }
+      }
+    },
+    "Few Bluetooth devices around: they leave the channels of Locky free." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Peu d’appareils Bluetooth alentour : ils laissent les canaux de Locky libres."
+          }
+        }
+      }
+    },
+    "Quite a few Bluetooth devices around. They advertise on the same channels as Locky, which can live with it." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pas mal d’appareils Bluetooth alentour. Ils s’annoncent sur les mêmes canaux que Locky, qui s’en accommode."
+          }
+        }
+      }
+    },
+    "Many Bluetooth devices, some very close: they crowd the channels of Locky, and some readings of the distance get lost." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Beaucoup d’appareils Bluetooth, certains tout près : ils encombrent les canaux de Locky, et des relevés de la distance se perdent."
+          }
+        }
+      }
+    },
+    "Your Mac uses Wi-Fi at 2.4 GHz: its Wi-Fi and its Bluetooth take turns on the same antenna. Connect it at 5 GHz if your box offers it: Locky will hear your iPhone better." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ton Mac utilise le Wi-Fi en 2,4 GHz : son Wi-Fi et son Bluetooth se relaient sur la même antenne. Connecte-le en 5 GHz si ta box le propose : Locky entendra mieux ton iPhone."
+          }
+        }
+      }
+    },
+    "Bluetooth shares the 2.4 GHz band with Wi-Fi. Few strong networks there, and your Mac stays away from it." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le Bluetooth partage la bande des 2,4 GHz avec le Wi-Fi. Peu de réseaux forts ici, et ton Mac n’y est pas."
+          }
+        }
+      }
+    },
+    "Bluetooth shares the 2.4 GHz band with Wi-Fi, and many strong networks use it here: Bluetooth has to dodge them." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le Bluetooth partage la bande des 2,4 GHz avec le Wi-Fi, et beaucoup de réseaux forts l’occupent ici : le Bluetooth doit les esquiver."
+          }
+        }
+      }
+    },
+    "Nothing that streams sound is connected to your Mac: its Bluetooth radio is all Locky's." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rien qui diffuse du son n’est connecté à ton Mac : sa radio Bluetooth est toute à Locky."
+          }
+        }
+      }
+    },
+    "Headphones or speakers stream sound over the Bluetooth of your Mac: Locky shares its radio with them." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Des écouteurs ou des enceintes reçoivent du son par le Bluetooth de ton Mac : Locky partage sa radio avec eux."
+          }
+        }
+      }
+    },
+    "no Wi-Fi" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "pas de Wi-Fi"
+          }
+        }
+      }
+    },
+    "Sound and the magnetic field do nothing to Bluetooth: they are only shown." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le son et le champ magnétique n’ont aucun effet sur le Bluetooth : ils sont seulement montrés."
+          }
+        }
+      }
+    },
+    "Networks in use" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Réseaux utilisés"
+          }
+        }
+      }
+    },
+    "Measurement" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mesure"
+          }
+        }
+      }
+    },
+    "Your Mac’s part is missing: no Wi-Fi, nor the link with your iPhone." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Il manque la part de ton Mac : ni Wi-Fi, ni lien avec ton iPhone."
+          }
+        }
+      }
+    },
+    "Your iPhone’s part is missing: no sound, nor magnetic field." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Il manque la part de ton iPhone : ni son, ni champ magnétique."
+          }
+        }
+      }
+    },
+    "devices heard" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "appareils entendus"
+          }
+        }
+      }
+    },
+    "classic Bluetooth" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bluetooth classique"
+          }
+        }
+      }
+    },
+    "No Wi-Fi network heard: the Wi-Fi of your Mac may be off." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aucun réseau Wi-Fi entendu : le Wi-Fi de ton Mac est peut-être coupé."
+          }
+        }
+      }
+    },
+    "Dotted lines: where Bluetooth advertises, and Locky looks for your iPhone." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "En pointillés : là où le Bluetooth s’annonce, et où Locky cherche ton iPhone."
+          }
+        }
+      }
+    },
+    "macOS hides the names of the networks: allow Locky in Location Services to see them." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "macOS cache le nom des réseaux : autorise Locky dans le Service de localisation pour les voir."
+          }
+        }
+      }
+    },
+    "networks heard" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "réseaux entendus"
+          }
+        }
+      }
+    },
+    "at 2.4 GHz" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "en 2,4 GHz"
+          }
+        }
+      }
+    },
+    "your Mac" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ton Mac"
+          }
+        }
+      }
+    },
+    "average signal" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "signal moyen"
+          }
+        }
+      }
+    },
+    "steadiness" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "stabilité"
+          }
+        }
+      }
+    },
+    "dropouts" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "coupures"
+          }
+        }
+      }
+    },
+    "average level" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "niveau moyen"
+          }
+        }
+      }
+    },
+    "loudest" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "le plus fort"
+          }
+        }
+      }
+    },
+    "dominant pitch" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "fréquence dominante"
+          }
+        }
+      }
+    },
+    "average" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "moyenne"
+          }
+        }
+      }
+    },
+    "strongest" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "le plus fort"
+          }
+        }
+      }
+    },
+    "the Earth, at most" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "la Terre, au plus"
+          }
+        }
+      }
+    },
+    "Wi-Fi of your Mac" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wi-Fi de ton Mac"
+          }
+        }
+      }
+    },
+    "Mobile network of your iPhone" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Réseau mobile de ton iPhone"
+          }
+        }
+      }
+    },
+    "Home" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Maison"
+          }
+        }
+      }
+    },
+    "Office" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bureau"
+          }
+        }
+      }
+    },
+    "Bedroom" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chambre"
+          }
+        }
+      }
+    },
+    "Café" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Café"
+          }
+        }
+      }
+    },
+    "New measurement" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nouvelle mesure"
+          }
+        }
+      }
+    },
+    "Home, office, café…" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Maison, bureau, café…"
+          }
+        }
+      }
+    },
+    "Name" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nom"
+          }
+        }
+      }
+    },
+    "Where are you?" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Où es-tu ?"
+          }
+        }
+      }
+    },
+    "Name it after the place, to find it among your measurements." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Donne-lui le nom du lieu, pour la retrouver parmi tes mesures."
+          }
+        }
+      }
+    },
+    "Lay your iPhone next to your Mac and leave both still for 20 seconds." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pose ton iPhone à côté de ton Mac et laisse-les immobiles pendant 20 secondes."
+          }
+        }
+      }
+    },
+    "Meanwhile, the Wi-Fi of your Mac may pause for a moment and Bluetooth headphones may stutter. Locky neither locks nor unlocks until it is over." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pendant ce temps, le Wi-Fi de ton Mac peut marquer de courtes pauses et le son des écouteurs Bluetooth peut hoqueter. Locky ne verrouille ni ne déverrouille avant la fin."
+          }
+        }
+      }
+    },
+    "Measuring “%@”" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mesure de « %@ »"
+          }
+        }
+      }
+    },
+    "Saving “%@”" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enregistrement de « %@ »"
+          }
+        }
+      }
+    },
+    "Leave your iPhone next to your Mac. Locky neither locks nor unlocks meanwhile." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Laisse ton iPhone à côté de ton Mac. Locky ne verrouille ni ne déverrouille pendant ce temps."
+          }
+        }
+      }
+    },
+    "Both parts of the measurement go to iCloud, sealed with the key of your pairing." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Les deux parts de la mesure partent dans iCloud, scellées avec la clé de ton appairage."
+          }
+        }
+      }
+    },
+    "Your iPhone does not take part: open Locky on it next time to measure everything." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ton iPhone ne participe pas : ouvre Locky dessus la prochaine fois pour tout mesurer."
+          }
+        }
+      }
+    },
+    "Bluetooth" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bluetooth"
+          }
+        }
+      }
+    },
+    "Magnetism" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Magnétisme"
+          }
+        }
+      }
+    },
+    "Link" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lien"
+          }
+        }
+      }
+    },
+    "Pair your iPhone with your Mac first." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Commence par appairer ton iPhone avec ton Mac."
+          }
+        }
+      }
+    },
+    "Your iPhone is out of reach: bring it next to your Mac." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ton iPhone est hors de portée : rapproche-le de ton Mac."
+          }
+        }
+      }
+    },
+    "Update Locky on your iPhone to measure the waves." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mets à jour Locky sur ton iPhone pour mesurer les ondes."
+          }
+        }
+      }
+    },
+    "Open Locky on your iPhone: it listens only while it is on screen." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ouvre Locky sur ton iPhone : il n’écoute que lorsqu’il est à l’écran."
+          }
+        }
+      }
+    },
+    "Calm" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Calme"
+          }
+        }
+      }
+    },
+    "Busy" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Animé"
+          }
+        }
+      }
+    },
+    "Crowded" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chargé"
+          }
+        }
+      }
+    },
+    "Nothing gets in the way: Locky measures the distance precisely here." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rien ne gêne : Locky mesure la distance avec précision ici."
+          }
+        }
+      }
+    },
+    "Some traffic: the distance may waver a little, Locky may lock a few seconds later." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Un peu de trafic : la distance peut hésiter, Locky peut verrouiller quelques secondes plus tard."
+          }
+        }
+      }
+    },
+    "Lots of waves: Locky may lock or unlock late here." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Beaucoup d’ondes : Locky peut verrouiller ou déverrouiller en retard ici."
+          }
+        }
+      }
+    },
+    "Wi-Fi at 2.4 GHz" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wi-Fi en 2,4 GHz"
+          }
+        }
+      }
+    },
+    "Devices connected to your Mac" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Appareils connectés à ton Mac"
+          }
+        }
+      }
+    },
+    "Name hidden by macOS" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nom caché par macOS"
+          }
+        }
+      }
+    },
+    "Hidden network" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Réseau masqué"
+          }
+        }
+      }
+    },
+    "%@ device" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Appareil %@"
+          }
+        }
+      }
+    },
+    "Unnamed device" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Appareil sans nom"
+          }
+        }
+      }
+    },
+    "No password" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sans mot de passe"
+          }
+        }
+      }
+    },
+    "Enterprise" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Entreprise"
+          }
+        }
+      }
+    },
+    "Computer" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ordinateur"
+          }
+        }
+      }
+    },
+    "Phone" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Téléphone"
+          }
+        }
+      }
+    },
+    "Audio" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Audio"
+          }
+        }
+      }
+    },
+    "Keyboard, mouse…" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Clavier, souris…"
+          }
+        }
+      }
+    },
+    "Printer, camera…" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Imprimante, appareil photo…"
+          }
+        }
+      }
+    },
+    "Wearable" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Accessoire porté"
+          }
+        }
+      }
+    },
+    "Toy" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jouet"
+          }
+        }
+      }
+    },
+    "Health" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Santé"
+          }
+        }
+      }
+    },
+    "Other" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Autre"
+          }
+        }
+      }
+    },
+    "Details" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Détails"
+          }
+        }
+      }
+    },
+    "Measure the waves" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mesurer les ondes"
+          }
+        }
+      }
+    },
+    "No measurement yet" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aucune mesure pour l’instant"
+          }
+        }
+      }
+    },
+    "Measure the waves around your Mac, at home, at work or anywhere: Wi-Fi, Bluetooth, sound… and see how they affect Locky." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mesure les ondes autour de ton Mac, chez toi, au travail ou ailleurs : Wi-Fi, Bluetooth, son… et vois comment elles jouent sur Locky."
+          }
+        }
+      }
+    },
+    "Delete “%@”?" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Supprimer « %@ » ?"
+          }
+        }
+      }
+    },
+    "The measurement could not start" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La mesure n’a pas pu démarrer"
+          }
+        }
+      }
+    },
+    "Delete…" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Supprimer…"
+          }
+        }
+      }
+    },
+    "Measure the waves around your Mac" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mesurer les ondes autour de ton Mac"
+          }
+        }
+      }
+    },
+    "Sign in to iCloud on your Mac and your iPhone with the same Apple Account to keep your measurements." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Connecte-toi à iCloud sur ton Mac et ton iPhone avec le même compte Apple pour garder tes mesures."
+          }
+        }
+      }
+    },
+    "iCloud unavailable" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "iCloud indisponible"
+          }
+        }
+      }
+    },
+    "Choose a measurement" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Choisis une mesure"
+          }
+        }
+      }
+    },
+    "Delete" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Supprimer"
+          }
+        }
+      }
+    },
+    "The measurement is deleted from your Mac and your iPhone." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La mesure est supprimée de ton Mac et de ton iPhone."
+          }
+        }
+      }
+    },
+    "Check that your iPhone is next to your Mac, with Locky open on it." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vérifie que ton iPhone est à côté de ton Mac, avec Locky ouvert dessus."
+          }
+        }
+      }
+    },
+    "Measurement not saved" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mesure non enregistrée"
+          }
+        }
+      }
+    },
+    "Sign in to iCloud on your Mac with the same Apple Account as your iPhone to keep your measurements." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Connecte-toi à iCloud sur ton Mac avec le même compte Apple que ton iPhone pour garder tes mesures."
+          }
+        }
+      }
+    },
+    "iCloud did not take it. Try again in a moment." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "iCloud ne l’a pas acceptée. Réessaie dans un instant."
+          }
+        }
+      }
+    },
+    "Waves around" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ondes alentour"
+          }
+        }
+      }
     }
   },
   "version" : "1.0"

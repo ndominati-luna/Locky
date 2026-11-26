@@ -16,6 +16,8 @@ final class WindowManager: NSObject {
         case about
         /// The video of the first Locky, opened from About.
         case story
+        /// The measurements of the waves around.
+        case waves
     }
 
     private let model: MacAppModel
@@ -90,6 +92,12 @@ final class WindowManager: NSObject {
             window.titleVisibility = .hidden
             window.isMovableByWindowBackground = true
             window.title = String(localized: "About Locky")
+        case .waves:
+            controller = NSHostingController(rootView: WavesWindowView().environment(model))
+            window = .init(contentViewController: controller)
+            window.styleMask = [.titled, .closable, .miniaturizable, .resizable, .fullSizeContentView]
+            window.title = String(localized: "Waves around")
+            window.setContentSize(NSSize(width: 980, height: 720))
         case .story:
             controller = NSHostingController(rootView: StoryWindowView())
             window = .init(contentViewController: controller)
@@ -101,7 +109,7 @@ final class WindowManager: NSObject {
         window.isReleasedWhenClosed = false
         window.delegate = self
         switch kind {
-        case .about, .story:
+        case .about, .story, .waves:
             // Ordinary windows: nothing to keep in sight.
             window.level = .normal
         case .pairing, .password, .animation, .releaseNotes:

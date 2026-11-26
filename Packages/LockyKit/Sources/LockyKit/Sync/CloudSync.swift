@@ -12,7 +12,9 @@ import OSLog
 ///   (for when the iPhone is away from the Mac);
 /// - the iPhone drops the settings of the Mac chosen out of reach (`MacSettings` record, sealed
 ///   with the pairing key, see ``MacSettingsEnvelope``); the Mac subscribes to them (silent push)
-///   and reads them while the iPhone is away.
+///   and reads them while the iPhone is away;
+/// - each device leaves its part of a measurement of the waves around (`WaveScan` records, sealed,
+///   in a zone of their own: see ``WaveScan``).
 ///
 /// Everything lives in a custom zone and is read with zone change fetches, so no query index has
 /// to be configured in the CloudKit console.
@@ -27,6 +29,7 @@ public actor CloudSync {
         static let intrusion: String = "Intrusion"
         static let nowPlaying: String = "NowPlaying"
         static let macSettings: String = "MacSettings"
+        static let waveScan: String = "WaveScan"
     }
 
     private enum SubscriptionID {
@@ -40,8 +43,12 @@ public actor CloudSync {
 
     private let logger: Logger = .init(subsystem: "studio.lunabee.locky", category: "CloudSync")
     private let zoneID: CKRecordZone.ID = .init(zoneName: "Locky", ownerName: CKCurrentUserDefaultName)
+    /// The measurements of the waves live apart: ``fetchAll()`` reads the whole Locky zone on every
+    /// refresh, they would weigh on it for nothing.
+    private let wavesZoneID: CKRecordZone.ID = .init(zoneName: "Waves", ownerName: CKCurrentUserDefaultName)
     private var container: CKContainer?
     private var isZoneReady: Bool = false
+    private var isWavesZoneReady: Bool = false
 
     private init() {}
 
@@ -288,6 +295,54 @@ public actor CloudSync {
         let reports: [IntrusionReport] = try await fetchAll().intrusions.filter { $0.macID == macID }
         let obsolete: [String] = reports.dropFirst(Self.maximumIntrusionCount).map(\.id)
         try await deleteIntrusions(ids: obsolete)
+    }
+
+    // MARK: - Waves
+
+    private func prepareWavesZone() async throws {
+        guard !isWavesZoneReady else { return }
+        guard await isAvailable() else { throw CloudSyncError.accountUnavailable }
+        _ = try await database.modifyRecordZones(saving: [CKRecordZone(zoneID: wavesZoneID)], deleting: [])
+        isWavesZoneReady = true
+    }
+
+    private func waveScanRecordID(scanID: UUID, side: WaveScanSide) -> CKRecord.ID {
+        .init(recordName: "waves-\(scanID.uuidString)-\(side.rawValue)", zoneID: wavesZoneID)
+    }
+
+    /// Leaves the part of a measurement one device made, sealed (``WaveScanPart/sealed(key:macID:)``).
+    /// Only the Mac it belongs to shows in clear.
+    func saveWaveScanPart(_ sealed: Data, scanID: UUID, side: WaveScanSide, macID: UUID) async throws {
+        try await prepareWavesZone()
+        let record: CKRecord = .init(recordType: RecordType.waveScan, recordID: waveScanRecordID(scanID: scanID, side: side))
+        record["macID"] = macID.uuidString
+        record["sealed"] = sealed
+        try await modify(saving: [record], savePolicy: .allKeys)
+    }
+
+    /// The sealed parts of the measurements of a Mac.
+    func fetchWaveScanParts(macID: UUID) async throws -> [Data] {
+        try await prepareWavesZone()
+        var parts: [Data] = []
+        var token: CKServerChangeToken?
+        var moreComing: Bool = true
+        while moreComing {
+            let changes = try await database.recordZoneChanges(inZoneWith: wavesZoneID, since: token)
+            for (_, result) in changes.modificationResultsByID {
+                guard let record = try? result.get().record, record.recordType == RecordType.waveScan,
+                      record["macID"] as? String == macID.uuidString, let sealed = record["sealed"] as? Data else { continue }
+                parts.append(sealed)
+            }
+            token = changes.changeToken
+            moreComing = changes.moreComing
+        }
+        return parts
+    }
+
+    /// Deletes a measurement: the parts of both devices.
+    func deleteWaveScan(id: UUID) async throws {
+        try await prepareWavesZone()
+        try await modify(saving: [], deleting: WaveScanSide.allCases.map { waveScanRecordID(scanID: id, side: $0) })
     }
 
     // MARK: - Fetch
