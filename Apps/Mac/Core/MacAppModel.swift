@@ -1187,10 +1187,27 @@ final class MacAppModel {
         }
         transitions.beginUnlock(preferences.lockAnimation)
         try? await Task.sleep(for: .milliseconds(700))
-        guard isLocked, await SessionLocker.typePassword(password) else {
-            // Unlocked meanwhile (Apple Watch, Touch ID…): nothing was typed.
+        let typing: SessionLocker.PasswordTyping = isLocked ? await SessionLocker.typePassword(password) : .unlocked
+        switch typing {
+        case .typed:
+            break
+        case .unlocked:
+            // Unlocked meanwhile (Apple Watch, Touch ID…): nothing more was typed.
             transitions.finishUnlock()
             unlockInProgress = false
+            return
+        case .notTaken:
+            // Nothing validated, the password is not in question: the lock screen offers to try
+            // again.
+            logger.error("The password field never held the whole password: not validated")
+            transitions.finishUnlock()
+            unlockInProgress = false
+            if preferences.phonePreferences.intrusionDetection, isPaired {
+                intrusions.start()
+            }
+            if session.connection.isConnected {
+                showPrompt(mode: .button)
+            }
             return
         }
         try? await Task.sleep(for: .seconds(4))

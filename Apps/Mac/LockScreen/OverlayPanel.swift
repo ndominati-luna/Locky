@@ -43,17 +43,31 @@ extension OverlayPanel {
     /// which happens right when the session locks or unlocks (an AppKit or SwiftUI animation, driven
     /// by the main thread, would freeze then disappear at once).
     func fadeOut(duration: TimeInterval) async {
-        if let layer = contentView?.layer {
-            let fade: CABasicAnimation = .init(keyPath: "opacity")
-            fade.fromValue = layer.presentation()?.opacity ?? layer.opacity
-            fade.toValue = 0
-            fade.duration = duration
-            fade.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
-            layer.add(fade, forKey: "lockyFadeOut")
-            layer.opacity = 0
-        }
+        setContentHidden(true, duration: duration)
         try? await Task.sleep(for: .seconds(duration + 0.05))
         orderOut(nil)
+    }
+
+    /// Fades the content out or back in with Core Animation (see ``fadeOut(duration:)``), the panel
+    /// staying on screen: ordered out, it would have to be moved above the lock screen again.
+    /// - Parameter duration: `0` for at once.
+    func setContentHidden(_ isHidden: Bool, duration: TimeInterval) {
+        guard let layer = contentView?.layer else { return }
+        let opacity: Float = isHidden ? 0 : 1
+        CATransaction.begin()
+        CATransaction.setDisableActions(true)
+        if duration > 0 {
+            let fade: CABasicAnimation = .init(keyPath: "opacity")
+            fade.fromValue = layer.presentation()?.opacity ?? layer.opacity
+            fade.toValue = opacity
+            fade.duration = duration
+            fade.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
+            layer.add(fade, forKey: "lockyFade")
+        } else {
+            layer.removeAnimation(forKey: "lockyFade")
+        }
+        layer.opacity = opacity
+        CATransaction.commit()
     }
 
     /// Hides the panel at once, animation or not: for when what it stands on has already vanished.

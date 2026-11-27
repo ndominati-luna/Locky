@@ -17,6 +17,13 @@ enum LockScreenLayout {
         var passwordField: CGRect?
         /// Name and hint under the picture, in AppKit screen coordinates.
         var labels: [CGRect] = []
+        /// Every element read, for ``covering(_:)``.
+        fileprivate var elements: [Element] = []
+
+        /// What macOS shows over `picture` (see ``LockScreenLayout/covering(_:mainHeight:)``).
+        func covering(_ picture: CGRect) -> [String] {
+            LockScreenLayout.covering(picture, in: elements)
+        }
 
         /// Everything macOS draws for the login, to keep Locky's button clear of it.
         var loginBlock: CGRect? {
@@ -76,7 +83,47 @@ enum LockScreenLayout {
     static let nameToHintBottom: CGFloat = 29
 
     static func anchors() -> Anchors {
-        let elements: [Element] = loginWindowElements()
+        let elements: [Element] = loginWindowElements(mainHeight: NSScreen.screens.first?.frame.height)
+        var anchors: Anchors = anchors(from: elements)
+        anchors.elements = elements
+        return anchors
+    }
+
+    /// What macOS writes or draws over `picture` (texts, buttons, images), the picture itself aside,
+    /// read again: one call to loginwindow per attribute, to make off the main thread. After failed
+    /// passwords (or with its ? button), macOS puts a message offering to reset the password where
+    /// the picture was: the wings must not frame it.
+    /// - Parameter mainHeight: Height of the main screen, read on the main thread.
+    static func covering(_ picture: CGRect, mainHeight: CGFloat) -> [String] {
+        covering(picture, in: loginWindowElements(mainHeight: mainHeight))
+    }
+
+    /// Roles of what macOS writes or draws, as opposed to the windows and groups holding them, which
+    /// span the picture anyway.
+    private static let contentRoles: Set<String> = [
+        kAXStaticTextRole as String,
+        kAXTextAreaRole as String,
+        kAXTextFieldRole as String,
+        kAXButtonRole as String,
+        kAXImageRole as String,
+        "AXLink",
+    ]
+
+    fileprivate static func covering(_ picture: CGRect, in elements: [Element]) -> [String] {
+        // A few points inside: the name and the message of the lock screen come close to the picture.
+        let area: CGRect = picture.insetBy(dx: 4, dy: 4)
+        return elements
+            .filter { contentRoles.contains($0.role) && $0.frame.intersects(area) && !isPicture($0.frame, picture) }
+            .map(\.description)
+    }
+
+    /// The picture itself, when macOS exposes it.
+    private static func isPicture(_ frame: CGRect, _ picture: CGRect) -> Bool {
+        abs(frame.midX - picture.midX) < 8 && abs(frame.midY - picture.midY) < 8
+            && abs(frame.width - picture.width) < 16 && abs(frame.height - picture.height) < 16
+    }
+
+    private static func anchors(from elements: [Element]) -> Anchors {
         let name: CGRect? = elements.first { $0.identifier == "FocusedUser" }?.frame
         let passwordField: CGRect? = elements.first { $0.identifier == "UserPasswordTextField" }?.frame
         let message: CGRect? = elements.first { $0.role == kAXTextAreaRole as String }?.frame
@@ -108,36 +155,43 @@ enum LockScreenLayout {
     #if DEBUG
     /// Every element of the lock screen, for calibration (`-LockyDemoLockScreenProbe YES`).
     static func dump() -> String {
-        loginWindowElements().map { "\($0.role) \($0.subrole ?? "") \($0.identifier ?? "") \(NSStringFromRect($0.frame))" }.joined(separator: "\n")
+        loginWindowElements(mainHeight: NSScreen.screens.first?.frame.height).map(\.description).joined(separator: "\n")
     }
     #endif
 
     // MARK: - Accessibility
 
-    private struct Element {
+    fileprivate struct Element: CustomStringConvertible {
         let role: String
         let subrole: String?
         let identifier: String?
         /// AppKit screen coordinates (origin at the bottom left of the main screen).
         let frame: CGRect
 
+        /// Never the text: it may name the user.
+        var description: String {
+            "\(role) \(subrole ?? "") \(identifier ?? "") \(NSStringFromRect(frame))"
+        }
     }
 
-    private static func loginWindowElements() -> [Element] {
+    /// - Parameter mainHeight: Height of the main screen, read on the main thread: the elements may
+    ///   be read on another one.
+    private static func loginWindowElements(mainHeight: CGFloat?) -> [Element] {
         guard
+            let mainHeight,
             AXIsProcessTrusted(),
             let pid = NSRunningApplication.runningApplications(withBundleIdentifier: "com.apple.loginwindow").first?.processIdentifier
         else { return [] }
         let application: AXUIElement = AXUIElementCreateApplication(pid)
         AXUIElementSetMessagingTimeout(application, 0.5)
         var elements: [Element] = []
-        collect(application, depth: 0, into: &elements)
+        collect(application, depth: 0, mainHeight: mainHeight, into: &elements)
         return elements
     }
 
-    private static func collect(_ element: AXUIElement, depth: Int, into elements: inout [Element]) {
+    private static func collect(_ element: AXUIElement, depth: Int, mainHeight: CGFloat, into elements: inout [Element]) {
         guard depth < 14, elements.count < 400 else { return }
-        if let role = value(of: element, kAXRoleAttribute as String) as? String, let frame = frame(of: element) {
+        if let role = value(of: element, kAXRoleAttribute as String) as? String, let frame = frame(of: element, mainHeight: mainHeight) {
             elements.append(.init(
                 role: role,
                 subrole: value(of: element, kAXSubroleAttribute as String) as? String,
@@ -147,7 +201,7 @@ enum LockScreenLayout {
         }
         let children: [AXUIElement] = (value(of: element, kAXChildrenAttribute as String) as? [AXUIElement]) ?? []
         for child in children {
-            collect(child, depth: depth + 1, into: &elements)
+            collect(child, depth: depth + 1, mainHeight: mainHeight, into: &elements)
         }
     }
 
@@ -158,7 +212,7 @@ enum LockScreenLayout {
     }
 
     /// Accessibility frames start at the top left of the main screen; AppKit ones at the bottom left.
-    private static func frame(of element: AXUIElement) -> CGRect? {
+    private static func frame(of element: AXUIElement, mainHeight: CGFloat) -> CGRect? {
         guard
             let positionValue = value(of: element, kAXPositionAttribute as String),
             let sizeValue = value(of: element, kAXSizeAttribute as String),
@@ -171,7 +225,7 @@ enum LockScreenLayout {
         AXValueGetValue(positionValue as! AXValue, .cgPoint, &position)
         // swiftlint:disable:next force_cast
         AXValueGetValue(sizeValue as! AXValue, .cgSize, &size)
-        guard size.width > 0, size.height > 0, let mainHeight = NSScreen.screens.first?.frame.height else { return nil }
+        guard size.width > 0, size.height > 0 else { return nil }
         return .init(x: position.x, y: mainHeight - position.y - size.height, width: size.width, height: size.height)
     }
 }

@@ -22,6 +22,8 @@ final class TransitionController {
     private var screenObserver: (any NSObjectProtocol)?
     /// Places the prompt again once the displays settle.
     private var relayoutTask: Task<Void, Never>?
+    /// Hides the wings while macOS shows something else where the user picture was.
+    private var pictureWatchTask: Task<Void, Never>?
 
     init() {
         screenObserver = NotificationCenter.default.addObserver(
@@ -80,6 +82,8 @@ final class TransitionController {
         promptTask = nil
         relayoutTask?.cancel()
         relayoutTask = nil
+        pictureWatchTask?.cancel()
+        pictureWatchTask = nil
         promptContent = nil
         let panels: [OverlayPanel] = [promptPanel, wingsPanel].compactMap { $0 }
         promptPanel = nil
@@ -142,6 +146,12 @@ final class TransitionController {
         let wings: OverlayPanel = .init(contentRect: Self.wingsFrame(around: avatar), interactive: false)
         wings.show(LockScreenWings(avatarDiameter: avatar.width, picture: picture, state: content.state), aboveLockScreen: true)
         wingsPanel = wings
+        let covering: [String] = anchors.covering(avatar)
+        if !covering.isEmpty {
+            logger.info("Lock screen picture covered by \(covering.joined(separator: ", "), privacy: .public)")
+            wings.setContentHidden(true, duration: 0)
+        }
+        watchPicture(avatar, isCovered: !covering.isEmpty)
         // The button goes under the name and the hint line of macOS, clear of the wings. Typing the
         // password replaces the name with the field, at the same place.
         let wingsBottom: CGFloat = avatar.midY - LockScreenWings.depthBelowCenter(for: avatar.width)
@@ -159,6 +169,33 @@ final class TransitionController {
         let panel: OverlayPanel = .init(contentRect: buttonFrame, interactive: content.mode != .wings)
         panel.show(content, aboveLockScreen: true)
         promptPanel = panel
+    }
+
+    /// After failed passwords (or with its ? button), macOS replaces the user picture and the name
+    /// with a message offering to reset the password, and puts them back later: the wings fade out
+    /// meanwhile instead of framing the message. Read twice a second off the main thread, while the
+    /// prompt is on screen.
+    private func watchPicture(_ picture: CGRect, isCovered: Bool) {
+        pictureWatchTask?.cancel()
+        guard let mainHeight = NSScreen.screens.first?.frame.height else { return }
+        pictureWatchTask = Task { [weak self] in
+            var isCovered: Bool = isCovered
+            while !Task.isCancelled {
+                try? await Task.sleep(for: .milliseconds(500))
+                let covering: [String] = await Task.detached(priority: .utility) {
+                    LockScreenLayout.covering(picture, mainHeight: mainHeight)
+                }.value
+                guard !Task.isCancelled, let self, let wingsPanel = self.wingsPanel else { return }
+                guard covering.isEmpty == isCovered else { continue }
+                isCovered.toggle()
+                if isCovered {
+                    logger.info("Lock screen picture covered by \(covering.joined(separator: ", "), privacy: .public)")
+                } else {
+                    logger.info("Lock screen picture back")
+                }
+                wingsPanel.setContentHidden(isCovered, duration: 0.2)
+            }
+        }
     }
 
     /// The window of the wings, its ring centered on `avatar`.
