@@ -221,25 +221,32 @@ final class TransitionController {
         }
     }
 
-    /// Plays the locking animation on every display, then calls `lock` (at once without animation).
+    /// Plays the locking animation on every display and calls `lock` as soon as it covers them (at
+    /// once without animation): the logo and its title play above the lock screen, then fade into it.
+    ///
+    /// The animation lets clicks and keys through to the desktop: locking only at its end left the
+    /// Mac usable for seconds after the iPhone had gone beyond the lock distance.
     func lock(_ animation: LockAnimation, lock: @escaping @MainActor () -> Void) {
         guard animation.style != .none, !NSScreen.screens.isEmpty else {
             lock()
             return
         }
         lockTask = Task {
-            // Above the lock screen: once the session is locked, the logo fades into it instead of
-            // being cut off.
+            // Above the lock screen from the start: the session locks under the animation.
             let panels: [OverlayPanel] = await showTransition(.locking, animation: animation, aboveLockScreen: true)
-            try? await Task.sleep(for: .seconds(animation.lockDuration))
+            let start: ContinuousClock.Instant = .now
+            // A few frames after the animation covers the screens, should drawing lag.
+            try? await Task.sleep(for: .seconds(animation.style.coverDuration + 0.15))
             lock()
+            let lockedAt: ContinuousClock.Instant = .now
             // The lock screen is put in front as it appears: bring the animation back above it until
-            // it is shown, then fade into it.
-            for delay in [0, 80, 200, 400] {
-                try? await Task.sleep(for: .milliseconds(delay == 0 ? 0 : delay / 2))
+            // it is shown, as long as the animation plays.
+            for delay in [0, 40, 140, 340, 600, 1000, 1500] {
+                try? await Task.sleep(until: lockedAt + .milliseconds(delay), clock: .continuous)
                 panels.forEach { LockScreenSpace.shared.adopt($0) }
             }
-            try? await Task.sleep(for: .milliseconds(400))
+            // The logo and its title, then the fade into the lock screen.
+            try? await Task.sleep(until: start + .seconds(animation.lockDuration), clock: .continuous)
             await fadeOut(panels, duration: 0.9)
             closeTransition(panels)
         }

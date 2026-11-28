@@ -1141,7 +1141,7 @@ final class MacAppModel {
     // MARK: - Locking and unlocking
 
     private func lockMac(fromProximity: Bool) {
-        // The animation plays for seconds before the session locks: the iPhone, still far, must
+        // The animation covers the screens before the session locks: the iPhone, still far, must
         // not start a second one meanwhile.
         guard !isLocked, lockingSince == nil else { return }
         let started: ContinuousClock.Instant = .now

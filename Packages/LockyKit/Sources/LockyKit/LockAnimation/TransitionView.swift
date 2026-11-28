@@ -144,10 +144,10 @@ public struct TransitionView: View {
     private func playLocking() async {
         switch animation.style {
         case .iris:
-            withAnimation(.easeInOut(duration: LockAnimationTiming.fadeDuration)) {
+            withAnimation(.easeInOut(duration: animation.style.coverDuration)) {
                 coverOpacity = 1
             }
-            try? await Task.sleep(for: .seconds(LockAnimationTiming.fadeDuration))
+            try? await Task.sleep(for: .seconds(animation.style.coverDuration))
             withAnimation(.easeInOut(duration: LockAnimationTiming.irisDuration)) {
                 iris = 1
             }
@@ -160,7 +160,7 @@ public struct TransitionView: View {
                 bubble = 0
             }
         case .halo:
-            withAnimation(.easeInOut(duration: 0.6)) {
+            withAnimation(.easeInOut(duration: animation.style.coverDuration)) {
                 coverOpacity = 1
             }
             try? await Task.sleep(for: .seconds(0.5))
@@ -170,7 +170,7 @@ public struct TransitionView: View {
             try? await Task.sleep(for: .seconds(animation.style.logoDelay - 0.5))
             showLogo()
         case .flight:
-            withAnimation(.easeInOut(duration: 0.9)) {
+            withAnimation(.easeInOut(duration: animation.style.coverDuration)) {
                 backdropOpacity = 1
             }
             try? await Task.sleep(for: .seconds(animation.style.logoDelay))

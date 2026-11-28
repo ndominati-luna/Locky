@@ -40,8 +40,9 @@ public struct LockAnimation: Equatable, Sendable {
         self.background = background
     }
 
-    /// From the start of the animation to the lock of the session: the logo, then its title, then
-    /// a short pause to read it.
+    /// From the start of the animation to its fade into the lock screen: the logo, then its title,
+    /// then a short pause to read it. The session locks long before, once the animation covers the
+    /// screen (``LockAnimationStyle/coverDuration``).
     public var lockDuration: TimeInterval {
         style.logoDelay + style.intro(flightDistance: 0).titleStart + titleStyle.duration + 0.55
     }
@@ -63,6 +64,21 @@ extension LockAnimationStyle {
         case .halo: 0.9
         case .flight: 0.15
         case .curtain: 1.0
+        case .none: 0
+        }
+    }
+
+    /// From the start of the animation until it covers the whole screen, the desktop out of sight:
+    /// the session may lock from then on, the lock screen appearing under the animation.
+    public var coverDuration: TimeInterval {
+        switch self {
+        // The wallpaper fades in over the desktop.
+        case .iris: LockAnimationTiming.fadeDuration
+        case .halo: 0.6
+        // The background fades in over the desktop.
+        case .flight: 0.9
+        // The panels meet as the logo appears.
+        case .curtain: logoDelay
         case .none: 0
         }
     }
